@@ -1,0 +1,1 @@
+<p><i>Versia - new generation SCM <br />(C) 2009 Vladimir Jotov</i></p>

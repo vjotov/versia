@@ -246,7 +246,6 @@ public class DesktopApplication1View extends FrameView {
         jbNewWorkspace.setAction(actionMap.get("showNewWorkspace")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(desktopapplication1.DesktopApplication1.class).getContext().getResourceMap(DesktopApplication1View.class);
         jbNewWorkspace.setText(resourceMap.getString("jbNewWorkspace.text")); // NOI18N
-        jbNewWorkspace.setEnabled(false);
         jbNewWorkspace.setName("jbNewWorkspace"); // NOI18N
         jbNewWorkspace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,7 +255,6 @@ public class DesktopApplication1View extends FrameView {
 
         jbEditWS.setAction(actionMap.get("showEditWorkspace")); // NOI18N
         jbEditWS.setText(resourceMap.getString("jbEditWS.text")); // NOI18N
-        jbEditWS.setEnabled(false);
         jbEditWS.setName("jbEditWS"); // NOI18N
 
         jlAttachedWorkitems.setText(resourceMap.getString("jlAttachedWorkitems.text")); // NOI18N
@@ -375,8 +373,14 @@ public class DesktopApplication1View extends FrameView {
         jScrollPane1.setViewportView(jtaJSONTrace);
 
         jbViewVODistribution.setText(resourceMap.getString("jbViewVODistribution.text")); // NOI18N
+        jbViewVODistribution.setActionCommand(resourceMap.getString("jbViewVODistribution.actionCommand")); // NOI18N
         jbViewVODistribution.setEnabled(false);
         jbViewVODistribution.setName("jbViewVODistribution"); // NOI18N
+        jbViewVODistribution.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbViewVODistributionActionPerformed(evt);
+            }
+        });
 
         jbViewVOHistory.setText(resourceMap.getString("jbViewVOHistory.text")); // NOI18N
         jbViewVOHistory.setEnabled(false);
@@ -723,6 +727,31 @@ public class DesktopApplication1View extends FrameView {
     private void jbNewWorkspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNewWorkspaceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbNewWorkspaceActionPerformed
+
+    private void jbViewVODistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVODistributionActionPerformed
+        // TODO add your handling code here:
+         try {
+            JSONConnection jc = new JSONConnection();
+            Map params = new HashMap();
+
+            params.put("vo_id", selectedVO.getInt("vo_id"));
+            params.put("release_id", selectedReleaseID);
+
+            jc.prepareJSONRequest("viewVersionedObjectDistribution", params, uid);
+            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject err = jResponce.getJSONObject("error");
+            JSONArray Distribution = jResponce.getJSONArray("result");
+            int code = err.getInt("code");
+            if (code != 0) {
+                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+            }
+            diplayVersionedObjectsDistribution(Distribution);
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        refreshVOButtons(true);
+    }//GEN-LAST:event_jbViewVODistributionActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1011,6 +1040,11 @@ public class DesktopApplication1View extends FrameView {
         }
 
     }
+    private void diplayVersionedObjectsDistribution(JSONArray Distribution) {
+        // TODO - idea - to show in a new window an expanded tree, where nodes with gray means no local version.
+        // By selectin a node the user shall be able to view (readonly mode) the version of the VO.
+        //throw new UnsupportedOperationException("Not yet implemented");
+    }
 
     private void refreshWSButtons(boolean b) {
         jbEditWS.setEnabled(b);
@@ -1085,6 +1119,8 @@ public class DesktopApplication1View extends FrameView {
         }
         return sb.toString();
     }
+
+
 
 
 }

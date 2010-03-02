@@ -45,6 +45,13 @@ function putbackVersionedObjectState($params) {
   $responce['error'] = $result;
 	return $responce;
 }
+function viewVersionedObjectDistribution($params) {
+	$result = cd_vo::vew_versioned_object_distribution($params['vo_id'], $params['release_id']);
+	$responce = array();
+	$responce['result'] = $result['ws_list'];
+  $responce['error'] = $result['error'];
+  return $responce;
+}
 
 //////////////
 class j_vo { 
@@ -65,6 +72,9 @@ class j_vo {
 		$functions[] = array('method' => 'putbackVersionedObjectState', 
 			'params' => array('ws_id' => 'number', 'vo_id' => 'number'), 
 			'permition' => 'putback_versioned_object');
+		$functions[] = array('method' => 'viewVersionedObjectDistribution',
+			'params' => array('vo_id' => 'number', 'release_id' => 'number'),
+			'permition' => 'view_versioned_object_distribution');
 		return $functions;
 	}
 }

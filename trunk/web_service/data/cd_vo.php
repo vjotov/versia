@@ -41,7 +41,7 @@ class cd_vo {
 			return array('error' => $err_);
 		}
 		$vo_list = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
-		return array('error' => array('code'=>0, 'message' => 'Successful') ,
+		return array('error' => array('code' => 0, 'message' => 'Successful') ,
 			'vo_list' => $vo_list);
 	}
 	static public function save_versioned_object_state($ws_id, $vo_id, $new_datum, $vo_name, $uid) {
@@ -119,6 +119,24 @@ class cd_vo {
 		return  array('code' => 0, 'message' => 'Sucessful');
 	}
 	
+	static public function vew_versioned_object_distribution($vo_id, $release_id) {
+		global $mdb;
+
+		$query = "SELECT ws_id, name FROM v_vo_distribution "
+				." WHERE vo_id = '".$vo_id."' AND release_id = '".$release_id."' "; 
+				
+		$resultset = $mdb->query($query); 
+		
+		if(PEAR::isError($resultset)) {
+			$err_['code'] = 2;
+			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
+			$err_['message'] .= '\n cd_vo::putback_versioned_object_state - 1';
+			return array();
+		}
+		$ws_list = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
+		return array('error' => array('code' => 0, 'message' => 'Successful') ,
+			'ws_list' => $ws_list);
+	}
 	// PRIVATE FUNCTIONs
 	
 }

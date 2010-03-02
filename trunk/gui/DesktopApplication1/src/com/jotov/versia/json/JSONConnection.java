@@ -6,9 +6,7 @@
 package com.jotov.versia.json;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -22,18 +20,17 @@ import org.json.JSONObject;
  */
 public class JSONConnection {
 
-    private String srvAddress = "http://192.168.56.2/versia/json_controller.php";
+    public static String repositoryURL;
     private JSONObject jsonRequest = new JSONObject();
 
     
-
     public JSONObject doRequest(JTextArea jta) {
         JSONObject jo;// = new JSONObject();
         try{
             String strRequest = jsonRequest.toString();
             if(jta != null) jta.append("<< "+strRequest+"\n");
 
-            URL srvURL = new URL(srvAddress+"?json="+URLEncoder.encode(strRequest, "UTF-8"));
+            URL srvURL = new URL(repositoryURL+"json_controller.php?json="+URLEncoder.encode(strRequest, "UTF-8"));
             URLConnection conection = srvURL.openConnection();
             
             BufferedReader in = new BufferedReader(new InputStreamReader(conection.getInputStream()));

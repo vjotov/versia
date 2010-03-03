@@ -442,6 +442,9 @@
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="jbViewVOHistory" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbViewVOHistoryActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -481,9 +484,6 @@
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="desktopapplication1.DesktopApplication1View" id="showOpenProduct" methodName="showOpenProduct"/>
-                </Property>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+O"/>
                 </Property>
                 <Property name="text" type="java.lang.String" resourceKey="jmiOpenProduct.text"/>
                 <Property name="name" type="java.lang.String" value="jmiOpenProduct" noResource="true"/>

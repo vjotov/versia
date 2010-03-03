@@ -129,6 +129,7 @@ public class DesktopApplication1View extends FrameView {
             JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
             openProduct = new OpenProduct(mainFrame);
             openProduct.setLocationRelativeTo(mainFrame);
+            openProduct.setTitle("Open Product&Release");
         }
         DesktopApplication1.getApplication().show(openProduct);
         if (openProduct.getActionCommand().equals("BTN_OK")) {
@@ -145,6 +146,7 @@ public class DesktopApplication1View extends FrameView {
         JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
         NewEditWorkspace dlg = new NewEditWorkspace(mainFrame);
         dlg.setLocationRelativeTo(mainFrame);
+        dlg.setTitle("New Workspace");
 
         DesktopApplication1.getApplication().show(dlg);
         if (dlg.getActionCommand().equals("BTN_SAVE")) {
@@ -157,8 +159,17 @@ public class DesktopApplication1View extends FrameView {
     @Action
     public void showEditWorkspace() {
         JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
-        NewEditWorkspace dlg = new NewEditWorkspace(mainFrame);
+        String wsName = "";
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtWorkspaces.getLastSelectedPathComponent();
+        if (node == null) {
+            wsName = "";
+        } else {
+            worspaceInfo nodeInfo = (worspaceInfo) node.getUserObject();
+            wsName = nodeInfo.getName();
+        }
+        NewEditWorkspace dlg = new NewEditWorkspace(mainFrame, wsName);
         dlg.setLocationRelativeTo(mainFrame);
+        dlg.setTitle("Edit Workspace");
 
         DesktopApplication1.getApplication().show(dlg);
         if (dlg.getActionCommand().equals("BTN_SAVE")) {
@@ -246,6 +257,7 @@ public class DesktopApplication1View extends FrameView {
         jbNewWorkspace.setAction(actionMap.get("showNewWorkspace")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(desktopapplication1.DesktopApplication1.class).getContext().getResourceMap(DesktopApplication1View.class);
         jbNewWorkspace.setText(resourceMap.getString("jbNewWorkspace.text")); // NOI18N
+        jbNewWorkspace.setEnabled(false);
         jbNewWorkspace.setName("jbNewWorkspace"); // NOI18N
         jbNewWorkspace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,6 +267,7 @@ public class DesktopApplication1View extends FrameView {
 
         jbEditWS.setAction(actionMap.get("showEditWorkspace")); // NOI18N
         jbEditWS.setText(resourceMap.getString("jbEditWS.text")); // NOI18N
+        jbEditWS.setEnabled(false);
         jbEditWS.setName("jbEditWS"); // NOI18N
 
         jlAttachedWorkitems.setText(resourceMap.getString("jlAttachedWorkitems.text")); // NOI18N
@@ -385,6 +398,11 @@ public class DesktopApplication1View extends FrameView {
         jbViewVOHistory.setText(resourceMap.getString("jbViewVOHistory.text")); // NOI18N
         jbViewVOHistory.setEnabled(false);
         jbViewVOHistory.setName("jbViewVOHistory"); // NOI18N
+        jbViewVOHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbViewVOHistoryActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jpWorkspacesLayout = new org.jdesktop.layout.GroupLayout(jpWorkspaces);
         jpWorkspaces.setLayout(jpWorkspacesLayout);
@@ -752,6 +770,30 @@ public class DesktopApplication1View extends FrameView {
         refreshVOButtons(true);
     }//GEN-LAST:event_jbViewVODistributionActionPerformed
 
+    private void jbViewVOHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVOHistoryActionPerformed
+        // TODO add your handling code here:
+        try {
+            JSONConnection jc = new JSONConnection();
+            Map params = new HashMap();
+
+            params.put("vo_id", selectedVO.getInt("vo_id"));
+            params.put("release_id", selectedReleaseID);
+
+            jc.prepareJSONRequest("viewVersionedObjectHistory", params, uid);
+            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject err = jResponce.getJSONObject("error");
+            JSONArray HistoryItems = jResponce.getJSONArray("result");
+            int code = err.getInt("code");
+            if (code != 0) {
+                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+            }
+            diplayVersionedObjectsHistory(HistoryItems);
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        refreshVOButtons(true);
+    }//GEN-LAST:event_jbViewVOHistoryActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -848,7 +890,7 @@ public class DesktopApplication1View extends FrameView {
                 }
             }
             jtWorkspaces.setRootVisible(true);
-            jtWorkspaces.expandRow(2);
+            jtWorkspaces.expandRow(10);
             ((DefaultTreeModel) jtWorkspaces.getModel()).reload();
 
         } catch (Exception ex) {
@@ -1001,7 +1043,7 @@ public class DesktopApplication1View extends FrameView {
             jc.prepareJSONRequest("createWorkspace", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            //JSONObject NewWorkspace = jResponce.getJSONObject("result");
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
@@ -1045,7 +1087,34 @@ public class DesktopApplication1View extends FrameView {
         // By selectin a node the user shall be able to view (readonly mode) the version of the VO.
         //throw new UnsupportedOperationException("Not yet implemented");
     }
+    private void diplayVersionedObjectsHistory(JSONArray HistoryItems){
+        // TODO - idea - to show in a new window list of all historical changes of VO - source, target, time of version, user initiated the change, work item of the change
+    }
+/*
+    private void expandAll(JTree tree, boolean expand) {
+        TreeNode root = (TreeNode)tree.getModel().getRoot();
 
+        // Traverse tree from root
+        expandAll(tree, new TreePath(root), expand);
+    }
+    private void expandAll(JTree tree, TreePath parent, boolean expand) {
+        // Traverse children
+        TreeNode node = (TreeNode)parent.getLastPathComponent();
+        if (node.getChildCount() >= 0) {
+            for (Enumeration e=node.children(); e.hasMoreElements(); ) {
+                TreeNode n = (TreeNode)e.nextElement();
+                TreePath path = parent.pathByAddingChild(n);
+                expandAll(tree, path, expand);
+            }
+        }
+
+        // Expansion or collapse must be done bottom-up
+        if (expand) {
+            tree.expandPath(parent);
+        } else {
+            tree.collapsePath(parent);
+        }
+    }//*/
     private void refreshWSButtons(boolean b) {
         jbEditWS.setEnabled(b);
         jbCreateVO.setEnabled(b);

@@ -2,7 +2,7 @@
 SQLyog Enterprise - MySQL GUI v8.12 
 MySQL - 5.1.37 : Database - versia_er2
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -161,13 +161,13 @@ CREATE TABLE `t_product` (
   `pr_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`pr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_product` */
 
 LOCK TABLES `t_product` WRITE;
 
-insert  into `t_product`(`pr_id`,`name`) values (1,'First Product'),(2,'Second product');
+insert  into `t_product`(`pr_id`,`name`) values (1,'First Product'),(9,'Tetris');
 
 UNLOCK TABLES;
 
@@ -185,13 +185,13 @@ CREATE TABLE `t_release` (
   KEY `FK_product` (`pr_id`),
   CONSTRAINT `FK_master_workspace` FOREIGN KEY (`master_ws_id`) REFERENCES `t_workspace` (`ws_id`) ON DELETE SET NULL,
   CONSTRAINT `FK_t_release` FOREIGN KEY (`pr_id`) REFERENCES `t_product` (`pr_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_release` */
 
 LOCK TABLES `t_release` WRITE;
 
-insert  into `t_release`(`release_id`,`master_ws_id`,`pr_id`,`name`) values (1,1,1,'zeroRelease'),(17,5,1,'Second release');
+insert  into `t_release`(`release_id`,`master_ws_id`,`pr_id`,`name`) values (1,5,1,'zeroRelease'),(17,5,1,'Second release'),(24,31,9,'Zero Release');
 
 UNLOCK TABLES;
 
@@ -264,13 +264,13 @@ DROP TABLE IF EXISTS `t_versioned_object`;
 CREATE TABLE `t_versioned_object` (
   `vo_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`vo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_versioned_object` */
 
 LOCK TABLES `t_versioned_object` WRITE;
 
-insert  into `t_versioned_object`(`vo_id`) values (1),(2),(3),(4),(9),(14);
+insert  into `t_versioned_object`(`vo_id`) values (1),(2),(3),(4),(9),(14),(18);
 
 UNLOCK TABLES;
 
@@ -296,7 +296,7 @@ CREATE TABLE `t_versioned_primitive` (
 
 LOCK TABLES `t_versioned_primitive` WRITE;
 
-insert  into `t_versioned_primitive`(`vp_id`,`vo_id`,`name`,`type_id`,`constructs`,`datum`) values (0,14,'test VO',1,NULL,'test datum'),(1,3,'WI1',1,NULL,NULL),(2,9,'Object 9',1,NULL,'ver.2'),(3,1,'Object 1',1,NULL,'ver.3'),(3,2,'Object 2',1,NULL,'ver.3'),(4,1,'Object 1',1,NULL,'ver.4'),(4,2,'Object 2',1,NULL,'ver.4'),(6,2,'Object 2',1,NULL,'ver.6'),(7,4,'Object 4',1,NULL,'ver.7'),(9,4,'Object 4',1,NULL,'ver.9'),(15,4,'Object 4',1,NULL,'ver.15');
+insert  into `t_versioned_primitive`(`vp_id`,`vo_id`,`name`,`type_id`,`constructs`,`datum`) values (0,14,'test VO',1,NULL,'test datum'),(0,18,'General Workitem',1,NULL,NULL),(1,3,'WI1',1,NULL,NULL),(2,9,'Object 9',1,NULL,'ver.2'),(3,1,'Object 1',1,NULL,'ver.3'),(3,2,'Object 2',1,NULL,'ver.3'),(4,1,'Object 1',1,NULL,'ver.4'),(4,2,'Object 2',1,NULL,'ver.4'),(6,2,'Object 2',1,NULL,'ver.6'),(7,4,'Object 4',1,NULL,'ver.7'),(9,4,'Object 4',1,NULL,'ver.9'),(15,4,'Object 4',1,NULL,'ver.15');
 
 UNLOCK TABLES;
 
@@ -314,13 +314,13 @@ CREATE TABLE `t_workitem` (
   KEY `FK_initiator_object` (`initiator_vo_id`),
   CONSTRAINT `FK_initiator_object` FOREIGN KEY (`initiator_vo_id`) REFERENCES `t_versioned_object` (`vo_id`),
   CONSTRAINT `FK_t_workitem` FOREIGN KEY (`release_id`) REFERENCES `t_release` (`release_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_workitem` */
 
 LOCK TABLES `t_workitem` WRITE;
 
-insert  into `t_workitem`(`wi_id`,`initiator_vo_id`,`wi_name`,`release_id`) values (1,3,'WI1.name',17);
+insert  into `t_workitem`(`wi_id`,`initiator_vo_id`,`wi_name`,`release_id`) values (1,3,'WI1.name',17),(4,18,NULL,24);
 
 UNLOCK TABLES;
 
@@ -338,15 +338,14 @@ CREATE TABLE `t_workspace` (
   PRIMARY KEY (`ws_id`),
   KEY `FK_release` (`release_id`),
   KEY `FK_ws_ancestor_offsring` (`ancestor_ws_id`),
-  CONSTRAINT `FK_release` FOREIGN KEY (`release_id`) REFERENCES `t_release` (`release_id`),
-  CONSTRAINT `FK_ws_ancestor_offsring` FOREIGN KEY (`ancestor_ws_id`) REFERENCES `t_workspace` (`ws_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_release` FOREIGN KEY (`release_id`) REFERENCES `t_release` (`release_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_workspace` */
 
 LOCK TABLES `t_workspace` WRITE;
 
-insert  into `t_workspace`(`ws_id`,`release_id`,`ancestor_ws_id`,`name`,`lft`,`rgt`) values (1,1,0,'Master Workspace',1,2),(5,17,0,'Master Workspace',1,14),(20,17,5,'B1',2,7),(21,17,5,'B2',8,13),(22,17,20,'D1',3,4),(23,17,20,'D2',5,6),(24,17,21,'D3',9,12),(25,17,24,'E1',10,11);
+insert  into `t_workspace`(`ws_id`,`release_id`,`ancestor_ws_id`,`name`,`lft`,`rgt`) values (5,17,0,'Master Workspace',1,14),(20,17,5,'B1',2,7),(21,17,5,'B2',8,13),(22,17,20,'D1',3,4),(23,17,20,'D2',5,6),(24,17,21,'D3',9,12),(25,17,24,'E1',10,11),(31,24,0,'Master Workspace',1,2);
 
 UNLOCK TABLES;
 
@@ -370,7 +369,7 @@ CREATE TABLE `t_ws_obj_ver_selector` (
 
 LOCK TABLES `t_ws_obj_ver_selector` WRITE;
 
-insert  into `t_ws_obj_ver_selector`(`vp_id`,`vo_id`,`ws_id`,`locked`) values (0,14,21,0),(1,3,5,0),(2,9,5,0),(3,1,20,0),(3,2,5,0),(4,1,23,0),(4,2,21,0),(6,2,25,0),(7,4,5,0),(9,4,23,0),(15,4,24,0);
+insert  into `t_ws_obj_ver_selector`(`vp_id`,`vo_id`,`ws_id`,`locked`) values (0,14,21,0),(0,18,31,1),(1,3,5,0),(2,9,5,0),(3,1,20,0),(3,2,5,0),(4,1,23,0),(4,2,21,0),(6,2,25,0),(7,4,5,0),(9,4,23,0),(15,4,24,0);
 
 UNLOCK TABLES;
 
@@ -391,9 +390,40 @@ CREATE TABLE `t_ws_workitem` (
 
 LOCK TABLES `t_ws_workitem` WRITE;
 
-insert  into `t_ws_workitem`(`ws_id`,`wi_id`) values (21,1);
+insert  into `t_ws_workitem`(`ws_id`,`wi_id`) values (21,1),(31,4);
 
 UNLOCK TABLES;
+
+/* Trigger structure for table `t_product` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `new_product` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'192.168.56.1' */ /*!50003 TRIGGER `new_product` AFTER INSERT ON `t_product` FOR EACH ROW BEGIN
+	DECLARE new_release_id, mws, srvc_vo_id, srvc_wi_id INT(11);
+	
+	INSERT INTO t_release (release_id, pr_id, `name`) VALUES (NULL, New.pr_id, 'Zero Release');
+	SET new_release_id = LAST_INSERT_ID();
+	
+	INSERT INTO t_workspace (release_id, `name`, lft, rgt) VALUES (new_release_id, 'Master Workspace', 1, 2);
+	SET mws = LAST_INSERT_ID();
+	UPDATE t_release SET master_ws_id =  mws WHERE release_id = new_release_id;
+	
+	INSERT INTO t_versioned_object (vo_id) VALUES (0);
+	SET srvc_vo_id = LAST_INSERT_ID();
+	
+	INSERT INTO t_versioned_primitive (vo_id, vp_id, `name`, type_id) VALUES (srvc_vo_id, 0, 'General Workitem', 1);
+	
+	INSERT INTO t_ws_obj_ver_selector (ws_id, vo_id, vp_id, locked) VALUES (mws, srvc_vo_id, 0, 1);
+	INSERT INTO t_workitem (release_id, initiator_vo_id) VALUES (new_release_id, srvc_vo_id);
+	SET srvc_wi_id = LAST_INSERT_ID();
+	
+	INSERT INTO t_ws_workitem (ws_id, wi_id) VALUES (mws, srvc_wi_id);
+    END */$$
+
+
+DELIMITER ;
 
 /* Function  structure for function  `create_versioned_object` */
 
@@ -440,20 +470,20 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`192.168.56.1` FUNCTION `f_create_workspace`(in_ancestor_ws_id INT(11), in_name VARCHAR(255), in_release_id INT(11)) RETURNS int(11)
 BEGIN
-	DECLARE out_result INT(11) DEFAULT 0;
-	DECLARE anc_rgt INT(11);
-	IF in_ancestor_ws_id <= 0 THEN RETURN -10; END IF;
-
-	SELECT rgt FROM t_workspace 
-		WHERE ws_id = in_ancestor_ws_id AND release_id = in_release_id
-		INTO anc_rgt;
-	IF anc_rgt <=0 THEN RETURN -20; END IF;
-	
-	UPDATE t_workspace SET rgt = rgt + 2 WHERE rgt >= anc_rgt AND release_id = in_release_id;
-	UPDATE t_workspace SET lft = lft + 2 WHERE rgt > anc_rgt AND release_id = in_release_id;
-	
-	INSERT INTO t_workspace (ancestor_ws_id, `name`, release_id, lft, rgt) 
-		VALUES (in_ancestor_ws_id, in_name, in_release_id, anc_rgt, anc_rgt+1);
+	DECLARE out_result INT(11) DEFAULT 0;
+	DECLARE anc_rgt INT(11);
+	IF in_ancestor_ws_id <= 0 THEN RETURN -10; END IF;
+
+	SELECT rgt FROM t_workspace 
+		WHERE ws_id = in_ancestor_ws_id AND release_id = in_release_id
+		INTO anc_rgt;
+	IF anc_rgt <=0 THEN RETURN -20; END IF;
+	
+	UPDATE t_workspace SET rgt = rgt + 2 WHERE rgt >= anc_rgt AND release_id = in_release_id;
+	UPDATE t_workspace SET lft = lft + 2 WHERE rgt > anc_rgt AND release_id = in_release_id;
+	
+	INSERT INTO t_workspace (ancestor_ws_id, `name`, release_id, lft, rgt) 
+		VALUES (in_ancestor_ws_id, in_name, in_release_id, anc_rgt, anc_rgt+1);
 	RETURN out_result;
     END */$$
 DELIMITER ;
@@ -543,25 +573,25 @@ BEGIN
 	DECLARE has_local, is_in_anc, anc_ws_id, is_locked, l_vp_id INT(11) DEFAULT 0;
 	
 	SELECT count(*), vp_id FROM t_ws_obj_ver_selector WHERE ws_id=in_ws_id AND vo_id=in_vo_id 
-		INTO has_local, l_vp_id;
+		INTO has_local, l_vp_id;
 	IF has_local = 0 THEN
 		RETURN -1;
 	END IF;
-	
+	
 	SELECT ancestor_ws_id FROM t_workspace WHERE ws_id=in_ws_id INTO anc_ws_id;
 	SELECT COUNT(*), locked FROM t_ws_obj_ver_selector WHERE vo_id=in_vo_id AND ws_id = (
 		SELECT ancestor_ws_id FROM t_workspace WHERE ws_id=in_ws_id
 		) INTO is_in_anc, is_locked;
-	
-	IF anc_ws_id = 0 THEN # in_ws_id is MASTER WS
-		RETURN -2;
-	ELSEIF is_locked != 0 OR is_locked IS NOT NULL THEN # LOCKED
+	
+	IF anc_ws_id = 0 THEN # in_ws_id is MASTER WS
+		RETURN -2;
+	ELSEIF is_locked != 0 OR is_locked IS NOT NULL THEN # LOCKED
 		RETURN -3;
-	END IF;
-	IF is_in_anc = 0 THEN 
+	END IF;
+	IF is_in_anc = 0 THEN 
 		INSERT INTO t_ws_obj_ver_selector VALUES (l_vp_id, in_vo_id, anc_ws_id, 0);
-	ELSE 
-		UPDATE t_ws_obj_ver_selector SET vp_id=l_vp_id WHERE vo_id=in_vo_id AND ws_id = anc_ws_id;
+	ELSE 
+		UPDATE t_ws_obj_ver_selector SET vp_id=l_vp_id WHERE vo_id=in_vo_id AND ws_id = anc_ws_id;
 	END IF;
 	
 	DELETE FROM t_ws_obj_ver_selector WHERE  ws_id=in_ws_id AND vo_id=in_vo_id;
@@ -602,16 +632,16 @@ DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`192.168.56.1` FUNCTION `f_read_visibility_vector`(in_vector INT(11)) RETURNS varchar(10) CHARSET latin1
 BEGIN
-	DECLARE s1, s2, s3, s4, s5  CHAR(1) DEFAULT "_";
-	DECLARE st VARCHAR(10);
-
-	IF in_vector & 1 THEN SET s1 = "R"; END IF;
-	IF in_vector & 2 THEN SET s2 = "P"; END IF;
-	IF in_vector & 4 THEN SET s3 = "C"; END IF;
-	IF in_vector & 8 THEN SET s4 = "L"; END IF;
-	IF in_vector & 16 THEN SET s5 = "T"; END IF;
-
-	SET st = s1.s2 ;#+ s3 + s4 + s5;
+	DECLARE s1, s2, s3, s4, s5  CHAR(1) DEFAULT "_";
+	DECLARE st VARCHAR(10);
+
+	IF in_vector & 1 THEN SET s1 = "R"; END IF;
+	IF in_vector & 2 THEN SET s2 = "P"; END IF;
+	IF in_vector & 4 THEN SET s3 = "C"; END IF;
+	IF in_vector & 8 THEN SET s4 = "L"; END IF;
+	IF in_vector & 16 THEN SET s5 = "T"; END IF;
+
+	SET st = s1.s2 ;#+ s3 + s4 + s5;
 	RETURN st;
     END */$$
 DELIMITER ;

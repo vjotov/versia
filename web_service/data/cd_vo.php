@@ -1,10 +1,10 @@
 <?php
 
 class cd_vo {
-	static public function create_versioned_object($ws_id, $vo_name, $vo_datum, $uid /*$vo_ancestor, $vo_model, $vo_model_place,*/) {
+	static public function create_versioned_object($ws_id, $vo_name, $vo_datum, $uid, $type = '1', $constructs='NULL') {
 		global $mdb;   
 		
-		$query = "SELECT create_versioned_object(".$ws_id.", '".$vo_name."', '".$vo_datum."', '".$uid."') AS new_vo_id ";
+		$query = "SELECT create_versioned_object(".$ws_id.", '".$vo_name."', '".$vo_datum."', '".$uid."', ".$type.", ".$constructs.") AS new_vo_id ";
 		$resultset = $mdb->query($query); 
 		
 		if(PEAR::isError($resultset)) {
@@ -13,10 +13,26 @@ class cd_vo {
 			$err_['message'] .= '\n cd_vo::create_versioned_object($id) - 1';
 			return array('error' => $err_);
 		}
-		if($resultset->numRows() != 1) {
-			$err_['code'] = 1;
-			$err_['message'] = 'cd_vo->create_versioned_object -';
-			return array('error' => $err_);
+		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
+
+		$result = $set[0]['new_vo_id'];
+		if($result < 1) {
+			switch ($result) {
+			case -1 :
+				$err_['code'] = $result;
+				$err_['message'] = 'No workitems in selected workspace.';
+				break;
+			case -2 :
+				$err_['code'] = $result;
+				$err_['message'] = 'Missing type for the new object state.';
+				break;
+			case -3 :
+			default:
+				$err_['code'] = $result;
+				$err_['message'] = 'Missing visible object to be constructed by this one.';
+				break;
+			}
+			return array('error' => $err_, 'new_vo_id' => 0);
 		}
 		
 		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
@@ -44,10 +60,10 @@ class cd_vo {
 		return array('error' => array('code' => 0, 'message' => 'Successful') ,
 			'vo_list' => $vo_list);
 	}
-	static public function save_versioned_object_state($ws_id, $vo_id, $new_datum, $vo_name, $uid) {
+	static public function save_versioned_object_state($ws_id, $vo_id, $new_datum, $vo_name, $uid, $type = '1', $constructs='NULL') {
 		global $mdb; 
 		
-		$query = "SELECT f_save_vo_state('".$vo_id."', '".$ws_id."', '".$new_datum."', '".$vo_name."', '".$uid."') AS save_result";
+		$query = "SELECT f_save_vo_state('".$vo_id."', '".$ws_id."', '".$new_datum."', '".$vo_name."', '".$uid."',  ".$type.", ".$constructs.") AS save_result";
 		$resultset = $mdb->query($query);
 		if(PEAR::isError($resultset)) {
 			$err_['code'] = 1;
@@ -58,13 +74,28 @@ class cd_vo {
 		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
 
 		$result = $set[0]['save_result'];
-		if($result == 0) {
-			$err_['code'] = 2;
-			$err_['message'] = 'Versioned Object is locked.';
-			return $err_;
-		} else {
-			return array('code' => 0, 'message' => 'Sucessful');
+		switch ($result) {
+			case -1 :
+				$err_['code'] = $result;
+				$err_['message'] = 'No workitems in selected workspace.';
+				break;
+			case -2 :
+				$err_['code'] = $result;
+				$err_['message'] = 'Missing type for the new object state.';
+				break;
+			case -3 :
+				$err_['code'] = $result;
+				$err_['message'] = 'Missing visible object to be constructed by this one.';
+				break;
+			case -4 :
+				$err_['code'] = $result;
+				$err_['message'] = 'Versioned Object is locked.';
+				break;
+			default:	
+				$err_['code'] = 0; $err_['message'] = 'Sucessful';
+				break;
 		}
+		return $err_;
 	}
 	static public function publish_versioned_object_state($in_ws_id, $vo_id){
 		global $mdb;   

@@ -3,10 +3,9 @@ function createVersionedObject($params){
 	$result = cd_vo::create_versioned_object($params['ws_id'], 
 											 $params['vo_name'], 
 											 $params['vo_datum'],
-											 $params['uid'] 
-											 //$vo_ancestor_id, 
-											 //$vo_model, 
-											 //$vo_model_place, 
+											 $params['uid'],
+											 $params['type'],
+											 $params['constructs']
 											 );
 	$responce = array();
 	$responce['result'] = array();
@@ -25,7 +24,10 @@ function saveVersionedObjectState ($params) {
 												$params['vo_id'], 
 												$params['vo_datum'], 
 												$params['vo_name'],
-												$params['uid']);
+												$params['uid'],
+											 	$params['type'],
+											 	$params['constructs']
+												);
 	$responce = array();
 	$responce['result'] = array();
   $responce['error'] = $result;
@@ -58,13 +60,13 @@ class j_vo {
 	function registerFncs() {
 		$functions = array();
 		$functions[] = array('method' => 'createVersionedObject', 
-			'params' => array('ws_id' => 'number', 'vo_name' => 'string', 'vo_datum' => 'string', 'uid' => 'number'), 
+			'params' => array('ws_id' => 'number', 'vo_name' => 'string', 'vo_datum' => 'string', 'uid' => 'number', 'type' => 'number', 'constructs' => 'number' ), 
 			'permition' => 'create_versioned_object');
 		$functions[] = array('method' => 'getVisibleVersionedObjectList', 
 			'params' => array('ws_id' => 'number'), 
 			'permition' => 'get_versioned_object');
 		$functions[] = array('method' => 'saveVersionedObjectState', 
-			'params' => array('ws_id' => 'number', 'vo_id' => 'number', 'vo_datum' => 'string', 'vo_name' => 'string', 'uid' => 'number'), 
+			'params' => array('ws_id' => 'number', 'vo_id' => 'number', 'vo_datum' => 'string', 'vo_name' => 'string', 'uid' => 'number', 'type' => 'number', 'constructs' => 'number'), 
 			'permition' => 'save_versioned_object');
 		$functions[] = array('method' => 'publishVersionedObjectState', 
 			'params' => array('ws_id' => 'number', 'vo_id' => 'number'), 

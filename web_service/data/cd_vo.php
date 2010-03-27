@@ -44,7 +44,7 @@ class cd_vo {
 	static public function get_visible_vo_list($ws_id) {
 		global $mdb;
 
-		$query = "SELECT vv.vo_id, vv.vp_id, vv.vp_name, vv.locked, vp.datum AS vp_datum, vv.v_vector AS v_vector"
+		$query = "SELECT vv.vo_id, vv.vp_id, vv.vp_name, vv.locked, vp.datum AS vp_datum, vv.v_vector AS v_vector, vp.constructs AS constructs "
 				." FROM v_vo_visibility vv INNER JOIN t_versioned_primitive vp ON vp.vp_id = vv.vp_id AND vp.vo_id = vv.vo_id "
 				." WHERE ws_id = '".$ws_id."' "; 
 				
@@ -63,12 +63,12 @@ class cd_vo {
 	static public function save_versioned_object_state($ws_id, $vo_id, $new_datum, $vo_name, $uid, $type = '1', $constructs='NULL') {
 		global $mdb; 
 		
-		$query = "SELECT f_save_vo_state('".$vo_id."', '".$ws_id."', '".$new_datum."', '".$vo_name."', '".$uid."',  ".$type.", ".$constructs.") AS save_result";
+		$query = "SELECT f_save_vo_state('".$vo_id."', '".$ws_id."', '".$new_datum."', '".$vo_name."', '".$uid."',  '".$type."', '".$constructs."') AS save_result";
 		$resultset = $mdb->query($query);
 		if(PEAR::isError($resultset)) {
 			$err_['code'] = 1;
 			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
-			$err_['message'] .= '\n cd_vo::save_versioned_object_state - 1';
+			$err_['message'] .= '\n cd_vo::save_versioned_object_state - 1'.$query;
 			return $err_;
 		}
 		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);

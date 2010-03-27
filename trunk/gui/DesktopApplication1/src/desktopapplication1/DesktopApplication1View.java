@@ -222,6 +222,7 @@ public class DesktopApplication1View extends FrameView {
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jmiLogin = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmiOpenProduct = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         usersMenu = new javax.swing.JMenu();
@@ -257,7 +258,6 @@ public class DesktopApplication1View extends FrameView {
         jbNewWorkspace.setAction(actionMap.get("showNewWorkspace")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(desktopapplication1.DesktopApplication1.class).getContext().getResourceMap(DesktopApplication1View.class);
         jbNewWorkspace.setText(resourceMap.getString("jbNewWorkspace.text")); // NOI18N
-        jbNewWorkspace.setEnabled(false);
         jbNewWorkspace.setName("jbNewWorkspace"); // NOI18N
         jbNewWorkspace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +267,6 @@ public class DesktopApplication1View extends FrameView {
 
         jbEditWS.setAction(actionMap.get("showEditWorkspace")); // NOI18N
         jbEditWS.setText(resourceMap.getString("jbEditWS.text")); // NOI18N
-        jbEditWS.setEnabled(false);
         jbEditWS.setName("jbEditWS"); // NOI18N
 
         jlAttachedWorkitems.setText(resourceMap.getString("jlAttachedWorkitems.text")); // NOI18N
@@ -542,6 +541,11 @@ public class DesktopApplication1View extends FrameView {
         jmiLogin.setName("jmiLogin"); // NOI18N
         fileMenu.add(jmiLogin);
 
+        jMenuItem1.setActionCommand(resourceMap.getString("jmiNewProduct.actionCommand")); // NOI18N
+        jMenuItem1.setLabel(resourceMap.getString("jmiNewProduct.label")); // NOI18N
+        jMenuItem1.setName("jmiNewProduct"); // NOI18N
+        fileMenu.add(jMenuItem1);
+
         jmiOpenProduct.setAction(actionMap.get("showOpenProduct")); // NOI18N
         jmiOpenProduct.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jmiOpenProduct.setText(resourceMap.getString("jmiOpenProduct.text")); // NOI18N
@@ -677,6 +681,8 @@ public class DesktopApplication1View extends FrameView {
             params.put("vo_id", selectedVO.getInt("vo_id"));
             params.put("ws_id", selectedWorkspaceID);
             params.put("uid", uid);
+            params.put("type", 1);
+            params.put("constructs", 0);
 
             jc.prepareJSONRequest("saveVersionedObjectState", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
@@ -799,6 +805,7 @@ public class DesktopApplication1View extends FrameView {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

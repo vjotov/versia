@@ -480,6 +480,13 @@
                 <Property name="name" type="java.lang.String" value="jmiLogin" noResource="true"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="actionCommand" type="java.lang.String" resourceKey="jmiNewProduct.actionCommand"/>
+                <Property name="label" type="java.lang.String" resourceKey="jmiNewProduct.label"/>
+                <Property name="name" type="java.lang.String" value="jmiNewProduct" noResource="true"/>
+              </Properties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiOpenProduct">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">

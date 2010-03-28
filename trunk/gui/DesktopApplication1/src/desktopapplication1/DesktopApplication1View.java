@@ -3,10 +3,12 @@
  */
 package desktopapplication1;
 
+import com.jotov.versia.WorkEnvironment;
 import com.jotov.versia.gui.NewEditWorkspace;
 import com.jotov.versia.gui.VersiaAboutBox;
 import com.jotov.versia.json.JSONConnection;
-import com.jotov.versia.gui.OpenProduct;
+import com.jotov.versia.gui.OpenWorkspace;
+import com.jotov.versia.voInfo;
 import com.jotov.versia.worspaceInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,29 +32,29 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * The application's main frame.
- */
+/***********************************************************************
+ * Module:  DesktopApplication1View.java
+ * Author:  Vladimir Jotov
+ * Purpose: Defines the Class DesktopApplication1View
+ ***********************************************************************/
 public class DesktopApplication1View extends FrameView {
 
-    private JSONArray projects;
-    private JSONArray releases;
-    private JSONArray workspaces;
-    private JSONArray versionedObjects;
-    private JSONObject workitems;
-    private JSONObject selectedVO;
-    private int selectedProjectID;
-    private int selectedReleaseID;
-    private int selectedWorkspaceID;
+    private WorkEnvironment workEnvironment;
     private int uid = 1;
-    DefaultMutableTreeNode wsRoot;
-    DefaultTreeModel wsModel;
+    DefaultMutableTreeNode workspaceRoot;
+    DefaultMutableTreeNode voRoot;
+    DefaultTreeModel workspaceModel;
+    DefaultTreeModel voModel;
 
     public DesktopApplication1View(SingleFrameApplication app) {
         super(app);
 
-        wsRoot = new DefaultMutableTreeNode();
-        wsModel = new DefaultTreeModel(wsRoot);
+        workEnvironment = WorkEnvironment.getWorkEnvironment();
+        workspaceRoot = new DefaultMutableTreeNode();
+        voRoot = new DefaultMutableTreeNode();
+        workspaceModel = new DefaultTreeModel(workspaceRoot);
+        voModel = new DefaultTreeModel(voRoot);
+
         initComponents();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
@@ -127,14 +129,14 @@ public class DesktopApplication1View extends FrameView {
     public void showOpenProduct() {
         if (openProduct == null) {
             JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
-            openProduct = new OpenProduct(mainFrame);
+            openProduct = new OpenWorkspace(mainFrame);
             openProduct.setLocationRelativeTo(mainFrame);
             openProduct.setTitle("Open Product&Release");
         }
         DesktopApplication1.getApplication().show(openProduct);
         if (openProduct.getActionCommand().equals("BTN_OK")) {
-            selectedProjectID = openProduct.getSelectedProjectID();
-            selectedReleaseID = openProduct.getSelectedReleaseID();
+            //workEnvironment.setProject(openProduct.getSelectedProjectID());
+            //workEnvironment.setRelease(openProduct.getSelectedReleaseID());
 
             loadWorkspaces();
             refreshWSButtons(false);
@@ -219,6 +221,8 @@ public class DesktopApplication1View extends FrameView {
         jtaJSONTrace = new javax.swing.JTextArea();
         jbViewVODistribution = new javax.swing.JButton();
         jbViewVOHistory = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtVOs = new javax.swing.JTree();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jmiLogin = new javax.swing.JMenuItem();
@@ -243,7 +247,7 @@ public class DesktopApplication1View extends FrameView {
 
         jspWorkspaces.setName("jspWorkspaces"); // NOI18N
 
-        jtWorkspaces.setModel(wsModel);
+        jtWorkspaces.setModel(workspaceModel);
         jtWorkspaces.setName("jtWorkspaces"); // NOI18N
         jtWorkspaces.setNextFocusableComponent(jbCreateVO);
         jtWorkspaces.setRootVisible(false);
@@ -403,6 +407,12 @@ public class DesktopApplication1View extends FrameView {
             }
         });
 
+        jScrollPane4.setName("jScrollPane4"); // NOI18N
+
+        jtVOs.setModel(voModel);
+        jtVOs.setName("jtVOs"); // NOI18N
+        jScrollPane4.setViewportView(jtVOs);
+
         org.jdesktop.layout.GroupLayout jpWorkspacesLayout = new org.jdesktop.layout.GroupLayout(jpWorkspaces);
         jpWorkspaces.setLayout(jpWorkspacesLayout);
         jpWorkspacesLayout.setHorizontalGroup(
@@ -441,9 +451,12 @@ public class DesktopApplication1View extends FrameView {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jbEditWS))
                             .add(jpWorkspacesLayout.createSequentialGroup()
-                                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jLabel3)
-                                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel3)
+                                    .add(jpWorkspacesLayout.createSequentialGroup()
+                                        .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 184, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                     .add(jpWorkspacesLayout.createSequentialGroup()
@@ -510,10 +523,11 @@ public class DesktopApplication1View extends FrameView {
                     .add(jLabel3))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                    .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
         );
 
         jpWorkspacesLayout.linkSize(new java.awt.Component[] {jspAttWI, jspAvalWI, jspWorkspaces}, org.jdesktop.layout.GroupLayout.VERTICAL);
@@ -526,7 +540,7 @@ public class DesktopApplication1View extends FrameView {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jpWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+            .add(jpWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -541,6 +555,7 @@ public class DesktopApplication1View extends FrameView {
         jmiLogin.setName("jmiLogin"); // NOI18N
         fileMenu.add(jmiLogin);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setActionCommand(resourceMap.getString("jmiNewProduct.actionCommand")); // NOI18N
         jMenuItem1.setLabel(resourceMap.getString("jmiNewProduct.label")); // NOI18N
         jMenuItem1.setName("jmiNewProduct"); // NOI18N
@@ -632,7 +647,7 @@ public class DesktopApplication1View extends FrameView {
             return;
         }
         worspaceInfo nodeInfo = (worspaceInfo) node.getUserObject();
-        selectedWorkspaceID = nodeInfo.getWs_id();
+        workEnvironment.setCurrentWs(nodeInfo.getWs_id());
         loadVOsAndWI();
         refreshWSButtons(true);
         refreshVOButtons(false);
@@ -678,8 +693,8 @@ public class DesktopApplication1View extends FrameView {
 
             params.put("vo_name", jtfVOName.getText());
             params.put("vo_datum", jtaVODatum.getText());
-            params.put("vo_id", selectedVO.getInt("vo_id"));
-            params.put("ws_id", selectedWorkspaceID);
+            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
+            params.put("ws_id", workEnvironment.getCurrentWs());
             params.put("uid", uid);
             params.put("type", 1);
             params.put("constructs", 0);
@@ -687,7 +702,7 @@ public class DesktopApplication1View extends FrameView {
             jc.prepareJSONRequest("saveVersionedObjectState", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
@@ -705,13 +720,13 @@ public class DesktopApplication1View extends FrameView {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
 
-            params.put("vo_id", selectedVO.getInt("vo_id"));
-            params.put("ws_id", selectedWorkspaceID);
+            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
+            params.put("ws_id", workEnvironment.getCurrentWs());
 
             jc.prepareJSONRequest("publishVersionedObjectState", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
@@ -730,13 +745,13 @@ public class DesktopApplication1View extends FrameView {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
 
-            params.put("vo_id", selectedVO.getInt("vo_id"));
-            params.put("ws_id", selectedWorkspaceID);
+            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
+            params.put("ws_id", workEnvironment.getCurrentWs());
 
             jc.prepareJSONRequest("putbackVersionedObjectState", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
@@ -754,12 +769,12 @@ public class DesktopApplication1View extends FrameView {
 
     private void jbViewVODistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVODistributionActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
 
-            params.put("vo_id", selectedVO.getInt("vo_id"));
-            params.put("release_id", selectedReleaseID);
+            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
+            params.put("release_id", workEnvironment.getRelease());
 
             jc.prepareJSONRequest("viewVersionedObjectDistribution", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
@@ -782,8 +797,8 @@ public class DesktopApplication1View extends FrameView {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
 
-            params.put("vo_id", selectedVO.getInt("vo_id"));
-            params.put("release_id", selectedReleaseID);
+            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
+            params.put("release_id", workEnvironment.getRelease());
 
             jc.prepareJSONRequest("viewVersionedObjectHistory", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
@@ -799,7 +814,6 @@ public class DesktopApplication1View extends FrameView {
         }
         refreshVOButtons(true);
     }//GEN-LAST:event_jbViewVOHistoryActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -809,6 +823,7 @@ public class DesktopApplication1View extends FrameView {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton jbAttachWI;
     private javax.swing.JButton jbCreateVO;
     private javax.swing.JButton jbCreateWI;
@@ -832,6 +847,7 @@ public class DesktopApplication1View extends FrameView {
     private javax.swing.JScrollPane jspAttWI;
     private javax.swing.JScrollPane jspAvalWI;
     private javax.swing.JScrollPane jspWorkspaces;
+    private javax.swing.JTree jtVOs;
     private javax.swing.JTree jtWorkspaces;
     private javax.swing.JTextArea jtaJSONTrace;
     private javax.swing.JTextArea jtaVODatum;
@@ -850,17 +866,17 @@ public class DesktopApplication1View extends FrameView {
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
     private JDialog aboutBox;
-    private OpenProduct openProduct;
+    private OpenWorkspace openProduct;
 
     private void loadWorkspaces() {
         try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
-            params.put("release_id", selectedReleaseID);
+            params.put("release_id", workEnvironment.getRelease());
             jc.prepareJSONRequest("getReleaseWorkspaces", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            workspaces = jResponce.getJSONArray("result");
+            workEnvironment.setWorkspace_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code == 0) {
                 refreshWorkspaces();
@@ -875,7 +891,8 @@ public class DesktopApplication1View extends FrameView {
 
     private void refreshWorkspaces() {
         try {
-            wsRoot.removeAllChildren();
+            workspaceRoot.removeAllChildren();
+            JSONArray workspaces = workEnvironment.getWorkspace_ls();
             int pr_len = workspaces.length();
             JSONObject tmpWorkspace;
             DefaultMutableTreeNode tmpNode, tmpNode2 = null;
@@ -887,13 +904,45 @@ public class DesktopApplication1View extends FrameView {
                 int ancestor_ws_id = Integer.parseInt(tmpWorkspace.get("ancestor_ws_id").toString());
 
                 if (ancestor_ws_id == 0) {
-                    wsRoot.setUserObject(new worspaceInfo(name, ws_id, i));
-                    wsMap.put(ws_id, wsRoot);
+                    workspaceRoot.setUserObject(new worspaceInfo(name, ws_id, i));
+                    wsMap.put(ws_id, workspaceRoot);
                 } else {
                     tmpNode = new DefaultMutableTreeNode(new worspaceInfo(name, ws_id, i));
                     tmpNode2 = (DefaultMutableTreeNode) wsMap.get(ancestor_ws_id);
                     tmpNode2.add(tmpNode);
                     wsMap.put(ws_id, tmpNode);
+                }
+            }
+            jtWorkspaces.setRootVisible(true);
+            jtWorkspaces.expandRow(10);
+            ((DefaultTreeModel) jtWorkspaces.getModel()).reload();
+
+        } catch (Exception ex) {
+            ex.printStackTrace(System.err);
+        }
+    }
+        private void refreshVOs() {
+        try {
+            voRoot.removeAllChildren();
+            JSONArray vo_list = workEnvironment.getVersionedObject_ls();
+            int pr_len = vo_list.length();
+            JSONObject tmpVO;
+            DefaultMutableTreeNode tmpNode, tmpNode2 = null;
+            Map wsMap = new HashMap();
+            for (int i = 0; i < pr_len; i++) {
+                tmpVO = (JSONObject) vo_list.get(i);
+                String name = tmpVO.getString("vp_name") + " - " + transform_vector(tmpVO.getInt("v_vector"));
+                int vo_id = Integer.parseInt(tmpVO.get("vo_id").toString());
+                int construced_vo_id = Integer.parseInt(tmpVO.get("constructed").toString());
+
+                if (construced_vo_id == 0) {
+                    voRoot.setUserObject(new voInfo(name, vo_id, i));
+                    wsMap.put(vo_id, voRoot);
+                } else {
+                    tmpNode = new DefaultMutableTreeNode(new voInfo(name, vo_id, i));
+                    tmpNode2 = (DefaultMutableTreeNode) wsMap.get(construced_vo_id);
+                    tmpNode2.add(tmpNode);
+                    wsMap.put(vo_id, tmpNode);
                 }
             }
             jtWorkspaces.setRootVisible(true);
@@ -915,11 +964,13 @@ public class DesktopApplication1View extends FrameView {
         try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
-            params.put("ws_id", selectedWorkspaceID);
+            params.put("ws_id", workEnvironment.getCurrentWs());
             jc.prepareJSONRequest("getWorkItemList", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            workitems = jResponce.getJSONObject("result");
+            JSONObject workitems = jResponce.getJSONObject("result");
+            workEnvironment.setAttachedWorkItems(workitems.getJSONArray("attached"));
+            workEnvironment.setAvailableWorkItems(workitems.getJSONArray("not_attached"));
             int code = err.getInt("code");
             if (code == 0) {
                 refreshWorkitems();
@@ -934,8 +985,8 @@ public class DesktopApplication1View extends FrameView {
 
     private void refreshWorkitems() {
         try {
-            JSONArray attached = (JSONArray) workitems.get("attached");
-            JSONArray notAttached = (JSONArray) workitems.get("not_attached");
+            JSONArray attached = workEnvironment.getAttachedWorkItems();
+            JSONArray notAttached = workEnvironment.getAvailableWorkItems();
 
             int pr_len = attached.length();
             JSONObject tmpWorkitem;
@@ -963,11 +1014,11 @@ public class DesktopApplication1View extends FrameView {
         try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
-            params.put("ws_id", selectedWorkspaceID);
+            params.put("ws_id", workEnvironment.getCurrentWs());
             jc.prepareJSONRequest("getVisibleVersionedObjectList", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code == 0) {
                 refreshVersionedObjects();
@@ -982,12 +1033,13 @@ public class DesktopApplication1View extends FrameView {
 
     private void refreshVersionedObjects() {
         try {
+            JSONArray versionedObjects = workEnvironment.getVersionedObject_ls();
             int pr_len = versionedObjects.length();
-            JSONObject tmpRelease;
+            JSONObject tmpVO;
             Vector v = new Vector();
             for (int i = 0; i < pr_len; i++) {
-                tmpRelease = (JSONObject) versionedObjects.get(i);
-                String val = tmpRelease.getString("vp_name") + " - " + transform_vector(tmpRelease.getInt("v_vector"));
+                tmpVO = (JSONObject) versionedObjects.get(i);
+                String val = tmpVO.getString("vp_name") + " - " + transform_vector(tmpVO.getInt("v_vector"));
                 v.add(i, val);
             }
             jlstVersionedObjects.setListData(v);
@@ -1001,14 +1053,14 @@ public class DesktopApplication1View extends FrameView {
         try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
-            JSONArray notAttached = (JSONArray) workitems.get("not_attached");
+            JSONArray notAttached = workEnvironment.getAvailableWorkItems();
             JSONObject wi = (JSONObject) notAttached.get(jlstNotAttachedWorkitems.getSelectedIndex());
             params.put("wi_id", Integer.parseInt(wi.get("wi_id").toString()));
-            params.put("ws_id", selectedWorkspaceID);
+            params.put("ws_id", workEnvironment.getCurrentWs());
             jc.prepareJSONRequest("attachWorkItem", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
@@ -1023,14 +1075,14 @@ public class DesktopApplication1View extends FrameView {
         try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
-            JSONArray notAttached = (JSONArray) workitems.get("attached");
+            JSONArray notAttached = workEnvironment.getAttachedWorkItems();
             JSONObject wi = (JSONObject) notAttached.get(jlstAttachedWorkitems.getSelectedIndex());
             params.put("wi_id", Integer.parseInt(wi.get("wi_id").toString()));
-            params.put("ws_id", selectedWorkspaceID);
+            params.put("ws_id", workEnvironment.getCurrentWs());
             jc.prepareJSONRequest("detachWorkItem", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
@@ -1045,7 +1097,7 @@ public class DesktopApplication1View extends FrameView {
         try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
-            params.put("ancestor_workspace_id", selectedWorkspaceID);
+            params.put("ancestor_workspace_id", workEnvironment.getCurrentWs());
             params.put("new_workspace_name", newWSName);
             jc.prepareJSONRequest("createWorkspace", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
@@ -1059,16 +1111,17 @@ public class DesktopApplication1View extends FrameView {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     private void saveWS(String newWSName) {
         try {
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
-            params.put("workspace_id", selectedWorkspaceID);
+            params.put("workspace_id", workEnvironment.getCurrentWs());
             params.put("new_workspace_name", newWSName);
             jc.prepareJSONRequest("updateWorkspace", params, uid);
             JSONObject jResponce = jc.doRequest(jtaJSONTrace);
             JSONObject err = jResponce.getJSONObject("error");
-            versionedObjects = jResponce.getJSONArray("result");
+            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
@@ -1080,7 +1133,10 @@ public class DesktopApplication1View extends FrameView {
 
     private void loadSelectedVO() {
         try {
-            selectedVO = (JSONObject) versionedObjects.get(jlstVersionedObjects.getSelectedIndex());
+            JSONArray versionedObjects = workEnvironment.getVersionedObject_ls();
+            //@todo da vzema indeksa na VOid ot tree-to
+            JSONObject selectedVO = (JSONObject) versionedObjects.get(jlstVersionedObjects.getSelectedIndex());
+            workEnvironment.setCurrentVersionedObject(selectedVO.getInt("vo_id"));
             jtfVOName.setText(selectedVO.getString("vp_name"));
             jtaVODatum.setText(selectedVO.getString("vp_datum"));
             refreshVOButtons(true);
@@ -1089,39 +1145,42 @@ public class DesktopApplication1View extends FrameView {
         }
 
     }
+
     private void diplayVersionedObjectsDistribution(JSONArray Distribution) {
         // TODO - idea - to show in a new window an expanded tree, where nodes with gray means no local version.
         // By selectin a node the user shall be able to view (readonly mode) the version of the VO.
         //throw new UnsupportedOperationException("Not yet implemented");
     }
-    private void diplayVersionedObjectsHistory(JSONArray HistoryItems){
+
+    private void diplayVersionedObjectsHistory(JSONArray HistoryItems) {
         // TODO - idea - to show in a new window list of all historical changes of VO - source, target, time of version, user initiated the change, work item of the change
     }
-/*
+    /*
     private void expandAll(JTree tree, boolean expand) {
-        TreeNode root = (TreeNode)tree.getModel().getRoot();
+    TreeNode root = (TreeNode)tree.getModel().getRoot();
 
-        // Traverse tree from root
-        expandAll(tree, new TreePath(root), expand);
+    // Traverse tree from root
+    expandAll(tree, new TreePath(root), expand);
     }
     private void expandAll(JTree tree, TreePath parent, boolean expand) {
-        // Traverse children
-        TreeNode node = (TreeNode)parent.getLastPathComponent();
-        if (node.getChildCount() >= 0) {
-            for (Enumeration e=node.children(); e.hasMoreElements(); ) {
-                TreeNode n = (TreeNode)e.nextElement();
-                TreePath path = parent.pathByAddingChild(n);
-                expandAll(tree, path, expand);
-            }
-        }
+    // Traverse children
+    TreeNode node = (TreeNode)parent.getLastPathComponent();
+    if (node.getChildCount() >= 0) {
+    for (Enumeration e=node.children(); e.hasMoreElements(); ) {
+    TreeNode n = (TreeNode)e.nextElement();
+    TreePath path = parent.pathByAddingChild(n);
+    expandAll(tree, path, expand);
+    }
+    }
 
-        // Expansion or collapse must be done bottom-up
-        if (expand) {
-            tree.expandPath(parent);
-        } else {
-            tree.collapsePath(parent);
-        }
+    // Expansion or collapse must be done bottom-up
+    if (expand) {
+    tree.expandPath(parent);
+    } else {
+    tree.collapsePath(parent);
+    }
     }//*/
+
     private void refreshWSButtons(boolean b) {
         jbEditWS.setEnabled(b);
         jbCreateVO.setEnabled(b);
@@ -1139,6 +1198,7 @@ public class DesktopApplication1View extends FrameView {
         jbViewVOHistory.setEnabled(b);
 
         try {
+            JSONObject selectedVO = workEnvironment.getCurrentVersionedObject();
             int vv = selectedVO.getInt("v_vector");
             if ((vv & 8) > 0) { // Local versioned object
                 jbCreateWI.setEnabled(b);
@@ -1195,8 +1255,4 @@ public class DesktopApplication1View extends FrameView {
         }
         return sb.toString();
     }
-
-
-
-
 }

@@ -90,6 +90,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbNewProduct.setName("jbNewProduct"); // NOI18N
 
         jbEditProduct.setText(resourceMap.getString("jbEditProduct.text")); // NOI18N
+        jbEditProduct.setEnabled(false);
         jbEditProduct.setName("jbEditProduct"); // NOI18N
 
         jspProjects.setName("jspProjects"); // NOI18N
@@ -108,9 +109,11 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jlRelease.setName("jlRelease"); // NOI18N
 
         jbNewRelease.setText(resourceMap.getString("jbNewRelease.text")); // NOI18N
+        jbNewRelease.setEnabled(false);
         jbNewRelease.setName("jbNewRelease"); // NOI18N
 
         jbEditRelease.setText(resourceMap.getString("jbEditRelease.text")); // NOI18N
+        jbEditRelease.setEnabled(false);
         jbEditRelease.setName("jbEditRelease"); // NOI18N
 
         jspReleases.setName("jspReleases"); // NOI18N
@@ -128,15 +131,22 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jlWorkspace.setName("jlWorkspace"); // NOI18N
 
         jbNewWorkspace.setText(resourceMap.getString("jbNewWorkspace.text")); // NOI18N
+        jbNewWorkspace.setEnabled(false);
         jbNewWorkspace.setName("jbNewWorkspace"); // NOI18N
 
         jbEditWorkspace.setText(resourceMap.getString("jbEditWorkspace.text")); // NOI18N
+        jbEditWorkspace.setEnabled(false);
         jbEditWorkspace.setName("jbEditWorkspace"); // NOI18N
 
         jspWorkspaces.setName("jspWorkspaces"); // NOI18N
 
         jtWorkspaces.setModel(workspaceModel);
         jtWorkspaces.setName("jtWorkspaces"); // NOI18N
+        jtWorkspaces.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jtWorkspacesValueChanged(evt);
+            }
+        });
         jspWorkspaces.setViewportView(jtWorkspaces);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(desktopapplication1.DesktopApplication1.class).getContext().getActionMap(OpenWorkspace.class, this);
@@ -229,7 +239,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
             int idx = jlstProducts.getSelectedIndex();
             we.setProject(Integer.parseInt(((JSONObject) projects.get(idx)).get("product_id").toString()));
             loadReleases();
-            clearWorkspaces();
+            uiRefreshProductChanged();
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
         }
@@ -241,11 +251,17 @@ public class OpenWorkspace extends javax.swing.JDialog {
             int idx = jlstReleases.getSelectedIndex();
             we.setRelease(Integer.parseInt(((JSONObject) releases.get(idx)).get("release_id").toString()));
             loadWorkspaces();
-            jbOK.setEnabled(true);
+            uiRefreshReleaseChanged();
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
         }
 }//GEN-LAST:event_jlstReleasesValueChanged
+
+    private void jtWorkspacesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtWorkspacesValueChanged
+        // TODO add your handling code here:
+        uiRefreshWorkspaceChanged();
+    }//GEN-LAST:event_jtWorkspacesValueChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbEditProduct;
@@ -399,5 +415,33 @@ public class OpenWorkspace extends javax.swing.JDialog {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
         }
+    }
+
+    private void uiRefreshProductChanged() {
+        clearWorkspaces();
+        jbEditProduct.setEnabled(true);
+        jbEditRelease.setEnabled(false);
+        jbEditWorkspace.setEnabled(false);
+        jbNewRelease.setEnabled(true);
+        jbNewWorkspace.setEnabled(false);
+        jbOK.setEnabled(false);
+    }
+
+    private void uiRefreshReleaseChanged() {
+        clearWorkspaces();
+        jbEditProduct.setEnabled(true);
+        jbEditRelease.setEnabled(true);
+        jbEditWorkspace.setEnabled(false);
+        jbNewRelease.setEnabled(true);
+        jbNewWorkspace.setEnabled(true);
+        jbOK.setEnabled(false);
+    }
+    private void uiRefreshWorkspaceChanged() {
+        jbEditProduct.setEnabled(true);
+        jbEditRelease.setEnabled(true);
+        jbEditWorkspace.setEnabled(true);
+        jbNewRelease.setEnabled(true);
+        jbNewWorkspace.setEnabled(true);
+        jbOK.setEnabled(true);
     }
 }

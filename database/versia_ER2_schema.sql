@@ -2,7 +2,7 @@
 SQLyog Enterprise - MySQL GUI v8.12 
 MySQL - 5.1.37 : Database - versia_er2
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -84,9 +84,9 @@ CREATE TABLE `t_initiator_effector` (
   PRIMARY KEY (`wi_id`,`effector_vo_id`,`effector_vp_id`,`initiator_vp_id`),
   KEY `FK_initiator` (`initiator_vp_id`),
   KEY `FK_effector` (`effector_vp_id`,`effector_vo_id`),
-  CONSTRAINT `FK_initiator_workitem` FOREIGN KEY (`wi_id`) REFERENCES `t_workitem` (`wi_id`),
   CONSTRAINT `FK_effector` FOREIGN KEY (`effector_vp_id`, `effector_vo_id`) REFERENCES `t_versioned_primitive` (`vp_id`, `vo_id`),
-  CONSTRAINT `FK_initiator` FOREIGN KEY (`initiator_vp_id`) REFERENCES `t_versioned_primitive` (`vp_id`)
+  CONSTRAINT `FK_initiator` FOREIGN KEY (`initiator_vp_id`) REFERENCES `t_versioned_primitive` (`vp_id`),
+  CONSTRAINT `FK_initiator_workitem` FOREIGN KEY (`wi_id`) REFERENCES `t_workitem` (`wi_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_initiator_effector` */
@@ -245,8 +245,8 @@ CREATE TABLE `t_version_graph_arcs` (
   PRIMARY KEY (`vo_id`,`source_vp_id`,`target_vp_id`),
   KEY `FK_vp_src` (`source_vp_id`,`vo_id`),
   KEY `FK_vp_trg` (`target_vp_id`,`vo_id`),
-  CONSTRAINT `FK_vp_trg` FOREIGN KEY (`target_vp_id`, `vo_id`) REFERENCES `t_versioned_primitive` (`vp_id`, `vo_id`),
-  CONSTRAINT `FK_vp_src` FOREIGN KEY (`source_vp_id`, `vo_id`) REFERENCES `t_versioned_primitive` (`vp_id`, `vo_id`)
+  CONSTRAINT `FK_vp_src` FOREIGN KEY (`source_vp_id`, `vo_id`) REFERENCES `t_versioned_primitive` (`vp_id`, `vo_id`),
+  CONSTRAINT `FK_vp_trg` FOREIGN KEY (`target_vp_id`, `vo_id`) REFERENCES `t_versioned_primitive` (`vp_id`, `vo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_version_graph_arcs` */
@@ -283,7 +283,7 @@ CREATE TABLE `t_versioned_primitive` (
   `vo_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `type_id` int(11) NOT NULL,
-  `constructs` int(11) DEFAULT NULL,
+  `constructs` int(11) NOT NULL DEFAULT '0',
   `datum` text,
   PRIMARY KEY (`vp_id`,`vo_id`),
   KEY `FK_vo_type` (`type_id`),
@@ -296,7 +296,7 @@ CREATE TABLE `t_versioned_primitive` (
 
 LOCK TABLES `t_versioned_primitive` WRITE;
 
-insert  into `t_versioned_primitive`(`vp_id`,`vo_id`,`name`,`type_id`,`constructs`,`datum`) values (0,14,'test VO',1,NULL,'test datum'),(0,18,'General Workitem',1,NULL,NULL),(1,3,'WI1',1,NULL,NULL),(2,9,'Object 9',1,NULL,'ver.2'),(3,1,'Object 1',1,NULL,'ver.3'),(3,2,'Object 2',1,NULL,'ver.3'),(4,1,'Object 1',1,NULL,'ver.4'),(4,2,'Object 2',1,NULL,'ver.4'),(6,2,'Object 2',1,NULL,'ver.6'),(7,4,'Object 4',1,NULL,'ver.7'),(9,4,'Object 4',1,NULL,'ver.9'),(15,4,'Object 4',1,NULL,'ver.15');
+insert  into `t_versioned_primitive`(`vp_id`,`vo_id`,`name`,`type_id`,`constructs`,`datum`) values (0,14,'test VO',1,2,'test datum'),(0,18,'General Workitem',1,0,NULL),(1,3,'WI1',1,0,NULL),(2,9,'Object 9',1,0,'ver.2'),(3,1,'Object 1',1,0,'ver.3'),(3,2,'Object 2',1,0,'ver.3'),(4,1,'Object 1',1,0,'ver.4'),(4,2,'Object 2',1,0,'ver.4'),(6,2,'Object 2',1,0,'ver.6'),(7,4,'Object 4',1,0,'ver.7'),(9,4,'Object 4',1,0,'ver.9'),(15,4,'Object 4',1,0,'ver.15');
 
 UNLOCK TABLES;
 
@@ -390,7 +390,7 @@ CREATE TABLE `t_ws_workitem` (
 
 LOCK TABLES `t_ws_workitem` WRITE;
 
-insert  into `t_ws_workitem`(`ws_id`,`wi_id`) values (21,1),(31,4);
+insert  into `t_ws_workitem`(`ws_id`,`wi_id`) values (20,1),(21,1),(31,4);
 
 UNLOCK TABLES;
 
@@ -473,7 +473,6 @@ BEGIN
 	DECLARE out_result INT(11) DEFAULT 0;
 	DECLARE anc_rgt INT(11);
 	IF in_ancestor_ws_id <= 0 THEN RETURN -10; END IF;
-
 	SELECT rgt FROM t_workspace 
 		WHERE ws_id = in_ancestor_ws_id AND release_id = in_release_id
 		INTO anc_rgt;
@@ -634,13 +633,11 @@ DELIMITER $$
 BEGIN
 	DECLARE s1, s2, s3, s4, s5  CHAR(1) DEFAULT "_";
 	DECLARE st VARCHAR(10);
-
 	IF in_vector & 1 THEN SET s1 = "R"; END IF;
 	IF in_vector & 2 THEN SET s2 = "P"; END IF;
 	IF in_vector & 4 THEN SET s3 = "C"; END IF;
 	IF in_vector & 8 THEN SET s4 = "L"; END IF;
 	IF in_vector & 16 THEN SET s5 = "T"; END IF;
-
 	SET st = s1.s2 ;#+ s3 + s4 + s5;
 	RETURN st;
     END */$$

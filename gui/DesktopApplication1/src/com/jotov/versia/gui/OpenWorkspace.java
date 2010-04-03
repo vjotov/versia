@@ -78,6 +78,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jtWorkspaces = new javax.swing.JTree();
         jbOK = new javax.swing.JButton();
         jbCancel = new javax.swing.JButton();
+        jbLoadWS = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -88,6 +89,11 @@ public class OpenWorkspace extends javax.swing.JDialog {
 
         jbNewProduct.setText(resourceMap.getString("jbNewProduct.text")); // NOI18N
         jbNewProduct.setName("jbNewProduct"); // NOI18N
+        jbNewProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNewProductActionPerformed(evt);
+            }
+        });
 
         jbEditProduct.setText(resourceMap.getString("jbEditProduct.text")); // NOI18N
         jbEditProduct.setEnabled(false);
@@ -143,6 +149,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jtWorkspaces.setModel(workspaceModel);
         jtWorkspaces.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jtWorkspaces.setName("jtWorkspaces"); // NOI18N
+        jtWorkspaces.setRootVisible(false);
         jtWorkspaces.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 jtWorkspacesValueChanged(evt);
@@ -160,6 +167,14 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbCancel.setText(resourceMap.getString("jbCancel.text")); // NOI18N
         jbCancel.setActionCommand(resourceMap.getString("jbCancel.actionCommand")); // NOI18N
         jbCancel.setName("jbCancel"); // NOI18N
+
+        jbLoadWS.setText(resourceMap.getString("jbLoadWS.text")); // NOI18N
+        jbLoadWS.setName("jbLoadWS"); // NOI18N
+        jbLoadWS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLoadWSActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,19 +201,22 @@ public class OpenWorkspace extends javax.swing.JDialog {
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(jspReleases, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 160, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(10, 10, 10)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(layout.createSequentialGroup()
-                        .add(jlWorkspace)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jbNewWorkspace)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jbEditWorkspace))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jbLoadWS)
+                .add(6, 6, 6)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(jbOK)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbCancel))
-                    .add(jspWorkspaces))
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                        .add(jspWorkspaces, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 175, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
+                            .add(jlWorkspace)
+                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(jbNewWorkspace)
+                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(jbEditWorkspace))))
                 .addContainerGap())
         );
 
@@ -219,14 +237,18 @@ public class OpenWorkspace extends javax.swing.JDialog {
                     .add(jbNewWorkspace, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jbEditWorkspace, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jspWorkspaces, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 245, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jspReleases, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                    .add(jspProjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jbCancel)
-                    .add(jbOK))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jbLoadWS)
+                    .add(layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(jspWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                .add(jspReleases, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                .add(jspProjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jbCancel)
+                            .add(jbOK))))
                 .addContainerGap())
         );
 
@@ -250,7 +272,6 @@ public class OpenWorkspace extends javax.swing.JDialog {
             WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
             int idx = jlstReleases.getSelectedIndex();
             we.setRelease(Integer.parseInt(((JSONObject) releases.get(idx)).get("release_id").toString()));
-            loadWorkspaces();
             uiRefreshReleaseChanged();
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
@@ -258,23 +279,33 @@ public class OpenWorkspace extends javax.swing.JDialog {
 }//GEN-LAST:event_jlstReleasesValueChanged
 
     private void jtWorkspacesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtWorkspacesValueChanged
-        // TODO add your handling code here:
         WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
-
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtWorkspaces.getLastSelectedPathComponent();
         if (node == null) {
             return;
-        } 
+        }
         worspaceInfo nodeInfo = (worspaceInfo) node.getUserObject();
         we.setWorkspace(nodeInfo.getWs_id());
         uiRefreshWorkspaceChanged();
     }//GEN-LAST:event_jtWorkspacesValueChanged
+
+    private void jbNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNewProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbNewProductActionPerformed
+
+    private void jbLoadWSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoadWSActionPerformed
+        // TODO add your handling code here:
+        loadWorkspaces();
+        jbEditWorkspace.setEnabled(false);
+        jbNewWorkspace.setEnabled(false);
+    }//GEN-LAST:event_jbLoadWSActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbEditProduct;
     private javax.swing.JButton jbEditRelease;
     private javax.swing.JButton jbEditWorkspace;
+    private javax.swing.JButton jbLoadWS;
     private javax.swing.JButton jbNewProduct;
     private javax.swing.JButton jbNewRelease;
     private javax.swing.JButton jbNewWorkspace;
@@ -391,6 +422,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
     private void clearWorkspaces() {
         workspaceRoot.removeAllChildren();
         ((DefaultTreeModel) jtWorkspaces.getModel()).reload();
+        jtWorkspaces.setRootVisible(false);
     }
 
     private void displayWorkspaces() {
@@ -402,22 +434,21 @@ public class OpenWorkspace extends javax.swing.JDialog {
             Map wsMap = new HashMap();
             for (int i = 0; i < pr_len; i++) {
                 tmpWorkspace = (JSONObject) workspaces.get(i);
-                String name = tmpWorkspace.get("name").toString();
-                int ws_id = Integer.parseInt(tmpWorkspace.get("ws_id").toString());
-                int ancestor_ws_id = Integer.parseInt(tmpWorkspace.get("ancestor_ws_id").toString());
+                worspaceInfo wsInfo = new worspaceInfo(tmpWorkspace.getString("name"), 
+                           tmpWorkspace.getInt("ws_id"), i);
+                int ancestor_ws_id = tmpWorkspace.getInt("ancestor_ws_id");
 
                 if (ancestor_ws_id == 0) {
-                    workspaceRoot.setUserObject(new worspaceInfo(name, ws_id, i));
-                    wsMap.put(ws_id, workspaceRoot);
+                    workspaceRoot.setUserObject(wsInfo);
+                    wsMap.put(wsInfo.getWs_id(), workspaceRoot);
                 } else {
-                    tmpNode = new DefaultMutableTreeNode(new worspaceInfo(name, ws_id, i));
+                    tmpNode = new DefaultMutableTreeNode(wsInfo);
                     tmpNode2 = (DefaultMutableTreeNode) wsMap.get(ancestor_ws_id);
                     tmpNode2.add(tmpNode);
-                    wsMap.put(ws_id, tmpNode);
+                    wsMap.put(wsInfo.getWs_id(), tmpNode);
                 }
             }
             jtWorkspaces.setRootVisible(true);
-            //jtWorkspaces.expandRow(10);
             ((DefaultTreeModel) jtWorkspaces.getModel()).reload();
 
         } catch (Exception ex) {
@@ -441,7 +472,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbEditRelease.setEnabled(true);
         jbEditWorkspace.setEnabled(false);
         jbNewRelease.setEnabled(true);
-        jbNewWorkspace.setEnabled(true);
+        jbNewWorkspace.setEnabled(false);
         jbOK.setEnabled(false);
     }
     private void uiRefreshWorkspaceChanged() {

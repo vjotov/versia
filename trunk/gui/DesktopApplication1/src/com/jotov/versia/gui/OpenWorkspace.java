@@ -141,6 +141,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jspWorkspaces.setName("jspWorkspaces"); // NOI18N
 
         jtWorkspaces.setModel(workspaceModel);
+        jtWorkspaces.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jtWorkspaces.setName("jtWorkspaces"); // NOI18N
         jtWorkspaces.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -153,7 +154,6 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbOK.setAction(actionMap.get("doOK")); // NOI18N
         jbOK.setText(resourceMap.getString("jbOK.text")); // NOI18N
         jbOK.setActionCommand(resourceMap.getString("jbOK.actionCommand")); // NOI18N
-        jbOK.setEnabled(false);
         jbOK.setName("jbOK"); // NOI18N
 
         jbCancel.setAction(actionMap.get("doCancel")); // NOI18N
@@ -219,8 +219,8 @@ public class OpenWorkspace extends javax.swing.JDialog {
                     .add(jbNewWorkspace, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jbEditWorkspace, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jspWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jspWorkspaces, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 245, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jspReleases, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                     .add(jspProjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -259,6 +259,14 @@ public class OpenWorkspace extends javax.swing.JDialog {
 
     private void jtWorkspacesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtWorkspacesValueChanged
         // TODO add your handling code here:
+        WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtWorkspaces.getLastSelectedPathComponent();
+        if (node == null) {
+            return;
+        } 
+        worspaceInfo nodeInfo = (worspaceInfo) node.getUserObject();
+        we.setWorkspace(nodeInfo.getWs_id());
         uiRefreshWorkspaceChanged();
     }//GEN-LAST:event_jtWorkspacesValueChanged
 
@@ -409,7 +417,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
                 }
             }
             jtWorkspaces.setRootVisible(true);
-            jtWorkspaces.expandRow(10);
+            //jtWorkspaces.expandRow(10);
             ((DefaultTreeModel) jtWorkspaces.getModel()).reload();
 
         } catch (Exception ex) {

@@ -2,7 +2,7 @@ package com.jotov.versia.gui2.command;
 
 /***********************************************************************
  * Module:  CreateRelease.java
- * Author:  v
+ * Author:  Vladimir Jotov
  * Purpose: Defines the Class CreateRelease
  ***********************************************************************/
 
@@ -12,6 +12,10 @@ import java.util.*;
 public class CreateRelease implements ICommand {
 
     public Object doRequest() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setParameters(HashMap params) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

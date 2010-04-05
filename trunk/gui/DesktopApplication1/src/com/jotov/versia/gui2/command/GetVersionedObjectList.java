@@ -2,7 +2,7 @@ package com.jotov.versia.gui2.command;
 
 /***********************************************************************
  * Module:  GetVersionedObjectList.java
- * Author:  v
+ * Author:  Vladimir Jotov
  * Purpose: Defines the Class GetVersionedObjectList
  ***********************************************************************/
 
@@ -12,6 +12,10 @@ import java.util.*;
 public class GetVersionedObjectList implements ICommand {
 
     public Object doRequest() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setParameters(HashMap params) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

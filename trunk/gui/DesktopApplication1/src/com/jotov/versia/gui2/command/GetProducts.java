@@ -35,4 +35,8 @@ public class GetProducts implements ICommand {
             return null;
         }
     }
+
+    public void setParameters(HashMap params) {
+        return;
+    }
 }

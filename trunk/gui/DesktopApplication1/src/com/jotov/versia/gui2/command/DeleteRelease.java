@@ -2,16 +2,19 @@ package com.jotov.versia.gui2.command;
 
 /***********************************************************************
  * Module:  DeleteRelease.java
- * Author:  v
+ * Author:  Vladimir Jotov
  * Purpose: Defines the Class DeleteRelease
  ***********************************************************************/
 
 import java.util.*;
 
-/** @pdOid 314e089a-f000-4b45-95a3-0eff7e6a0c15 */
 public class DeleteRelease implements ICommand {
 
     public Object doRequest() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setParameters(HashMap params) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

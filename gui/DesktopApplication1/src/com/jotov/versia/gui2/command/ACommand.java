@@ -6,6 +6,7 @@
 package com.jotov.versia.gui2.command;
 
 import com.jotov.versia.WorkEnvironment;
+import java.util.HashMap;
 
 /***********************************************************************
  * Module:  ACommand.java
@@ -17,6 +18,10 @@ import com.jotov.versia.WorkEnvironment;
 public class ACommand implements ICommand {
     private WorkEnvironment workEnvironment;
     public Object doRequest() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setParameters(HashMap params) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

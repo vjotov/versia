@@ -1,5 +1,7 @@
 package com.jotov.versia.gui2.command;
 
+
+import java.util.HashMap;
 import org.json.JSONException;
 
 /***********************************************************************
@@ -11,5 +13,5 @@ import org.json.JSONException;
 
 public interface ICommand {
    Object doRequest() throws JSONException;
-
+   void setParameters(HashMap params);
 }

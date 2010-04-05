@@ -14,12 +14,14 @@ import com.jotov.versia.WorkEnvironment;
 import com.jotov.versia.gui2.command.CommandFactory;
 import com.jotov.versia.gui2.command.ICommand;
 import com.jotov.versia.worspaceInfo;
+import desktopapplication1.DesktopApplication1;
 import desktopapplication1.DesktopApplication1View;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -139,10 +141,20 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbNewWorkspace.setText(resourceMap.getString("jbNewWorkspace.text")); // NOI18N
         jbNewWorkspace.setEnabled(false);
         jbNewWorkspace.setName("jbNewWorkspace"); // NOI18N
+        jbNewWorkspace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNewWorkspaceActionPerformed(evt);
+            }
+        });
 
         jbEditWorkspace.setText(resourceMap.getString("jbEditWorkspace.text")); // NOI18N
         jbEditWorkspace.setEnabled(false);
         jbEditWorkspace.setName("jbEditWorkspace"); // NOI18N
+        jbEditWorkspace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditWorkspaceActionPerformed(evt);
+            }
+        });
 
         jspWorkspaces.setName("jspWorkspaces"); // NOI18N
 
@@ -300,6 +312,41 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbNewWorkspace.setEnabled(false);
     }//GEN-LAST:event_jbLoadWSActionPerformed
 
+    private void jbEditWorkspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditWorkspaceActionPerformed
+        // TODO add your handling code here:
+        JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
+        String wsName = "";
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtWorkspaces.getLastSelectedPathComponent();
+        if (node == null) {
+            wsName = "";
+        } else {
+            worspaceInfo nodeInfo = (worspaceInfo) node.getUserObject();
+            wsName = nodeInfo.getName();
+        }
+        NewEditWorkspace dlg = new NewEditWorkspace(mainFrame, wsName);
+        dlg.setLocationRelativeTo(mainFrame);
+        dlg.setTitle("Edit Workspace");
+
+        DesktopApplication1.getApplication().show(dlg);
+        if (dlg.getActionCommand().equals("BTN_SAVE")) {
+            String newWSName = dlg.getWSName();
+            saveWS(newWSName);
+        }
+    }//GEN-LAST:event_jbEditWorkspaceActionPerformed
+
+    private void jbNewWorkspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNewWorkspaceActionPerformed
+        // TODO add your handling code here:
+        JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
+        NewEditWorkspace dlg = new NewEditWorkspace(mainFrame);
+        dlg.setLocationRelativeTo(mainFrame);
+        dlg.setTitle("New Workspace");
+
+        DesktopApplication1.getApplication().show(dlg);
+        if (dlg.getActionCommand().equals("BTN_SAVE")) {
+            String newWSName = dlg.getWSName();
+            createWS(newWSName);
+        }
+    }//GEN-LAST:event_jbNewWorkspaceActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbEditProduct;
@@ -434,8 +481,8 @@ public class OpenWorkspace extends javax.swing.JDialog {
             Map wsMap = new HashMap();
             for (int i = 0; i < pr_len; i++) {
                 tmpWorkspace = (JSONObject) workspaces.get(i);
-                worspaceInfo wsInfo = new worspaceInfo(tmpWorkspace.getString("name"), 
-                           tmpWorkspace.getInt("ws_id"), i);
+                worspaceInfo wsInfo = new worspaceInfo(tmpWorkspace.getString("name"),
+                        tmpWorkspace.getInt("ws_id"), i);
                 int ancestor_ws_id = tmpWorkspace.getInt("ancestor_ws_id");
 
                 if (ancestor_ws_id == 0) {
@@ -475,6 +522,7 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbNewWorkspace.setEnabled(false);
         jbOK.setEnabled(false);
     }
+
     private void uiRefreshWorkspaceChanged() {
         jbEditProduct.setEnabled(true);
         jbEditRelease.setEnabled(true);
@@ -482,5 +530,42 @@ public class OpenWorkspace extends javax.swing.JDialog {
         jbNewRelease.setEnabled(true);
         jbNewWorkspace.setEnabled(true);
         jbOK.setEnabled(true);
+    }
+
+    private void saveWS(String newWSName) {
+        try {
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.UPDATE_WORKSPACE);
+            HashMap params = new HashMap();
+            params.put("new_workspace_name", newWSName);
+            cmd.setParameters(params);
+            Integer result = (Integer) cmd.doRequest();
+            if (result != null) {
+                loadWorkspaces();
+                displayWorkspaces();
+            }
+
+        } catch (JSONException ex) {
+            Logger.getLogger(OpenWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void createWS(String newWSName) {
+        try {
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.CREATE_WORKSPACE);
+            HashMap params = new HashMap();
+            params.put("ancestor_workspace_id", we.getWorkspace());
+            params.put("new_workspace_name", newWSName);
+            cmd.setParameters(params);
+            Integer result = (Integer) cmd.doRequest();
+            if (result != null) {
+                loadWorkspaces();
+                displayWorkspaces();
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(OpenWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

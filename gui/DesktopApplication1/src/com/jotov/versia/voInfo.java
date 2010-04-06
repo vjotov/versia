@@ -14,9 +14,9 @@ public class voInfo {
     private int vo_id;
     private int place_in_array;
 
-    public voInfo(String name, int ws_id, int place_in_array) {
+    public voInfo(String name, int vo_id, int place_in_array) {
         this.name = name;
-        this.vo_id = ws_id;
+        this.vo_id = vo_id;
         this.place_in_array = place_in_array;
     }
 

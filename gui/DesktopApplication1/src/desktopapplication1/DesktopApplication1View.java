@@ -8,6 +8,8 @@ import com.jotov.versia.gui.NewEditWorkspace;
 import com.jotov.versia.gui.VersiaAboutBox;
 import com.jotov.versia.json.JSONConnection;
 import com.jotov.versia.gui.OpenWorkspace;
+import com.jotov.versia.gui2.command.CommandFactory;
+import com.jotov.versia.gui2.command.ICommand;
 import com.jotov.versia.voInfo;
 import com.jotov.versia.worspaceInfo;
 import java.util.logging.Level;
@@ -137,13 +139,10 @@ public class DesktopApplication1View extends FrameView {
         if (openProduct.getActionCommand().equals("BTN_OK")) {
             //workEnvironment.setProject(openProduct.getSelectedProjectID());
             //workEnvironment.setRelease(openProduct.getSelectedReleaseID());
-
-         //   loadWorkspaces();
-            refreshWSButtons(false);
+            //   loadWorkspaces();
+            // refreshWSButtons(false);
         }
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -736,45 +735,6 @@ public class DesktopApplication1View extends FrameView {
     private JDialog aboutBox;
     private OpenWorkspace openProduct;
 
-        private void refreshVOs() {
-        try {
-            voRoot.removeAllChildren();
-            JSONArray vo_list = workEnvironment.getVersionedObject_ls();
-            int pr_len = vo_list.length();
-            JSONObject tmpVO;
-            DefaultMutableTreeNode tmpNode, tmpNode2 = null;
-            Map wsMap = new HashMap();
-            for (int i = 0; i < pr_len; i++) {
-                tmpVO = (JSONObject) vo_list.get(i);
-                String name = tmpVO.getString("vp_name") + " - " + transform_vector(tmpVO.getInt("v_vector"));
-                int vo_id = Integer.parseInt(tmpVO.get("vo_id").toString());
-                int construced_vo_id = Integer.parseInt(tmpVO.get("constructed").toString());
-
-                if (construced_vo_id == 0) {
-                    voRoot.setUserObject(new voInfo(name, vo_id, i));
-                    wsMap.put(vo_id, voRoot);
-                } else {
-                    tmpNode = new DefaultMutableTreeNode(new voInfo(name, vo_id, i));
-                    tmpNode2 = (DefaultMutableTreeNode) wsMap.get(construced_vo_id);
-                    tmpNode2.add(tmpNode);
-                    wsMap.put(vo_id, tmpNode);
-                }
-            }
-            jtVOs.setRootVisible(true);
-            jtVOs.expandRow(10);
-            ((DefaultTreeModel) jtVOs.getModel()).reload();
-
-        } catch (Exception ex) {
-            ex.printStackTrace(System.err);
-        }
-    }
-
-    private void loadVOsAndWI() {
-        //System.out.println(" loadVOsAndWI(). Selected workspace is: "+selectedWorkspaceID);
-        loadWorkItems();
-        loadVersionedObjects();
-    }
-
     private void loadWorkItems() {
         try {
             JSONConnection jc = new JSONConnection();
@@ -827,40 +787,50 @@ public class DesktopApplication1View extends FrameView {
 
     private void loadVersionedObjects() {
         try {
-            JSONConnection jc = new JSONConnection();
-            Map params = new HashMap();
-            params.put("ws_id", workEnvironment.getCurrentWs());
-            jc.prepareJSONRequest("getVisibleVersionedObjectList", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
-            JSONObject err = jResponce.getJSONObject("error");
-            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
-            int code = err.getInt("code");
-            if (code == 0) {
-                refreshVersionedObjects();
-            } else {
-                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.GET_VERSIONED_OBJECT_LIST);
+            JSONArray vo_ls = (JSONArray) cmd.doRequest();
+            if (vo_ls != null) {
+                displayVersionedObjectsTree();
             }
-
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void refreshVersionedObjects() {
+    private void displayVersionedObjectsTree() {
         try {
-            JSONArray versionedObjects = workEnvironment.getVersionedObject_ls();
-            int pr_len = versionedObjects.length();
-            JSONObject tmpVO;
-            Vector v = new Vector();
-            for (int i = 0; i < pr_len; i++) {
-                tmpVO = (JSONObject) versionedObjects.get(i);
-                String val = tmpVO.getString("vp_name") + " - " + transform_vector(tmpVO.getInt("v_vector"));
-                v.add(i, val);
-            }
-            jlstVersionedObjects.setListData(v);
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            JSONArray vo_ls = we.getVersionedObject_ls();
 
-        } catch (Exception ex) {
-            ex.printStackTrace(System.err);
+            voRoot.removeAllChildren();
+            int pr_len = vo_ls.length();
+            JSONObject tmpVO;
+            DefaultMutableTreeNode tmpNode, tmpNode2 = null;
+            String val;
+            Map wsMap = new HashMap();
+            for (int i = 0; i < pr_len; i++) {
+                tmpVO = (JSONObject) vo_ls.get(i);
+                val = tmpVO.getString("vp_name") + " - " + transform_vector(tmpVO.getInt("v_vector"));
+                voInfo voInfo = new voInfo(val, tmpVO.getInt("vo_id"), i);
+
+                //@todo - to get valid attribute from VO
+                int ancestor_ws_id = tmpWS.getInt("ancestor_ws_id");
+
+                if (ancestor_ws_id == 0) {
+                    tmpNode = new DefaultMutableTreeNode(voInfo);
+                    workspaceRoot.add(tmpNode);
+                    wsMap.put(voInfo.getVo_id(), tmpNode);
+                } else {
+                    tmpNode = new DefaultMutableTreeNode(voInfo);
+                    tmpNode2 = (DefaultMutableTreeNode) wsMap.get(ancestor_ws_id);
+                    tmpNode2.add(tmpNode);
+                    wsMap.put(voInfo.getVo_id(), tmpNode);
+                }
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -957,12 +927,6 @@ public class DesktopApplication1View extends FrameView {
     tree.collapsePath(parent);
     }
     }//*/
-
-    private void refreshWSButtons(boolean b) {
-        jbEditWS.setEnabled(b);
-        jbCreateVO.setEnabled(b);
-        jbNewWorkspace.setEnabled(b);
-    }
 
     private void refreshWIButtons(boolean b) {
         jbAttachWI.setEnabled(b);

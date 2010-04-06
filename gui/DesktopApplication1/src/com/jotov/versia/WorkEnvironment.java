@@ -5,6 +5,8 @@ package com.jotov.versia;
  * Author:  Vladimir Jotov
  * Purpose: Defines the Class WorkEnvironment
  ***********************************************************************/
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,7 +131,7 @@ public class WorkEnvironment {
 
     public void setCurrentVersionedObject(int currentVOID) throws JSONException {
         int len = jaVersionedObject.length();
-        for(int i=0; i<len; i++) {
+        for (int i = 0; i < len; i++) {
             JSONObject tmpVO = jaVersionedObject.getJSONObject(i);
             if (currentVOID == tmpVO.getInt("vo_id")) {
                 currentVersionedObject = tmpVO;
@@ -172,5 +174,60 @@ public class WorkEnvironment {
 
     public void setCurrentRelease(int currentRelease) {
         this.currentRelease = currentRelease;
+    }
+    public boolean isLocalCurrentVersionedObject() {
+        try {
+            int vector = currentVersionedObject.getInt("v_vector");
+            if ((vector & 8) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (JSONException ex) {
+            return false;
+        }
+    }
+
+    public boolean isPutBackableCurrentVersionedObject() {
+        try {
+            int vector = currentVersionedObject.getInt("v_vector");
+            if ((vector & 11) > 0 ) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (JSONException ex) {
+            return false;
+        }
+    }
+
+    public String getVisibilityVectorString(int vector) {
+        StringBuffer sb = new StringBuffer();
+        if ((vector & 1) > 0) {
+            sb.append("R");
+        } else {
+            sb.append("_");
+        }
+        if ((vector & 2) > 0) {
+            sb.append("P");
+        } else {
+            sb.append("_");
+        }
+        if ((vector & 4) > 0) {
+            sb.append("C");
+        } else {
+            sb.append("_");
+        }
+        if ((vector & 8) > 0) {
+            sb.append("L");
+        } else {
+            sb.append("_");
+        }
+        if ((vector & 16) > 0) {
+            sb.append("O");
+        } else {
+            sb.append("_");
+        }
+        return sb.toString();
     }
 }

@@ -4,14 +4,12 @@
 package desktopapplication1;
 
 import com.jotov.versia.WorkEnvironment;
-import com.jotov.versia.gui.NewEditWorkspace;
 import com.jotov.versia.gui.VersiaAboutBox;
 import com.jotov.versia.json.JSONConnection;
 import com.jotov.versia.gui.OpenWorkspace;
 import com.jotov.versia.gui2.command.CommandFactory;
 import com.jotov.versia.gui2.command.ICommand;
 import com.jotov.versia.voInfo;
-import com.jotov.versia.worspaceInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -23,10 +21,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
-import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
+import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -34,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+// Variables declaration - do not modify
 /***********************************************************************
  * Module:  DesktopApplication1View.java
  * Author:  Vladimir Jotov
@@ -137,6 +135,11 @@ public class DesktopApplication1View extends FrameView {
         }
         DesktopApplication1.getApplication().show(openProduct);
         if (openProduct.getActionCommand().equals("BTN_OK")) {
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            we.setCurrentProject(we.getProject());
+            we.setCurrentRelease(we.getRelease());
+            we.setCurrentWs(we.getWorkspace());
+            loadVersionedObjects();
             //workEnvironment.setProject(openProduct.getSelectedProjectID());
             //workEnvironment.setRelease(openProduct.getSelectedReleaseID());
             //   loadWorkspaces();
@@ -158,27 +161,26 @@ public class DesktopApplication1View extends FrameView {
         jlAttachedWorkitems = new javax.swing.JLabel();
         jspAttWI = new javax.swing.JScrollPane();
         jlstAttachedWorkitems = new javax.swing.JList();
-        jLabel1 = new javax.swing.JLabel();
-        jspAvalWI = new javax.swing.JScrollPane();
-        jlstNotAttachedWorkitems = new javax.swing.JList();
         jbAttachWI = new javax.swing.JButton();
         jbDetachWI = new javax.swing.JButton();
+        jbCreateWI = new javax.swing.JButton();
+        jlAvailableWorkitems = new javax.swing.JLabel();
+        jspAvalWI = new javax.swing.JScrollPane();
+        jlstNotAttachedWorkitems = new javax.swing.JList();
         jbCreateVO = new javax.swing.JButton();
         jbPublishVO = new javax.swing.JButton();
         jbPutBackVO = new javax.swing.JButton();
         jbSaveVO = new javax.swing.JButton();
-        jbCreateWI = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jtfVOName = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jtaVODatum = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtaJSONTrace = new javax.swing.JTextArea();
         jbViewVODistribution = new javax.swing.JButton();
         jbViewVOHistory = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jbChangeVOHat = new javax.swing.JButton();
+        jlVersionedObjects = new javax.swing.JLabel();
+        jspVersionedObjects = new javax.swing.JScrollPane();
         jtVOs = new javax.swing.JTree();
+        jlVersionedObject = new javax.swing.JLabel();
+        jtfVOName = new javax.swing.JTextField();
+        jspVODatum = new javax.swing.JScrollPane();
+        jtaVODatum = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jmiLogin = new javax.swing.JMenuItem();
@@ -215,19 +217,6 @@ public class DesktopApplication1View extends FrameView {
         });
         jspAttWI.setViewportView(jlstAttachedWorkitems);
 
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
-
-        jspAvalWI.setName("jspAvalWI"); // NOI18N
-
-        jlstNotAttachedWorkitems.setName("jlstNotAttachedWorkitems"); // NOI18N
-        jlstNotAttachedWorkitems.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jlstNotAttachedWorkitemsValueChanged(evt);
-            }
-        });
-        jspAvalWI.setViewportView(jlstNotAttachedWorkitems);
-
         jbAttachWI.setText(resourceMap.getString("jbAttachWI.text")); // NOI18N
         jbAttachWI.setEnabled(false);
         jbAttachWI.setName("jbAttachWI"); // NOI18N
@@ -245,6 +234,23 @@ public class DesktopApplication1View extends FrameView {
                 jbDetachWIActionPerformed(evt);
             }
         });
+
+        jbCreateWI.setText(resourceMap.getString("jbCreateWI.text")); // NOI18N
+        jbCreateWI.setEnabled(false);
+        jbCreateWI.setName("jbCreateWI"); // NOI18N
+
+        jlAvailableWorkitems.setText(resourceMap.getString("jlAvailableWorkitems.text")); // NOI18N
+        jlAvailableWorkitems.setName("jlAvailableWorkitems"); // NOI18N
+
+        jspAvalWI.setName("jspAvalWI"); // NOI18N
+
+        jlstNotAttachedWorkitems.setName("jlstNotAttachedWorkitems"); // NOI18N
+        jlstNotAttachedWorkitems.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jlstNotAttachedWorkitemsValueChanged(evt);
+            }
+        });
+        jspAvalWI.setViewportView(jlstNotAttachedWorkitems);
 
         jbCreateVO.setText(resourceMap.getString("jbCreateVO.text")); // NOI18N
         jbCreateVO.setEnabled(false);
@@ -277,33 +283,6 @@ public class DesktopApplication1View extends FrameView {
             }
         });
 
-        jbCreateWI.setText(resourceMap.getString("jbCreateWI.text")); // NOI18N
-        jbCreateWI.setEnabled(false);
-        jbCreateWI.setName("jbCreateWI"); // NOI18N
-
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
-
-        jtfVOName.setText(resourceMap.getString("jtfVOName.text")); // NOI18N
-        jtfVOName.setName("jtfVOName"); // NOI18N
-
-        jScrollPane3.setName("jScrollPane3"); // NOI18N
-
-        jtaVODatum.setColumns(20);
-        jtaVODatum.setRows(5);
-        jtaVODatum.setName("jtaVODatum"); // NOI18N
-        jScrollPane3.setViewportView(jtaVODatum);
-
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
-
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
-        jtaJSONTrace.setColumns(20);
-        jtaJSONTrace.setRows(5);
-        jtaJSONTrace.setName("jtaJSONTrace"); // NOI18N
-        jScrollPane1.setViewportView(jtaJSONTrace);
-
         jbViewVODistribution.setText(resourceMap.getString("jbViewVODistribution.text")); // NOI18N
         jbViewVODistribution.setActionCommand(resourceMap.getString("jbViewVODistribution.actionCommand")); // NOI18N
         jbViewVODistribution.setEnabled(false);
@@ -323,12 +302,37 @@ public class DesktopApplication1View extends FrameView {
             }
         });
 
-        jScrollPane4.setName("jScrollPane4"); // NOI18N
+        jbChangeVOHat.setText(resourceMap.getString("jbChangeVOHat.text")); // NOI18N
+        jbChangeVOHat.setEnabled(false);
+        jbChangeVOHat.setName("jbChangeVOHat"); // NOI18N
+
+        jlVersionedObjects.setText(resourceMap.getString("jlVersionedObjects.text")); // NOI18N
+        jlVersionedObjects.setName("jlVersionedObjects"); // NOI18N
+
+        jspVersionedObjects.setName("jspVersionedObjects"); // NOI18N
 
         jtVOs.setModel(voModel);
         jtVOs.setName("jtVOs"); // NOI18N
         jtVOs.setRootVisible(false);
-        jScrollPane4.setViewportView(jtVOs);
+        jtVOs.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jtVOsValueChanged(evt);
+            }
+        });
+        jspVersionedObjects.setViewportView(jtVOs);
+
+        jlVersionedObject.setText(resourceMap.getString("jlVersionedObject.text")); // NOI18N
+        jlVersionedObject.setName("jlVersionedObject"); // NOI18N
+
+        jtfVOName.setText(resourceMap.getString("jtfVOName.text")); // NOI18N
+        jtfVOName.setName("jtfVOName"); // NOI18N
+
+        jspVODatum.setName("jspVODatum"); // NOI18N
+
+        jtaVODatum.setColumns(20);
+        jtaVODatum.setRows(5);
+        jtaVODatum.setName("jtaVODatum"); // NOI18N
+        jspVODatum.setViewportView(jtaVODatum);
 
         org.jdesktop.layout.GroupLayout jpWorkspacesLayout = new org.jdesktop.layout.GroupLayout(jpWorkspaces);
         jpWorkspaces.setLayout(jpWorkspacesLayout);
@@ -337,33 +341,38 @@ public class DesktopApplication1View extends FrameView {
             .add(jpWorkspacesLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
-                    .add(jpWorkspacesLayout.createSequentialGroup()
-                        .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                .add(jpWorkspacesLayout.createSequentialGroup()
-                                    .add(jLabel3)
-                                    .add(61, 61, 61))
-                                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
-                            .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, jspAttWI)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, jpWorkspacesLayout.createSequentialGroup()
-                                    .add(jbCreateVO)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                    .add(jbPublishVO)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                    .add(jbPutBackVO)))
-                            .add(jlAttachedWorkitems))
-                        .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jpWorkspacesLayout.createSequentialGroup()
+                    .add(jlAttachedWorkitems)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jpWorkspacesLayout.createSequentialGroup()
+                        .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jpWorkspacesLayout.createSequentialGroup()
+                                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jpWorkspacesLayout.createSequentialGroup()
+                                        .add(jbCreateVO)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(jbPublishVO)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(jbPutBackVO))
+                                    .add(jlVersionedObjects))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jpWorkspacesLayout.createSequentialGroup()
+                                        .add(jlVersionedObject)
+                                        .add(34, 34, 34)
+                                        .add(jtfVOName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE))
                                     .add(jpWorkspacesLayout.createSequentialGroup()
                                         .add(jbSaveVO)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(jbViewVODistribution)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(jbViewVOHistory))
+                                        .add(jbViewVOHistory)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(jbChangeVOHat))))
+                            .add(jpWorkspacesLayout.createSequentialGroup()
+                                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jspAttWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                                    .add(jspVersionedObjects, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 264, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(jpWorkspacesLayout.createSequentialGroup()
                                         .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                             .add(jbDetachWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -371,41 +380,34 @@ public class DesktopApplication1View extends FrameView {
                                             .add(jpWorkspacesLayout.createSequentialGroup()
                                                 .add(jbCreateWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .add(2, 2, 2)))
-                                        .add(4, 4, 4)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(jLabel1)
-                                            .add(jspAvalWI, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 180, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                        .add(22, 22, 22)))
-                                .add(312, 312, 312))
-                            .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                .add(jpWorkspacesLayout.createSequentialGroup()
-                                    .add(jLabel2)
-                                    .add(40, 40, 40)
-                                    .add(jtfVOName))
-                                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 398, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                            .add(jlAvailableWorkitems)
+                                            .add(jspAvalWI, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 237, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(645, 645, 645))
+                                    .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE))))
                         .add(27, 27, 27))))
         );
         jpWorkspacesLayout.setVerticalGroup(
             jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpWorkspacesLayout.createSequentialGroup()
-                .add(38, 38, 38)
+                .addContainerGap()
                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jlAttachedWorkitems)
-                    .add(jLabel1))
+                    .add(jlAttachedWorkitems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jlAvailableWorkitems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jspAvalWI, 0, 0, Short.MAX_VALUE)
                     .add(jpWorkspacesLayout.createSequentialGroup()
                         .add(jbAttachWI, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 18, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbDetachWI, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbCreateWI))
-                    .add(jpWorkspacesLayout.createSequentialGroup()
-                        .add(jspAttWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                        .add(1, 1, 1))
-                    .add(jspAvalWI, 0, 0, Short.MAX_VALUE))
+                    .add(jspAttWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jbChangeVOHat, 0, 0, Short.MAX_VALUE)
                     .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jbPutBackVO, 0, 0, Short.MAX_VALUE)
                         .add(jbSaveVO, 0, 0, Short.MAX_VALUE)
@@ -413,18 +415,16 @@ public class DesktopApplication1View extends FrameView {
                         .add(jbViewVOHistory, 0, 0, Short.MAX_VALUE))
                     .add(jbPublishVO, 0, 0, Short.MAX_VALUE)
                     .add(jbCreateVO, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE))
-                .add(18, 18, 18)
-                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jtfVOName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jLabel2))
-                    .add(jLabel3))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(11, 11, 11)
+                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jlVersionedObjects)
+                    .add(jlVersionedObject)
+                    .add(jtfVOName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 165, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                    .add(jspVersionedObjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jpWorkspacesLayout.linkSize(new java.awt.Component[] {jspAttWI, jspAvalWI}, org.jdesktop.layout.GroupLayout.VERTICAL);
@@ -460,6 +460,7 @@ public class DesktopApplication1View extends FrameView {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(desktopapplication1.DesktopApplication1.class).getContext().getActionMap(DesktopApplication1View.class, this);
         jmiOpenProduct.setAction(actionMap.get("showOpenProduct")); // NOI18N
+        jmiOpenProduct.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jmiOpenProduct.setText(resourceMap.getString("jmiOpenProduct.text")); // NOI18N
         jmiOpenProduct.setName("jmiOpenProduct"); // NOI18N
         fileMenu.add(jmiOpenProduct);
@@ -510,11 +511,11 @@ public class DesktopApplication1View extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(statusPanelSeparator, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
+            .add(statusPanelSeparator, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1287, Short.MAX_VALUE)
             .add(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(statusMessageLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 749, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 1113, Short.MAX_VALUE)
                 .add(progressBar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(statusAnimationLabel)
@@ -578,7 +579,7 @@ public class DesktopApplication1View extends FrameView {
             params.put("constructs", 0);
 
             jc.prepareJSONRequest("saveVersionedObjectState", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
@@ -589,7 +590,7 @@ public class DesktopApplication1View extends FrameView {
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refreshVOButtons(true);
+        //refreshVOButtons(true);
     }//GEN-LAST:event_jbSaveVOActionPerformed
 
     private void jbPublishVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPublishVOActionPerformed
@@ -602,7 +603,7 @@ public class DesktopApplication1View extends FrameView {
             params.put("ws_id", workEnvironment.getCurrentWs());
 
             jc.prepareJSONRequest("publishVersionedObjectState", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
@@ -613,7 +614,7 @@ public class DesktopApplication1View extends FrameView {
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refreshVOButtons(true);
+        //refreshVOButtons(true);
     }//GEN-LAST:event_jbPublishVOActionPerformed
 
     private void jbPutBackVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPutBackVOActionPerformed
@@ -627,7 +628,7 @@ public class DesktopApplication1View extends FrameView {
             params.put("ws_id", workEnvironment.getCurrentWs());
 
             jc.prepareJSONRequest("putbackVersionedObjectState", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
@@ -638,7 +639,7 @@ public class DesktopApplication1View extends FrameView {
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refreshVOButtons(true);
+        //refreshVOButtons(true);
     }//GEN-LAST:event_jbPutBackVOActionPerformed
 
     private void jbViewVODistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVODistributionActionPerformed
@@ -651,7 +652,7 @@ public class DesktopApplication1View extends FrameView {
             params.put("release_id", workEnvironment.getRelease());
 
             jc.prepareJSONRequest("viewVersionedObjectDistribution", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             JSONArray Distribution = jResponce.getJSONArray("result");
             int code = err.getInt("code");
@@ -662,7 +663,7 @@ public class DesktopApplication1View extends FrameView {
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refreshVOButtons(true);
+        //refreshVOButtons(true);
     }//GEN-LAST:event_jbViewVODistributionActionPerformed
 
     private void jbViewVOHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVOHistoryActionPerformed
@@ -675,7 +676,7 @@ public class DesktopApplication1View extends FrameView {
             params.put("release_id", workEnvironment.getRelease());
 
             jc.prepareJSONRequest("viewVersionedObjectHistory", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             JSONArray HistoryItems = jResponce.getJSONArray("result");
             int code = err.getInt("code");
@@ -686,17 +687,29 @@ public class DesktopApplication1View extends FrameView {
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refreshVOButtons(true);
+        //refreshVOButtons(true);
     }//GEN-LAST:event_jbViewVOHistoryActionPerformed
+
+    private void jtVOsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtVOsValueChanged
+        // TODO add your handling code here:
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtVOs.getLastSelectedPathComponent();
+        if (node == null) {
+            clearVOData();
+        } else {
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            voInfo nodeInfo = (voInfo) node.getUserObject();
+            try {
+                we.setCurrentVersionedObject(nodeInfo.getVo_id());
+            } catch (JSONException ex) {
+                Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            displayVOdata();
+        }
+    }//GEN-LAST:event_jtVOsValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton jbAttachWI;
+    private javax.swing.JButton jbChangeVOHat;
     private javax.swing.JButton jbCreateVO;
     private javax.swing.JButton jbCreateWI;
     private javax.swing.JButton jbDetachWI;
@@ -706,6 +719,9 @@ public class DesktopApplication1View extends FrameView {
     private javax.swing.JButton jbViewVODistribution;
     private javax.swing.JButton jbViewVOHistory;
     private javax.swing.JLabel jlAttachedWorkitems;
+    private javax.swing.JLabel jlAvailableWorkitems;
+    private javax.swing.JLabel jlVersionedObject;
+    private javax.swing.JLabel jlVersionedObjects;
     private javax.swing.JList jlstAttachedWorkitems;
     private javax.swing.JList jlstNotAttachedWorkitems;
     private javax.swing.JMenuItem jmiLogin;
@@ -715,8 +731,9 @@ public class DesktopApplication1View extends FrameView {
     private javax.swing.JPanel jpWorkspaces;
     private javax.swing.JScrollPane jspAttWI;
     private javax.swing.JScrollPane jspAvalWI;
+    private javax.swing.JScrollPane jspVODatum;
+    private javax.swing.JScrollPane jspVersionedObjects;
     private javax.swing.JTree jtVOs;
-    private javax.swing.JTextArea jtaJSONTrace;
     private javax.swing.JTextArea jtaVODatum;
     private javax.swing.JTextField jtfVOName;
     private javax.swing.JPanel mainPanel;
@@ -741,7 +758,7 @@ public class DesktopApplication1View extends FrameView {
             Map params = new HashMap();
             params.put("ws_id", workEnvironment.getCurrentWs());
             jc.prepareJSONRequest("getWorkItemList", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             JSONObject workitems = jResponce.getJSONObject("result");
             workEnvironment.setAttachedWorkItems(workitems.getJSONArray("attached"));
@@ -766,7 +783,8 @@ public class DesktopApplication1View extends FrameView {
             int pr_len = attached.length();
             JSONObject tmpWorkitem;
             Vector v = new Vector();
-            for (int i = 0; i < pr_len; i++) {
+            for (int i = 0; i
+                    < pr_len; i++) {
                 tmpWorkitem = (JSONObject) attached.get(i);
                 v.add(i, tmpWorkitem.get("name"));
             }
@@ -774,7 +792,8 @@ public class DesktopApplication1View extends FrameView {
 
             pr_len = notAttached.length();
             v = new Vector();
-            for (int i = 0; i < pr_len; i++) {
+            for (int i = 0; i
+                    < pr_len; i++) {
                 tmpWorkitem = (JSONObject) notAttached.get(i);
                 v.add(i, tmpWorkitem.get("name"));
             }
@@ -790,7 +809,9 @@ public class DesktopApplication1View extends FrameView {
             WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
             CommandFactory cf = new CommandFactory();
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.GET_VERSIONED_OBJECT_LIST);
+
             JSONArray vo_ls = (JSONArray) cmd.doRequest();
+            we.setVersionedObject_ls(vo_ls);
             if (vo_ls != null) {
                 displayVersionedObjectsTree();
             }
@@ -810,17 +831,17 @@ public class DesktopApplication1View extends FrameView {
             DefaultMutableTreeNode tmpNode, tmpNode2 = null;
             String val;
             Map wsMap = new HashMap();
-            for (int i = 0; i < pr_len; i++) {
+            for (int i = 0; i
+                    < pr_len; i++) {
                 tmpVO = (JSONObject) vo_ls.get(i);
-                val = tmpVO.getString("vp_name") + " - " + transform_vector(tmpVO.getInt("v_vector"));
+                val = tmpVO.getString("vp_name") + " - " + we.getVisibilityVectorString(tmpVO.getInt("v_vector"));
                 voInfo voInfo = new voInfo(val, tmpVO.getInt("vo_id"), i);
 
                 //@todo - to get valid attribute from VO
-                int ancestor_ws_id = tmpWS.getInt("ancestor_ws_id");
-
+                int ancestor_ws_id = tmpVO.getInt("constructs");
                 if (ancestor_ws_id == 0) {
                     tmpNode = new DefaultMutableTreeNode(voInfo);
-                    workspaceRoot.add(tmpNode);
+                    voRoot.add(tmpNode);
                     wsMap.put(voInfo.getVo_id(), tmpNode);
                 } else {
                     tmpNode = new DefaultMutableTreeNode(voInfo);
@@ -829,6 +850,8 @@ public class DesktopApplication1View extends FrameView {
                     wsMap.put(voInfo.getVo_id(), tmpNode);
                 }
             }
+            jtVOs.setRootVisible(false);
+            ((DefaultTreeModel) jtVOs.getModel()).reload();
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -843,7 +866,7 @@ public class DesktopApplication1View extends FrameView {
             params.put("wi_id", Integer.parseInt(wi.get("wi_id").toString()));
             params.put("ws_id", workEnvironment.getCurrentWs());
             jc.prepareJSONRequest("attachWorkItem", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
@@ -865,7 +888,7 @@ public class DesktopApplication1View extends FrameView {
             params.put("wi_id", Integer.parseInt(wi.get("wi_id").toString()));
             params.put("ws_id", workEnvironment.getCurrentWs());
             jc.prepareJSONRequest("detachWorkItem", params, uid);
-            JSONObject jResponce = jc.doRequest(jtaJSONTrace);
+            JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
             workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
@@ -886,11 +909,10 @@ public class DesktopApplication1View extends FrameView {
             workEnvironment.setCurrentVersionedObject(selectedVO.getInt("vo_id"));
             jtfVOName.setText(selectedVO.getString("vp_name"));
             jtaVODatum.setText(selectedVO.getString("vp_datum"));
-            refreshVOButtons(true);
+            //refreshVOButtons(true);
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     private void diplayVersionedObjectsDistribution(JSONArray Distribution) {
@@ -933,6 +955,34 @@ public class DesktopApplication1View extends FrameView {
         jbDetachWI.setEnabled(b);
     }
 
+    private void clearVOData() {
+        jtfVOName.setText("");
+        jtaVODatum.setText("");
+        jbPublishVO.setEnabled(false);
+        jbPutBackVO.setEnabled(false);
+        jbSaveVO.setEnabled(false);
+        jbViewVODistribution.setEnabled(false);
+        jbViewVOHistory.setEnabled(false);
+        jbChangeVOHat.setEnabled(false);
+    }
+
+    private void displayVOdata() {
+        try {
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            JSONObject vo = we.getCurrentVersionedObject();
+            jtfVOName.setText(vo.getString("vp_name"));
+            jtaVODatum.setText(vo.getString("vp_datum"));
+            jbPublishVO.setEnabled(we.isLocalCurrentVersionedObject());
+            jbPutBackVO.setEnabled(we.isPutBackableCurrentVersionedObject());
+            jbSaveVO.setEnabled(false);
+            jbViewVODistribution.setEnabled(true);
+            jbViewVOHistory.setEnabled(true);
+            jbChangeVOHat.setEnabled(true);
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+/*
     private void refreshVOButtons(boolean b) {
         jbSaveVO.setEnabled(b);
         jbViewVODistribution.setEnabled(b);
@@ -965,35 +1015,5 @@ public class DesktopApplication1View extends FrameView {
             jtfVOName.setText("");
             jtaVODatum.setText("");
         }
-    }
-
-    private String transform_vector(int vector) {
-        StringBuffer sb = new StringBuffer();
-        if ((vector & 1) > 0) {
-            sb.append("R");
-        } else {
-            sb.append("_");
-        }
-        if ((vector & 2) > 0) {
-            sb.append("P");
-        } else {
-            sb.append("_");
-        }
-        if ((vector & 4) > 0) {
-            sb.append("C");
-        } else {
-            sb.append("_");
-        }
-        if ((vector & 8) > 0) {
-            sb.append("L");
-        } else {
-            sb.append("_");
-        }
-        if ((vector & 16) > 0) {
-            sb.append("O");
-        } else {
-            sb.append("_");
-        }
-        return sb.toString();
-    }
+    }//*/
 }

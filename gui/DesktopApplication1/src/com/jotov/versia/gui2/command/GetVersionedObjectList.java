@@ -17,6 +17,7 @@ public class GetVersionedObjectList implements ICommand {
     public Object doRequest() throws JSONException {
             WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
             int uid = we.getUid();
+
             JSONConnection jc = new JSONConnection();
             Map params = new HashMap();
             params.put("ws_id", we.getCurrentWs());

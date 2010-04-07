@@ -25,18 +25,14 @@ public class UpdateWorkspace implements ICommand {
         JSONObject err = jResponce.getJSONObject("error");
         int code = err.getInt("code");
         if (code ==0) {
-            return new Integer(0);
+            return new Integer(1);
         } else {
             System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
             return null;
         }
-
     }
 
     public void setParameters(HashMap inParams) {
         params = inParams;
-    }
-    public UpdateWorkspace() {
-        params = new HashMap();
     }
 }

@@ -13,17 +13,11 @@ import com.jotov.versia.voInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
-import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
-import org.jdesktop.application.TaskMonitor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.Icon;
 import javax.swing.JDialog;
-import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -58,62 +52,6 @@ public class DesktopApplication1View extends FrameView {
 
         initComponents();
 
-        // status bar initialization - message timeout, idle icon and busy animation, etc
-        /*ResourceMap resourceMap = getResourceMap();
-        int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
-        messageTimer = new Timer(messageTimeout, new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                statusMessageLabel.setText("");
-            }
-        });
-        messageTimer.setRepeats(false);
-        int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
-        for (int i = 0; i < busyIcons.length; i++) {
-            busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
-        }
-        busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
-                statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
-            }
-        });
-        idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
-        statusAnimationLabel.setIcon(idleIcon);
-        progressBar.setVisible(false);//*/
-
-        // connecting action tasks to status bar via TaskMonitor
-        //TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
-        /*taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                String propertyName = evt.getPropertyName();
-                if ("started".equals(propertyName)) {
-                    if (!busyIconTimer.isRunning()) {
-                        //statusAnimationLabel.setIcon(busyIcons[0]);
-                        busyIconIndex = 0;
-                        busyIconTimer.start();
-                    }
-                    //progressBar.setVisible(true);
-                    //progressBar.setIndeterminate(true);
-                } else if ("done".equals(propertyName)) {
-                    busyIconTimer.stop();
-                    //statusAnimationLabel.setIcon(idleIcon);
-                    //progressBar.setVisible(false);
-                    //progressBar.setValue(0);
-                } else if ("message".equals(propertyName)) {
-                    //String text = (String) (evt.getNewValue());
-                    //statusMessageLabel.setText((text == null) ? "" : text);
-                    messageTimer.restart();
-                } else if ("progress".equals(propertyName)) {
-                    //int value = (Integer) (evt.getNewValue());
-                    //progressBar.setVisible(true);
-                    //progressBar.setIndeterminate(false);
-                    //progressBar.setValue(value);
-                }
-            }
-        });//*/
     }
 
     @Action
@@ -209,6 +147,7 @@ public class DesktopApplication1View extends FrameView {
 
         jspAttachedWorkItems.setName("jspAttachedWorkItems"); // NOI18N
 
+        jtAttachedWorkItems.setModel(wiAttachedModel);
         jtAttachedWorkItems.setMinimumSize(new java.awt.Dimension(100, 50));
         jtAttachedWorkItems.setName("jtAttachedWorkItems"); // NOI18N
         jtAttachedWorkItems.setPreferredSize(new java.awt.Dimension(100, 50));
@@ -242,6 +181,7 @@ public class DesktopApplication1View extends FrameView {
 
         jspAvailableWorkItems.setName("jspAvailableWorkItems"); // NOI18N
 
+        jtAvailableWorkItems.setModel(wiAvailableModel);
         jtAvailableWorkItems.setName("jtAvailableWorkItems"); // NOI18N
         jtAvailableWorkItems.setRootVisible(false);
         jspAvailableWorkItems.setViewportView(jtAvailableWorkItems);
@@ -268,9 +208,9 @@ public class DesktopApplication1View extends FrameView {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jpWorkItemsLayout.linkSize(new java.awt.Component[] {jbAttachWI, jbCreateWI, jbDetachWI}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
-
         jpWorkItemsLayout.linkSize(new java.awt.Component[] {jspAttachedWorkItems, jspAvailableWorkItems}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
+        jpWorkItemsLayout.linkSize(new java.awt.Component[] {jbAttachWI, jbCreateWI, jbDetachWI}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         jpWorkItemsLayout.setVerticalGroup(
             jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -310,6 +250,11 @@ public class DesktopApplication1View extends FrameView {
         jbChangeVOHat.setText(resourceMap.getString("jbChangeVOHat.text")); // NOI18N
         jbChangeVOHat.setEnabled(false);
         jbChangeVOHat.setName("jbChangeVOHat"); // NOI18N
+        jbChangeVOHat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbChangeVOHatActionPerformed(evt);
+            }
+        });
 
         jbPublishVO.setText(resourceMap.getString("jbPublishVO.text")); // NOI18N
         jbPublishVO.setEnabled(false);
@@ -435,7 +380,7 @@ public class DesktopApplication1View extends FrameView {
                     .add(jpVersionedObjectsLayout.createSequentialGroup()
                         .add(jspVersionedObjects, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 172, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)))
+                        .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1718, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpVersionedObjectsLayout.setVerticalGroup(
@@ -448,8 +393,8 @@ public class DesktopApplication1View extends FrameView {
                     .add(jtfVOName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpVersionedObjectsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .add(jspVersionedObjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
+                    .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                    .add(jspVersionedObjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -479,11 +424,11 @@ public class DesktopApplication1View extends FrameView {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jpWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jpWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1926, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jpWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jpWorkspaces, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -564,128 +509,108 @@ public class DesktopApplication1View extends FrameView {
     private void jbSaveVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveVOActionPerformed
         // TODO add your handling code here:
 //        try {
-            //JSONConnection jc = new JSONConnection();
-            Map params = new HashMap();
+        //JSONConnection jc = new JSONConnection();
+        Map params = new HashMap();
 
-            params.put("vo_name", jtfVOName.getText());
-            params.put("vo_datum", jtaVODatum.getText());
-            
-            loadVersionedObjects();
-//            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
-//            params.put("ws_id", workEnvironment.getCurrentWs());
-//            params.put("uid", uid);
-//            params.put("type", 1);
-//            params.put("constructs", 0);
+        params.put("vo_name", jtfVOName.getText());
+        params.put("vo_datum", jtaVODatum.getText());
 
-//            jc.prepareJSONRequest("saveVersionedObjectState", params, uid);
-//            JSONObject jResponce = jc.doRequest(null);
-//            JSONObject err = jResponce.getJSONObject("error");
-//            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
-//            int code = err.getInt("code");
-//            if (code != 0) {
-//                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
-//            }
-            
-//        } catch (JSONException ex) {
-//            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        //refreshVOButtons(true);
+        try {
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.SAVE_VERSIONED_OBJECT);
+
+            JSONArray vo_ls = (JSONArray) cmd.doRequest();
+            we.setVersionedObject_ls(vo_ls);
+            if (vo_ls != null) {
+                loadVersionedObjects();
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbSaveVOActionPerformed
 
     private void jbPublishVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPublishVOActionPerformed
         // TODO add your handling code here:
         try {
-            JSONConnection jc = new JSONConnection();
-            Map params = new HashMap();
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.PUBLISH_VERSIONED_BJECT);
 
-            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
-            params.put("ws_id", workEnvironment.getCurrentWs());
-
-            jc.prepareJSONRequest("publishVersionedObjectState", params, uid);
-            JSONObject jResponce = jc.doRequest(null);
-            JSONObject err = jResponce.getJSONObject("error");
-            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
-            int code = err.getInt("code");
-            if (code != 0) {
-                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+            Integer int_val = (Integer) cmd.doRequest();
+            //we.setVersionedObject_ls(vo_ls);
+            if (int_val != null) {
+                loadVersionedObjects();
             }
-            loadVersionedObjects();
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //refreshVOButtons(true);
     }//GEN-LAST:event_jbPublishVOActionPerformed
 
     private void jbPutBackVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPutBackVOActionPerformed
         // TODO add your handling code here:
-
         try {
-            JSONConnection jc = new JSONConnection();
-            Map params = new HashMap();
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.PUT_BACK_VERSIONED_OBJECT);
 
-            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
-            params.put("ws_id", workEnvironment.getCurrentWs());
-
-            jc.prepareJSONRequest("putbackVersionedObjectState", params, uid);
-            JSONObject jResponce = jc.doRequest(null);
-            JSONObject err = jResponce.getJSONObject("error");
-            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
-            int code = err.getInt("code");
-            if (code != 0) {
-                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+            Integer int_val = (Integer) cmd.doRequest();
+            //we.setVersionedObject_ls(vo_ls);
+            if (int_val != null) {
+                loadVersionedObjects();
             }
-            loadVersionedObjects();
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //refreshVOButtons(true);
     }//GEN-LAST:event_jbPutBackVOActionPerformed
 
     private void jbViewVODistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVODistributionActionPerformed
         // TODO add your handling code here:
-        try {
-            JSONConnection jc = new JSONConnection();
-            Map params = new HashMap();
-
-            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
-            params.put("release_id", workEnvironment.getRelease());
-
-            jc.prepareJSONRequest("viewVersionedObjectDistribution", params, uid);
-            JSONObject jResponce = jc.doRequest(null);
-            JSONObject err = jResponce.getJSONObject("error");
-            JSONArray Distribution = jResponce.getJSONArray("result");
-            int code = err.getInt("code");
-            if (code != 0) {
-                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
-            }
-            diplayVersionedObjectsDistribution(Distribution);
-        } catch (JSONException ex) {
-            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //@todo - to show in new dialog versioned object distribution among workspaces of the release.
+//        try {
+//            JSONConnection jc = new JSONConnection();
+//            Map params = new HashMap();
+//
+//            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
+//            params.put("release_id", workEnvironment.getRelease());
+//
+//            jc.prepareJSONRequest("viewVersionedObjectDistribution", params, uid);
+//            JSONObject jResponce = jc.doRequest(null);
+//            JSONObject err = jResponce.getJSONObject("error");
+//            JSONArray Distribution = jResponce.getJSONArray("result");
+//            int code = err.getInt("code");
+//            if (code != 0) {
+//                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+//            }
+//            diplayVersionedObjectsDistribution(Distribution);
+//        } catch (JSONException ex) {
+//            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         //refreshVOButtons(true);
     }//GEN-LAST:event_jbViewVODistributionActionPerformed
 
     private void jbViewVOHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVOHistoryActionPerformed
         // TODO add your handling code here:
-        try {
-            JSONConnection jc = new JSONConnection();
-            Map params = new HashMap();
-
-            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
-            params.put("release_id", workEnvironment.getRelease());
-
-            jc.prepareJSONRequest("viewVersionedObjectHistory", params, uid);
-            JSONObject jResponce = jc.doRequest(null);
-            JSONObject err = jResponce.getJSONObject("error");
-            JSONArray HistoryItems = jResponce.getJSONArray("result");
-            int code = err.getInt("code");
-            if (code != 0) {
-                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
-            }
-            diplayVersionedObjectsHistory(HistoryItems);
-        } catch (JSONException ex) {
-            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //@todo - to show in new dialog versioned object distribution among workspaces of the release.
+//        try {
+//            JSONConnection jc = new JSONConnection();
+//            Map params = new HashMap();
+//
+//            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
+//            params.put("release_id", workEnvironment.getRelease());
+//
+//            jc.prepareJSONRequest("viewVersionedObjectHistory", params, uid);
+//            JSONObject jResponce = jc.doRequest(null);
+//            JSONObject err = jResponce.getJSONObject("error");
+//            JSONArray HistoryItems = jResponce.getJSONArray("result");
+//            int code = err.getInt("code");
+//            if (code != 0) {
+//                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+//            }
+//            diplayVersionedObjectsHistory(HistoryItems);
+//        } catch (JSONException ex) {
+//            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         //refreshVOButtons(true);
     }//GEN-LAST:event_jbViewVOHistoryActionPerformed
 
@@ -705,6 +630,11 @@ public class DesktopApplication1View extends FrameView {
             displayVOdata();
         }
     }//GEN-LAST:event_jtVOsValueChanged
+
+    private void jbChangeVOHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangeVOHatActionPerformed
+        // TODO add your handling code here:
+        //@todo to make functionality - to open new dialog for selection of hat object
+    }//GEN-LAST:event_jbChangeVOHatActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JButton jbAttachWI;
@@ -752,50 +682,73 @@ public class DesktopApplication1View extends FrameView {
 
     private void loadWorkItems() {
         try {
-            JSONConnection jc = new JSONConnection();
-            Map params = new HashMap();
-            params.put("ws_id", workEnvironment.getCurrentWs());
-            jc.prepareJSONRequest("getWorkItemList", params, uid);
-            JSONObject jResponce = jc.doRequest(null);
-            JSONObject err = jResponce.getJSONObject("error");
-            JSONObject workitems = jResponce.getJSONObject("result");
-            workEnvironment.setAttachedWorkItems(workitems.getJSONArray("attached"));
-            workEnvironment.setAvailableWorkItems(workitems.getJSONArray("not_attached"));
-            int code = err.getInt("code");
-            if (code == 0) {
-                refreshWorkitems();
-            } else {
-                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
-            }
+            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.GET_WORK_ITEM_LIST);
 
+            JSONArray vo_ls = (JSONArray) cmd.doRequest();
+            we.setVersionedObject_ls(vo_ls);
+            if (vo_ls != null) {
+                displayWorkitems();
+            }
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        try {
+//            JSONConnection jc = new JSONConnection();
+//            Map params = new HashMap();
+//            params.put("ws_id", workEnvironment.getCurrentWs());
+//            jc.prepareJSONRequest("getWorkItemList", params, uid);
+//            JSONObject jResponce = jc.doRequest(null);
+//            JSONObject err = jResponce.getJSONObject("error");
+//            JSONObject workitems = jResponce.getJSONObject("result");
+//            workEnvironment.setAttachedWorkItems(workitems.getJSONArray("attached"));
+//            workEnvironment.setAvailableWorkItems(workitems.getJSONArray("not_attached"));
+//            int code = err.getInt("code");
+//            if (code == 0) {
+//                refreshWorkitems();
+//            } else {
+//                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
+//            }
+//
+//        } catch (JSONException ex) {
+//            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
-    private void refreshWorkitems() {
+    private void displayWorkitems() {
         try {
             JSONArray attached = workEnvironment.getAttachedWorkItems();
             JSONArray notAttached = workEnvironment.getAvailableWorkItems();
 
+            // Display attached workitems
             int pr_len = attached.length();
-            JSONObject tmpWorkitem;
-            Vector v = new Vector();
-            for (int i = 0; i
-                    < pr_len; i++) {
-                tmpWorkitem = (JSONObject) attached.get(i);
-                v.add(i, tmpWorkitem.get("name"));
-            }
-            jlstAttachedWorkitems.setListData(v);
+            wiAttachedRoot.removeAllChildren();
+            JSONObject tmpVO;
+            DefaultMutableTreeNode tmpNode, tmpNode2 = null;
+            String val;
+            Map wsMap = new HashMap();
 
+//            JSONObject tmpWorkitem;
+//            Vector v = new Vector();
+//            for (int i = 0; i
+//                    < pr_len; i++) {
+//                tmpWorkitem = (JSONObject) attached.get(i);
+//                v.add(i, tmpWorkitem.get("name"));
+//            }
+//            jlstAttachedWorkitems.setListData(v);
+
+            // Display available workitems
             pr_len = notAttached.length();
-            v = new Vector();
-            for (int i = 0; i
-                    < pr_len; i++) {
-                tmpWorkitem = (JSONObject) notAttached.get(i);
-                v.add(i, tmpWorkitem.get("name"));
-            }
-            jlstNotAttachedWorkitems.setListData(v);
+            wiAvailableRoot.removeAllChildren();
+            wsMap.clear();
+//            v = new Vector();
+//            for (int i = 0; i
+//                    < pr_len; i++) {
+//                tmpWorkitem = (JSONObject) notAttached.get(i);
+//                v.add(i, tmpWorkitem.get("name"));
+//            }
+//            jlstNotAttachedWorkitems.setListData(v);
 
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
@@ -829,8 +782,7 @@ public class DesktopApplication1View extends FrameView {
             DefaultMutableTreeNode tmpNode, tmpNode2 = null;
             String val;
             Map wsMap = new HashMap();
-            for (int i = 0; i
-                    < pr_len; i++) {
+            for (int i = 0; i < pr_len; i++) {
                 tmpVO = (JSONObject) vo_ls.get(i);
                 val = tmpVO.getString("vp_name") + " - " + we.getVisibilityVectorString(tmpVO.getInt("v_vector"));
                 voInfo voInfo = new voInfo(val, tmpVO.getInt("vo_id"), i);

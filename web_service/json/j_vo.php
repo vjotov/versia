@@ -48,7 +48,7 @@ function putbackVersionedObjectState($params) {
 	return $responce;
 }
 function viewVersionedObjectDistribution($params) {
-	$result = cd_vo::vew_versioned_object_distribution($params['vo_id'], $params['release_id']);
+	$result = cd_vo::view_versioned_object_distribution($params['vo_id'], $params['release_id']);
 	$responce = array();
 	$responce['result'] = $result['ws_list'];
   $responce['error'] = $result['error'];

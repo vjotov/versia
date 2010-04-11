@@ -150,7 +150,7 @@ class cd_vo {
 		return  array('code' => 0, 'message' => 'Sucessful');
 	}
 	
-	static public function vew_versioned_object_distribution($vo_id, $release_id) {
+	static public function view_versioned_object_distribution($vo_id, $release_id) {
 		global $mdb;
 
 		$query = "SELECT ws_id, name FROM v_vo_distribution "

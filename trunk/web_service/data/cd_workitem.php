@@ -73,8 +73,8 @@ class cd_workitem {
 	static public function get_attached_workitem_list($ws_id) {
 		global $mdb;
 			
-		$query = "SELECT wi_id, vo_id, wi_name AS name "
-				." FROM v_workitem_distribution WHERE ws_id='".$ws_id."' AND is_active='1' ORDER BY name DESC";
+		$query = "SELECT wi_id, vo_id, vp.name AS name, vp.constructs AS constructs "
+				." FROM v_workitem_distribution INNER JOIN t_versioned_primitive vp USING(vo_id) WHERE ws_id='".$ws_id."' AND is_active='1' ORDER BY name DESC";
 		$resultset = $mdb->query($query); 
 		if(PEAR::isError($resultset)) {
 			$err_['code'] = 1;
@@ -89,8 +89,8 @@ class cd_workitem {
 	static public function get_not_attached_workitem_list($ws_id) {
 		global $mdb;
 			
-		$query = "SELECT wi_id, vo_id, wi_name AS name "
-				." FROM v_workitem_distribution WHERE ws_id='".$ws_id."' AND is_active='0'  ORDER BY name DESC";	
+		$query = "SELECT wi_id, vo_id, vp.name AS name, vp.constructs AS constructs "
+				." FROM v_workitem_distribution INNER JOIN t_versioned_primitive vp USING(vo_id) WHERE ws_id='".$ws_id."' AND is_active='0'  ORDER BY name DESC";	
 		$resultset = $mdb->query($query); 
 		if(PEAR::isError($resultset)) {
 			$err_['code'] = 1;

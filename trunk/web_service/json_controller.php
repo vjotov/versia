@@ -12,13 +12,11 @@ my_mysql_connect();
 //echo"<pre>";
 
 function registerFncs() {
-	$functions = j_product::getFunctions();						// OK
-	$tmp_arr = j_release::registerFncs();							// OK
+	$functions = j_product::getFunctions();
+	$tmp_arr = j_release::registerFncs();
 	$functions = array_merge($functions, $tmp_arr);
 	$tmp_arr = j_workspace::registerFncs();
 	$functions = array_merge($functions, $tmp_arr);
-	//$tmp_arr = j_model::registerFncs();
-	//$functions = array_merge($functions, $tmp_arr);
 	$tmp_arr = j_vo::registerFncs();
 	$functions = array_merge($functions, $tmp_arr);
 	$tmp_arr = j_workitem::registerFncs();
@@ -84,7 +82,10 @@ foreach ($json_functions as $func_definition) {
 				if ($found < 1) break;
 				
 				$f_param[$param_name] = $param_value;
-			} // if params
+			} //else { // if params
+				//$found = 0; 
+				//break;
+			//} // else params
 		} // foreach
 		
 		if ($found < 1) break;

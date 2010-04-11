@@ -53,6 +53,12 @@ public class WorkEnvironment {
         return singleton;
     }
 
+    public void openEnvironment() {
+        currentProject = project;
+        currentRelease = release;
+        currentWs = workspace;
+    }
+
     public int getProject() {
         return project;
     }
@@ -135,9 +141,10 @@ public class WorkEnvironment {
             JSONObject tmpVO = jaVersionedObject.getJSONObject(i);
             if (currentVOID == tmpVO.getInt("vo_id")) {
                 currentVersionedObject = tmpVO;
-                break;
+                return;
             }
         }
+        currentVersionedObject = null;
     }
 
     public int getCurrentVersionedObjectID() throws JSONException {
@@ -175,6 +182,7 @@ public class WorkEnvironment {
     public void setCurrentRelease(int currentRelease) {
         this.currentRelease = currentRelease;
     }
+
     public boolean isLocalCurrentVersionedObject() {
         try {
             int vector = currentVersionedObject.getInt("v_vector");
@@ -191,7 +199,7 @@ public class WorkEnvironment {
     public boolean isPutBackableCurrentVersionedObject() {
         try {
             int vector = currentVersionedObject.getInt("v_vector");
-            if ((vector & 11) > 0 ) {
+            if ((vector & 11) > 0) {
                 return true;
             } else {
                 return false;

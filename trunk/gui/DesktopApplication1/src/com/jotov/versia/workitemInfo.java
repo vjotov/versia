@@ -36,7 +36,7 @@ public class workitemInfo {
         this.place_in_array = place_in_array;
     }
 
-    public int getVo_id() {
+    public int getWi_id() {
         return wi_id;
     }
 

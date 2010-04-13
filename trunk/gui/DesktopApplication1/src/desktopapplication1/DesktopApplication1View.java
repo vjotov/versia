@@ -4,8 +4,8 @@
 package desktopapplication1;
 
 import com.jotov.versia.WorkEnvironment;
+import com.jotov.versia.gui.ChangeVOHat;
 import com.jotov.versia.gui.VersiaAboutBox;
-import com.jotov.versia.json.JSONConnection;
 import com.jotov.versia.gui.OpenWorkspace;
 import com.jotov.versia.gui2.command.CommandFactory;
 import com.jotov.versia.gui2.command.ICommand;
@@ -365,12 +365,22 @@ public class DesktopApplication1View extends FrameView {
 
         jtfVOName.setText(resourceMap.getString("jtfVOName.text")); // NOI18N
         jtfVOName.setName("jtfVOName"); // NOI18N
+        jtfVOName.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jtfVONamePropertyChange(evt);
+            }
+        });
 
         jspVODatum.setName("jspVODatum"); // NOI18N
 
         jtaVODatum.setColumns(20);
         jtaVODatum.setRows(5);
         jtaVODatum.setName("jtaVODatum"); // NOI18N
+        jtaVODatum.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jtaVODatumPropertyChange(evt);
+            }
+        });
         jspVODatum.setViewportView(jtaVODatum);
 
         org.jdesktop.layout.GroupLayout jpVersionedObjectsLayout = new org.jdesktop.layout.GroupLayout(jpVersionedObjects);
@@ -460,6 +470,7 @@ public class DesktopApplication1View extends FrameView {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(desktopapplication1.DesktopApplication1.class).getContext().getActionMap(DesktopApplication1View.class, this);
         jmiOpenProduct.setAction(actionMap.get("showOpenProduct")); // NOI18N
+        jmiOpenProduct.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jmiOpenProduct.setText(resourceMap.getString("jmiOpenProduct.text")); // NOI18N
         jmiOpenProduct.setName("jmiOpenProduct"); // NOI18N
         fileMenu.add(jmiOpenProduct);
@@ -545,7 +556,7 @@ public class DesktopApplication1View extends FrameView {
 
     private void jbSaveVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveVOActionPerformed
         // TODO add your handling code here:
-        Map params = new HashMap();
+        HashMap params = new HashMap();
 
         params.put("vo_name", jtfVOName.getText());
         params.put("vo_datum", jtaVODatum.getText());
@@ -554,6 +565,7 @@ public class DesktopApplication1View extends FrameView {
             CommandFactory cf = new CommandFactory();
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.SAVE_VERSIONED_OBJECT);
 
+            cmd.setParameters(params);
             JSONArray vo_ls = (JSONArray) cmd.doRequest();
             if (vo_ls != null) {
                 loadVersionedObjects();
@@ -663,6 +675,13 @@ public class DesktopApplication1View extends FrameView {
     private void jbChangeVOHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangeVOHatActionPerformed
         // TODO add your handling code here:
         //@todo to make functionality - to open new dialog for selection of hat object
+        if (changeVOHat == null) {
+            JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
+            changeVOHat = new ChangeVOHat(mainFrame);
+            changeVOHat.setLocationRelativeTo(mainFrame);
+        }
+        DesktopApplication1.getApplication().show(changeVOHat);
+        loadVersionedObjects();
     }//GEN-LAST:event_jbChangeVOHatActionPerformed
 
     private void jtAvailableWorkItemsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtAvailableWorkItemsValueChanged
@@ -688,6 +707,17 @@ public class DesktopApplication1View extends FrameView {
             jbDetachWI.setEnabled(true);
         }
     }//GEN-LAST:event_jtAttachedWorkItemsValueChanged
+
+    private void jtaVODatumPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtaVODatumPropertyChange
+        // TODO add your handling code here:
+        jbSaveVO.setEnabled(true);
+    }//GEN-LAST:event_jtaVODatumPropertyChange
+
+    private void jtfVONamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtfVONamePropertyChange
+        // TODO add your handling code here:
+        jbSaveVO.setEnabled(true);
+    }//GEN-LAST:event_jtfVONamePropertyChange
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JButton jbAttachWI;
@@ -730,7 +760,7 @@ public class DesktopApplication1View extends FrameView {
     //private final Icon idleIcon;
     //private final Icon[] busyIcons = new Icon[15];
     //private int busyIconIndex = 0;
-    private JDialog aboutBox;
+    private JDialog aboutBox, changeVOHat;
     private OpenWorkspace openProduct;
 
     private void loadWorkItems() {
@@ -821,7 +851,7 @@ public class DesktopApplication1View extends FrameView {
                     wsMap.put(voInfo.getVo_id(), tmpNode);
                 } else {
                     tmpNode = new DefaultMutableTreeNode(voInfo);
-                    tmpNode2 = (DefaultMutableTreeNode) wsMap.get(constructs);
+                    tmpNode2 = (DefaultMutableTreeNode) wsMap.get(new Integer(constructs));
                     tmpNode2.add(tmpNode);
                     wsMap.put(voInfo.getVo_id(), tmpNode);
                 }
@@ -831,50 +861,6 @@ public class DesktopApplication1View extends FrameView {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-//    private void attachWorkItem() {
-//        try {
-//            JSONConnection jc = new JSONConnection();
-//            Map params = new HashMap();
-//            JSONArray notAttached = workEnvironment.getAvailableWorkItems();
-//            JSONObject wi = (JSONObject) notAttached.get(jlstNotAttachedWorkitems.getSelectedIndex());
-//            params.put("wi_id", Integer.parseInt(wi.get("wi_id").toString()));
-//            params.put("ws_id", workEnvironment.getCurrentWs());
-//            jc.prepareJSONRequest("attachWorkItem", params, uid);
-//            JSONObject jResponce = jc.doRequest(null);
-//            JSONObject err = jResponce.getJSONObject("error");
-//            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
-//            int code = err.getInt("code");
-//            if (code != 0) {
-//                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
-//            }
-//
-//        } catch (JSONException ex) {
-//            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    private void detachWorkItem() {
-//        try {
-//            JSONConnection jc = new JSONConnection();
-//            Map params = new HashMap();
-//            JSONArray notAttached = workEnvironment.getAttachedWorkItems();
-//            JSONObject wi = (JSONObject) notAttached.get(jlstAttachedWorkitems.getSelectedIndex());
-//            params.put("wi_id", Integer.parseInt(wi.get("wi_id").toString()));
-//            params.put("ws_id", workEnvironment.getCurrentWs());
-//            jc.prepareJSONRequest("detachWorkItem", params, uid);
-//            JSONObject jResponce = jc.doRequest(null);
-//            JSONObject err = jResponce.getJSONObject("error");
-//            workEnvironment.setVersionedObject_ls(jResponce.getJSONArray("result"));
-//            int code = err.getInt("code");
-//            if (code != 0) {
-//                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
-//            }
-//
-//        } catch (JSONException ex) {
-//            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
 
     private void diplayVersionedObjectsHistory(JSONArray HistoryItems) {
         // TODO - idea - to show in a new window list of all historical changes of VO - source, target, time of version, user initiated the change, work item of the change

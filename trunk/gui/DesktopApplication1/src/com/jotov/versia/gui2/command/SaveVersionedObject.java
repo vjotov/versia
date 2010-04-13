@@ -26,7 +26,7 @@ public class SaveVersionedObject implements ICommand {
         params.put("type", 1);
         //@todo - to check whether constructs is obligatory parameter
         //        there is an action change VO's hat!
-        params.put("constructs", 0);
+        //params.put("constructs", 0);
 
         jc.prepareJSONRequest("saveVersionedObjectState", params, uid);
         JSONObject jResponce = jc.doRequest(null);

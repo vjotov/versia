@@ -420,6 +420,9 @@
                     <Property name="text" type="java.lang.String" resourceKey="jtfVOName.text"/>
                     <Property name="name" type="java.lang.String" value="jtfVOName" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jtfVONamePropertyChange"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jspVODatum">
                   <Properties>
@@ -437,6 +440,9 @@
                         <Property name="rows" type="int" value="5"/>
                         <Property name="name" type="java.lang.String" value="jtaVODatum" noResource="true"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jtaVODatumPropertyChange"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -490,6 +496,9 @@
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="desktopapplication1.DesktopApplication1View" id="showOpenProduct" methodName="showOpenProduct"/>
+                </Property>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+O"/>
                 </Property>
                 <Property name="text" type="java.lang.String" resourceKey="jmiOpenProduct.text"/>
                 <Property name="name" type="java.lang.String" value="jmiOpenProduct" noResource="true"/>

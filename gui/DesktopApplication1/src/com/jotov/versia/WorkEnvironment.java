@@ -5,8 +5,6 @@ package com.jotov.versia;
  * Author:  Vladimir Jotov
  * Purpose: Defines the Class WorkEnvironment
  ***********************************************************************/
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

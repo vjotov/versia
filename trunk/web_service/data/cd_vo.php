@@ -46,7 +46,7 @@ class cd_vo {
 
 		$query = "SELECT vv.vo_id, vv.vp_id, vv.vp_name, vv.locked, vp.datum AS vp_datum, vv.v_vector AS v_vector, vp.constructs AS constructs "
 				." FROM v_vo_visibility vv INNER JOIN t_versioned_primitive vp ON vp.vp_id = vv.vp_id AND vp.vo_id = vv.vo_id "
-				." WHERE ws_id = '".$ws_id."' "; 
+				." WHERE ws_id = '".$ws_id."' ORDER BY constructs "; 
 				
 		$resultset = $mdb->query($query); 
 		

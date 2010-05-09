@@ -1,7 +1,7 @@
 <?php
 
 class cd_workitem {
-	static public function create_workitem($release_id, $vo_id, $vp_vp, $wi_name) {
+	static public function create_workitem($release_id, $vo_id, $vp_vp, $wi_name, $ws_id) {
 		global $mdb; 
 		
 		$query = "INSERT INTO t_workitem (initiator_vo_id, initiator_vp_id, wi_name, release_id) "

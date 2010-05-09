@@ -1,6 +1,6 @@
 <?php
 function createWorkItem($params){
-	$result = cd_workitem::create_workitem($params['release_id'], $params['vo_id'], $params['vp_vp'], $params['wi_name']);
+	$result = cd_workitem::create_workitem($params['release_id'], $params['vo_id'], $params['vp_vp'], $params['wi_name'], $params['ws_id']);
 	$responce = array();
 	$responce['result'] = ayyar();
   $responce['error'] = $result;
@@ -57,7 +57,7 @@ class j_workitem {
 	function registerFncs() {
 		$functions = array();
 		$functions[] = array('method' => 'createWorkItem', 
-			'params' => array('release_id' => 'number', 'vo_id' => 'number', 'vp_vp' => 'number', 'wi_name' => 'string'), 
+			'params' => array('release_id' => 'number', 'vo_id' => 'number', 'vp_vp' => 'number', 'wi_name' => 'string', 'ws_id' => 'number'), 
 			'permition' => 'create_workitem');
 		$functions[] = array('method' => 'updateWorkItem', 
 			'params' => array('wi_id' => 'number', 'wi_name' => 'string'), 

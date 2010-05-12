@@ -65,7 +65,7 @@ class cd_product {
 		return $err_;
 		
 	}
-	static public function update_product($id, $product_name, $session_id) {
+	static public function update_product($id, $product_name) {
 		global $mdb;
 		    	
 		$err_ = array();

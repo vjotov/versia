@@ -45,6 +45,8 @@ CREATE TABLE `t_debug` (
 
 LOCK TABLES `t_debug` WRITE;
 
+insert  into `t_debug`(`debug_txt`) values ('3'),('3'),('f_publish_versioned_object:'),('f_publish_versioned_object:'),('0'),('0'),('3'),('f_publish_versioned_object:'),('0'),('0'),('3');
+
 UNLOCK TABLES;
 
 /*Table structure for table `t_history` */
@@ -60,11 +62,13 @@ CREATE TABLE `t_history` (
   `on_date_time` datetime NOT NULL,
   `action` enum('create','save','publish','putback','delete') DEFAULT NULL,
   PRIMARY KEY (`h_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_history` */
 
 LOCK TABLES `t_history` WRITE;
+
+insert  into `t_history`(`h_id`,`uid`,`vo_id`,`vp_id`,`wi_id`,`on_date_time`,`action`) values (1,1,2,8,NULL,'2010-01-10 08:48:33',NULL),(2,1,2,9,NULL,'2010-01-10 09:17:27',NULL),(3,1,3,4,NULL,'2010-01-10 09:35:08',NULL),(4,1,3,5,NULL,'2010-01-10 09:35:32',NULL),(5,1,3,6,NULL,'2010-01-10 09:35:43',NULL),(6,1,3,7,NULL,'2010-01-10 09:55:31',NULL),(7,1,4,1,NULL,'2010-01-10 10:02:12',NULL),(8,1,4,2,NULL,'2010-01-10 10:06:01',NULL),(9,1,4,3,NULL,'2010-01-10 10:06:18',NULL),(10,1,4,4,NULL,'2010-01-10 10:08:30',NULL),(11,1,4,5,NULL,'2010-01-10 10:09:23',NULL),(12,1,4,6,NULL,'2010-01-10 10:09:34',NULL),(13,1,4,7,NULL,'2010-01-10 10:09:43',NULL),(14,1,4,8,NULL,'2010-01-10 10:09:45',NULL),(15,1,2,10,NULL,'2010-01-17 13:00:25',NULL),(16,1,4,9,NULL,'2010-01-21 05:06:38',NULL),(17,1,4,9,NULL,'2010-01-21 05:07:06',NULL),(18,1,4,9,NULL,'2010-01-21 05:36:06',NULL),(19,1,4,9,NULL,'2010-01-21 05:36:53',NULL),(20,1,4,9,NULL,'2010-01-21 05:37:20',NULL),(21,1,4,9,NULL,'2010-01-21 05:47:15',NULL),(22,1,2,11,NULL,'2010-02-27 22:13:36',NULL),(23,1,3,8,NULL,'2010-03-02 22:23:28',NULL),(24,1,13,0,NULL,'2010-03-07 18:02:31',NULL),(25,1,14,0,NULL,'2010-03-07 18:04:44',NULL),(26,1,4,16,NULL,'2010-04-13 23:21:41',NULL),(27,1,4,16,NULL,'2010-04-13 23:25:08',NULL),(28,1,4,17,NULL,'2010-04-14 22:47:13',NULL),(29,1,9,3,NULL,'2010-04-14 22:50:57',NULL),(30,1,4,18,NULL,'2010-04-25 10:25:40',NULL),(31,1,4,19,NULL,'2010-04-25 10:27:02',NULL);
 
 UNLOCK TABLES;
 
@@ -88,6 +92,8 @@ CREATE TABLE `t_initiator_effector` (
 /*Data for the table `t_initiator_effector` */
 
 LOCK TABLES `t_initiator_effector` WRITE;
+
+insert  into `t_initiator_effector`(`wi_id`,`effector_vo_id`,`effector_vp_id`,`initiator_vp_id`) values (1,4,16,1),(1,4,17,1),(1,4,18,1),(1,4,19,1),(1,9,3,1),(1,14,0,1);
 
 UNLOCK TABLES;
 
@@ -155,13 +161,13 @@ CREATE TABLE `t_product` (
   `pr_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`pr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_product` */
 
 LOCK TABLES `t_product` WRITE;
 
-insert  into `t_product`(`pr_id`,`name`) values (1,'Product ONE'),(2,'P two');
+insert  into `t_product`(`pr_id`,`name`) values (1,'First Product'),(9,'Tetris');
 
 UNLOCK TABLES;
 
@@ -179,13 +185,13 @@ CREATE TABLE `t_release` (
   KEY `FK_product` (`pr_id`),
   CONSTRAINT `FK_master_workspace` FOREIGN KEY (`master_ws_id`) REFERENCES `t_workspace` (`ws_id`) ON DELETE SET NULL,
   CONSTRAINT `FK_t_release` FOREIGN KEY (`pr_id`) REFERENCES `t_product` (`pr_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_release` */
 
 LOCK TABLES `t_release` WRITE;
 
-insert  into `t_release`(`release_id`,`master_ws_id`,`pr_id`,`name`) values (1,1,1,'Zero Release'),(2,1,2,'Zero Release');
+insert  into `t_release`(`release_id`,`master_ws_id`,`pr_id`,`name`) values (1,5,1,'zeroRelease'),(17,5,1,'Second release'),(24,31,9,'Zero Release');
 
 UNLOCK TABLES;
 
@@ -205,6 +211,8 @@ CREATE TABLE `t_release_vgraph_arcs` (
 /*Data for the table `t_release_vgraph_arcs` */
 
 LOCK TABLES `t_release_vgraph_arcs` WRITE;
+
+insert  into `t_release_vgraph_arcs`(`source_release_id`,`target_release_id`) values (1,17);
 
 UNLOCK TABLES;
 
@@ -245,6 +253,8 @@ CREATE TABLE `t_version_graph_arcs` (
 
 LOCK TABLES `t_version_graph_arcs` WRITE;
 
+insert  into `t_version_graph_arcs`(`vo_id`,`source_vp_id`,`target_vp_id`) values (9,2,3),(1,3,4),(2,3,4),(2,4,6),(4,7,9),(4,7,15),(4,7,16),(4,7,18),(4,16,17),(4,18,19);
+
 UNLOCK TABLES;
 
 /*Table structure for table `t_versioned_object` */
@@ -254,13 +264,13 @@ DROP TABLE IF EXISTS `t_versioned_object`;
 CREATE TABLE `t_versioned_object` (
   `vo_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`vo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_versioned_object` */
 
 LOCK TABLES `t_versioned_object` WRITE;
 
-insert  into `t_versioned_object`(`vo_id`) values (1),(2);
+insert  into `t_versioned_object`(`vo_id`) values (1),(2),(3),(4),(9),(14),(18);
 
 UNLOCK TABLES;
 
@@ -286,7 +296,7 @@ CREATE TABLE `t_versioned_primitive` (
 
 LOCK TABLES `t_versioned_primitive` WRITE;
 
-insert  into `t_versioned_primitive`(`vp_id`,`vo_id`,`name`,`type_id`,`constructs`,`datum`) values (0,1,'General Workitem 1',1,0,NULL),(0,2,'General Workitem 2',1,0,NULL);
+insert  into `t_versioned_primitive`(`vp_id`,`vo_id`,`name`,`type_id`,`constructs`,`datum`) values (0,14,'test VO',1,2,'test datum'),(0,18,'General Workitem',1,0,NULL),(1,3,'WI1',1,0,NULL),(2,9,'Object 9',1,0,'ver.2'),(3,1,'Object 1',1,0,'ver.3'),(3,2,'Object 2',1,0,'ver.3'),(3,9,'object 9',1,4,''),(4,1,'Object 1',1,0,'ver.4'),(4,2,'Object 2',1,0,'ver.4'),(6,2,'Object 2',1,0,'ver.6'),(7,4,'Object 4',1,0,'ver.7'),(9,4,'Object 4',1,0,'ver.9'),(15,4,'Object 4',1,0,'ver.15'),(16,4,'',1,9,''),(17,4,'',1,0,''),(18,4,'',1,9,''),(19,4,'',1,0,'');
 
 UNLOCK TABLES;
 
@@ -304,13 +314,13 @@ CREATE TABLE `t_workitem` (
   KEY `FK_initiator_object` (`initiator_vo_id`),
   CONSTRAINT `FK_initiator_object` FOREIGN KEY (`initiator_vo_id`) REFERENCES `t_versioned_object` (`vo_id`),
   CONSTRAINT `FK_t_workitem` FOREIGN KEY (`release_id`) REFERENCES `t_release` (`release_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_workitem` */
 
 LOCK TABLES `t_workitem` WRITE;
 
-insert  into `t_workitem`(`wi_id`,`initiator_vo_id`,`wi_name`,`release_id`) values (1,1,'General Workitem WI name',1),(2,2,'General Workitem',2);
+insert  into `t_workitem`(`wi_id`,`initiator_vo_id`,`wi_name`,`release_id`) values (1,3,'WI1.name',17),(4,18,NULL,24);
 
 UNLOCK TABLES;
 
@@ -329,13 +339,13 @@ CREATE TABLE `t_workspace` (
   KEY `FK_release` (`release_id`),
   KEY `FK_ws_ancestor_offsring` (`ancestor_ws_id`),
   CONSTRAINT `FK_release` FOREIGN KEY (`release_id`) REFERENCES `t_release` (`release_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 /*Data for the table `t_workspace` */
 
 LOCK TABLES `t_workspace` WRITE;
 
-insert  into `t_workspace`(`ws_id`,`release_id`,`ancestor_ws_id`,`name`,`lft`,`rgt`) values (1,1,0,'Master Workspace',1,2),(2,2,0,'Master Workspace',1,2);
+insert  into `t_workspace`(`ws_id`,`release_id`,`ancestor_ws_id`,`name`,`lft`,`rgt`) values (5,17,0,'Master Workspace',3,18),(20,17,5,'B1',4,9),(21,17,5,'B2',10,15),(22,17,20,'D1',5,6),(23,17,20,'D2',7,8),(24,17,21,'D3',11,14),(25,17,24,'E1',12,13),(31,24,0,'Master Workspace',1,2),(32,17,5,'B33',16,17);
 
 UNLOCK TABLES;
 
@@ -359,7 +369,7 @@ CREATE TABLE `t_ws_obj_ver_selector` (
 
 LOCK TABLES `t_ws_obj_ver_selector` WRITE;
 
-insert  into `t_ws_obj_ver_selector`(`vp_id`,`vo_id`,`ws_id`,`locked`) values (0,1,1,0),(0,2,2,0);
+insert  into `t_ws_obj_ver_selector`(`vp_id`,`vo_id`,`ws_id`,`locked`) values (0,14,21,0),(0,18,31,1),(1,3,5,0),(2,9,5,0),(3,1,20,0),(3,2,5,0),(3,9,21,0),(4,1,23,0),(4,2,21,0),(6,2,25,0),(7,4,5,0),(9,4,23,0),(15,4,24,0),(17,4,21,0),(19,4,20,0);
 
 UNLOCK TABLES;
 
@@ -380,7 +390,7 @@ CREATE TABLE `t_ws_workitem` (
 
 LOCK TABLES `t_ws_workitem` WRITE;
 
-insert  into `t_ws_workitem`(`ws_id`,`wi_id`) values (1,1),(2,2);
+insert  into `t_ws_workitem`(`ws_id`,`wi_id`) values (20,1),(21,1),(5,4);
 
 UNLOCK TABLES;
 

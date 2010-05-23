@@ -1,0 +1,18 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Project Versia aims to be a laboratory for scientific researches in domain of versioning in environment with hierarchical workspace composition .
+
+
+= Features =
+
+Current system.  Format your content with:
+  * 
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+= Technologies =
+
+System is implemented using PHP5 on Apache web service, MySQL 5.1 database for server-side.
+Client GUI application is implemented using NetBeans and Java 5 technology.

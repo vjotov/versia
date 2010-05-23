@@ -1,4 +1,5 @@
 #summary One-sentence summary of this page.
+#labels Featured
 
 = Introduction =
 
@@ -7,10 +8,13 @@ Project Versia aims to be a laboratory for scientific researches in domain of ve
 
 = Features =
 
-Current system.  Format your content with:
-  * 
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Current system supports the following functions:
+  * User management _(not implemented in client side)_
+  * Workspace management
+  * Project and Release management
+  * Creation and lifecycle support of versioned objects
+  * Composition of versioned objects
+  * Event-based semi-automatic traceability of changes.
 
 = Technologies =
 

@@ -12,7 +12,8 @@ my_mysql_connect();
 //echo"<pre>";
 
 function registerFncs() {
-	$functions = j_product::getFunctions();
+	$functions = j_product::registerFncs();
+	
 	$tmp_arr = j_release::registerFncs();
 	$functions = array_merge($functions, $tmp_arr);
 	$tmp_arr = j_workspace::registerFncs();
@@ -20,6 +21,8 @@ function registerFncs() {
 	$tmp_arr = j_vo::registerFncs();
 	$functions = array_merge($functions, $tmp_arr);
 	$tmp_arr = j_workitem::registerFncs();
+	$functions = array_merge($functions, $tmp_arr);
+	$tmp_arr = j_user::registerFncs();
 	$functions = array_merge($functions, $tmp_arr);
 	return $functions;
 }

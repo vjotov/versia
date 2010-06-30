@@ -13,10 +13,10 @@ class cd_user {
 			return array('error' => $err_);
 		}
 		
-		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
+		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);//var_dump($set);
 		$users = array();
 		foreach($set as $value) {
-			$permitions = get_permitions($uid);
+			$permitions = self::get_permitions($value["uid"]);//var_dump($permitions);
 			if($permitions == false) {
 				$err_['code'] = 1;
 				$err_['message'] = 'Failed to issue query';
@@ -25,7 +25,7 @@ class cd_user {
 			}
 			
 			
-			$users[] = array ('uid' => $value["uid"], 'username' => $value['username']);
+			$users[] = array ('uid' => $value["uid"], 'username' => $value['username'], 'permitions' => $permitions);
 		}
 		
 		return array(
@@ -52,6 +52,8 @@ class cd_user {
 		
 	} 
 	static public function update_permition($user_id, $action_id, $permition_value) {
+	// TODO: da pomislq kak da predam vsichki permitions
+	//update in j_user.php i GetPermition.java
 		global $mdb;
 		if($permition_value != 1) $permition_value = 0; // only 1 and 0 are correct values
 		    	
@@ -69,22 +71,24 @@ class cd_user {
 	}
 	
 	///// PRIVATE FUNCTIONS
-	static private get_permitions($uid) {
+	static private function get_permitions($uid) {
 		global $mdb;
 		
-		$query="SELECT * FROM t_permition INNER JOIN t_action USIN (action_id) WHERE uid = '".$uid."' ";
+		$query="SELECT * FROM t_permition INNER JOIN t_action USING (action_id) WHERE uid = '".$uid."' ";
 		$sub_resultset = $mdb->query($query); 
 		if(PEAR::isError($sub_resultset)) {
+      
 			return false;
 		}
 		$permitions = array();
-		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
+		$set = $sub_resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
 		foreach($set as $value) {
 			$permition[] = array('permition_id' => $value['permition_id'], 
 								'action_id' => $value['action_id'], 
 								'action_name' => $value['action_name'], 
 								'permited' => $value['permited']);
 		}
+		return $permition;
 	}
 
 }

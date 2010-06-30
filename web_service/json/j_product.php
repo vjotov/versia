@@ -38,7 +38,7 @@ function deleteProduct($product_id) {
 //////////////
 class j_product { 
 
-	function getFunctions() {
+	function registerFncs() {
 		$functions = array();
 		$functions[] = array('method' => 'getProduct', 
 			'params' => array('product_id' => 'number'), 

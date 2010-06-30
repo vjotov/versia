@@ -488,6 +488,7 @@
                   <KeyStroke key="Ctrl+N"/>
                 </Property>
                 <Property name="actionCommand" type="java.lang.String" resourceKey="jmiNewProduct.actionCommand"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="label" type="java.lang.String" resourceKey="jmiNewProduct.label"/>
                 <Property name="name" type="java.lang.String" value="jmiNewProduct" noResource="true"/>
               </Properties>
@@ -496,9 +497,6 @@
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="desktopapplication1.DesktopApplication1View" id="showOpenProduct" methodName="showOpenProduct"/>
-                </Property>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+O"/>
                 </Property>
                 <Property name="text" type="java.lang.String" resourceKey="jmiOpenProduct.text"/>
                 <Property name="name" type="java.lang.String" value="jmiOpenProduct" noResource="true"/>
@@ -520,15 +518,16 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="usersMenu">
           <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="label" type="java.lang.String" resourceKey="usersMenu.label"/>
             <Property name="name" type="java.lang.String" value="usersMenu" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiManageUser">
               <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-                <Property name="label" type="java.lang.String" resourceKey="jmiManageUser.label"/>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="desktopapplication1.DesktopApplication1View" id="manageUsers" methodName="manageUsers"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="jmiManageUser.text"/>
                 <Property name="name" type="java.lang.String" value="jmiManageUser" noResource="true"/>
               </Properties>
             </MenuItem>

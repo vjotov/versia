@@ -7,6 +7,7 @@ import com.jotov.versia.WorkEnvironment;
 import com.jotov.versia.gui.ChangeVOHat;
 import com.jotov.versia.gui.VersiaAboutBox;
 import com.jotov.versia.gui.OpenWorkspace;
+import com.jotov.versia.gui.UserManagement;
 import com.jotov.versia.gui2.command.CommandFactory;
 import com.jotov.versia.gui2.command.ICommand;
 import com.jotov.versia.voInfo;
@@ -79,6 +80,16 @@ public class DesktopApplication1View extends FrameView {
             loadVersionedObjects();
             loadWorkItems();
         }
+    }
+    @Action
+    public void manageUsers() {
+        if (manageUsers == null) {
+            JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
+            manageUsers = new UserManagement(mainFrame);
+            manageUsers.setLocationRelativeTo(mainFrame);
+            manageUsers.setTitle("Manage Users");
+        }
+        DesktopApplication1.getApplication().show(manageUsers);
     }
 
     /** This method is called from within the constructor to
@@ -217,9 +228,9 @@ public class DesktopApplication1View extends FrameView {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jpWorkItemsLayout.linkSize(new java.awt.Component[] {jspAttachedWorkItems, jspAvailableWorkItems}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
-
         jpWorkItemsLayout.linkSize(new java.awt.Component[] {jbAttachWI, jbCreateWI, jbDetachWI}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
+        jpWorkItemsLayout.linkSize(new java.awt.Component[] {jspAttachedWorkItems, jspAvailableWorkItems}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         jpWorkItemsLayout.setVerticalGroup(
             jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -464,13 +475,13 @@ public class DesktopApplication1View extends FrameView {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setActionCommand(resourceMap.getString("jmiNewProduct.actionCommand")); // NOI18N
+        jMenuItem1.setEnabled(false);
         jMenuItem1.setLabel(resourceMap.getString("jmiNewProduct.label")); // NOI18N
         jMenuItem1.setName("jmiNewProduct"); // NOI18N
         fileMenu.add(jMenuItem1);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(desktopapplication1.DesktopApplication1.class).getContext().getActionMap(DesktopApplication1View.class, this);
         jmiOpenProduct.setAction(actionMap.get("showOpenProduct")); // NOI18N
-        jmiOpenProduct.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jmiOpenProduct.setText(resourceMap.getString("jmiOpenProduct.text")); // NOI18N
         jmiOpenProduct.setName("jmiOpenProduct"); // NOI18N
         fileMenu.add(jmiOpenProduct);
@@ -481,12 +492,11 @@ public class DesktopApplication1View extends FrameView {
 
         menuBar.add(fileMenu);
 
-        usersMenu.setEnabled(false);
         usersMenu.setLabel(resourceMap.getString("usersMenu.label")); // NOI18N
         usersMenu.setName("usersMenu"); // NOI18N
 
-        jmiManageUser.setEnabled(false);
-        jmiManageUser.setLabel(resourceMap.getString("jmiManageUser.label")); // NOI18N
+        jmiManageUser.setAction(actionMap.get("manageUsers")); // NOI18N
+        jmiManageUser.setText(resourceMap.getString("jmiManageUser.text")); // NOI18N
         jmiManageUser.setName("jmiManageUser"); // NOI18N
         usersMenu.add(jmiManageUser);
 
@@ -762,6 +772,7 @@ public class DesktopApplication1View extends FrameView {
     //private int busyIconIndex = 0;
     private JDialog aboutBox, changeVOHat;
     private OpenWorkspace openProduct;
+    private UserManagement manageUsers;
 
     private void loadWorkItems() {
         try {
@@ -900,4 +911,6 @@ public class DesktopApplication1View extends FrameView {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+
 }

@@ -1,1 +1,0 @@
-vw_class_name

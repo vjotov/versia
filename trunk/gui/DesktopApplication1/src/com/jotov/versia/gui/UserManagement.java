@@ -30,7 +30,7 @@ import org.json.JSONObject;
 public class UserManagement extends javax.swing.JDialog {
 
     private JSONArray users;
-
+    private WorkEnvironment workEnvironment;
     private String actionCommand;
 
     /** Creates new form OpenWorkspace */
@@ -235,10 +235,7 @@ public class UserManagement extends javax.swing.JDialog {
                 clearPermitions();
                 return;
         }
-        try {
-            WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
-            int idx = jlstUsers.getSelectedIndex();
-           
+        try {           
             loadPermitions();
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
@@ -282,7 +279,7 @@ public class UserManagement extends javax.swing.JDialog {
     private javax.swing.JScrollPane jspGrantedPermitions;
     private javax.swing.JScrollPane jspUsers;
     // End of variables declaration//GEN-END:variables
-    private WorkEnvironment workEnvironment;
+    
     @Action
     public void doCancel() {
         actionCommand = jbCancel.getActionCommand();
@@ -300,8 +297,34 @@ public class UserManagement extends javax.swing.JDialog {
         return actionCommand;
     }
 
-    private void loadPermitions() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void loadPermitions() throws JSONException {
+        int idx = jlstUsers.getSelectedIndex();
+
+        JSONObject user = users.getJSONObject(idx);
+        int selectedUserID = user.getInt("uid");
+        boolean enable_flag;
+        if (selectedUserID == workEnvironment.getUid())
+            enable_flag = false;
+        else
+            enable_flag= true;
+
+        JSONArray permitions = user.getJSONArray("permitions");
+        int perm_len = permitions.length();
+        Vector granted = new Vector();
+        Vector revoked = new Vector();
+        for(int i = 0; i < perm_len; i++) {
+            JSONObject permition = permitions.getJSONObject(i);
+             permition.getString("action_name");
+            if (permition.getInt("permited") == 1)
+                granted.add(permition);
+            else
+                revoked.add(permition);
+        }
+        jlstAvailablePermitions.setListData(revoked);
+        jlstGrantedPermitions.setListData(granted);
+        jlstAvailablePermitions.setEnabled(enable_flag);
+        jlstGrantedPermitions.setEnabled(enable_flag);
+
     }
 
     private void clearPermitions() {
@@ -329,10 +352,10 @@ public class UserManagement extends javax.swing.JDialog {
     private void displayUsers() {
         //$users[] = array ('uid' => $value["uid"], 'username' => $value['username']);
         try {
-            int pr_len = users.length();
+            int usr_len = users.length();
             JSONObject tmpUser;
             Vector v = new Vector();
-            for (int i = 0; i < pr_len; i++) {
+            for (int i = 0; i < usr_len; i++) {
                 tmpUser = (JSONObject) users.get(i);
                 v.add(i, tmpUser.get("username"));
             }

@@ -15,7 +15,9 @@ function createUser($params) {
 	return $responce;
 }
 function updateUserPerminiton($params) {
-	$result = cd_user::update_permition($params['uid'], $params['action_id'], $params['permition_value']);
+// TODO: da pomislq kak da predam vsichki permitions
+	//update in cd_user.php i GetPermition.java
+	$result = cd_user::update_permition($params['user_id'], $params['action_id'], $params['permition_value']);
 	$responce = array();
 	$responce['result'] = array();
   $responce['error'] = $result['error'];
@@ -31,7 +33,7 @@ function deleteUser($params) {
 //////////////
 class j_user { 
 
-	function getFunctions() {
+	function registerFncs() {
 		$functions = array();
 		$functions[] = array('method' => 'getUserList', 
 			'params' => array(), 
@@ -40,7 +42,7 @@ class j_user {
 			'params' => array('name' => 'string', 'password' => 'string'), 
 			'permition' => 'create_user');
 		$functions[] = array('method' => 'updateUserPerminiton', 
-			'params' => array('uid' => 'number', 'action_id' => 'number', 'permition_value' => 'number'), 
+			'params' => array('user_id' => 'number', 'action_id' => 'number', 'permition_value' => 'number'), 
 			'permition' => 'update_permition');
 		$functions[] = array('method' => 'deleteUser', 
 			'params' => array('user_id' => 'number'), 

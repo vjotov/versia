@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:versia" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:versia">
+<types>
+<xsd:schema targetNamespace="urn:versia"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="Error">
+  <xsd:all>
+   <xsd:element name="err_code" type="xsd:int"/>
+   <xsd:element name="err_msgs" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Product">
+  <xsd:all>
+   <xsd:element name="product_id" type="xsd:string"/>
+   <xsd:element name="product_name" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="ProductResponce">
+  <xsd:all>
+   <xsd:element name="err_code" type="tns:Error"/>
+   <xsd:element name="product" type="tns:Product"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="ProductArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Product[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="getProductRequest">
+  <part name="symbol" type="xsd:int" /></message>
+<message name="getProductResponse">
+  <part name="return" type="tns:ProductResponce" /></message>
+<message name="getProductArrayRequest"></message>
+<message name="getProductArrayResponse">
+  <part name="return" type="tns:ProductArray" /></message>
+<message name="createProductRequest">
+  <part name="symbol" type="xsd:string" /></message>
+<message name="createProductResponse">
+  <part name="return" type="tns:Error" /></message>
+<message name="updateProductRequest">
+  <part name="symbol1" type="xsd:int" />
+  <part name="symbol2" type="xsd:string" /></message>
+<message name="updateProductResponse">
+  <part name="return" type="tns:Error" /></message>
+<message name="deleteProductRequest">
+  <part name="symbol" type="xsd:int" /></message>
+<message name="deleteProductResponse">
+  <part name="return" type="tns:Error" /></message>
+<portType name="stockserverPortType">
+  <operation name="getProduct">
+    <input message="tns:getProductRequest"/>
+    <output message="tns:getProductResponse"/>
+  </operation>
+  <operation name="getProductArray">
+    <input message="tns:getProductArrayRequest"/>
+    <output message="tns:getProductArrayResponse"/>
+  </operation>
+  <operation name="createProduct">
+    <input message="tns:createProductRequest"/>
+    <output message="tns:createProductResponse"/>
+  </operation>
+  <operation name="updateProduct">
+    <input message="tns:updateProductRequest"/>
+    <output message="tns:updateProductResponse"/>
+  </operation>
+  <operation name="deleteProduct">
+    <input message="tns:deleteProductRequest"/>
+    <output message="tns:deleteProductResponse"/>
+  </operation>
+</portType>
+<binding name="stockserverBinding" type="tns:stockserverPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="getProduct">
+    <soap:operation soapAction="urn:versia#getProduct" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getProductArray">
+    <soap:operation soapAction="urn:versia#getProductArray" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="createProduct">
+    <soap:operation soapAction="urn:versia#createProduct" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="updateProduct">
+    <soap:operation soapAction="urn:versia#updateProduct" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="deleteProduct">
+    <soap:operation soapAction="urn:versia#deleteProduct" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:versia" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="stockserver">
+  <port name="stockserverPort" binding="tns:stockserverBinding">
+    <soap:address location="http://127.0.0.1/versia/soap_controller.php"/>
+  </port>
+</service>
+</definitions>

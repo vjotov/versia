@@ -400,8 +400,8 @@ public class OpenWorkspace extends javax.swing.JDialog {
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
             JOptionPane.showMessageDialog(this,
-                    "Communication Problem.",
-                    "Error during products load",
+                    "Problem.",
+                    "Error during products display",
                     JOptionPane.ERROR_MESSAGE);
 
         }

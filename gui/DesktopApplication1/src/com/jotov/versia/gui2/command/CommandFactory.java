@@ -13,7 +13,8 @@ public class CommandFactory {
     public enum CmdCode {ATTACH_WORK_ITEM, CREATE_PRODUCT, CREATE_RELEASE, CREATE_VERSIONED_OBJECT, CREATE_WORK_ITEM,CREATE_WORKSPACE,
         DELETE_PRODUCT, DELETE_RELEASE, DELETE_VERSIONED_OBJECT, DELETE_WORKSPACE, DETACH_WORK_ITEM, GET_PRODUCTS, GET_RELEASE_LIST,
         GET_VERSIONED_OBJECT_LIST, GET_WORK_ITEM_LIST, GET_WORKSPACE_LIST, PUBLISH_VERSIONED_BJECT, PUT_BACK_VERSIONED_OBJECT, SAVE_VERSIONED_OBJECT,
-        UPDATE_PRODUCT, UPDATE_RELEASE, UPDATE_WORKSPACE, VIEW_VERSIONED_OBJECT_DISTRIBUTION, VIEW_VERSIONED_OBJECT_HISTORY};
+        UPDATE_PRODUCT, UPDATE_RELEASE, UPDATE_WORKSPACE, VIEW_VERSIONED_OBJECT_DISTRIBUTION, VIEW_VERSIONED_OBJECT_HISTORY, GET_USER_LIST,
+        CREATE_USER, UPDATE_PERMITION};
     public ICommand createCommand (CmdCode commandCode) {
         
         ICommand cmd;
@@ -42,6 +43,9 @@ public class CommandFactory {
             case UPDATE_WORKSPACE: cmd = new UpdateWorkspace(); break;
             case VIEW_VERSIONED_OBJECT_DISTRIBUTION: cmd = new ViewVersionedObjectDistribution(); break;
             case VIEW_VERSIONED_OBJECT_HISTORY: cmd = new ViewVersionedObjectHistory(); break;
+            case GET_USER_LIST: cmd = new GetUserList(); break;
+            case CREATE_USER: cmd = new CreateUser(); break;
+            case UPDATE_PERMITION: cmd = new UpdatePermition(); break;
             default: cmd = null;
         }
         return cmd;

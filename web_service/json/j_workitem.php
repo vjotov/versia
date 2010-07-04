@@ -28,10 +28,8 @@ function detachWorkItem ($params) {
 	return $responce;
 }
 function getWorkItemList ($params) {
-	//$result = cd_workitem::get_workitem_list($params['ws_id']);
 	$r1 = getAttachedWorkItemList($params);
 	$r2 = getNotAttachedWorkItemList($params);
-	//$e1 = $r1['error'];
 	$responce = array();
 	$responce['result'] = array('attached' => $r1['result'], 'not_attached' => $r2['result']);
   $responce['error'] = $r2['error'];

@@ -13,10 +13,10 @@ class cd_user {
 			return array('error' => $err_);
 		}
 		
-		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);//var_dump($set);
+		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
 		$users = array();
 		foreach($set as $value) {
-			$permitions = self::get_permitions($value["uid"]);//var_dump($permitions);
+			$permitions = self::get_permitions($value["uid"]);
 			if($permitions == false) {
 				$err_['code'] = 1;
 				$err_['message'] = 'Failed to issue query';
@@ -51,17 +51,17 @@ class cd_user {
 		return $err_;
 		
 	} 
-	static public function update_permition($user_id, $action_id, $permition_value) {
+	static public function update_permition($permition_id, $permition_value) {
 	// TODO: da pomislq kak da predam vsichki permitions
 	//update in j_user.php i GetPermition.java
 		global $mdb;
 		if($permition_value != 1) $permition_value = 0; // only 1 and 0 are correct values
 		    	
 		$err_ = array();
-		$result = $mdb->query("UPDATE t_user SET permited='".$permition_value."' WHERE uid='".$user_id."' AND action_id = '".$action_id."' ");
+		$result = $mdb->query("UPDATE t_permition SET permited='".$permition_value."' WHERE permition_id='".$permition_id."' ");
 		if(PEAR::isError($result)) {
 			$err_['code'] = 1;
-			$err_['message'] = 'Failed to issue query, error message : ' . $result->getMessage();
+			$err_['message'] = var_dump($query).' Failed to issue query, error message : ' . $result->getMessage();
 			$err_['message'] .= 'cd_user.update_permition() - 1';
 			return $err_;
 		}

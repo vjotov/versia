@@ -44,7 +44,7 @@ class cd_vo {
 	static public function get_visible_vo_list($ws_id) {
 		global $mdb;
 
-		$query = "SELECT vv.vo_id, vv.vp_id, vv.vp_name, vv.locked, vp.datum AS vp_datum, vv.v_vector AS v_vector, vp.constructs AS constructs "
+		$query = "SELECT vv.vo_id, vv.vp_id, vv.vp_name as vo_name, vv.locked, vp.datum AS vo_datum, vv.v_vector AS v_vector, vp.constructs AS constructs, vp.type_id AS type "
 				." FROM v_vo_visibility vv INNER JOIN t_versioned_primitive vp ON vp.vp_id = vv.vp_id AND vp.vo_id = vv.vo_id "
 				." WHERE ws_id = '".$ws_id."' ORDER BY constructs "; 
 				

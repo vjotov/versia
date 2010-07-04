@@ -158,31 +158,44 @@ public class ChangeVOHat extends javax.swing.JDialog {
     @Action
     public void doSave() {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtVersionedObjects.getLastSelectedPathComponent();
-        if (node == null) {
-            jbOK.setEnabled(false);
-        } else {
-            int voID = ((voInfo) node.getUserObject()).getVo_id();
-            HashMap params = new HashMap();
-            params.put("constructs", voID);
-
+        if (Object.class.isInstance(node)) {
             try {
-                CommandFactory cf = new CommandFactory();
-                ICommand cmd = cf.createCommand(CommandFactory.CmdCode.SAVE_VERSIONED_OBJECT);
-
-                cmd.setParameters(params);
-                JSONArray vo_ls = (JSONArray) cmd.doRequest();
+                int voID = ((voInfo) node.getUserObject()).getVo_id();
+                HashMap params = new HashMap();
+                JSONObject vo = we.getCurrentVersionedObject();
+                params.put("vo_id", vo.getInt("vo_id"));
+                params.put("vo_name", vo.getString("vo_name"));
+                params.put("vo_datum", vo.getString("vo_datum"));
+                params.put("type", vo.getInt("type"));
+                params.put("constructs", voID);
+                try {
+                    CommandFactory cf = new CommandFactory();
+                    ICommand cmd = cf.createCommand(CommandFactory.CmdCode.SAVE_VERSIONED_OBJECT);
+                    cmd.setParameters(params);
+                    JSONObject result = (JSONObject) cmd.doRequest();
+                } catch (JSONException ex) {
+                    Logger.getLogger(ChangeVOHat.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } catch (JSONException ex) {
                 Logger.getLogger(ChangeVOHat.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            jbOK.setEnabled(false);
         }
-        dispose();
-    }
+    dispose();
+}
 
-    @Action
-    public void doCancel() {
+@Action
+    public
+
+void doCancel() {
         actionCommand = jbCancel.getActionCommand();
-        dispose();
-    }
+        dispose(
+
+);
+
+
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbOK;
@@ -194,41 +207,93 @@ public class ChangeVOHat extends javax.swing.JDialog {
     /**
      * @return the actionCommand
      */
-    public String getActionCommand() {
+    public String
+
+getActionCommand() {
         return actionCommand;
-    }
+
+
+}
 
     private void initVOTree() {
         try {
             JSONArray objectArray = we.getVersionedObject_ls();
-            voRoot.removeAllChildren();
+            voRoot.
 
-            int pr_len = objectArray.length();
-            JSONObject tmpVO;
-            DefaultMutableTreeNode tmpNode, tmpNode2 = null;
-            String val;
-            Map voMap = new HashMap();
-            voRoot.setUserObject(new voInfo("No Hat", 0, 0));
-            for (int i = 0; i < pr_len; i++) {
+removeAllChildren();
+
+
+
+int pr_len = objectArray.length();
+            JSONObject
+
+tmpVO;
+            DefaultMutableTreeNode
+
+tmpNode, tmpNode2 = null;
+            String
+
+val;
+            Map
+
+voMap = new HashMap();
+            voRoot.
+
+setUserObject(new voInfo("No Hat", 0, 0));
+
+
+for (int i = 0; i
+
+< pr_len; i++
+
+) {
                 tmpVO = (JSONObject) objectArray.get(i);
-                val = tmpVO.getString("vp_name") + " - " + we.getVisibilityVectorString(tmpVO.getInt("v_vector"));
-                voInfo voInfo = new voInfo(val, tmpVO.getInt("vo_id"), i+1);
+                val
 
-                int constructs = tmpVO.getInt("constructs");
-                if (constructs == 0) {
+= tmpVO.getString("vo_name") + " - " + we.getVisibilityVectorString(tmpVO.getInt("v_vector"));
+                voInfo
+
+voInfo = new voInfo(val, tmpVO.getInt("vo_id"), i+1);
+
+
+
+int constructs = tmpVO.getInt("constructs");
+
+
+if (constructs == 0) {
                     tmpNode = new DefaultMutableTreeNode(voInfo);
-                    voRoot.add(tmpNode);
-                    voMap.put(voInfo.getVo_id(), tmpNode);
-                } else {
+                    voRoot.
+
+add(tmpNode);
+                    voMap.
+
+put(voInfo.getVo_id(), tmpNode);
+
+
+} else {
                     tmpNode = new DefaultMutableTreeNode(voInfo);
-                    tmpNode2 = (DefaultMutableTreeNode) voMap.get(new Integer(constructs));
-                    tmpNode2.add(tmpNode);
-                    voMap.put(voInfo.getVo_id(), tmpNode);
-                }
+                    tmpNode2
+
+= (DefaultMutableTreeNode) voMap.get(new Integer(constructs));
+                    tmpNode2.
+
+add(tmpNode);
+                    voMap.
+
+put(voInfo.getVo_id(), tmpNode);
+
+
+}
             }
             ((DefaultTreeModel) jtVersionedObjects.getModel()).reload();
-        } catch (JSONException ex) {
+
+
+
+}
+
+catch (JSONException ex) {
             Logger.getLogger(ChangeVOHat.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+
+}
 }

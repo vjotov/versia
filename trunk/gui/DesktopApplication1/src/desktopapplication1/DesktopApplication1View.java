@@ -255,11 +255,14 @@ public class DesktopApplication1View extends FrameView {
         jpCommands.setName("jpCommands"); // NOI18N
 
         jbCreateVO.setText(resourceMap.getString("jbCreateVO.text")); // NOI18N
-        jbCreateVO.setEnabled(false);
         jbCreateVO.setName("jbCreateVO"); // NOI18N
+        jbCreateVO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCreateVOActionPerformed(evt);
+            }
+        });
 
         jbSaveVO.setText(resourceMap.getString("jbSaveVO.text")); // NOI18N
-        jbSaveVO.setEnabled(false);
         jbSaveVO.setName("jbSaveVO"); // NOI18N
         jbSaveVO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -533,7 +536,7 @@ public class DesktopApplication1View extends FrameView {
                 params.put("wi_id", wiInfo.getWi_id());
                 cmd.setParameters(params);
                 Integer res = (Integer) cmd.doRequest();
-                if (res != null) {
+                if (Object.class.isInstance(res)) {
                     loadWorkItems();
                 }
             } catch (JSONException ex) {
@@ -555,7 +558,7 @@ public class DesktopApplication1View extends FrameView {
                 params.put("wi_id", wiInfo.getWi_id());
                 cmd.setParameters(params);
                 Integer res = (Integer) cmd.doRequest();
-                if (res != null) {
+                if (Object.class.isInstance(res)) {
                     loadWorkItems();
                 }
             } catch (JSONException ex) {
@@ -576,8 +579,8 @@ public class DesktopApplication1View extends FrameView {
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.SAVE_VERSIONED_OBJECT);
 
             cmd.setParameters(params);
-            JSONArray vo_ls = (JSONArray) cmd.doRequest();
-            if (vo_ls != null) {
+            Integer int_val = (Integer) cmd.doRequest();
+            if (Object.class.isInstance(int_val)) {
                 loadVersionedObjects();
             }
         } catch (JSONException ex) {
@@ -592,7 +595,7 @@ public class DesktopApplication1View extends FrameView {
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.PUBLISH_VERSIONED_BJECT);
 
             Integer int_val = (Integer) cmd.doRequest();
-            if (int_val != null) {
+            if (Object.class.isInstance(int_val)) {
                 loadVersionedObjects();
             }
         } catch (JSONException ex) {
@@ -607,7 +610,7 @@ public class DesktopApplication1View extends FrameView {
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.PUT_BACK_VERSIONED_OBJECT);
 
             Integer int_val = (Integer) cmd.doRequest();
-            if (int_val != null) {
+            if (Object.class.isInstance(int_val)) {
                 loadVersionedObjects();
             }
         } catch (JSONException ex) {
@@ -697,36 +700,57 @@ public class DesktopApplication1View extends FrameView {
     private void jtAvailableWorkItemsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtAvailableWorkItemsValueChanged
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtAvailableWorkItems.getLastSelectedPathComponent();
-        if (node == null) {
-            jbAttachWI.setEnabled(false);
-            jbDetachWI.setEnabled(false);
-        } else {
+        if (Object.class.isInstance(node)) {
             jbAttachWI.setEnabled(true);
-            jbDetachWI.setEnabled(false);
+        } else {
+            jbAttachWI.setEnabled(false);
         }
     }//GEN-LAST:event_jtAvailableWorkItemsValueChanged
 
     private void jtAttachedWorkItemsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtAttachedWorkItemsValueChanged
         // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtAttachedWorkItems.getLastSelectedPathComponent();
-        if (node == null) {
-            jbAttachWI.setEnabled(false);
-            jbDetachWI.setEnabled(false);
-        } else {
-            jbAttachWI.setEnabled(false);
+        if (Object.class.isInstance(node)) {
             jbDetachWI.setEnabled(true);
+        } else {
+            jbDetachWI.setEnabled(false);
         }
     }//GEN-LAST:event_jtAttachedWorkItemsValueChanged
 
     private void jtaVODatumPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtaVODatumPropertyChange
         // TODO add your handling code here:
-        jbSaveVO.setEnabled(true);
+        //JSONObject vo = workEnvironment.getCurrentVersionedObject();
+        //if (Object.class.isInstance(vo))
+            jbSaveVO.setEnabled(true);
     }//GEN-LAST:event_jtaVODatumPropertyChange
 
     private void jtfVONamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtfVONamePropertyChange
         // TODO add your handling code here:
-        jbSaveVO.setEnabled(true);
+        //JSONObject vo = workEnvironment.getCurrentVersionedObject();
+        //if (Object.class.isInstance(vo))
+            jbSaveVO.setEnabled(true);
     }//GEN-LAST:event_jtfVONamePropertyChange
+
+    private void jbCreateVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateVOActionPerformed
+        // TODO add your handling code here:
+         HashMap params = new HashMap();
+
+        params.put("vo_name", jtfVOName.getText());
+        params.put("vo_datum", jtaVODatum.getText());
+
+        try {
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.CREATE_VERSIONED_OBJECT);
+
+            cmd.setParameters(params);
+            Integer int_val = (Integer) cmd.doRequest();
+            if (Object.class.isInstance(int_val)) {
+                loadVersionedObjects();
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbCreateVOActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
@@ -780,7 +804,7 @@ public class DesktopApplication1View extends FrameView {
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.GET_WORK_ITEM_LIST);
 
             Object res = cmd.doRequest();
-            if (res != null) {
+            if (Object.class.isInstance(res)) {
                 displayWorkitems();
             }
         } catch (JSONException ex) {
@@ -809,17 +833,17 @@ public class DesktopApplication1View extends FrameView {
         for (int i = 0; i < pr_len; i++) {
             tmpWI = (JSONObject) treeElements.get(i);
             workitemInfo wiInfo = new workitemInfo(tmpWI.getString("name"), tmpWI.getInt("wi_id"), i);
-            int constructs = tmpWI.getInt("constructs");
-            if (constructs == 0) {
+            //int constructs = tmpWI.getInt("constructs");
+            //if (constructs == 0) {
                 tmpNode = new DefaultMutableTreeNode(wiInfo);
                 Root.add(tmpNode);
                 wsMap.put(wiInfo.getWi_id(), tmpNode);
-            } else {
-                tmpNode = new DefaultMutableTreeNode(wiInfo);
-                tmpNode2 = (DefaultMutableTreeNode) wsMap.get(constructs);
-                tmpNode2.add(tmpNode);
-                wsMap.put(wiInfo.getWi_id(), tmpNode);
-            }
+//            } else {
+//                tmpNode = new DefaultMutableTreeNode(wiInfo);
+//                tmpNode2 = (DefaultMutableTreeNode) wsMap.get(constructs);
+//                tmpNode2.add(tmpNode);
+//                wsMap.put(wiInfo.getWi_id(), tmpNode);
+//            }
         }
     }
 
@@ -831,7 +855,7 @@ public class DesktopApplication1View extends FrameView {
 
             JSONArray vo_ls = (JSONArray) cmd.doRequest();
             workEnvironment.setVersionedObject_ls(vo_ls);
-            if (vo_ls != null) {
+            if (Object.class.isInstance(vo_ls)) {
                 displayVersionedObjectsTree();
             }
         } catch (JSONException ex) {
@@ -852,7 +876,7 @@ public class DesktopApplication1View extends FrameView {
             Map wsMap = new HashMap();
             for (int i = 0; i < pr_len; i++) {
                 tmpVO = (JSONObject) vo_ls.get(i);
-                val = tmpVO.getString("vp_name") + " - " + workEnvironment.getVisibilityVectorString(tmpVO.getInt("v_vector"));
+                val = tmpVO.getString("vo_name") + " - " + workEnvironment.getVisibilityVectorString(tmpVO.getInt("v_vector"));
                 voInfo voInfo = new voInfo(val, tmpVO.getInt("vo_id"), i);
 
                 int constructs = tmpVO.getInt("constructs");
@@ -874,7 +898,8 @@ public class DesktopApplication1View extends FrameView {
     }
 
     private void diplayVersionedObjectsHistory(JSONArray HistoryItems) {
-        // TODO - idea - to show in a new window list of all historical changes of VO - source, target, time of version, user initiated the change, work item of the change
+        // TODO - idea - to show in a new window list of all historical changes of VO
+        //source, target, time of version, user initiated the change, work item of the change
     }
 
     private void refreshWIButtons(boolean b) {
@@ -898,11 +923,11 @@ public class DesktopApplication1View extends FrameView {
         try {
             //WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
             JSONObject vo = workEnvironment.getCurrentVersionedObject();
-            jtfVOName.setText(vo.getString("vp_name"));
-            jtaVODatum.setText(vo.getString("vp_datum"));
+            jtfVOName.setText(vo.getString("vo_name"));
+            jtaVODatum.setText(vo.getString("vo_datum"));
             jbPublishVO.setEnabled(workEnvironment.isLocalCurrentVersionedObject());
             jbPutBackVO.setEnabled(workEnvironment.isPutBackableCurrentVersionedObject());
-            jbSaveVO.setEnabled(false);
+            jbSaveVO.setEnabled(true);
             jbViewVODistribution.setEnabled(true);
             jbViewVOHistory.setEnabled(true);
             jbChangeVOHat.setEnabled(true);

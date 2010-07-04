@@ -23,7 +23,7 @@ public class WorkEnvironment {
     private JSONArray jaRrelease;
     private JSONArray jaAttachedWorkItems;
     private JSONArray jaAvailableWorkItems;
-    private JSONArray jaVersionedObject;
+    private JSONArray jaVersionedObjects;
     private JSONObject currentVersionedObject;
     static private WorkEnvironment singleton;
 
@@ -35,13 +35,12 @@ public class WorkEnvironment {
         currentProject = 0;
         currentRelease = 0;
         currentWs = 0;
-        jaWorkspace = new JSONArray();
-        jaProject = new JSONArray();
-        jaRrelease = new JSONArray();
-        jaAttachedWorkItems = new JSONArray();
-        jaAvailableWorkItems = new JSONArray();
-        jaVersionedObject = new JSONArray();
-        currentVersionedObject = new JSONObject();
+        //jaWorkspace = new JSONArray();
+        //jaProject = new JSONArray();
+        //jaRrelease = new JSONArray();
+        //jaAttachedWorkItems = new JSONArray();
+        //jaAvailableWorkItems = new JSONArray();
+        //jaVersionedObjects = new JSONArray();
     }
 
     public static WorkEnvironment getWorkEnvironment() {
@@ -90,11 +89,11 @@ public class WorkEnvironment {
     }
 
     public JSONArray getVersionedObject_ls() {
-        return jaVersionedObject;
+        return jaVersionedObjects;
     }
 
     public void setVersionedObject_ls(JSONArray newVersionedObject_ls) {
-        jaVersionedObject = newVersionedObject_ls;
+        jaVersionedObjects = newVersionedObject_ls;
     }
 
     public JSONArray getAttachedWorkItems() {
@@ -134,9 +133,9 @@ public class WorkEnvironment {
     }
 
     public void setCurrentVersionedObject(int currentVOID) throws JSONException {
-        int len = jaVersionedObject.length();
+        int len = jaVersionedObjects.length();
         for (int i = 0; i < len; i++) {
-            JSONObject tmpVO = jaVersionedObject.getJSONObject(i);
+            JSONObject tmpVO = jaVersionedObjects.getJSONObject(i);
             if (currentVOID == tmpVO.getInt("vo_id")) {
                 currentVersionedObject = tmpVO;
                 return;
@@ -147,6 +146,10 @@ public class WorkEnvironment {
 
     public int getCurrentVersionedObjectID() throws JSONException {
         return currentVersionedObject.getInt("vo_id");
+    }
+
+    public int getCurrentVersionedObjectConstructs() throws JSONException {
+        return currentVersionedObject.getInt("constructs");
     }
 
     public int getUid() {
@@ -195,6 +198,7 @@ public class WorkEnvironment {
     }
 
     public boolean isPutBackableCurrentVersionedObject() {
+        // TODO da go prerabotq
         try {
             int vector = currentVersionedObject.getInt("v_vector");
             if ((vector & 11) > 0) {

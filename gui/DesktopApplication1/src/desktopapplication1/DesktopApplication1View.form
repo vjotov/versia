@@ -264,14 +264,15 @@
                 <Component class="javax.swing.JButton" name="jbCreateVO">
                   <Properties>
                     <Property name="text" type="java.lang.String" resourceKey="jbCreateVO.text"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jbCreateVO" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCreateVOActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbSaveVO">
                   <Properties>
                     <Property name="text" type="java.lang.String" resourceKey="jbSaveVO.text"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jbSaveVO" noResource="true"/>
                   </Properties>
                   <Events>

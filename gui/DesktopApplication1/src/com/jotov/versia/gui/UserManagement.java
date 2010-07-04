@@ -13,10 +13,13 @@ package com.jotov.versia.gui;
 import com.jotov.versia.WorkEnvironment;
 import com.jotov.versia.gui2.command.CommandFactory;
 import com.jotov.versia.gui2.command.ICommand;
+import com.jotov.versia.json.JSONObjectListItem;
 import desktopapplication1.DesktopApplication1View;
+import java.util.HashMap;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import org.jdesktop.application.Action;
 import org.json.JSONArray;
@@ -30,6 +33,7 @@ import org.json.JSONObject;
 public class UserManagement extends javax.swing.JDialog {
 
     private JSONArray users;
+    private int selectedUserIdx;
     private WorkEnvironment workEnvironment;
     private String actionCommand;
 
@@ -117,11 +121,7 @@ public class UserManagement extends javax.swing.JDialog {
 
         jspAvailablePermitions.setName("jspAvailablePermitions"); // NOI18N
 
-        jlstAvailablePermitions.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jlstAvailablePermitions.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jlstAvailablePermitions.setName("jlstAvailablePermitions"); // NOI18N
         jlstAvailablePermitions.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -130,21 +130,19 @@ public class UserManagement extends javax.swing.JDialog {
         });
         jspAvailablePermitions.setViewportView(jlstAvailablePermitions);
 
+        jbGrantPermition.setAction(actionMap.get("GrantPrivilege")); // NOI18N
         jbGrantPermition.setText(resourceMap.getString("jbGrantPermition.text")); // NOI18N
         jbGrantPermition.setEnabled(false);
         jbGrantPermition.setName("jbGrantPermition"); // NOI18N
 
+        jbRevokePermition.setAction(actionMap.get("RevokePrivilege")); // NOI18N
         jbRevokePermition.setText(resourceMap.getString("jbRevokePermition.text")); // NOI18N
         jbRevokePermition.setEnabled(false);
         jbRevokePermition.setName("jbRevokePermition"); // NOI18N
 
         jspGrantedPermitions.setName("jspGrantedPermitions"); // NOI18N
 
-        jlstGrantedPermitions.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jlstGrantedPermitions.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jlstGrantedPermitions.setName("jlstGrantedPermitions"); // NOI18N
         jlstGrantedPermitions.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -206,7 +204,6 @@ public class UserManagement extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jlAvailablePermitions, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jlGrantedPermitions))
@@ -230,12 +227,12 @@ public class UserManagement extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlstUsersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstUsersValueChanged
-    //TODO
-        if (jlstUsers.isSelectionEmpty()){
-                clearPermitions();
-                return;
+        //TODO
+        if (jlstUsers.isSelectionEmpty()) {
+            clearPermitions();
+            return;
         }
-        try {           
+        try {
             loadPermitions();
         } catch (Exception ex) {
             ex.printStackTrace(System.err);
@@ -248,20 +245,21 @@ public class UserManagement extends javax.swing.JDialog {
 
     private void jlstAvailablePermitionsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstAvailablePermitionsValueChanged
         // TODO add your handling code here:
-        if(jlstAvailablePermitions.isSelectionEmpty())
+        if (jlstAvailablePermitions.isSelectionEmpty()) {
             jbGrantPermition.setEnabled(false);
-        else
+        } else {
             jbGrantPermition.setEnabled(true);
+        }
     }//GEN-LAST:event_jlstAvailablePermitionsValueChanged
 
     private void jlstGrantedPermitionsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstGrantedPermitionsValueChanged
         // TODO add your handling code here:
-        if(jlstGrantedPermitions.isSelectionEmpty())
+        if (jlstGrantedPermitions.isSelectionEmpty()) {
             jbRevokePermition.setEnabled(false);
-        else
+        } else {
             jbRevokePermition.setEnabled(true);
+        }
     }//GEN-LAST:event_jlstGrantedPermitionsValueChanged
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbEditUser;
@@ -279,7 +277,7 @@ public class UserManagement extends javax.swing.JDialog {
     private javax.swing.JScrollPane jspGrantedPermitions;
     private javax.swing.JScrollPane jspUsers;
     // End of variables declaration//GEN-END:variables
-    
+
     @Action
     public void doCancel() {
         actionCommand = jbCancel.getActionCommand();
@@ -293,32 +291,89 @@ public class UserManagement extends javax.swing.JDialog {
 
     }
 
+    @Action
+    public void GrantPrivilege() throws JSONException {
+        changePrivilage(jlstAvailablePermitions, 1);
+    }
+
+    @Action
+    public void RevokePrivilege() {
+        changePrivilage(jlstGrantedPermitions, 0);
+    }
+
+    private void changePrivilage(JList lst, int newValue) {
+        JSONObjectListItem selection = (JSONObjectListItem) lst.getSelectedValue();
+        try {
+            JSONObject permition = loadUserPermitionByID(selection.getInt("permition_id"));
+            if (permition != null) {
+                permition.put("permited", newValue);
+                savePermition(permition);
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private JSONObject loadUserPermitionByID(int permitionID) throws JSONException {
+        JSONObject user = users.getJSONObject(selectedUserIdx);
+        JSONArray permitions = user.getJSONArray("permitions");
+        int perm_len = permitions.length();
+        for (int i = 0; i < perm_len; i++) {
+            JSONObject permition = permitions.getJSONObject(i);
+            if (permition.getInt("permition_id") == permitionID) {
+                return permition;
+            }
+        }
+        return null;
+    }
+
+    private void savePermition(JSONObject permition) {
+        try {
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.UPDATE_PERMITION);
+
+            HashMap params = new HashMap();
+            params.put("permition_id", permition.getInt("permition_id"));
+            params.put("permition_value", permition.getInt("permited"));
+            cmd.setParameters(params);
+            Integer res = (Integer) cmd.doRequest();
+            if (res != null) {
+                loadPermitions();
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public String getActionCommand() {
         return actionCommand;
     }
 
     private void loadPermitions() throws JSONException {
-        int idx = jlstUsers.getSelectedIndex();
+        selectedUserIdx = jlstUsers.getSelectedIndex();
 
-        JSONObject user = users.getJSONObject(idx);
+        JSONObject user = users.getJSONObject(selectedUserIdx);
         int selectedUserID = user.getInt("uid");
         boolean enable_flag;
-        if (selectedUserID == workEnvironment.getUid())
+        if (selectedUserID == workEnvironment.getUid()) {
             enable_flag = false;
-        else
-            enable_flag= true;
+        } else {
+            enable_flag = true;
+        }
 
         JSONArray permitions = user.getJSONArray("permitions");
         int perm_len = permitions.length();
         Vector granted = new Vector();
         Vector revoked = new Vector();
-        for(int i = 0; i < perm_len; i++) {
-            JSONObject permition = permitions.getJSONObject(i);
-             permition.getString("action_name");
-            if (permition.getInt("permited") == 1)
+        for (int i = 0; i < perm_len; i++) {
+            JSONObjectListItem permition = new JSONObjectListItem(permitions.getJSONObject(i));
+            permition.setDisplayingValue("action_name");
+            if (permition.getInt("permited") == 1) {
                 granted.add(permition);
-            else
+            } else {
                 revoked.add(permition);
+            }
         }
         jlstAvailablePermitions.setListData(revoked);
         jlstGrantedPermitions.setListData(granted);
@@ -332,7 +387,7 @@ public class UserManagement extends javax.swing.JDialog {
     }
 
     private void loadUsers() {
-       try {
+        try {
             CommandFactory cf = new CommandFactory();
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.GET_USER_LIST);
             users = (JSONArray) cmd.doRequest();

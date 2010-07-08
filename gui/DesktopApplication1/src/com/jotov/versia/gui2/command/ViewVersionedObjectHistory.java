@@ -22,17 +22,17 @@ public class ViewVersionedObjectHistory implements ICommand {
         JSONConnection jc = new JSONConnection();
         Map params = new HashMap();
         params.put("vo_id", we.getCurrentVersionedObjectID());
-        params.put("release_id", we.getCurrentRelease());
+        //params.put("release_id", we.getCurrentRelease());
         jc.prepareJSONRequest("viewVersionedObjectHistory", params, uid);
         JSONObject jResponce = jc.doRequest(null);
         JSONObject err = jResponce.getJSONObject("error");
         
         //@todo - to check what to do with the result
-        JSONArray HistoryItems = jResponce.getJSONArray("result");
+        JSONObject ResultItems = jResponce.getJSONObject("result");
 
         int code = err.getInt("code");
         if (code == 0) {
-            return new Integer(1);
+            return ResultItems;
         } else {
             System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
             return null;

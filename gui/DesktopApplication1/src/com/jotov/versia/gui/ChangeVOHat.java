@@ -133,7 +133,6 @@ public class ChangeVOHat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtVersionedObjectsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtVersionedObjectsValueChanged
-        // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtVersionedObjects.getLastSelectedPathComponent();
         if (node == null) {
             jbOK.setEnabled(false);

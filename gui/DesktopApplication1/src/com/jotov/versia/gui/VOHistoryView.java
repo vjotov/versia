@@ -148,13 +148,9 @@ public class VOHistoryView extends javax.swing.JDialog {
 
     private void bindHistoryModel(JSONObject Items) {
         try {
-            //JSONArray head = ;
-            //JSONArray changes = ;
 
             VOHModel.setContentData(Items.getJSONArray("changes"));
             VOHModel.setHead(Items.getJSONArray("head"));
-            //jtblVOHistory.setModel(VOHModel);
-            //jtblVOHistory.
             
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);

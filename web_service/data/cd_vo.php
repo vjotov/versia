@@ -161,12 +161,30 @@ class cd_vo {
 		if(PEAR::isError($resultset)) {
 			$err_['code'] = 2;
 			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
-			$err_['message'] .= '\n cd_vo::putback_versioned_object_state - 1';
+			$err_['message'] .= '\n cd_vo::view_versioned_object_distribution - 1';
 			return array();
 		}
 		$ws_list = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
 		return array('error' => array('code' => 0, 'message' => 'Successful') ,
 			'ws_list' => $ws_list);
+	}
+	
+	static public function view_versioned_object_history($vo_id) {
+    global $mdb;
+
+		$query ="SELECT uid, vo_id, vp_id, on_date_time, wi_id, `action` FROM t_history WHERE vo_id = '".$vo_id."'";
+		
+		$resultset = $mdb->query($query);
+		if(PEAR::isError($resultset)) {
+			$err_['code'] = 2;
+			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
+			$err_['message'] .= '\n cd_vo::view_versioned_object_history - 1';
+			return array();
+		}
+		$changes = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
+		$head = array('uid', 'vo_id', 'vp_id', 'on_date_time', 'wi_id', 'action');
+		return array('error' => array('code' => 0, 'message' => 'Successful'), 
+		  'result' => array('changes' => $changes, 'head' => $head));
 	}
 	// PRIVATE FUNCTIONs
 	

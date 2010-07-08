@@ -54,6 +54,13 @@ function viewVersionedObjectDistribution($params) {
   $responce['error'] = $result['error'];
   return $responce;
 }
+function viewVersionedObjectHistory($params) {
+	$result = cd_vo::view_versioned_object_history($params['vo_id']);
+	$responce = array();
+	$responce['result'] = $result['result'];
+  $responce['error'] = $result['error'];
+  return $responce;
+}
 
 //////////////
 class j_vo { 
@@ -77,6 +84,9 @@ class j_vo {
 		$functions[] = array('method' => 'viewVersionedObjectDistribution',
 			'params' => array('vo_id' => 'number', 'release_id' => 'number'),
 			'permition' => 'view_versioned_object_distribution');
+		$functions[] = array('method' => 'viewVersionedObjectHistory',
+			'params' => array('vo_id' => 'number'),
+			'permition' => 'view_versioned_object_history');
 		return $functions;
 	}
 }

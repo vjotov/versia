@@ -8,6 +8,7 @@ import com.jotov.versia.gui.ChangeVOHat;
 import com.jotov.versia.gui.VersiaAboutBox;
 import com.jotov.versia.gui.OpenWorkspace;
 import com.jotov.versia.gui.UserManagement;
+import com.jotov.versia.gui.VOHistoryView;
 import com.jotov.versia.gui2.command.CommandFactory;
 import com.jotov.versia.gui2.command.ICommand;
 import com.jotov.versia.voInfo;
@@ -81,6 +82,7 @@ public class DesktopApplication1View extends FrameView {
             loadWorkItems();
         }
     }
+
     @Action
     public void manageUsers() {
         if (manageUsers == null) {
@@ -524,7 +526,6 @@ public class DesktopApplication1View extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAttachWIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAttachWIActionPerformed
-        // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtAvailableWorkItems.getLastSelectedPathComponent();
         if (node != null) {
             try {
@@ -546,7 +547,6 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jbAttachWIActionPerformed
 
     private void jbDetachWIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetachWIActionPerformed
-        // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtAttachedWorkItems.getLastSelectedPathComponent();
         if (node != null) {
             try {
@@ -568,7 +568,6 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jbDetachWIActionPerformed
 
     private void jbSaveVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveVOActionPerformed
-        // TODO add your handling code here:
         HashMap params = new HashMap();
 
         params.put("vo_name", jtfVOName.getText());
@@ -589,7 +588,6 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jbSaveVOActionPerformed
 
     private void jbPublishVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPublishVOActionPerformed
-        // TODO add your handling code here:
         try {
             CommandFactory cf = new CommandFactory();
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.PUBLISH_VERSIONED_BJECT);
@@ -604,7 +602,6 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jbPublishVOActionPerformed
 
     private void jbPutBackVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPutBackVOActionPerformed
-        // TODO add your handling code here:
         try {
             CommandFactory cf = new CommandFactory();
             ICommand cmd = cf.createCommand(CommandFactory.CmdCode.PUT_BACK_VERSIONED_OBJECT);
@@ -644,37 +641,17 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jbViewVODistributionActionPerformed
 
     private void jbViewVOHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbViewVOHistoryActionPerformed
-        // TODO add your handling code here:
-        //@todo - to show in new dialog versioned object distribution among workspaces of the release.
-//        try {
-//            JSONConnection jc = new JSONConnection();
-//            Map params = new HashMap();
-//
-//            params.put("vo_id", workEnvironment.getCurrentVersionedObjectID());
-//            params.put("release_id", workEnvironment.getRelease());
-//
-//            jc.prepareJSONRequest("viewVersionedObjectHistory", params, uid);
-//            JSONObject jResponce = jc.doRequest(null);
-//            JSONObject err = jResponce.getJSONObject("error");
-//            JSONArray HistoryItems = jResponce.getJSONArray("result");
-//            int code = err.getInt("code");
-//            if (code != 0) {
-//                System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());
-//            }
-//            diplayVersionedObjectsHistory(HistoryItems);
-//        } catch (JSONException ex) {
-//            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        //refreshVOButtons(true);
+        JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
+        voHistory = new VOHistoryView(mainFrame);
+        voHistory.setLocationRelativeTo(mainFrame);
+        DesktopApplication1.getApplication().show(voHistory);
     }//GEN-LAST:event_jbViewVOHistoryActionPerformed
 
     private void jtVOsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtVOsValueChanged
-        // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtVOs.getLastSelectedPathComponent();
         if (node == null) {
             clearVOData();
         } else {
-            //WorkEnvironment we = WorkEnvironment.getWorkEnvironment();
             voInfo nodeInfo = (voInfo) node.getUserObject();
             try {
                 workEnvironment.setCurrentVersionedObject(nodeInfo.getVo_id());
@@ -686,8 +663,6 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jtVOsValueChanged
 
     private void jbChangeVOHatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbChangeVOHatActionPerformed
-        // TODO add your handling code here:
-        //@todo to make functionality - to open new dialog for selection of hat object
         if (changeVOHat == null) {
             JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
             changeVOHat = new ChangeVOHat(mainFrame);
@@ -698,17 +673,15 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jbChangeVOHatActionPerformed
 
     private void jtAvailableWorkItemsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtAvailableWorkItemsValueChanged
-        // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtAvailableWorkItems.getLastSelectedPathComponent();
         if (Object.class.isInstance(node)) {
             jbAttachWI.setEnabled(true);
         } else {
-            jbAttachWI.setEnabled(false);
+            jbAttachWI.setEnabled(true);
         }
     }//GEN-LAST:event_jtAvailableWorkItemsValueChanged
 
     private void jtAttachedWorkItemsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jtAttachedWorkItemsValueChanged
-        // TODO add your handling code here:
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtAttachedWorkItems.getLastSelectedPathComponent();
         if (Object.class.isInstance(node)) {
             jbDetachWI.setEnabled(true);
@@ -718,22 +691,15 @@ public class DesktopApplication1View extends FrameView {
     }//GEN-LAST:event_jtAttachedWorkItemsValueChanged
 
     private void jtaVODatumPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtaVODatumPropertyChange
-        // TODO add your handling code here:
-        //JSONObject vo = workEnvironment.getCurrentVersionedObject();
-        //if (Object.class.isInstance(vo))
-            jbSaveVO.setEnabled(true);
+        jbSaveVO.setEnabled(true);
     }//GEN-LAST:event_jtaVODatumPropertyChange
 
     private void jtfVONamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtfVONamePropertyChange
-        // TODO add your handling code here:
-        //JSONObject vo = workEnvironment.getCurrentVersionedObject();
-        //if (Object.class.isInstance(vo))
-            jbSaveVO.setEnabled(true);
+        jbSaveVO.setEnabled(true);
     }//GEN-LAST:event_jtfVONamePropertyChange
 
     private void jbCreateVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateVOActionPerformed
-        // TODO add your handling code here:
-         HashMap params = new HashMap();
+        HashMap params = new HashMap();
 
         params.put("vo_name", jtfVOName.getText());
         params.put("vo_datum", jtaVODatum.getText());
@@ -751,7 +717,6 @@ public class DesktopApplication1View extends FrameView {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbCreateVOActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JButton jbAttachWI;
@@ -794,7 +759,7 @@ public class DesktopApplication1View extends FrameView {
     //private final Icon idleIcon;
     //private final Icon[] busyIcons = new Icon[15];
     //private int busyIconIndex = 0;
-    private JDialog aboutBox, changeVOHat;
+    private JDialog aboutBox, changeVOHat, voHistory;
     private OpenWorkspace openProduct;
     private UserManagement manageUsers;
 
@@ -835,9 +800,9 @@ public class DesktopApplication1View extends FrameView {
             workitemInfo wiInfo = new workitemInfo(tmpWI.getString("name"), tmpWI.getInt("wi_id"), i);
             //int constructs = tmpWI.getInt("constructs");
             //if (constructs == 0) {
-                tmpNode = new DefaultMutableTreeNode(wiInfo);
-                Root.add(tmpNode);
-                wsMap.put(wiInfo.getWi_id(), tmpNode);
+            tmpNode = new DefaultMutableTreeNode(wiInfo);
+            Root.add(tmpNode);
+            wsMap.put(wiInfo.getWi_id(), tmpNode);
 //            } else {
 //                tmpNode = new DefaultMutableTreeNode(wiInfo);
 //                tmpNode2 = (DefaultMutableTreeNode) wsMap.get(constructs);
@@ -897,16 +862,6 @@ public class DesktopApplication1View extends FrameView {
         }
     }
 
-    private void diplayVersionedObjectsHistory(JSONArray HistoryItems) {
-        // TODO - idea - to show in a new window list of all historical changes of VO
-        //source, target, time of version, user initiated the change, work item of the change
-    }
-
-    private void refreshWIButtons(boolean b) {
-        jbAttachWI.setEnabled(b);
-        jbDetachWI.setEnabled(b);
-    }
-
     private void clearVOData() {
         jtfVOName.setText("");
         jtaVODatum.setText("");
@@ -936,6 +891,4 @@ public class DesktopApplication1View extends FrameView {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-
 }

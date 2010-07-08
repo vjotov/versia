@@ -227,7 +227,6 @@ public class UserManagement extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlstUsersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstUsersValueChanged
-        //TODO
         if (jlstUsers.isSelectionEmpty()) {
             clearPermitions();
             return;
@@ -244,7 +243,6 @@ public class UserManagement extends javax.swing.JDialog {
     }//GEN-LAST:event_jbNewUserActionPerformed
 
     private void jlstAvailablePermitionsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstAvailablePermitionsValueChanged
-        // TODO add your handling code here:
         if (jlstAvailablePermitions.isSelectionEmpty()) {
             jbGrantPermition.setEnabled(false);
         } else {
@@ -253,8 +251,7 @@ public class UserManagement extends javax.swing.JDialog {
     }//GEN-LAST:event_jlstAvailablePermitionsValueChanged
 
     private void jlstGrantedPermitionsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstGrantedPermitionsValueChanged
-        // TODO add your handling code here:
-        if (jlstGrantedPermitions.isSelectionEmpty()) {
+         if (jlstGrantedPermitions.isSelectionEmpty()) {
             jbRevokePermition.setEnabled(false);
         } else {
             jbRevokePermition.setEnabled(true);

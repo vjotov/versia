@@ -27,7 +27,6 @@ public class ViewVersionedObjectHistory implements ICommand {
         JSONObject jResponce = jc.doRequest(null);
         JSONObject err = jResponce.getJSONObject("error");
         
-        //@todo - to check what to do with the result
         JSONObject ResultItems = jResponce.getJSONObject("result");
 
         int code = err.getInt("code");

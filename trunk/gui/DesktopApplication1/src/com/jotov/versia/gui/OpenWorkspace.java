@@ -303,14 +303,12 @@ public class OpenWorkspace extends javax.swing.JDialog {
     }//GEN-LAST:event_jbNewProductActionPerformed
 
     private void jbLoadWSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoadWSActionPerformed
-        // TODO add your handling code here:
         loadWorkspaces();
         jbEditWorkspace.setEnabled(false);
         jbNewWorkspace.setEnabled(false);
     }//GEN-LAST:event_jbLoadWSActionPerformed
 
     private void jbEditWorkspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditWorkspaceActionPerformed
-        // TODO add your handling code here:
         JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
         String wsName = "";
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jtWorkspaces.getLastSelectedPathComponent();
@@ -332,7 +330,6 @@ public class OpenWorkspace extends javax.swing.JDialog {
     }//GEN-LAST:event_jbEditWorkspaceActionPerformed
 
     private void jbNewWorkspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNewWorkspaceActionPerformed
-        // TODO add your handling code here:
         JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
         NewEditWorkspace dlg = new NewEditWorkspace(mainFrame);
         dlg.setLocationRelativeTo(mainFrame);

@@ -2,7 +2,8 @@
 SQLyog Enterprise - MySQL GUI v8.12 
 MySQL - 5.1.37 : Database - versia_er2
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -457,7 +458,7 @@ BEGIN
 	SET new_vo_id = LAST_INSERT_ID();
 	INSERT INTO t_versioned_primitive (vp_id, vo_id, datum, `name`, type_id, constructs) VALUES (0, new_vo_id, in_datum, in_name, in_type, in_constructs);
 	INSERT INTO t_ws_obj_ver_selector (ws_id, vo_id, vp_id) VALUES (in_ws_id, new_vo_id, 0);
-	INSERT INTO t_history (uid, vo_id, vp_id, on_date_time) VALUES (in_uid, new_vo_id, 0, now());
+	INSERT INTO t_history (uid, vo_id, vp_id, on_date_time, wi_id, `action`) VALUES (in_uid, new_vo_id, 0, now(), in_ws_id, 'create');
 	#open ws_wi_cursor;
 	
 	CALL make_trace(in_ws_id, new_vo_id, 0);
@@ -692,7 +693,7 @@ BEGIN
 	
 	INSERT INTO t_versioned_primitive (vp_id, vo_id, datum, `name`, constructs, type_id) VALUES (next_vp_id, in_vo_id, in_vo_datum, in_name, in_constructs, in_type);
 	INSERT INTO t_version_graph_arcs (vo_id, source_vp_id, target_vp_id)VALUES (in_vo_id, src_vp_id, next_vp_id);	
-	INSERT INTO t_history (uid, vo_id, vp_id, on_date_time) VALUES (in_uid, in_vo_id, next_vp_id, now());
+	INSERT INTO t_history (uid, vo_id, vp_id, on_date_time, wi_id, `action`) VALUES (in_uid, in_vo_id, next_vp_id, now(), in_ws_id, 'save');
 	CALL make_trace(in_ws_id, in_vo_id, next_vp_id);
 	IF v_vector & 8 THEN 
 		UPDATE t_ws_obj_ver_selector SET vp_id = next_vp_id WHERE vo_id = in_vo_id AND ws_id = in_ws_id;

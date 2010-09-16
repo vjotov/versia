@@ -11,8 +11,8 @@
 package com.jotov.versia.gui;
 
 import com.jotov.versia.WorkEnvironment;
-import com.jotov.versia.gui2.command.CommandFactory;
-import com.jotov.versia.gui2.command.ICommand;
+import com.jotov.versia.command.CommandFactory;
+import com.jotov.versia.command.ICommand;
 import com.jotov.versia.worspaceInfo;
 import desktopapplication1.DesktopApplication1;
 import desktopapplication1.DesktopApplication1View;

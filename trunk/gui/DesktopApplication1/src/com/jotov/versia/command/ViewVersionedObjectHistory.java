@@ -9,7 +9,6 @@ package com.jotov.versia.command;
 import com.jotov.versia.WorkEnvironment;
 import com.jotov.versia.json.JSONConnection;
 import java.util.*;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

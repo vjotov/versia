@@ -28,10 +28,10 @@ public class SaveVersionedObject implements ICommand {
 
         jc.prepareJSONRequest("saveVersionedObjectState", params, uid);
         JSONObject jResponce = jc.doRequest(null);
-        JSONObject err = jResponce.getJSONObject("error");
-        we.setVersionedObject_ls(jResponce.getJSONArray("result"));
+        JSONObject err = jResponce.getJSONObject("error");      
         int code = err.getInt("code");
         if (code == 0) {
+            we.setVersionedObject_ls(jResponce.getJSONArray("result"));
             return new Integer(1);
         } else {
             System.err.println("JSON ERROR SaveVersionedObject - code:" + code + "; message:" + err.get("message").toString());

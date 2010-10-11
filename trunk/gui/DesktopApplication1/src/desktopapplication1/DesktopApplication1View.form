@@ -35,13 +35,11 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jpVersionedObjects" alignment="0" max="32767" attributes="1"/>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jpWorkItems" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jpCommands" alignment="0" max="32767" attributes="1"/>
-                          </Group>
+                          <Component id="jpCommands" alignment="0" min="-2" max="-2" attributes="1"/>
+                          <Component id="jpWorkItems" alignment="0" min="-2" pref="562" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -50,7 +48,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jpWorkItems" min="-2" pref="123" max="-2" attributes="0"/>
+                      <Component id="jpWorkItems" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jpCommands" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -71,50 +69,55 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="0" max="-2" attributes="0">
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" max="-2" attributes="0">
                                   <Component id="jspAttachedWorkItems" linkSize="6" min="-2" pref="214" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jbCreateWI" linkSize="5" alignment="0" min="-2" pref="87" max="-2" attributes="1"/>
-                                      <Component id="jbDetachWI" linkSize="5" min="-2" max="-2" attributes="1"/>
-                                      <Component id="jbAttachWI" linkSize="5" min="-2" max="-2" attributes="1"/>
+                                      <Component id="jbCreateWI" linkSize="13" pref="87" max="32767" attributes="1"/>
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jbEditWI" linkSize="13" pref="87" max="32767" attributes="1"/>
+                                          <Component id="jbDetachWI" linkSize="13" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jbAttachWI" linkSize="13" alignment="0" pref="87" max="32767" attributes="1"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Component id="jlAttachedWorkitems" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jlAvailableWorkitems" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jspAvailableWorkItems" linkSize="6" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
+                              <Component id="jlAvailableWorkitems" min="-2" max="-2" attributes="0"/>
+                              <Component id="jspAvailableWorkItems" linkSize="6" min="-2" pref="81" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jlAttachedWorkitems" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="jlAvailableWorkitems" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jspAvailableWorkItems" min="0" pref="0" max="32767" attributes="1"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="jbAttachWI" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jbDetachWI" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jbCreateWI" min="-2" max="-2" attributes="2"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jspAttachedWorkItems" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jbAttachWI" linkSize="14" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jbDetachWI" linkSize="14" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jbCreateWI" linkSize="14" min="-2" pref="23" max="-2" attributes="2"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jbEditWI" linkSize="14" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jspAvailableWorkItems" alignment="0" pref="122" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -182,6 +185,19 @@
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jbCreateWI" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCreateWIActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jbEditWI">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jbEditWI.text"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jbEditWI" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEditWIActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlAvailableWorkitems">
                   <Properties>
@@ -371,8 +387,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jspVODatum" pref="414" max="32767" attributes="0"/>
-                              <Component id="jspVersionedObjects" alignment="1" pref="414" max="32767" attributes="0"/>
+                              <Component id="jspVODatum" pref="385" max="32767" attributes="0"/>
+                              <Component id="jspVersionedObjects" alignment="1" pref="385" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>

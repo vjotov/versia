@@ -9,8 +9,9 @@ import com.jotov.versia.gui.VersiaAboutBox;
 import com.jotov.versia.gui.OpenWorkspace;
 import com.jotov.versia.gui.UserManagement;
 import com.jotov.versia.gui.VOHistoryView;
-import com.jotov.versia.gui2.command.CommandFactory;
-import com.jotov.versia.gui2.command.ICommand;
+import com.jotov.versia.command.CommandFactory;
+import com.jotov.versia.command.ICommand;
+import com.jotov.versia.gui.NewEditWorkItem;
 import com.jotov.versia.voInfo;
 import com.jotov.versia.workitemInfo;
 import java.util.logging.Level;
@@ -112,6 +113,7 @@ public class DesktopApplication1View extends FrameView {
         jbAttachWI = new javax.swing.JButton();
         jbDetachWI = new javax.swing.JButton();
         jbCreateWI = new javax.swing.JButton();
+        jbEditWI = new javax.swing.JButton();
         jlAvailableWorkitems = new javax.swing.JLabel();
         jspAvailableWorkItems = new javax.swing.JScrollPane();
         jtAvailableWorkItems = new javax.swing.JTree();
@@ -192,6 +194,20 @@ public class DesktopApplication1View extends FrameView {
         jbCreateWI.setText(resourceMap.getString("jbCreateWI.text")); // NOI18N
         jbCreateWI.setEnabled(false);
         jbCreateWI.setName("jbCreateWI"); // NOI18N
+        jbCreateWI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCreateWIActionPerformed(evt);
+            }
+        });
+
+        jbEditWI.setText(resourceMap.getString("jbEditWI.text")); // NOI18N
+        jbEditWI.setEnabled(false);
+        jbEditWI.setName("jbEditWI"); // NOI18N
+        jbEditWI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditWIActionPerformed(evt);
+            }
+        });
 
         jlAvailableWorkitems.setText(resourceMap.getString("jlAvailableWorkitems.text")); // NOI18N
         jlAvailableWorkitems.setName("jlAvailableWorkitems"); // NOI18N
@@ -214,45 +230,51 @@ public class DesktopApplication1View extends FrameView {
             jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpWorkItemsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jpWorkItemsLayout.createSequentialGroup()
                         .add(jspAttachedWorkItems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 214, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jbCreateWI, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jbDetachWI)
-                            .add(jbAttachWI)))
+                            .add(jbCreateWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                            .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                .add(jbEditWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                                .add(jbDetachWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(jbAttachWI, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))))
                     .add(jlAttachedWorkitems))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jlAvailableWorkitems)
                     .add(jspAvailableWorkItems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 81, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .add(25, 25, 25))
         );
 
-        jpWorkItemsLayout.linkSize(new java.awt.Component[] {jbAttachWI, jbCreateWI, jbDetachWI}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
-
         jpWorkItemsLayout.linkSize(new java.awt.Component[] {jspAttachedWorkItems, jspAvailableWorkItems}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
+        jpWorkItemsLayout.linkSize(new java.awt.Component[] {jbAttachWI, jbCreateWI, jbDetachWI, jbEditWI}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         jpWorkItemsLayout.setVerticalGroup(
             jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpWorkItemsLayout.createSequentialGroup()
-                .add(11, 11, 11)
+                .addContainerGap()
                 .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jlAttachedWorkitems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jlAvailableWorkitems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(6, 6, 6)
-                .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jspAvailableWorkItems, 0, 0, Short.MAX_VALUE)
+                .add(jpWorkItemsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jspAttachedWorkItems, 0, 0, Short.MAX_VALUE)
                     .add(jpWorkItemsLayout.createSequentialGroup()
                         .add(jbAttachWI)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jbDetachWI)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jbCreateWI))
-                    .add(jspAttachedWorkItems, 0, 0, Short.MAX_VALUE))
+                        .add(jbCreateWI, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jbEditWI))
+                    .add(jspAvailableWorkItems, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        jpWorkItemsLayout.linkSize(new java.awt.Component[] {jbAttachWI, jbCreateWI, jbDetachWI, jbEditWI}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
         jpCommands.setName("jpCommands"); // NOI18N
 
@@ -428,8 +450,8 @@ public class DesktopApplication1View extends FrameView {
                     .add(jtfVOName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpVersionedObjectsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-                    .add(jspVersionedObjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
+                    .add(jspVODatum, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                    .add(jspVersionedObjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -438,17 +460,16 @@ public class DesktopApplication1View extends FrameView {
         jpWorkspacesLayout.setHorizontalGroup(
             jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpWorkspacesLayout.createSequentialGroup()
-                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jpVersionedObjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(jpWorkItems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jpCommands, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .add(jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jpVersionedObjects, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jpCommands, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jpWorkItems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 562, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jpWorkspacesLayout.setVerticalGroup(
             jpWorkspacesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jpWorkspacesLayout.createSequentialGroup()
-                .add(jpWorkItems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jpWorkItems, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jpCommands, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -539,6 +560,7 @@ public class DesktopApplication1View extends FrameView {
                 Integer res = (Integer) cmd.doRequest();
                 if (Object.class.isInstance(res)) {
                     loadWorkItems();
+                    disableWIButtons();
                 }
             } catch (JSONException ex) {
                 Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
@@ -560,6 +582,7 @@ public class DesktopApplication1View extends FrameView {
                 Integer res = (Integer) cmd.doRequest();
                 if (Object.class.isInstance(res)) {
                     loadWorkItems();
+                    disableWIButtons();
                 }
             } catch (JSONException ex) {
                 Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
@@ -717,6 +740,32 @@ public class DesktopApplication1View extends FrameView {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbCreateVOActionPerformed
+
+    private void jbCreateWIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateWIActionPerformed
+        try {
+            // TODO add your handling code here:
+            //dialog for WI name
+            JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
+            //String wiName = "";
+            JSONObject vo = workEnvironment.getCurrentVersionedObject();
+            NewEditWorkItem dlg = new NewEditWorkItem(mainFrame, vo.getString("vo_name"));
+            dlg.setLocationRelativeTo(mainFrame);
+            dlg.setTitle("New Work Item");
+            DesktopApplication1.getApplication().show(dlg);
+            if (dlg.getActionCommand().equals("Save")) {
+                String newWIName = dlg.getWIName();
+                createWI(newWIName);
+                loadWorkItems();
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbCreateWIActionPerformed
+
+    private void jbEditWIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditWIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbEditWIActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JButton jbAttachWI;
@@ -724,6 +773,7 @@ public class DesktopApplication1View extends FrameView {
     private javax.swing.JButton jbCreateVO;
     private javax.swing.JButton jbCreateWI;
     private javax.swing.JButton jbDetachWI;
+    private javax.swing.JButton jbEditWI;
     private javax.swing.JButton jbPublishVO;
     private javax.swing.JButton jbPutBackVO;
     private javax.swing.JButton jbSaveVO;
@@ -890,5 +940,32 @@ public class DesktopApplication1View extends FrameView {
         } catch (JSONException ex) {
             Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void createWI(String newWIName) {
+        HashMap params = new HashMap();
+        params.put("wi_name", newWIName);
+
+        try {
+            CommandFactory cf = new CommandFactory();
+            ICommand cmd = cf.createCommand(CommandFactory.CmdCode.CREATE_WORK_ITEM);
+
+            cmd.setParameters(params);
+            Integer int_val = (Integer) cmd.doRequest();
+            if (Object.class.isInstance(int_val)) {
+                loadVersionedObjects();
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(DesktopApplication1View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void disableWIButtons() {
+        jbAttachWI.setEnabled(false);
+        jbDetachWI.setEnabled(false);
+        jbCreateWI.setEnabled(false);
+        jbEditWI.setEnabled(false);
+        jtAttachedWorkItems.setSelectionPath(null);
+        jtAvailableWorkItems.setSelectionPath(null);
     }
 }

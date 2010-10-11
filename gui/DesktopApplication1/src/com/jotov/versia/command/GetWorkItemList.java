@@ -21,6 +21,7 @@ public class GetWorkItemList implements ICommand {
         JSONConnection jc = new JSONConnection();
         Map params = new HashMap();
         params.put("ws_id", we.getCurrentWs());
+        params.put("release_id", we.getCurrentRelease());
         jc.prepareJSONRequest("getWorkItemList", params, uid);
         JSONObject jResponce = jc.doRequest(null);
         JSONObject err = jResponce.getJSONObject("error");

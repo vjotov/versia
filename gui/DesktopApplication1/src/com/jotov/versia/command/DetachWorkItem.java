@@ -31,7 +31,7 @@ HashMap params = new HashMap();
             jc.prepareJSONRequest("detachWorkItem", params, uid);
             JSONObject jResponce = jc.doRequest(null);
             JSONObject err = jResponce.getJSONObject("error");
-            we.setVersionedObject_ls(jResponce.getJSONArray("result"));
+            //we.setVersionedObject_ls(jResponce.getJSONArray("result"));
             int code = err.getInt("code");
             if (code != 0) {
                 System.err.println("JSON ERROR loadReleases - code:" + code + "; message:" + err.get("message").toString());

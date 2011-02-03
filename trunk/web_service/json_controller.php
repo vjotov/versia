@@ -25,13 +25,13 @@ function registerFncs() {
 	$tmp_arr = j_user::registerFncs();
 	$functions = array_merge($functions, $tmp_arr);
 	return $functions;
-}
+} 
 $json_functions = registerFncs();
 $URL_decoded = urldecode($_GET['json']);
 $decoded = json_decode($URL_decoded, true); 
 
 // JSON _RPC
-$method = $decoded['method'];
+$method = $decoded['method']; 
 $params = $decoded['params'];
 $session_id = $decoded['id'];
 

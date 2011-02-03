@@ -2,7 +2,9 @@
 
 function hasRights($session_id, $right) {
 	global $mdb;
-	$query="SELECT validate_session_n_permition ('".$session_id."', '".$right."') AS permition";
+	$query="SELECT count(*) AS permition FROM t_permition INNER JOIN t_action USING (action_id)
+		WHERE uid = '".$session_id."'
+		AND action_name =  '".$right."' ";
 		$resultset1 = $mdb->query($query); 
 		if(PEAR::isError($resultset1)) {
 			$err_['err_code'] = '1';

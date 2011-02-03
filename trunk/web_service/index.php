@@ -31,7 +31,9 @@ if ($current_conf['view'] != NULL) {
 	$view = new $current_conf['view'];
 	$view->show($c_parameters);
 }
-?><p><a href='soap_controller.php'>SOAP</a></p><?php
+?>
+<p><a href='soap_controller.php'>SOAP</a></p>
+<?php
 require_once (VPATH_BASE .DS.'copyright.php');
 ?>
 </pre>

@@ -1,7 +1,7 @@
 <?php
 
 class cd_product { 
-	static public function load_by_id($id) {
+	static public function load_by_id($id) { // TODO REWRITE
     global $mdb; 
 
 		$query="SELECT pr_id AS product_id, name AS product_name FROM t_product WHERE pr_id='".$id."'";
@@ -26,46 +26,46 @@ class cd_product {
 		);
 	}
 	static public function get_list() {
-		global $mdb;
-    	
-		$query="SELECT pr_id AS product_id, name AS product_name FROM t_product ORDER BY name";
-		$resultset = $mdb->query($query); 
-		if(PEAR::isError($resultset)) {
-			$err_['code'] = 1;
-			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
-			$err_['message'] .= '\n cd_product.get_list() - 1';
-			return array('error' => $err_);
+		try{
+			$products = cd_executer::selectQuery("cd_product:get_list", 
+				"SELECT product_id, product_name FROM t_product ORDER BY product_name");
+			
+			return array(
+				'error' => array('code' => 0, 'message' => 'Successful'),
+				'product_list' => $products);
+		} catch (Exception $e) {
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'message'=> 'Error');
 		}
-		
-		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
-		$products = array();
-		foreach($set as $value) {
-			$products[] = array ('product_id' => $value["product_id"], 'product_name' => $value['product_name']);
-		}
-		
-		return array(
-			'error' => array('code' => 0, 'message' => 'Successful'),
-			'product_list' => $products);
 	}	
 	static public function create_product($product_name) {
-		global $mdb;
-		    	
-		$err_ = array();
-		// CREATION OF NEW PRODUCT & ZERO RELEASE
-		$query = "INSERT INTO t_product (name) VALUES ('".$product_name."')";
-		$result = $mdb->query($query);
-		if(PEAR::isError($result)) {
-			$err_['code'] = 1;
-			$err_['message'] = 'Failed to issue query, error message : ' . $result->getMessage();
-			$err_['message'] .= ' -- cd_product::create_product() - 1'.$query;
-			return $err_;
+		// CREATION OF NEW PRODUCT, ZERO RELEASE & MASTER WORKSPACE
+		try {
+			$r1 = cd_executer::selectQuery("cd_product:create_product", 
+				"INSERT INTO t_product (product_name) VALUES ('".$product_name."')");
+			$product_id = get_last_insert_id();
+			$r2 = cd_executer::selectQuery("cd_product:create_product",
+				"INSERT INTO t_release (pr_id, name) VALUES (".$product_id.", 'Zero Release')");
+			$release_id = get_last_insert_id();
+			$r3 = cd_executer::selectQuery("cd_product:create_product",
+				"INSERT INTO t_workspace (release_id, name) VALUES (".$release_id.", 'Master Workspace')");
+			$master_workspace_id = get_last_insert_id();
+			$r4 = cd_executer::selectQuery("cd_product:create_product",
+				"UPDATE t_release SET master_ws_id = '.$master_workspace_id.' WHERE release_id = '.$release_id.' ");
+			
+			$res = array();
+			$res['code'] = 0;
+			$res['message'] = 'Sucessful';
+			return $res;
+		} catch (Exception $e) {
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'message'=> 'Error');
 		}
-		$err_['code'] = 0;
-		$err_['message'] = 'Sucessful';
-		return $err_;
 		
 	}
-	static public function update_product($id, $product_name) {
+	static public function update_product($id, $product_name) {// TODO REWRITE
 		global $mdb;
 		    	
 		$err_ = array();

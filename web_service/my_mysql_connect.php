@@ -6,7 +6,7 @@ function my_mysql_connect() {
 	global $mdb;
 
 	// DRIVER://USER:PASS@SERVER/DATABASE
-	$url = "mysql://root:@localhost/versia_er2";
+	$url = "mysql://root:@localhost/versia_er3";
 
 	$mdb = MDB2::factory($url);
 	if(PEAR::isError($mdb)) {

@@ -21,7 +21,7 @@ class cd_workspace {
 			$result['error'] = array( 'code' => '0', 'message' => 'Successful');
 			$result['result'] = $ws_arr[0];
 			if($result['result']['ancestor_workspace_id'] == NULL)
-				$result['result']['ancestor_workspace_id'] = -1;
+				$result['result']['ancestor_workspace_id'] = 0;
 			return $result;
 		} catch (Exception $e) {
 			return array(
@@ -29,6 +29,10 @@ class cd_workspace {
 				'result'=> array());
 		}
 	}	
+	static public function get_workspace_obj($ws_id) {
+		$ws_data = self::get_workspace($ws_id);
+		return $ws_data['result'];
+	}
 	static public function create_workspace($ancestor_ws_id, $ws_name) {
 		try {
     		cd_executer::beginTransaction();
@@ -99,6 +103,27 @@ class cd_workspace {
 				'error' => array('code' => 1, 'message' => $e->getMessage()),
 				'result'=> array());
 		}
+	}
+	static public function get_offspring_workspaces_id($ws_id){
+		$offspring_ws_result = get_offspring_workspaces($ws_id);
+		if ($offspring_ws_result['error']['code'] == 1)
+			throw new Exception($offspring_ws_result['error']['message'], 1);
+		
+		$result = array();
+		foreach($offspring_ws_result['result'] as $ws) 
+			$result[] = $ws['workspace_id'];
+		return $result;
+	}
+	static public function get_workspace_ancestors_path_id($ws_id) {
+		if($ws_id == 0) 
+			return array();
+					
+		$ancestor_ws_result = cd_executer::execQuery("cd_workspace:get_workspace_precedents_path",
+			"SELECT ancestor_ws_id FROM t_workspace WHERE ws_id = '".$ws_id."' ");
+		$ancestor_ws_id = $ancestor_ws_result['ancestor_ws_id'];
+		$result = array();
+		array_push($result, self::get_workspace_ancestor_path($ancestor_ws_id));
+		return $result;
 	}
 }
 

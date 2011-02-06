@@ -29,6 +29,13 @@ class cd_vo {
 	}
 	static public function get_visible_vo_list($ws_id) { //TODO - SQL
 		try{
+			$vo_vp_map = self::get_visible_vo($ws_id);
+			$ws_obj = cd_workspace::get_workspace_obj($ws_id); 
+			//$ws_ancestor = cd_workspace::get_workspace_ancestors_path_id($ws_id);
+			//$ws_offspring = cd_workspace::get_offspring_workspaces_id($ws_id);
+			//$ws_other = 
+			$local_vo = cd_executer::execQuery("cd_vo:get_visible_vo_list",
+				"SELECT");
 			$vo_list = cd_executer::execQuery("cd_vo:get_visible_vo_list", 
 				"SELECT vv.vo_id, vv.vp_id, vv.vp_name as vo_name, vv.locked, vp.datum AS vo_datum, vv.v_vector AS v_vector, vp.constructs AS constructs, vp.type_id AS type "
 				." FROM v_vo_visibility vv INNER JOIN t_versioned_primitive vp ON vp.vp_id = vv.vp_id AND vp.vo_id = vv.vo_id "
@@ -42,6 +49,17 @@ class cd_vo {
 				'error' => array('code' => 1, 'message' => $e->getMessage()),
 				'result'=> array());
 		}	
+	}
+	static private function get_visible_vo($ws_id) {
+		if($ws_id == 0)
+			return array();
+		$ws_obj = cd_workspace::get_workspace_obj($ws_id); 
+		$result = self::get_visible_vo($ws_obj['ancestor_workspace_id']);
+		$local_vo = cd_executer::execQuery("cd_vo:get_visible_vo_list",
+				"SELECT vo_id, vp_id FROM t_ws_obj_ver_selector WHERE ws_id='".$ws_id."' ");
+		foreach ($local_vo as $vo => $vp)
+			$result[$vo] = $vp;
+		return $result;
 	}
 	static public function save_versioned_object_state($ws_id, $vo_id, $new_datum, $vo_name, $uid, $type = '1', $constructs='NULL') { //TODO
 		try{
@@ -184,6 +202,7 @@ class cd_vo {
 		return array('error' => array('code' => 0, 'message' => 'Successful'), 
 		  'result' => array('changes' => $changes, 'head' => $head));
 	}
+	
 	// PRIVATE FUNCTIONs
 	
 }

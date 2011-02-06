@@ -22,7 +22,8 @@ class cd_workitem {
 	static public function get_attached_workitems($ws_id) {//TODO
 		try{
 			$workitem_vo_ids = cd_executer::execQuery("cd_workitem:get_attached_workitems",
-				"SELECT wi.vo_id FROM t_ws_workitem wswi INNER JOIN t_workitem wi USING(wi_id) WHERE wswi.ws_id = ".$ws_id);
+				""
+				." SELECT wi.vo_id FROM t_ws_workitem wswi INNER JOIN t_workitem wi USING(wi_id) WHERE wswi.ws_id = ".$ws_id);
 			// davzema VP-ID-tata na VO-tata
 		}  catch (Exception $e) {
 			return array(

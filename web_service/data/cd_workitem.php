@@ -1,7 +1,40 @@
 <?php
 
 class cd_workitem {
-	static public function create_workitem($release_id, $vo_id, $wi_name) {
+	static public function create_default_workitem($ws_id, $release_id){
+		// Create VO
+		cd_executer::execQuery("cd_workitem:create_default_workitem",
+			"INSERT INTO t_versioned_object VALUES (NULL)");
+		$vo_id = get_last_insert_id(); 
+		cd_executer::execQuery("cd_workitem:create_default_workitem",
+			"INSERT INTO t_versioned_primitive VALUES (0,".$vo_id.", 'Default workitem', NULL)");
+		// Attach VO to WS 
+		cd_executer::execQuery("cd_workitem:create_default_workitem",
+			"INSERT INTO t_ws_obj_ver_selector VALUES (0, ".$vo_id.", ".$ws_id.")");
+		//Create WI
+		cd_executer::execQuery("cd_workitem:create_default_workitem",
+			"INSERT INTO t_workitem VALUES (NULL, ".$vo_id.", 'Default workitem', ".$release_id.")");
+		$wi_id = get_last_insert_id();
+		//Attach workitem
+		cd_executer::execQuery("cd_workspace:create_default_workitem",
+			"INSERT INTO t_ws_workitem VALUES (".$ws_id.", ".$wi_id.")");
+	}
+	static public function get_attached_workitems($ws_id) {//TODO
+		try{
+			$workitem_vo_ids = cd_executer::execQuery("cd_workitem:get_attached_workitems",
+				"SELECT wi.vo_id FROM t_ws_workitem wswi INNER JOIN t_workitem wi USING(wi_id) WHERE wswi.ws_id = ".$ws_id);
+			// davzema VP-ID-tata na VO-tata
+		}  catch (Exception $e) {
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'result'=> array());
+		}
+	}
+	static public function create_traceability($vo_id, $vp_id, $ws_id) { //TODO
+	// ako nqma WI vyv WS - exception i rollback na trx
+		
+	}
+	static public function create_workitem($release_id, $vo_id, $wi_name) {//TODO
 		global $mdb; 
 		//some checks
 		$query_0 = "SELECT count(*) AS cc FROM t_workitem WHERE initiator_vo_id='".$vo_id."' AND release_id='".$release_id."' "; 
@@ -30,7 +63,7 @@ class cd_workitem {
 		}
 		return array('code' => 0, 'message' => 'Sucessful');
 	}
-	static public function update_workitem($wi_id, $wi_name, $release_id) {
+	static public function update_workitem($wi_id, $wi_name, $release_id) {//TODO
 		global $mdb;
 		$query_0 = "SELECT count(*) AS cc FROM t_workitem WHERE initiator_vo_id='".$vo_id."' AND release_id='".$release_id."' "; 
 		$resultset_0 = $mdb->query($query_0);
@@ -58,31 +91,31 @@ class cd_workitem {
 		return array('code' => 0, 'message' => 'Sucessful');
 	}
 	static public function attach_workitem($wi_id, $ws_id) {
-		global $mdb;
-			
-		$query = "INSERT INTO t_ws_workitem (wi_id, ws_id) "
-						." VALUES ('".$wi_id."', '".$ws_id."' )";
-		$resultset = $mdb->exec($query); 
-		if(PEAR::isError($resultset)) {
-			$err_['code'] = 1;
-			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
-			$err_['message'] .= '\n cd_workitem::attach_workitem - 1';
-			return $err_;
+		try{ 
+			cd_executer::execQuery("cd_workitem:attach_workitem",
+				"INSERT INTO t_ws_workitem (wi_id, ws_id) "
+							." VALUES ('".$wi_id."', '".$ws_id."' )");
+			return array(
+				'error' => array('code' => 0, 'message' => 'Sucessful'),
+				'result'=> array());
+		}  catch (Exception $e) {
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'result'=> array());
 		}
-		return array('code' => 0, 'message' => 'Sucessful');
 	}
 	static public function detach_workitem($wi_id, $ws_id) {
-		global $mdb;
-		
-		$query = "DELETE FROM t_ws_workitem WHERE wi_id = '".$wi_id."' AND ws_id = '".$ws_id."' ";
-		$resultset = $mdb->exec($query); 
-		if(PEAR::isError($resultset)) {
-			$err_['code'] = 1;
-			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
-			$err_['message'] .= '\n cd_workitem::detach_workitem - 1';
-			return $err_;
+		try{ 
+			cd_executer::execQuery("cd_workitem:attach_workitem",
+				"DELETE FROM t_ws_workitem WHERE wi_id = '".$wi_id."' AND ws_id = '".$ws_id."' ");
+			return array(
+				'error' => array('code' => 0, 'message' => 'Sucessful'),
+				'result'=> array());
+		}  catch (Exception $e) {
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'result'=> array());
 		}
-		return array('code' => 0, 'message' => 'Sucessful');
 	}
 	/*
 	static public function get_workitem_list($release_id) {
@@ -101,7 +134,7 @@ class cd_workitem {
 			'workitem_list' => $wi_list);
 	}
 	//*/
-	static public function get_attached_workitem_list($ws_id) {
+	static public function get_attached_workitem_list($ws_id) {//TODO
 		global $mdb;
 		$query = "SELECT wi_id, vo_id, wi_name AS name "
 				." FROM v_workitem_distribution WHERE ws_id='".$ws_id."' AND is_active='1' ORDER BY name DESC";
@@ -117,7 +150,7 @@ class cd_workitem {
 		return array('error' => array('code' => 0, 'message' => 'Successful'),
 			'workitem_list' => $wi_list );
 	}
-	static public function get_not_attached_workitem_list($ws_id, $release_id) {
+	static public function get_not_attached_workitem_list($ws_id, $release_id) {//TODO
 		global $mdb;
 			
 		$query = "SELECT wi_id, vo_id, "

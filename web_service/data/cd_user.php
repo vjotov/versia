@@ -2,95 +2,67 @@
 
 class cd_user { 
 	static public function get_user_list() {
-		global $mdb;
-    	
-		$query="SELECT uid, username FROM t_user";
-		$resultset = $mdb->query($query); 
-		if(PEAR::isError($resultset)) {
-			$err_['code'] = 1;
-			$err_['message'] = 'Failed to issue query, error message : ' . $resultset->getMessage();
-			$err_['message'] .= '\n cd_user.get_user_list() - 1';
-			return array('error' => $err_);
-		}
-		
-		$set = $resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
-		$users = array();
-		foreach($set as $value) {
-			$permitions = self::get_permitions($value["uid"]);
-			if($permitions == false) {
-				$err_['code'] = 1;
-				$err_['message'] = 'Failed to issue query';
-				$err_['message'] .= '\n cd_user.get_permitions() - 1';
-				return array('error' => $err_);
+		try{	    	
+			$user_set = cd_executer::execQuery("cd_user:get_user_list", 
+				"SELECT uid, username FROM t_user");
+
+			$users = array();
+			foreach($set as $value) {
+				$permition = cd_executer::execQuery("cd_user:get_user_list", 
+				"SELECT a.permition_id, action_id, action_name, permited FROM t_permition p INNER JOIN t_action a USING (action_id) "
+				." WHERE uid = '".$value["uid"]."' ");
+						
+				$users[] = array ('uid' => $value["uid"], 'username' => $value['username'], 'permitions' => $permition_set);
 			}
 			
-			
-			$users[] = array ('uid' => $value["uid"], 'username' => $value['username'], 'permitions' => $permitions);
+			return array(
+				'error' => array('code' => 0, 'message' => 'Successful'),
+				'result' => $users);
+		}  catch(Exception $e) {
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'result'=> array());
 		}
-		
-		return array(
-			'error' => array('code' => 0, 'message' => 'Successful'),
-			'user_list' => $users);
 	}	
 	
 	static public function create_user($name, $password) {
-		global $mdb;
-		    	
-		$err_ = array();
-		// CREATION OF NEW USER & ZERO RIGHTS
-		$query = "INSERT INTO t_user (name) VALUES ('".$name."')";
-		$result = $mdb->query($query);
-		if(PEAR::isError($result)) {
-			$err_['code'] = 1;
-			$err_['message'] = 'Failed to issue query, error message : ' . $result->getMessage();
-			$err_['message'] .= ' -- cd_user::create_user() - 1'.$query;
-			return $err_;
+		try{	    	
+			cd_executer::beginTransaction();
+			cd_executer::execQuery("cd_user:create_user", 
+				"INSERT INTO t_user (name) VALUES ('".$name."')");
+			$new_user_id = get_last_insert_id();
+			cd_executer::execQuery("cd_user:create_user", 
+				"INSERT INTO t_permition (uid, permition_id, permited) SELECT ".$new_user_id.", action_id, 0 FROM t_action ");
+			
+			cd_executer::commitTransaction();
+			return array(
+				'error' => array('code' => 0, 'message' => 'Successful'),
+				'user_list' => array());
+		}  catch(Exception $e) {
+			cd_executer::rollbackTransaction();
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'result'=> array());
 		}
-		$err_['code'] = 0;
-		$err_['message'] = 'Sucessful';
-		return $err_;
 		
 	} 
 	static public function update_permition($permition_id, $permition_value) {
-	// TODO: da pomislq kak da predam vsichki permitions
-	//update in j_user.php i GetPermition.java
-		global $mdb;
-		if($permition_value != 1) $permition_value = 0; // only 1 and 0 are correct values
-		    	
-		$err_ = array();
-		$result = $mdb->query("UPDATE t_permition SET permited='".$permition_value."' WHERE permition_id='".$permition_id."' ");
-		if(PEAR::isError($result)) {
-			$err_['code'] = 1;
-			$err_['message'] = var_dump($query).' Failed to issue query, error message : ' . $result->getMessage();
-			$err_['message'] .= 'cd_user.update_permition() - 1';
-			return $err_;
+		try{
+			if($permition_value != 1) $permition_value = 0; // only 1 and 0 are correct values
+			    	
+			cd_executer::execQuery("cd_user:create_user", 
+				"UPDATE t_permition SET permited='".$permition_value."' WHERE permition_id='".$permition_id."' ");
+			
+			return array(
+				'error' => array('code' => 0, 'message' => 'Successful'),
+				'user_list' => array());
+		}  catch(Exception $e) {
+			return array(
+				'error' => array('code' => 1, 'message' => $e->getMessage()),
+				'result'=> array());
 		}
-		$err_['code'] = 0;
-		$err_['message'] = 'Successful';
-		return $err_;
 	}
 	
-	///// PRIVATE FUNCTIONS
-	static private function get_permitions($uid) {
-		global $mdb;
-		
-		$query="SELECT * FROM t_permition INNER JOIN t_action USING (action_id) WHERE uid = '".$uid."' ";
-		$sub_resultset = $mdb->query($query); 
-		if(PEAR::isError($sub_resultset)) {
-      
-			return false;
-		}
-		$permitions = array();
-		$set = $sub_resultset->fetchAll(MDB2_FETCHMODE_ASSOC);
-		foreach($set as $value) {
-			$permition[] = array('permition_id' => $value['permition_id'], 
-								'action_id' => $value['action_id'], 
-								'action_name' => $value['action_name'], 
-								'permited' => $value['permited']);
-		}
-		return $permition;
-	}
-
 }
 
 ?>

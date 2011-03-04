@@ -1,0 +1,21 @@
+REM INSERTING into ACTIONS
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (1,'create_action');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (2,'update_action');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (3,'delete_action');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (4,'create_user');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (5,'grant_user_right');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (6,'create_product');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (7,'update_product');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (8,'create_release');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (9,'update_release');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (10,'create_workspace');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (11,'update_workspace');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (12,'create_vo');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (13,'update_vo');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (14,'create_workitem');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (15,'update_workitem');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (16,'attach_detach_workitem');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (17,'publish_versioned_object');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (18,'putback_versioned_object');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (19,'view_vo_distribution');
+Insert into ACTIONS (ACTION_ID,ACTION_NAME) values (20,'exclusive_administrator');

@@ -7,19 +7,30 @@ import javax.persistence.Entity;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.JoinColumns;
 //import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+//import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+//import javax.persistence.SequenceGenerator;
+//import javax.persistence.Table;
 
 @Entity
-@Table(name="VERSION_GRAPH")
+//@Table(name="VERSION_GRAPH")
 public class VersionArc {
 	private int arcId;
 	private User user;
-	private ObjectVersion source;
+	private ObjectVersion objectVersion;
 	private ObjectVersion target;
-	private List<ObjectVersion> causes = new ArrayList<ObjectVersion>(); //TODO: relation of initiators
+	private List<Cause> causes = new ArrayList<Cause>(); //TODO: relation of initiators
 	
 
+	public VersionArc() {
+		super();
+	}
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getArcId() {
 		return arcId;
 	}
@@ -32,11 +43,11 @@ public class VersionArc {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public ObjectVersion getSource() {
-		return source;
+	public ObjectVersion getObjectVersion() {
+		return objectVersion;
 	}
-	public void setSource(ObjectVersion source) {
-		this.source = source;
+	public void setObjectVersion(ObjectVersion source) {
+		this.objectVersion = source;
 	}
 	public ObjectVersion getTarget() {
 		return target;
@@ -44,17 +55,11 @@ public class VersionArc {
 	public void setTarget(ObjectVersion target) {
 		this.target = target;
 	}
-	@ManyToMany
-//	@JoinTable(name="CAUSE", 
-//			joinColumns=@JoinColumn(name="VERSION_ARC_ID", referencedColumnName="ARC_ID"),
-//			inverseJoinColumns=@JoinColumns(value={
-//				@JoinColumn(name="CAUSE_VO_ID", referencedColumnName="VO_ID"),
-//				@JoinColumn(name="CAUSE_VP_ID", referencedColumnName="VP_ID")})
-//		)
-	public List<ObjectVersion> getCauses() {
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="arc")
+	public List<Cause> getCauses() {
 		return causes;
 	}
-	public void setCause(List<ObjectVersion> causes) {
+	public void setCause(List<Cause> causes) {
 		this.causes = causes;
 	}	
 }

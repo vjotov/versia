@@ -28,7 +28,7 @@
         <class>jotov.versia.pojo.Release</class>
         <class>jotov.versia.pojo.User</class>
         <class>jotov.versia.pojo.VersionArc</class>
-        <class>jotov.versia.pojo.VersionSelector</class>
+
         <class>jotov.versia.pojo.VObject</class>
         <class>jotov.versia.pojo.VOComposer</class>
         <class>jotov.versia.pojo.Workitem</class>

@@ -20,8 +20,8 @@ public class Release {
 	private int releaseId;
 	private String releaseName;
 	private Product product;
-	private Workspace masterWorkspace;
-	private List<Workspace> workspaces = new ArrayList<Workspace>();
+	private WSpace masterWorkspace;
+	private List<WSpace> workspaces = new ArrayList<WSpace>();
 
 	public Release() {
 		super();
@@ -30,7 +30,7 @@ public class Release {
 	public Release(String releaseName) {
 		super();
 		this.releaseName = releaseName;
-		Workspace masterWorkspace = new Workspace("Master workspace");
+		WSpace masterWorkspace = new WSpace("Master workspace");
 		masterWorkspace.setRelease(this);
 		this.masterWorkspace = masterWorkspace;
 
@@ -69,21 +69,21 @@ public class Release {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	public Workspace getMasterWorkspace() {
+	public WSpace getMasterWorkspace() {
 		return masterWorkspace;
 	}
 
-	public void setMasterWorkspace(Workspace masterWorkspace) {
+	public void setMasterWorkspace(WSpace masterWorkspace) {
 		this.masterWorkspace = masterWorkspace;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "release", cascade = {
 			CascadeType.PERSIST, CascadeType.REFRESH })
-	public List<Workspace> getWorkspaces() {
+	public List<WSpace> getWorkspaces() {
 		return workspaces;
 	}
 
-	public void setWorkspaces(List<Workspace> workspaces) {
+	public void setWorkspaces(List<WSpace> workspaces) {
 		this.workspaces = workspaces;
 	}
 

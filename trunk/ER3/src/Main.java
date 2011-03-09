@@ -8,8 +8,8 @@ import javax.persistence.Query;
 //import jotov.versia.pojo.Actions;
 //import jotov.versia.pojo.Permitions;
 import jotov.versia.pojo.Product;
-import jotov.versia.pojo.User;
-import jotov.versia.pojo.Workspace;
+import jotov.versia.pojo.UserProfile;
+import jotov.versia.pojo.WSpace;
 //import jotov.versia.pojo.User;
 import jotov.versia.pojo.Release;
 
@@ -26,7 +26,7 @@ public class Main {
 			//em.getTransaction().begin();
 			//em.find(Workspace.class, arg1);
 			Query query = em.createQuery("select a from Workspace a where a.workspaceId = 3");
-			for (Workspace a : (List<Workspace>) query.getResultList()) {
+			for (WSpace a : (List<WSpace>) query.getResultList()) {
 				System.out.println(a);
 				printWorkspace(a);
 			}
@@ -50,14 +50,14 @@ public class Main {
 //
 //	}
 
-	private static void printWorkspace(Workspace workspace) {
+	private static void printWorkspace(WSpace workspace) {
 		System.out.println(workspace);
-		User u = workspace.getUser();
+		UserProfile u = workspace.getUser();
 		if(u!=null)
 			System.out.println(u);
 		else
 			System.out.println("\t Not opened workspace");
-		for (Workspace w:(List<Workspace>) workspace.getOffspringWorkspaces()){
+		for (WSpace w:(List<WSpace>) workspace.getOffspringWorkspaces()){
 			printWorkspace(w);
 		}
 		

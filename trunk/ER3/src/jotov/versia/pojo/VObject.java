@@ -8,22 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-//import javax.persistence.Table;
 
 @Entity
-//@Table(name="VERSIONED_OBJECT")
 public class VObject {
 	private int VObjectId;
 	private List<ObjectVersion> versions = new ArrayList<ObjectVersion>();
-	
-	public VObject(Workspace workspace, String name, String datum) {
+
+	public VObject() {
 		super();
-		ObjectVersion firstVersion = new ObjectVersion(this, 1, name, datum);
+	}
+
+	public VObject(WSpace workspace, String name, String datum) {
+		super();
+		ObjectVersion firstVersion = new ObjectVersion(this, 1, name, datum, workspace);
 		this.versions.add(firstVersion);
 	}
 
 	@Id
-	//@Column(name="VO_ID")
 	public int getVObjectId() {
 		return VObjectId;
 	}
@@ -31,7 +32,8 @@ public class VObject {
 	public void setVObjectId(int vObjectId) {
 		VObjectId = vObjectId;
 	}
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="vobject")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "vobject")
 	public List<ObjectVersion> getVersions() {
 		return versions;
 	}
@@ -39,5 +41,5 @@ public class VObject {
 	public void setVersions(List<ObjectVersion> versions) {
 		this.versions = versions;
 	}
-	
+
 }

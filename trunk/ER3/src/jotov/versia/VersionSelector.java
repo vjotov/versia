@@ -1,4 +1,4 @@
-package jotov.versia.pojo;
+package jotov.versia;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -6,16 +6,19 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import jotov.versia.pojo.ObjectVersion;
+import jotov.versia.pojo.WSpace;
+
 @Entity
 public class VersionSelector {
-	private Workspace workspace;
+	private WSpace workspace;
 	private ObjectVersion objectVersion;
 
 	public VersionSelector() {
 		super();
 	}
 
-	public VersionSelector(Workspace workspace, ObjectVersion objectVersion) {
+	public VersionSelector(WSpace workspace, ObjectVersion objectVersion) {
 		super();
 		this.objectVersion = objectVersion;
 		this.workspace = workspace;
@@ -24,11 +27,11 @@ public class VersionSelector {
 	@Id
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	public Workspace getWorkspace() {
+	public WSpace getWorkspace() {
 		return workspace;
 	}
 
-	public void setWorkspace(Workspace workspace) {
+	public void setWorkspace(WSpace workspace) {
 		this.workspace = workspace;
 	}
 

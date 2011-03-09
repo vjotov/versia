@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Permitions {
 	private Actions action;
-	private User user;
+	private UserProfile user;
 	private int granted;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
@@ -22,11 +22,11 @@ public class Permitions {
 		this.action = action;
 	}
 	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
-	public User getUser() {
+	public UserProfile getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserProfile user) {
 		this.user = user;
 	}
 

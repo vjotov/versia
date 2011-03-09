@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+
 @Entity
 public class VOComposer {
 	private ObjectVersion superObject;
@@ -38,23 +39,23 @@ public class VOComposer {
 	}
 
 	public boolean add(ObjectVersion e) {
-		return subObjects.add(e);
+		return getSubObjects().add(e);
 	}
 
 	public boolean isEmpty() {
-		return subObjects.isEmpty();
+		return getSubObjects().isEmpty();
 	}
 
 	public boolean remove(Object o) {
-		return subObjects.remove(o);
+		return getSubObjects().remove(o);
 	}
 
 	public int size() {
-		return subObjects.size();
+		return getSubObjects().size();
 	}
 
 	public boolean contains(ObjectVersion o) {
-		return subObjects.contains(o);
+		return getSubObjects().contains(o);
 	}
 
 }

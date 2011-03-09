@@ -13,12 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User {
+public class UserProfile {
 	private int userId;
 	private String userName;
 	private String password;
 	private List<Permitions> permitions = new ArrayList<Permitions>();
-	private List<Workspace> openedWorkspaces = new ArrayList<Workspace>();
+	private List<WSpace> openedWorkspaces = new ArrayList<WSpace>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,22 +49,22 @@ public class User {
 	}
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	public List<Workspace> getOpenedWorkspaces() {
+	public List<WSpace> getOpenedWorkspaces() {
 		return openedWorkspaces;
 	}
 
-	public void setOpenedWorkspaces(List<Workspace> openedWorkspaces) {
+	public void setOpenedWorkspaces(List<WSpace> openedWorkspaces) {
 		this.openedWorkspaces = openedWorkspaces;
 	}
 
-	public void addOpenWorkspace(Workspace workspace) {
-		List<Workspace> ws_ls = getOpenedWorkspaces();
+	public void addOpenWorkspace(WSpace workspace) {
+		List<WSpace> ws_ls = getOpenedWorkspaces();
 		ws_ls.add(workspace);
 		workspace.setUser(this);
 	}
 
-	public void removeOpenWorkspace(Workspace workspace) {
-		List<Workspace> ws_ls = getOpenedWorkspaces();
+	public void removeOpenWorkspace(WSpace workspace) {
+		List<WSpace> ws_ls = getOpenedWorkspaces();
 		if (ws_ls.contains(workspace))
 			ws_ls.remove(workspace);
 		workspace.setUser(null);

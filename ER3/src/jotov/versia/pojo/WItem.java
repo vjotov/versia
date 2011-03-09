@@ -2,7 +2,6 @@ package jotov.versia.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,33 +11,33 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Workitem {
-	private int workitemId;
+public class WItem {
+	private int wItemId;
 	private VObject vObject;
-	private List<Workspace> attachedToWorkspaces = new ArrayList<Workspace>();
+	private List<WSpace> attWs = new ArrayList<WSpace>();
 
-	public Workitem() {
+	public WItem() {
 		super();
 	}
 
-	public Workitem(VObject vobject) {
+	public WItem(VObject vobject) {
 		super();
 		this.vObject = vobject;
 	}
 
-	public Workitem(VObject vobject, Workspace workspace) {
+/*	public WItem(VObject vobject, WSpace workspace) {
 		this(vobject);
-		this.attachToWorkspace(workspace);
-	}
+		this.setAttWs(workspace);
+	}*/
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getWorkitemId() {
-		return workitemId;
+		return wItemId;
 	}
 
 	public void setWorkitemId(int workitemId) {
-		this.workitemId = workitemId;
+		this.wItemId = workitemId;
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
@@ -51,24 +50,24 @@ public class Workitem {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	public List<Workspace> getAttachedToWorkspaces() {
-		return attachedToWorkspaces;
+	public List<WSpace> getAttWs() {
+		return attWs;
 	}
 
-	public void setAttachedToWorkspaces(List<Workspace> attachedToWorkspaces) {
-		this.attachedToWorkspaces = attachedToWorkspaces;
+	public void setAttWs(List<WSpace> attachedToWorkspaces) {
+		this.attWs = attachedToWorkspaces;
 	}
 
-	public void attachToWorkspace(Workspace workspace) {
-		List<Workspace> ws_ls = this.getAttachedToWorkspaces();
+	public void attachToWorkspace(WSpace workspace) {
+		List<WSpace> ws_ls = this.getAttWs();
 		if (!ws_ls.contains(workspace)) {
 			ws_ls.add(workspace);
 			workspace.attachWorkitem(this);
 		}
 	}
 
-	public void dettachFromWorkspace(Workspace workspace) {
-		List<Workspace> ws_ls = this.getAttachedToWorkspaces();
+	public void dettachFromWorkspace(WSpace workspace) {
+		List<WSpace> ws_ls = this.getAttWs();
 		if (ws_ls.contains(workspace)) {
 			ws_ls.remove(workspace);
 			workspace.detachWorkitem(this);

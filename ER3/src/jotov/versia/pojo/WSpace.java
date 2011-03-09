@@ -2,8 +2,7 @@ package jotov.versia.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-//import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -12,29 +11,27 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-//import javax.persistence.Table;
-
 @Entity
 // @Table(name="WORKSPACE")
-public class Workspace {
-	private int workspaceId;
-	private String workspaceName;
-	private User user;
+public class WSpace {
+	private int wSpaceId;
+	private String wSpaceName;
+	private UserProfile user;
 	private Release release;
-	private Workspace ancestorWorkspace;
-	private List<Workspace> OffspringWorkspaces = new ArrayList<Workspace>();
-	private List<VersionSelector> versionSelectors = new ArrayList<VersionSelector>();
+	private WSpace ancestorWSpace;
+	private List<WSpace> offspringWSpaces = new ArrayList<WSpace>();
+	private List<ObjectVersion> localVersions = new ArrayList<ObjectVersion>();
 	// private List<ObjectVersionExtended> visibleObjects = new
 	// ArrayList<VersionSelectorExtended>();
-	private List<Workitem> workitems = new ArrayList<Workitem>();
+	private List<WItem> wItems = new ArrayList<WItem>();
 
-	public Workspace() {
+	public WSpace() {
 		super();
 	}
 
-	public Workspace(String workspaceName) {
+	public WSpace(String workspaceName) {
 		super();
-		this.workspaceName = workspaceName;
+		this.wSpaceName = workspaceName;
 	}
 
 	// static public List<ObjectVersionExtended> getVisibleObjects(Workspace
@@ -45,29 +42,29 @@ public class Workspace {
 	@Id
 	// @Column(name="WS_ID")
 	public int getWorkspaceId() {
-		return workspaceId;
+		return wSpaceId;
 	}
 
 	public void setWorkspaceId(int workspaceId) {
-		this.workspaceId = workspaceId;
+		this.wSpaceId = workspaceId;
 	}
 
 	// @Column(name="WS_NAME", length=20,nullable=false)
 	public String getWorkspaceName() {
-		return workspaceName;
+		return wSpaceName;
 	}
 
 	public void setWorkspaceName(String workspaceName) {
-		this.workspaceName = workspaceName;
+		this.wSpaceName = workspaceName;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	// @JoinColumn(name="USER_ID")
-	public User getUser() {
+	public UserProfile getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserProfile user) {
 		this.user = user;
 	}
 
@@ -83,51 +80,64 @@ public class Workspace {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "ANCESTOR_WS_ID")
-	public Workspace getAncestorWorkspace() {
-		return ancestorWorkspace;
+	public WSpace getAncestorWorkspace() {
+		return ancestorWSpace;
 	}
 
-	public void setAncestorWorkspace(Workspace ancestorWorkspace) {
-		this.ancestorWorkspace = ancestorWorkspace;
+	public void setAncestorWorkspace(WSpace ancestorWorkspace) {
+		this.ancestorWSpace = ancestorWorkspace;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ancestorWorkspace")
-	public List<Workspace> getOffspringWorkspaces() {
-		return OffspringWorkspaces;
+	public List<WSpace> getOffspringWorkspaces() {
+		return offspringWSpaces;
 	}
 
-	public void setOffspringWorkspaces(List<Workspace> offspringWorkspaces) {
-		OffspringWorkspaces = offspringWorkspaces;
+	public void setOffspringWorkspaces(List<WSpace> offspringWorkspaces) {
+		offspringWSpaces = offspringWorkspaces;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "workspace")
-	public List<VersionSelector> getVersionSelectors() {
-		return versionSelectors;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "workspaces")
+	public List<ObjectVersion> getLocalVersions() {
+		return localVersions;
 	}
 
-	public void setVersionSelectors(List<VersionSelector> versionSelectors) {
-		this.versionSelectors = versionSelectors;
+	public void setLocalVersions(List<ObjectVersion> localVersions) {
+		this.localVersions = localVersions;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "attachedToWorkspaces")
-	public List<Workitem> getWorkitems() {
-		return workitems;
+	public void addLocalVersion(ObjectVersion objectVersion) {
+		List<ObjectVersion> LVer = getLocalVersions();
+		if (!LVer.contains(objectVersion))
+			LVer.add(objectVersion);
 	}
 
-	public void setWorkitems(List<Workitem> workitems) {
-		this.workitems = workitems;
+	public void removeLocalVersion(ObjectVersion objectVersion) {
+		List<ObjectVersion> LVer = getLocalVersions();
+		if (LVer.contains(objectVersion))
+			LVer.remove(objectVersion);
 	}
 
-	public void attachWorkitem(Workitem workitem) {
-		List<Workitem> workitems = this.getWorkitems();
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "attWs")
+	public List<WItem> getWItems() {
+		return wItems;
+	}
+
+	public void setWItems(List<WItem> workitems) {
+		this.wItems = workitems;
+	}
+
+	public void attachWorkitem(WItem workitem) {
+		List<WItem> workitems = this.getWItems();
 		if (!workitems.contains(workitem)) {
 			workitems.add(workitem);
 			workitem.attachToWorkspace(this);
 		}
 	}
-	public void detachWorkitem(Workitem workitem){
-		List<Workitem> workitems = this.getWorkitems();
-		if(workitems.contains(workitem)) {
+
+	public void detachWorkitem(WItem workitem) {
+		List<WItem> workitems = this.getWItems();
+		if (workitems.contains(workitem)) {
 			workitems.remove(workitem);
 			workitem.dettachFromWorkspace(this);
 		}
@@ -138,7 +148,7 @@ public class Workspace {
 		StringBuffer returnString = new StringBuffer("Workspace ("
 				+ this.getWorkspaceId() + ")-" + this.getWorkspaceName()
 				+ "\t(Ancestor WS ID = ");
-		Workspace ancestor = this.getAncestorWorkspace();
+		WSpace ancestor = this.getAncestorWorkspace();
 		if (ancestor != null)
 			returnString.append(ancestor.getWorkspaceId());
 		else

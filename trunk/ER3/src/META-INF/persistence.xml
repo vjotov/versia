@@ -26,13 +26,12 @@
         <class>jotov.versia.pojo.Permitions</class>
         <class>jotov.versia.pojo.Product</class>
         <class>jotov.versia.pojo.Release</class>
-        <class>jotov.versia.pojo.User</class>
+        <class>jotov.versia.pojo.UserProfile</class>
         <class>jotov.versia.pojo.VersionArc</class>
-
         <class>jotov.versia.pojo.VObject</class>
         <class>jotov.versia.pojo.VOComposer</class>
-        <class>jotov.versia.pojo.Workitem</class>
-        <class>jotov.versia.pojo.Workspace</class>
+        <class>jotov.versia.pojo.WItem</class>
+        <class>jotov.versia.pojo.WSpace</class>
        
         
         <properties>

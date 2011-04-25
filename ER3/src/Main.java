@@ -5,13 +5,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.jotov.versia.orml.Product;
+import com.jotov.versia.orml.Release;
+import com.jotov.versia.orml.UserProfile;
+import com.jotov.versia.orml.WSpace;
+
 //import jotov.versia.pojo.Actions;
 //import jotov.versia.pojo.Permitions;
-import jotov.versia.pojo.Product;
-import jotov.versia.pojo.UserProfile;
-import jotov.versia.pojo.WSpace;
 //import jotov.versia.pojo.User;
-import jotov.versia.pojo.Release;
 
 public class Main {
 	//static EntityManager em;
@@ -25,7 +26,7 @@ public class Main {
 			EntityManager em = factory.createEntityManager();
 			//em.getTransaction().begin();
 			//em.find(Workspace.class, arg1);
-			Query query = em.createQuery("select a from Workspace a where a.workspaceId = 3");
+			Query query = em.createQuery("select a from WSpace a where a.wSpaceId = 3");
 			for (WSpace a : (List<WSpace>) query.getResultList()) {
 				System.out.println(a);
 				printWorkspace(a);

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#pages#login.xhtml" PATH="/pages/login.xhtml"
+  SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#login.xhtml:0" NAME="item"
+   PATH="/pages/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{loginBean.CheckValidUser}:#pages#01_product.xhtml"
+    NAME="output" PATH="/pages/01_product.xhtml"
+    TARGET="rules:#pages#01_product.xhtml"
+    TITLE="#{loginBean.CheckValidUser}:success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#01_product.xhtml"
+  PATH="/pages/01_product.xhtml" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#01_product.xhtml:0" NAME="item"
+   PATH="/pages/01_product.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="open_release:#{productBean.openProduct}:#pages#02_releases.xhtml"
+    NAME="output" PATH="/pages/02_releases.xhtml"
+    TARGET="rules:#pages#02_releases.xhtml"
+    TITLE="#{productBean.openProduct}:open_release" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#02_releases.xhtml"
+  PATH="/pages/02_releases.xhtml" SHAPE="240,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#02_releases.xhtml:0" NAME="item"
+   PATH="/pages/02_releases.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="open_product:#{userSessionBean.closeProduct}:#pages#01_product.xhtml"
+    NAME="output" PATH="/pages/01_product.xhtml"
+    TARGET="rules:#pages#01_product.xhtml"
+    TITLE="#{userSessionBean.closeProduct}:open_product" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="open_workspace:#{releaseBean.openRelease}:#pages#03_open_workspace.xhtml"
+    NAME="output1" PATH="/pages/03_open_workspace.xhtml"
+    TARGET="rules:#pages#03_open_workspace.xhtml"
+    TITLE="#{releaseBean.openRelease}:open_workspace" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#03_open_workspace.xhtml"
+  PATH="/pages/03_open_workspace.xhtml" SHAPE="544,256,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#03_open_workspace.xhtml:0" NAME="item"
+   PATH="/pages/03_open_workspace.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="open_release:#{userSessionBean.closeRelease}:#pages#02_releases.xhtml"
+    NAME="output" PATH="/pages/02_releases.xhtml"
+    TARGET="rules:#pages#02_releases.xhtml"
+    TITLE="#{userSessionBean.closeRelease}:open_release" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="open_workspace:#{wSListBean.openWorkspace}:#pages#04_workspace.xhtml"
+    NAME="output1" PATH="/pages/04_workspace.xhtml"
+    TARGET="rules:#pages#04_workspace.xhtml"
+    TITLE="#{wSListBean.openWorkspace}:open_workspace" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#04_workspace.xhtml"
+  PATH="/pages/04_workspace.xhtml" SHAPE="720,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#04_workspace.xhtml:0" NAME="item"
+   PATH="/pages/04_workspace.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="workspace_closed:#{closeWorkspaceBean.closeWorkspace}:#pages#03_open_workspace.xhtml"
+    NAME="output" PATH="/pages/03_open_workspace.xhtml"
+    TARGET="rules:#pages#03_open_workspace.xhtml"
+    TITLE="#{closeWorkspaceBean.closeWorkspace}:workspace_closed" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

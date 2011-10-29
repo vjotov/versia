@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	
+<ui:composition template="/templates/common.xhtml">
+<ui:define name="pageSubHeader">Home - Open/Create/Update Product</ui:define>
+<ui:define name="menuBar">
+	<h:form id="menu_form">
+		<rich:toolBar>
+			<rich:dropDownMenu>
+				<f:facet name="label">
+					<h:panelGroup>
+						<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+						<h:outputText value="Product" />
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuItem value="Open Product"
+					action="#{userSessionBean.doOpenProduct}" />
+			</rich:dropDownMenu>
+			<rich:dropDownMenu>
+				<f:facet name="label">
+					<h:panelGroup>
+						<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+						<h:outputText value="Admin" />
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuItem value="Manage Actions"
+					action="#{userSessionBean.doManageActions}"
+					reRender="main_section" />
+				<rich:menuItem value="Manage Users"
+					action="#{userSessionBean.doManageUsers}" />
+			</rich:dropDownMenu>
+			<rich:dropDownMenu>
+				<f:facet name="label">
+					<h:panelGroup>
+						<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+						<h:outputText value="Help" />
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuItem value="About"
+					action="#{userSessionBean.doHelpAbout}" />
+			</rich:dropDownMenu>
+		</rich:toolBar>
+	</h:form>
+</ui:define>
+<ui:define name="body">
+	<h:form name="main_section">
+		<rich:panel>
+			<f:facet name="header">Open / Edit Products</f:facet>
+			<rich:dataGrid value="#{productBean.products}" var="product"
+				columns="1" elements="10" rowKeyVar="rowIndex"  ajaxKeys="#{repeatBean.rowsToUpdate}">
+				<rich:panel bodyClass="pbody" id="num">
+					<f:facet name="header">
+						<h:outputText value="Products" />
+					</f:facet>
+					<h:panelGrid columns="4" id="product_data">
+	
+						<h:outputText value="#  #{rowIndex}:#{product.productId}:" />
+						<h:inputText value="#{product.productName}" />
+						<a4j:commandButton value="Save"
+							action="#{productBean.updateProduct}" reRender="num">
+							<a4j:actionparam name="rowIndexSave" value="#{rowIndex}"
+								assignTo="#{productBean.selectedRow}" />
+						</a4j:commandButton>
+						<a4j:commandButton value="Open #{product.productId}"
+							action="#{productBean.openProduct}" reRender="main_section">
+							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
+								assignTo="#{productBean.selectedRow}" />
+						</a4j:commandButton>
+	
+					</h:panelGrid>
+				</rich:panel>
+				<f:facet name="footer">
+					<rich:datascroller></rich:datascroller>
+				</f:facet>
+			</rich:dataGrid>
+		</rich:panel>
+	</h:form>
+	<h:form>
+		<rich:panel bodyClass="pbody">
+			<f:facet name="header">Create product</f:facet>
+			<h:panelGrid columns="3" id="new_product_data">
+				<h:outputText value="New Product Name: " styleClass="label" />
+				<h:inputText value="#{productBean.newProductName}">
+					<f:validateLength></f:validateLength>
+				</h:inputText>
+				<a4j:commandButton value="Create"
+					action="#{productBean.createProduct()}" reRender="main_section" />
+			</h:panelGrid>
+		</rich:panel>
+		 <a4j:log hotkey="D"/>
+	</h:form>
+</ui:define>
+</ui:composition>
+</html>
+

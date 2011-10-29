@@ -7,7 +7,7 @@ import com.jotov.versia.orm.UserProfile;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.WSpace;
 
-public class UserSessionBean extends aDBbean {
+public class UserSessionBean {
 	private UserProfile userProfile;
 	// private String currentPage = "/pages/00_welcome.xhtml";
 	private Product product;
@@ -38,10 +38,10 @@ public class UserSessionBean extends aDBbean {
 		return "open_release";
 	}
 
-	public String closeWorkspace() {
-		this.executeQuery(1);
-		return "open_workspace";
-	}
+	// public String closeWorkspace() {
+	// this.executeQuery(1);
+	// return "open_workspace";
+	// }
 
 	// GETTERS & SETTERS
 	public void setProduct(Product product) {
@@ -84,22 +84,22 @@ public class UserSessionBean extends aDBbean {
 		this.selectedVersion = selectedVersion;
 	}
 
-	@Override
-	public String executeQuery(int mode) {
-		switch (mode) {
-		case 1:
-			return pCloseWorkspace();
-		default:
-			return null;
-		}
-	}
-
-	private String pCloseWorkspace() {
-		em.getTransaction().begin();
-		workspace.setOpenedByUser(null);
-		userProfile.setOpenedWorkspace(null);
-		em.getTransaction().commit();
-		return null;
-	}
+//	@Override
+//	public String executeQuery(int mode) {
+//		switch (mode) {
+//		case 1:
+//			return pCloseWorkspace();
+//		default:
+//			return null;
+//		}
+//	}
+//
+//	private String pCloseWorkspace() {
+//		em.getTransaction().begin();
+//		workspace.setOpenedByUser(null);
+//		userProfile.setOpenedWorkspace(null);
+//		em.getTransaction().commit();
+//		return null;
+//	}
 
 }

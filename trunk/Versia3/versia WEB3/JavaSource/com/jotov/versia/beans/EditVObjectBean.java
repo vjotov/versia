@@ -77,13 +77,18 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	private String deleteVersion() {
-		// TODO Auto-generated method stub
+		em.getTransaction().begin();
+		VObjectVersion deletedVersion = VObjectVersion.markDeleteVersion(
+				session.getWorkspace(), session.getSelectedVersion(), session.getUserProfile());
+		em.persist(session.getSelectedVersion());
+		em.persist(deletedVersion);
+		em.getTransaction().commit();
 		return null;
 	}
-
+	
 	// TODO: attached WI should be editable
 	// TODO: Deleted object should be editable
-	
+
 	private String createNewVersion() {
 		EntityTransaction trx = em.getTransaction();
 		trx.begin();

@@ -1,5 +1,7 @@
 package com.jotov.versia.beans;
 
+import com.jotov.versia.orm.UserProfile;
+
 public class closeWorkspaceBean extends aDBbean {
 	private UserSessionBean session;
 
@@ -9,8 +11,12 @@ public class closeWorkspaceBean extends aDBbean {
 
 	@Override
 	public String executeQuery() {
+		UserProfile userProfile = session.getUserProfile();
 		em.getTransaction().begin();
-		session.getUserProfile().setOpenedWorkspace(null);
+		
+		userProfile.setOpenedWorkspace(null);
+		session.getWorkspace().setOpenedByUser(null);
+		
 		em.persist(session.getUserProfile());
 		em.getTransaction().commit();
 		session.setWorkspace(null);

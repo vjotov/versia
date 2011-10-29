@@ -21,11 +21,6 @@
   <managed-bean-name>userSessionBean</managed-bean-name>
   <managed-bean-class>com.jotov.versia.beans.UserSessionBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
-  <managed-property>
-   <property-name>dbean</property-name>
-   <property-class>com.jotov.versia.beans.DBConnectBean</property-class>
-   <value>#{dBConnectBean}</value>
-  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>dBConnectBean</managed-bean-name>

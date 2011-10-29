@@ -24,6 +24,7 @@ public class VObjectVersion {
 	private String objectName;
 	private String objectDatum;
 	private WSpace workspace;
+	private int deleteFlag = 0;
 	private List<VersionArc> precetorsArc = new ArrayList<VersionArc>();
 
 	public VObjectVersion() {
@@ -51,6 +52,18 @@ public class VObjectVersion {
 			newVersion.addPrecetorsArc(va);
 		}
 		return newVersion;
+	}
+
+	public static VObjectVersion markDeleteVersion(WSpace workspace2,
+			VObjectVersion selectedVersion, UserProfile usr) {
+
+		ArrayList<VObjectVersion> precedors = new ArrayList<VObjectVersion>();
+		precedors.add(selectedVersion);
+		VObjectVersion deletedVersion = createVersion(
+				selectedVersion.getVobject(), selectedVersion.objectName, null,
+				workspace2, precedors, usr);
+		deletedVersion.setDeleteFlag(1);
+		return deletedVersion;
 	}
 
 	private static int getNextVersionNumber(VObject vObject) {
@@ -166,4 +179,13 @@ public class VObjectVersion {
 		}
 		return null;
 	}
+
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+
 }

@@ -18,10 +18,10 @@ public class VisibileItemsExtractor {
 	}
 
 	static public ArrayList<VisibleItems> getAvailableWorkitems(WSpace workspace) {
-		
+
 		ArrayList<VisibleItems> voMap = buildVersions(workspace);
 		ArrayList<VisibleItems> forRemove = new ArrayList<VisibleItems>();
-		
+
 		// leaving only potential workitems
 		for (VisibleItems item : voMap) {
 			if (!item.getVo().isWorkItem())
@@ -50,14 +50,20 @@ public class VisibileItemsExtractor {
 
 	private static void addObjects(HashMap<VObject, VisibleItems> map,
 			ArrayList<VObjectVersion> local, VisibilityEnum ve) {
-		// TODO Auto-generated method stub
 		for (VObjectVersion vov : local) {
 			VObject vobj = vov.getVobject();
 			if (map.containsKey(vobj)) {
 				VisibleItems vi = map.get(vobj);
-				vi.addVvector(ve);
+				if (vov.getDeleteFlag() == 0)
+					vi.addVvector(ve);
+				else
+					vi.addVvector(VisibilityEnum.DELETED);
 			} else {
-				VisibleItems vi = new VisibleItems(vobj, vov, ve);
+				VisibleItems vi;
+				if (vov.getDeleteFlag() == 0)
+					vi = new VisibleItems(vobj, vov, ve);
+				else
+					vi = new VisibleItems(vobj, vov, VisibilityEnum.DELETED);
 				map.put(vobj, vi);
 			}
 		}

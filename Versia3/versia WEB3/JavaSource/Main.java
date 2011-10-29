@@ -36,33 +36,43 @@ public class Main {
 			// em.getTransaction().begin();
 
 			// VersionArc va = em.find(VersionArc.class, 122);
-			WSpace ws = em.find(WSpace.class, 151);
-			VObjectVersion localVOV = em.find(VObjectVersion.class, 24);
+			
+			WSpace ws = em.find(WSpace.class, 152);
+			VObjectVersion localVOV = em.find(VObjectVersion.class, 23);
 			UserProfile user = em.find(UserProfile.class, 1);
-			WSpace aws = ws.getAncestorWorkspace();
-			if (Object.class.isInstance(aws)
-					&& ws.getLocalVersions().contains(localVOV)) {
-				VObjectVersion ancestorVOV = localVOV.getAncestorVersion();
-				if (Object.class.isInstance(ancestorVOV)) {
-					em.getTransaction().begin();
-					ancestorVOV.setWorkspace(null);
-					aws.removeLocalVersion(ancestorVOV);
-
-					localVOV.setWorkspace(aws);
-					localVOV.addPrecetorsArc(VersionArc.createArcs(localVOV,
-							ancestorVOV, aws, user));
-					ws.removeLocalVersion(localVOV);
-					aws.addLocalVersion(localVOV);
-					em.getTransaction().commit();
-				} else {
-					em.getTransaction().begin();
-					localVOV.setWorkspace(aws);
-					ws.removeLocalVersion(localVOV);
-					aws.addLocalVersion(localVOV);
-					em.getTransaction().commit();
-				}
-
-			}
+			
+			em.getTransaction().begin();
+			VObjectVersion deletedVersion = VObjectVersion.markDeleteVersion(
+					ws, localVOV, user);
+			
+			em.persist(deletedVersion);
+			em.persist(localVOV);
+			em.getTransaction().commit();
+			
+			// WSpace aws = ws.getAncestorWorkspace();
+			// if (Object.class.isInstance(aws)
+			// && ws.getLocalVersions().contains(localVOV)) {
+			// VObjectVersion ancestorVOV = localVOV.getAncestorVersion();
+			// if (Object.class.isInstance(ancestorVOV)) {
+			// em.getTransaction().begin();
+			// ancestorVOV.setWorkspace(null);
+			// aws.removeLocalVersion(ancestorVOV);
+			//
+			// localVOV.setWorkspace(aws);
+			// localVOV.addPrecetorsArc(VersionArc.createArcs(localVOV,
+			// ancestorVOV, aws, user));
+			// ws.removeLocalVersion(localVOV);
+			// aws.addLocalVersion(localVOV);
+			// em.getTransaction().commit();
+			// } else {
+			// em.getTransaction().begin();
+			// localVOV.setWorkspace(aws);
+			// ws.removeLocalVersion(localVOV);
+			// aws.addLocalVersion(localVOV);
+			// em.getTransaction().commit();
+			// }
+			//
+			// }
 
 			// VObject vo = em.find(VObject.class, 1);
 			// WSpace ws = em.find(WSpace.class, 152);

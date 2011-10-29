@@ -4,5 +4,6 @@ public enum VisibilityEnum {
 	LOCAL, 
 	PARENT, 
 	RELEASE, 
-	OTHER
+	OTHER,
+	DELETED
 }

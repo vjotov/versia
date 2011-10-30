@@ -1,13 +1,17 @@
 package com.jotov.versia.beans;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityTransaction;
 
+import com.jotov.versia.beans.vobj.VisibileItemsExtractor;
+import com.jotov.versia.beans.vobj.VisibleItems;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.VersionArc;
 import com.jotov.versia.orm.WSpace;
+import com.jotov.versia.orm.WorkItemAttachement;
 import com.sun.swing.internal.plaf.synth.resources.synth;
 
 public class EditVObjectBean extends aDBbean {
@@ -79,15 +83,13 @@ public class EditVObjectBean extends aDBbean {
 	private String deleteVersion() {
 		em.getTransaction().begin();
 		VObjectVersion deletedVersion = VObjectVersion.markDeleteVersion(
-				session.getWorkspace(), session.getSelectedVersion(), session.getUserProfile());
+				session.getWorkspace(), session.getSelectedVersion(),
+				session.getUserProfile());
 		em.persist(session.getSelectedVersion());
 		em.persist(deletedVersion);
 		em.getTransaction().commit();
 		return null;
 	}
-	
-	// TODO: attached WI should be editable
-	// TODO: Deleted object should be editable
 
 	private String createNewVersion() {
 		EntityTransaction trx = em.getTransaction();
@@ -214,4 +216,24 @@ public class EditVObjectBean extends aDBbean {
 		this.isWorkItem = isWorkItem;
 	}
 
+	public boolean isReadonly() {
+		VObjectVersion vov = session.getSelectedVersion();
+		if (vov == null)
+			return false;
+		VObject vo = vov.getVobject();
+
+		if (vov.getDeleteFlag() == 1)
+			// Deleted object are read only
+			return true;
+		else if (vo.isWorkItem()) {
+			// attached WI are read only
+			List<WorkItemAttachement> wia_ls = session.getWorkspace()
+					.getAttachedWorkItems();
+			for (WorkItemAttachement wia : wia_ls) {
+				if (vo.equals(wia.getWorkitem()))
+					return true;
+			}
+		}
+		return false;
+	}
 }

@@ -128,14 +128,14 @@
 							<h:outputText value="Object Version" />
 							<h:outputText value="#{editVObjectBean.VObjectVersion}" />
 							<h:outputText value="Object Name" />
-							<h:inputText value="#{editVObjectBean.VObjectName}" />
+							<h:inputText value="#{editVObjectBean.VObjectName}" disabled="#{editVObjectBean.readonly}" />
 							<h:outputText value="Object Data" />
-							<h:inputTextarea value="#{editVObjectBean.VObjectDatum}" />
+							<h:inputTextarea value="#{editVObjectBean.VObjectDatum}"  disabled="#{editVObjectBean.readonly}" />
 							<h:outputText value="Is Work Item" />
-							<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}" />
+							<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"  disabled="#{editVObjectBean.readonly}" />
 						</h:panelGrid>
 						<h:commandButton action="#{editVObjectBean.Save}" value="Save"
-							onclick="javascript:Richfaces.hideModalPanel('editPanel')" />
+							onclick="javascript:Richfaces.hideModalPanel('editPanel')"  disabled="#{editVObjectBean.readonly}" />
 					</a4j:form>
 				</rich:modalPanel>
 

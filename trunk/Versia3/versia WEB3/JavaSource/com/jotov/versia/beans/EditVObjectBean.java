@@ -41,8 +41,7 @@ public class EditVObjectBean extends aDBbean {
 		WSpace ws = session.getWorkspace();
 		WSpace aws = ws.getAncestorWorkspace();
 		VObjectVersion localVOV = session.getSelectedVersion();
-		if (Object.class.isInstance(aws)
-				&& !Object.class.isInstance(aws.getOpenedByUser())
+		if (Object.class.isInstance(aws) && aws.getOpenedByUser() == null
 				&& ws.getLocalVersions().contains(localVOV)) {
 			VObjectVersion ancestorVOV = localVOV.getAncestorVersion();
 			if (Object.class.isInstance(ancestorVOV)) {
@@ -71,12 +70,14 @@ public class EditVObjectBean extends aDBbean {
 	private synchronized String rollbackVersion() {
 		WSpace ws = session.getWorkspace();
 		VObjectVersion localVOV = session.getSelectedVersion();
-
-		em.getTransaction().begin();
-		ws.removeLocalVersion(localVOV);
-		localVOV.setWorkspace(null);
-		em.persist(localVOV);
-		em.getTransaction().commit();
+		if (localVOV.getWorkspace().equals(ws)) {
+			// RollBack of local versions only
+			em.getTransaction().begin();
+			ws.removeLocalVersion(localVOV);
+			localVOV.setWorkspace(null);
+			em.persist(localVOV);
+			em.getTransaction().commit();
+		}
 		return null;
 	}
 
@@ -147,7 +148,7 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void Delete() {
-		System.out.println("editVObjectBean.RollBack()/0");
+		System.out.println("editVObjectBean.Delete()/0");
 		dbean.executeQuery(this, 4);
 		session.setSelectedVersion(null);
 		isWorkItem = null;

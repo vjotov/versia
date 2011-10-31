@@ -63,6 +63,38 @@
     NAME="output" PATH="/pages/03_open_workspace.xhtml"
     TARGET="rules:#pages#03_open_workspace.xhtml"
     TITLE="#{closeWorkspaceBean.closeWorkspace}:workspace_closed" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="show_history:#{listVobjectsBean.showHistory}:#pages#05_history.xhtml"
+    NAME="output1" PATH="/pages/05_history.xhtml"
+    TARGET="rules:#pages#05_history.xhtml"
+    TITLE="#{listVobjectsBean.showHistory}:show_history" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="show_distribution:#{listVobjectsBean.showDistribution}:#pages#06_distribution.xhtml"
+    NAME="output2" PATH="/pages/06_distribution.xhtml"
+    TARGET="rules:#pages#06_distribution.xhtml"
+    TITLE="#{listVobjectsBean.showDistribution}:show_distribution" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#05_history.xhtml"
+  PATH="/pages/05_history.xhtml" SHAPE="944,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#05_history.xhtml:0" NAME="item"
+   PATH="/pages/05_history.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="show_workspace:#{objectHistoryBean.showWorkspace}:#pages#04_workspace.xhtml"
+    NAME="output" PATH="/pages/04_workspace.xhtml"
+    TARGET="rules:#pages#04_workspace.xhtml"
+    TITLE="#{objectHistoryBean.showWorkspace}:show_workspace" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#06_distribution.xhtml"
+  PATH="/pages/06_distribution.xhtml" SHAPE="960,417,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#06_distribution.xhtml:0" NAME="item"
+   PATH="/pages/06_distribution.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="show_workspace:#{objectHistoryBean.showWorkspace}:#pages#04_workspace.xhtml"
+    NAME="output" PATH="/pages/04_workspace.xhtml"
+    TARGET="rules:#pages#04_workspace.xhtml"
+    TITLE="#{objectHistoryBean.showWorkspace}:show_workspace" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

@@ -27,6 +27,9 @@ public class VObjectVersion {
 	private int deleteFlag = 0;
 	private List<VersionArc> precetorsArc = new ArrayList<VersionArc>();
 
+	// private List<VObjectVersion> subObjects = new
+	// ArrayList<VObjectVersion>();
+
 	public VObjectVersion() {
 		super();
 	}
@@ -159,6 +162,16 @@ public class VObjectVersion {
 	public void addPrecetorsArc(VersionArc va) {
 		precetorsArc.add(va);
 	}
+
+	// @OneToMany(fetch = FetchType.EAGER,
+	// cascade={CascadeType.PERSIST,CascadeType.REFRESH})
+	// public List<VObjectVersion> getSubObjects() {
+	// return subObjects;
+	// }
+	//
+	// public void setSubObjects(List<VObjectVersion> subObjects) {
+	// this.subObjects = subObjects;
+	// }
 
 	@Override
 	public String toString() {

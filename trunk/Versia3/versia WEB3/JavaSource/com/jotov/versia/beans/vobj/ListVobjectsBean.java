@@ -95,5 +95,11 @@ public class ListVobjectsBean extends aDBbean {
 	public void setSelectedRow(int selectedRow) {
 		this.selectedRow = selectedRow;
 	}
-
+	
+	public String showHistory() {
+		return "show_history";
+	}
+	public String showDistribution() {
+		return "show_distribution";
+	}
 }

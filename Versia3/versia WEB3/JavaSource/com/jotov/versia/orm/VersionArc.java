@@ -1,6 +1,7 @@
 package com.jotov.versia.orm;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,8 +19,9 @@ public class VersionArc {
 	private UserProfile user;
 	private VObjectVersion precedor;
 	private VObjectVersion target;
-	private List<Cause> causes = new ArrayList<Cause>(); 
-
+	private List<Cause> causes = new ArrayList<Cause>();
+	private Date arcDate = new Date();
+	
 	public VersionArc() {
 		super();
 	}
@@ -86,6 +88,14 @@ public class VersionArc {
 
 	public void setCauses(List<Cause> causes) {
 		this.causes = causes;
+	}
+
+	public Date getArcDate() {
+		return arcDate;
+	}
+
+	public void setArcDate(Date arcDate) {
+		this.arcDate = arcDate;
 	}
 
 

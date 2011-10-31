@@ -179,6 +179,36 @@
   <managed-bean-class>Bean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>objectHistoryBean</managed-bean-name>
+  <managed-bean-class>com.jotov.versia.beans.vobj.ObjectHistoryBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>session</property-name>
+   <property-class>com.jotov.versia.beans.UserSessionBean</property-class>
+   <value>#{userSessionBean}</value>
+  </managed-property>
+  <managed-property>
+   <property-name>dbean</property-name>
+   <property-class>com.jotov.versia.beans.DBConnectBean</property-class>
+   <value>#{dBConnectBean}</value>
+  </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>objectDistributionBean</managed-bean-name>
+  <managed-bean-class>com.jotov.versia.beans.vobj.ObjectDistributionBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>session</property-name>
+   <property-class>com.jotov.versia.beans.UserSessionBean</property-class>
+   <value>#{userSessionBean}</value>
+  </managed-property>
+  <managed-property>
+   <property-name>dbean</property-name>
+   <property-class>com.jotov.versia.beans.DBConnectBean</property-class>
+   <value>#{dBConnectBean}</value>
+  </managed-property>
+ </managed-bean>
  <navigation-rule>
   <display-name>login</display-name>
   <from-view-id>/pages/login.xhtml</from-view-id>
@@ -234,6 +264,36 @@
    <from-action>#{closeWorkspaceBean.closeWorkspace}</from-action>
    <from-outcome>workspace_closed</from-outcome>
    <to-view-id>/pages/03_open_workspace.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{listVobjectsBean.showHistory}</from-action>
+   <from-outcome>show_history</from-outcome>
+   <to-view-id>/pages/05_history.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{listVobjectsBean.showDistribution}</from-action>
+   <from-outcome>show_distribution</from-outcome>
+   <to-view-id>/pages/06_distribution.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/pages/05_history.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{objectHistoryBean.showWorkspace}</from-action>
+   <from-outcome>show_workspace</from-outcome>
+   <to-view-id>/pages/04_workspace.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/pages/06_distribution.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{objectHistoryBean.showWorkspace}</from-action>
+   <from-outcome>show_workspace</from-outcome>
+   <to-view-id>/pages/04_workspace.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
  </navigation-rule>

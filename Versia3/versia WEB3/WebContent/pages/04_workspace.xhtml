@@ -72,12 +72,10 @@
 							oncomplete="javascript:Richfaces.showModalPanel('DeleteVO');">
 						</a4j:commandButton>
 						<a4j:commandButton value="History" 
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('DeleteVO');">
+							action="#{listVobjectsBean.showHistory}" >
 						</a4j:commandButton>
 						<a4j:commandButton value="Distribution" 
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('DeleteVO');">
+							action="#{listVobjectsBean.showDistribution}" >
 						</a4j:commandButton>
 						<rich:spacer height="20px" />
 						<rich:scrollableDataTable id="visibleObjects" rowKeyVar="rkv"

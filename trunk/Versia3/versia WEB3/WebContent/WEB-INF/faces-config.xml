@@ -285,16 +285,14 @@
    <from-action>#{objectHistoryBean.showWorkspace}</from-action>
    <from-outcome>show_workspace</from-outcome>
    <to-view-id>/pages/04_workspace.xhtml</to-view-id>
-   <redirect/>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/pages/06_distribution.xhtml</from-view-id>
   <navigation-case>
-   <from-action>#{objectHistoryBean.showWorkspace}</from-action>
+   <from-action>#{objectDistributionBean.showWorkspace}</from-action>
    <from-outcome>show_workspace</from-outcome>
    <to-view-id>/pages/04_workspace.xhtml</to-view-id>
-   <redirect/>
   </navigation-case>
  </navigation-rule>
  <application>

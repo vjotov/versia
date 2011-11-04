@@ -16,8 +16,8 @@
 
 		<!-- We must enumerate each entity in the persistence unit -->
 		<class>com.jotov.versia.orm.Actions</class>
-		<!-- <class>com.jotov.versia.orm.Cause</class> -->
-
+		<class>com.jotov.versia.orm.Cause</class>
+		<class>com.jotov.versia.orm.VComposer</class> 
 		<class>com.jotov.versia.orm.Permitions</class>
 		<class>com.jotov.versia.orm.Product</class>
 		<class>com.jotov.versia.orm.Release</class>
@@ -27,9 +27,9 @@
 		<class>com.jotov.versia.orm.VObject</class>
 		<class>com.jotov.versia.orm.VObjectVersion</class>
 		<class>com.jotov.versia.orm.WorkItemAttachement</class>
-		<class>com.jotov.versia.orml.VersionArc</class> 
-		<!-- <class>com.jotov.versia.orm.VOComposer</class> 
-			<class>com.jotov.versia.orm.WItem</class -->
+		<class>com.jotov.versia.orm.VersionArc</class> 
+		
+			
 
 
 		<properties>

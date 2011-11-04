@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import com.jotov.versia.beans.vobj.VisibileItemsExtractor;
 import com.jotov.versia.beans.vobj.VisibleItems;
+import com.jotov.versia.orm.VComposer;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.VersionArc;
@@ -41,30 +43,54 @@ public class EditVObjectBean extends aDBbean {
 		WSpace ws = session.getWorkspace();
 		WSpace aws = ws.getAncestorWorkspace();
 		VObjectVersion localVOV = session.getSelectedVersion();
+
 		if (Object.class.isInstance(aws) && aws.getOpenedByUser() == null
 				&& ws.getLocalVersions().contains(localVOV)) {
-			VObjectVersion ancestorVOV = localVOV.getAncestorVersion();
-			if (Object.class.isInstance(ancestorVOV)) {
-				em.getTransaction().begin();
-				ancestorVOV.setWorkspace(null);
-				aws.removeLocalVersion(ancestorVOV);
 
-				localVOV.setWorkspace(aws);
-				localVOV.addPrecetorsArc(VersionArc.createArcs(localVOV,
-						ancestorVOV, aws, session.getUserProfile()));
-				ws.removeLocalVersion(localVOV);
-				aws.addLocalVersion(localVOV);
-				em.getTransaction().commit();
-			} else {
-				em.getTransaction().begin();
-				localVOV.setWorkspace(aws);
-				ws.removeLocalVersion(localVOV);
-				aws.addLocalVersion(localVOV);
-				em.getTransaction().commit();
-			}
+			em.getTransaction().begin();
 
+			publishVersion(localVOV, ws, aws);
+
+			em.getTransaction().commit();
 		}
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private void publishVersion(VObjectVersion pVOV, WSpace ws,
+			WSpace ancestorWS) {
+		// Separate method for recursive publication of sub-objects of a
+		// composed object
+		
+		if (!pVOV.getWorkspace().equals(ws))
+			// not local object => nothing to publicate
+			return;
+		
+		VObjectVersion ancestorVOV = pVOV.getAncestorVersion();
+		if (Object.class.isInstance(ancestorVOV)) {
+
+			ancestorVOV.setWorkspace(null);
+			ancestorWS.removeLocalVersion(ancestorVOV);
+
+			pVOV.setWorkspace(ancestorWS);
+			pVOV.addPrecetorsArc(VersionArc.createArcs(pVOV, ancestorVOV,
+					ancestorWS, session.getUserProfile()));
+			ws.removeLocalVersion(pVOV);
+			ancestorWS.addLocalVersion(pVOV);
+
+		} else {
+			pVOV.setWorkspace(ancestorWS);
+			ws.removeLocalVersion(pVOV);
+			ancestorWS.addLocalVersion(pVOV);
+		}
+
+		Query query = em
+				.createQuery("SELECT c FROM VComposer c WHERE c.superObject = :super");
+		query.setParameter("super", pVOV);
+		List<VComposer> vcs = query.getResultList();
+		for (VComposer vc : vcs) {
+			publishVersion(vc.getSubObject(), ws, ancestorWS);
+		}
 	}
 
 	private synchronized String rollbackVersion() {

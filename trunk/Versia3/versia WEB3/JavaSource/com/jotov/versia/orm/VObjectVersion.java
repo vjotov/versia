@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
@@ -26,6 +27,8 @@ public class VObjectVersion {
 	private WSpace workspace;
 	private int deleteFlag = 0;
 	private List<VersionArc> precetorsArc = new ArrayList<VersionArc>();
+	private List<VComposer> subObjects;
+	private VComposer superObject;
 
 	// private List<VObjectVersion> subObjects = new
 	// ArrayList<VObjectVersion>();
@@ -163,15 +166,31 @@ public class VObjectVersion {
 		precetorsArc.add(va);
 	}
 
-	// @OneToMany(fetch = FetchType.EAGER,
-	// cascade={CascadeType.PERSIST,CascadeType.REFRESH})
-	// public List<VObjectVersion> getSubObjects() {
-	// return subObjects;
-	// }
-	//
-	// public void setSubObjects(List<VObjectVersion> subObjects) {
-	// this.subObjects = subObjects;
-	// }
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	@OneToMany(mappedBy = "superObject", fetch = FetchType.LAZY)
+	public List<VComposer> getSubObjects() {
+		return subObjects;
+	}
+
+	public void setSubObjects(List<VComposer> subObjects) {
+		this.subObjects = subObjects;
+	}
+
+	@OneToOne(mappedBy = "subObject", fetch = FetchType.LAZY)
+	public VComposer getSuperObject() {
+		return superObject;
+	}
+
+	public void setSuperObject(VComposer superObject) {
+		this.superObject = superObject;
+	}
 
 	@Override
 	public String toString() {
@@ -191,14 +210,6 @@ public class VObjectVersion {
 			}
 		}
 		return null;
-	}
-
-	public void setDeleteFlag(int deleteFlag) {
-		this.deleteFlag = deleteFlag;
-	}
-
-	public int getDeleteFlag() {
-		return deleteFlag;
 	}
 
 }

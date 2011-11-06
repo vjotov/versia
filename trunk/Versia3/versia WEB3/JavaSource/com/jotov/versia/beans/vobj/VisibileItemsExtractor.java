@@ -3,7 +3,7 @@ package com.jotov.versia.beans.vobj;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import com.jotov.versia.orm.VComposer;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.WSpace;
@@ -14,7 +14,19 @@ public class VisibileItemsExtractor {
 	static public ArrayList<VisibleItems> buildVersions(WSpace workspace) {
 		HashMap<VObject, VisibleItems> voMap = constructVisibility(workspace,
 				new HashMap<VObject, VisibleItems>(), VisibilityEnum.LOCAL);
-		return new ArrayList<VisibleItems>(voMap.values());
+		ArrayList<VisibleItems> result = new ArrayList<VisibleItems>(
+				voMap.values());
+		for (VisibleItems vitem : result) {
+			if (vitem.getVov().getSubObjects().size() > 0) {
+				for (VComposer composer : vitem.getVov().getSubObjects()) {
+					vitem.addSubobject(new VisibleSubItem(composer
+							.getSubObject().getVobject().getVObjectId(),
+							composer.getSubObject().getVersionNumber(),
+							composer.getSubObject().getObjectName()));
+				}
+			}
+		}
+		return result;
 	}
 
 	static public ArrayList<VisibleItems> getAvailableWorkitems(WSpace workspace) {

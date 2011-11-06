@@ -9,6 +9,7 @@ public class VisibleItems {
 	private VObject vo;
 	private VObjectVersion vov;
 	private ArrayList<VisibilityEnum> vvector = new ArrayList<VisibilityEnum>();
+	private ArrayList<VisibleSubItem> subobjects = new ArrayList<VisibleSubItem>();
 
 	public VisibleItems(VObject vobj, VObjectVersion vov2, VisibilityEnum ve) {
 		this.vo = vobj;
@@ -55,6 +56,25 @@ public class VisibleItems {
 
 	public void setVo(VObject vo) {
 		this.vo = vo;
+	}
+
+	public ArrayList<VisibleSubItem> getSubobjects() {
+		return subobjects;
+	}
+
+	public void setSubobjects(ArrayList<VisibleSubItem> subobjects) {
+		this.subobjects = subobjects;
+	}
+	
+	public void addSubobject(VisibleSubItem item){
+		this.subobjects.add(item);
+	}
+	
+	public String getImage(){
+		if( this.subobjects.size()== 0)
+			return "img/tree_empty.gif";
+		else 
+			return "img/tree_expand.gif";
 	}
 
 }

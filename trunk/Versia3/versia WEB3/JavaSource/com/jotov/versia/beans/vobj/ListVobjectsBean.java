@@ -21,10 +21,12 @@ public class ListVobjectsBean extends aDBbean {
 		System.out.println("Save");
 		return null;
 	}
-	public String selectVov(){
+
+	public String selectVov() {
 		selectedVersion = selectedItems.get(selectedRow).getVov();
 		return null;
 	}
+
 	public String takeSelection() {
 		selectedItems = new ArrayList<VisibleItems>();
 		Iterator<Object> iterator = getSelection().getKeys();
@@ -95,11 +97,21 @@ public class ListVobjectsBean extends aDBbean {
 	public void setSelectedRow(int selectedRow) {
 		this.selectedRow = selectedRow;
 	}
-	
+
 	public String showHistory() {
 		return "show_history";
 	}
+
 	public String showDistribution() {
 		return "show_distribution";
+	}
+
+	public List<VisibleSubItem> getSubobjects() {
+		if (Object.class.isInstance(this.selectedItems)
+				&& this.selectedItems.size() > 0)
+
+			return this.selectedItems.get(0).getSubobjects();
+		else
+			return new ArrayList<VisibleSubItem>();
 	}
 }

@@ -12,13 +12,28 @@
 	<ui:define name="pageSubHeader">Login page</ui:define>
 	<ui:define name="body">
 		<a4j:form>
-			<rich:pickList value="#{bean.listaDestino}" copyAllControlLabel=" "
-				copyControlLabel=" " removeControlLabel=" "
-				removeAllControlLabel=" ">
-				<f:selectItems value="#{bean.listaOrigem}" />
-			</rich:pickList>
-				<a4j:commandButton value="Save WorkItem Configuration"
-					action="#{bean.Save()}"></a4j:commandButton>
+			<h:dataTable value="#{person.orders}" var="order">
+				<h:column>
+					<h:panelGrid columns="3">
+						<h:graphicImage id="expand" value="expand.gif"
+							onclick="toggleDetails(this);" />
+						<h:outputText value="#{order.id}" />
+						<h:outputText value="#{order.name}" />
+					</h:panelGrid>
+					<h:dataTable id="details" value="#{order.details}" var="detail"
+						style="display: none;">
+						<h:column>
+							<h:outputText value="#{detail.date}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{detail.description}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{detail.quantity}" />
+						</h:column>
+					</h:dataTable>
+				</h:column>
+			</h:dataTable>
 		</a4j:form>
 	</ui:define>
 </ui:composition>

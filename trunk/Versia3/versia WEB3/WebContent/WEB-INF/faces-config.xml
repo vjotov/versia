@@ -175,11 +175,6 @@
   </managed-property>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>bean</managed-bean-name>
-  <managed-bean-class>Bean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
- </managed-bean>
- <managed-bean>
   <managed-bean-name>objectHistoryBean</managed-bean-name>
   <managed-bean-class>com.jotov.versia.beans.vobj.ObjectHistoryBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
@@ -208,6 +203,11 @@
    <property-class>com.jotov.versia.beans.DBConnectBean</property-class>
    <value>#{dBConnectBean}</value>
   </managed-property>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>orderBean</managed-bean-name>
+  <managed-bean-class>OrderBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <navigation-rule>
   <display-name>login</display-name>

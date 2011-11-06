@@ -59,11 +59,6 @@
 							action="#{listVobjectsBean.takeSelection}"
 							oncomplete="javascript:Richfaces.showModalPanel('editVO');">
 						</a4j:commandButton>
-						<a4j:commandButton value="View SubObjects"
-							reRender="subObjectsTable"
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('viewSubObjects');">
-						</a4j:commandButton>
 						<a4j:commandButton value="Publish" reRender="publishTable"
 							action="#{listVobjectsBean.takeSelection}"
 							oncomplete="javascript:Richfaces.showModalPanel('PublishVO');">
@@ -76,11 +71,11 @@
 							action="#{listVobjectsBean.takeSelection}"
 							oncomplete="javascript:Richfaces.showModalPanel('DeleteVO');">
 						</a4j:commandButton>
-						<a4j:commandButton value="History"
-							action="#{listVobjectsBean.showHistory}">
+						<a4j:commandButton value="History" 
+							action="#{listVobjectsBean.showHistory}" >
 						</a4j:commandButton>
-						<a4j:commandButton value="Distribution"
-							action="#{listVobjectsBean.showDistribution}">
+						<a4j:commandButton value="Distribution" 
+							action="#{listVobjectsBean.showDistribution}" >
 						</a4j:commandButton>
 						<rich:spacer height="20px" />
 						<rich:scrollableDataTable id="visibleObjects" rowKeyVar="rkv"
@@ -116,15 +111,6 @@
 									<h:outputText styleClass="headerText" value="Visibility" />
 								</f:facet>
 								<h:outputText value="#{item.vvector}" />
-							</rich:column>
-							<rich:column width="60">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="SubObjects" />
-								</f:facet>
-								<h:graphicImage id="expand" value="#{item.image}" />
-
-
-
 							</rich:column>
 						</rich:scrollableDataTable>
 
@@ -162,42 +148,6 @@
 							disabled="#{editVObjectBean.readonly}" />
 					</a4j:form>
 				</rich:modalPanel>
-				<rich:modalPanel id="viewSubObjects" autosized="false"
-					keepVisualState="false" width="315" height="250">
-					<f:facet name="header">
-						<h:outputText value="View SubObject" />
-					</f:facet>
-					<f:facet name="controls">
-						<span style="cursor: pointer"
-							onclick="javascript:Richfaces.hideModalPanel('viewSubObjects')">X</span>
-					</f:facet>
-					<a4j:form>
-						<rich:scrollableDataTable id="subObjectsTable"
-							value="#{listVobjectsBean.subobjects}" var="item" rows="8" width="300" height="170">
-							<rich:column width="60">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object ID" />
-								</f:facet>
-								<h:outputText value="#{item.objectId}" />
-							</rich:column>
-							<rich:column width="60">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object Ver." />
-								</f:facet>
-								<h:outputText value="#{item.verionNumber}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object Name" />
-								</f:facet>
-								<h:outputText value="#{item.objectName}" />
-							</rich:column>
-							</rich:scrollableDataTable>
-							<h:commandButton value="Close"
-								onclick="javascript:Richfaces.hideModalPanel('viewSubObjects')" />
-					</a4j:form>
-				</rich:modalPanel>
-
 
 				<rich:modalPanel id="PublishVO" autosized="false"
 					keepVisualState="false" width="315" height="300">
@@ -299,7 +249,8 @@
 							<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
 								disabled="true" />
 						</h:panelGrid>
-						<h:commandButton action="#{editVObjectBean.Delete}" value="Delete"
+						<h:commandButton action="#{editVObjectBean.Delete}"
+							value="Delete"
 							onclick="javascript:Richfaces.hideModalPanel('DeleteVO')" />
 					</a4j:form>
 				</rich:modalPanel>

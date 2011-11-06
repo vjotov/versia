@@ -7,9 +7,27 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <f:loadBundle basename="resources" var="msg" />
+<script language="JavaScript">
+function toggleDetails(image) {
+	var full_img_name = image.src
+	var img_name = full_img_name.substr(full_img_name.length-14);
+	if(img_name != "tree_empty.gif") {
+	    var detailsId = image.id.substring(0, image.id.lastIndexOf(':')) + ':details';
+	    var details = document.getElementById(detailsId);
+	    if (details.style.display == 'none') {
+	        details.style.display = 'block';
+	        image.src = 'img/tree_collapse.gif';
+	    } else {
+	        details.style.display = 'none';
+	        image.src = 'img/tree_expand.gif';
+	    }
+	}
+}
+</script>
 <head>
-<title><ui:insert name="pageTitle">Versia <h:outputText value="#{userSessionBean.product.productName}" /></ui:insert>
-</title>
+<title><ui:insert name="pageTitle">Versia <h:outputText
+			value="#{userSessionBean.product.productName}" />
+	</ui:insert></title>
 <meta http-equiv="cache-control" content="no-cache" />
 <style type="text/css">
 body {
@@ -29,6 +47,7 @@ body {
 	vertical-align: middle;
 	color: #8E969D;
 }
+
 input {
 	border: 1px solid #999;
 	border-top-color: #CCC;
@@ -36,11 +55,12 @@ input {
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
-	box-shadow: inset 0 14px 10px rgba(255, 255, 255, 0.5), 0 1px 4px rgba(0, 0, 0, 0.25);
-	-webkit-box-shadow: inset 0 14px 10px rgba(255, 255, 255, 0.5),
-		0 1px 4px rgba(0, 0, 0, 0.25);
-	-moz-box-shadow: inset 0 14px 10px rgba(255, 255, 255, 0.5),
-		0 1px 4px rgba(0, 0, 0, 0.25);
+	box-shadow: inset 0 14px 10px rgba(255, 255, 255, 0.5), 0 1px 4px
+		rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: inset 0 14px 10px rgba(255, 255, 255, 0.5), 0 1px
+		4px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: inset 0 14px 10px rgba(255, 255, 255, 0.5), 0 1px 4px
+		rgba(0, 0, 0, 0.25);
 }
 </style>
 </head>
@@ -56,10 +76,14 @@ input {
 				</td>
 			</tr>
 			<tr>
-				<td height="1" width="100%" bgcolor="#CAD6E0"><ui:insert name="pageSubHeader">Page sub header</ui:insert></td>
+				<td height="1" width="100%" bgcolor="#CAD6E0"><ui:insert
+						name="pageSubHeader">Page sub header</ui:insert>
+				</td>
 			</tr>
 			<tr>
-				<td height="1" width="100%" bgcolor="#CAD6E0"><ui:insert name="menuBar">Menu bar</ui:insert></td>
+				<td height="1" width="100%" bgcolor="#CAD6E0"><ui:insert
+						name="menuBar">Menu bar</ui:insert>
+				</td>
 			</tr>
 			<tr>
 				<td width="100%" colspan="2">
@@ -68,10 +92,12 @@ input {
 						<tbody>
 							<tr>
 								<td align="center" width="100%" valign="middle"><ui:insert
-										name="body">Page Body</ui:insert></td>
+										name="body">Page Body</ui:insert>
+								</td>
 							</tr>
 						</tbody>
-					</table></td>
+					</table>
+				</td>
 			</tr>
 
 			<tr>

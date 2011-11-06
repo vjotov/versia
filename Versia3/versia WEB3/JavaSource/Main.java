@@ -39,11 +39,11 @@ public class Main {
 			// VersionArc va = em.find(VersionArc.class, 122);
 			
 			WSpace ws = em.find(WSpace.class, 152);
-			VObjectVersion superVOV = em.find(VObjectVersion.class, 9);
-			UserProfile user = em.find(UserProfile.class, 1);
-			
+//			VObjectVersion superVOV = em.find(VObjectVersion.class, 9);
+//			UserProfile user = em.find(UserProfile.class, 1);
+			ArrayList<VisibleItems> a = VisibileItemsExtractor.buildVersions(ws);
 			em.getTransaction().begin();
-			publishVersion(superVOV,ws, ws.getAncestorWorkspace(),user, em);
+//			publishVersion(superVOV,ws, ws.getAncestorWorkspace(),user, em);
 			em.getTransaction().commit();
 			
 			System.out.println("After Query");
@@ -64,7 +64,7 @@ public class Main {
 		// composed object
 		
 		if (!pVOV.getWorkspace().equals(ws))
-			// not local object => nothing to publicate
+			// not local object => nothing for publication
 			return;
 		
 		VObjectVersion ancestorVOV = pVOV.getAncestorVersion();

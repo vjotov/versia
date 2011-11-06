@@ -1,38 +1,41 @@
 import java.util.List;
 import java.util.ArrayList;
-import javax.faces.model.SelectItem;
+
+import javax.annotation.PostConstruct;
 
 public class Bean {
-  private List<SelectItem> listaDestino;
-  private List<SelectItem> listaOrigem;
-   
-  public List<SelectItem> getListaDestino() {
-    if (listaDestino == null) {
-      listaDestino = new ArrayList<SelectItem>();
-    }
-    return listaDestino;
-  }
-  public List<SelectItem> getListaOrigem() {
-    if (listaOrigem == null) {
-      listaOrigem = new ArrayList<SelectItem>();
-       
-      /* Criei esse objeto apenas a título de exemplo. 
-       * Num caso real, você poderia buscar a lista do banco.
-       */
-      //SelectItem o = ;
-      listaOrigem.add(new SelectItem("1", "firrst"));
-      listaOrigem.add(new SelectItem("2", "second"));
-    }  
-    return listaOrigem;
-  }
-  public void setListaDestino(List<SelectItem> listaDestino) {
-    this.listaDestino = listaDestino;
-  }
-  public void setListaOrigem(List<SelectItem> listaOrigem) {
-    this.listaOrigem = listaOrigem;
-  }
-	public String Save() {
-		System.out.println("Bean/Save()");
-		return null;
+	private List<Order1> orders;
+
+	public Bean() {
+		
 	}
+	
+	@PostConstruct
+	public void init() {
+		ArrayList<OrderDetail> odal1 = new ArrayList<OrderDetail>();
+		odal1.add(new OrderDetail("2010-01-31",
+				"detail 1", 100));
+		odal1.add(new OrderDetail("2010-02-20",
+				"detail 2", 50));
+		odal1.add(new OrderDetail("2010-03-30", "third",
+				3000));
+		this.orders.add(new Order1(1, "first order", odal1));
+		
+		ArrayList<OrderDetail> odal2 = new ArrayList<OrderDetail>();
+		odal2.add(new OrderDetail("2010-01-15",
+				"second order d1", 123));
+		odal2.add( new OrderDetail("2010-02-24",
+				"second order d2", 1234));
+		
+		this.orders.add(new Order1(2, "second order", odal2));
+	}
+
+	public List<Order1> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order1> orders) {
+		this.orders = orders;
+	}
+
 }

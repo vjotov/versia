@@ -66,15 +66,15 @@
 						</a4j:commandButton>
 						<a4j:commandButton value="Publish" reRender="publishTable"
 							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('PublishVO');">
+							oncomplete="javascript:Richfaces.showModalPanel('publishVO');">
 						</a4j:commandButton>
 						<a4j:commandButton value="Roll Back" reRender="rollbackTable"
 							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('RollBackVO');">
+							oncomplete="javascript:Richfaces.showModalPanel('rollBackVO');">
 						</a4j:commandButton>
 						<a4j:commandButton value="Delete" reRender="deleteTable"
 							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('DeleteVO');">
+							oncomplete="javascript:Richfaces.showModalPanel('deleteVO');">
 						</a4j:commandButton>
 						<a4j:commandButton value="History"
 							action="#{listVobjectsBean.showHistory}">
@@ -132,177 +132,11 @@
 					</a4j:form>
 				</rich:panel>
 
-				<rich:modalPanel id="editVO" autosized="false"
-					keepVisualState="false" width="315" height="230">
-					<f:facet name="header">
-						<h:outputText value="Edit Object" />
-					</f:facet>
-					<f:facet name="controls">
-						<span style="cursor: pointer"
-							onclick="javascript:Richfaces.hideModalPanel('editVO')">X</span>
-					</f:facet>
-					<a4j:form>
-						<h:panelGrid columns="2" id="editTable">
-							<h:outputText value="Object ID" />
-							<h:outputText value="#{editVObjectBean.VObjectID} " />
-							<h:outputText value="Object Version" />
-							<h:outputText value="#{editVObjectBean.VObjectVersion}" />
-							<h:outputText value="Object Name" />
-							<h:inputText value="#{editVObjectBean.VObjectName}"
-								disabled="#{editVObjectBean.readonly}" />
-							<h:outputText value="Object Data" />
-							<h:inputTextarea value="#{editVObjectBean.VObjectDatum}"
-								disabled="#{editVObjectBean.readonly}" />
-							<h:outputText value="Is Work Item" />
-							<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
-								disabled="#{editVObjectBean.readonly}" />
-						</h:panelGrid>
-						<h:commandButton action="#{editVObjectBean.Save}" value="Save"
-							onclick="javascript:Richfaces.hideModalPanel('editPanel')"
-							disabled="#{editVObjectBean.readonly}" />
-					</a4j:form>
-				</rich:modalPanel>
-				<rich:modalPanel id="viewSubObjects" autosized="false"
-					keepVisualState="false" width="315" height="250">
-					<f:facet name="header">
-						<h:outputText value="View SubObject" />
-					</f:facet>
-					<f:facet name="controls">
-						<span style="cursor: pointer"
-							onclick="javascript:Richfaces.hideModalPanel('viewSubObjects')">X</span>
-					</f:facet>
-					<a4j:form>
-						<rich:scrollableDataTable id="subObjectsTable"
-							value="#{listVobjectsBean.subobjects}" var="item" rows="8" width="300" height="170">
-							<rich:column width="60">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object ID" />
-								</f:facet>
-								<h:outputText value="#{item.objectId}" />
-							</rich:column>
-							<rich:column width="60">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object Ver." />
-								</f:facet>
-								<h:outputText value="#{item.verionNumber}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object Name" />
-								</f:facet>
-								<h:outputText value="#{item.objectName}" />
-							</rich:column>
-							</rich:scrollableDataTable>
-							<h:commandButton value="Close"
-								onclick="javascript:Richfaces.hideModalPanel('viewSubObjects')" />
-					</a4j:form>
-				</rich:modalPanel>
-
-
-				<rich:modalPanel id="PublishVO" autosized="false"
-					keepVisualState="false" width="315" height="300">
-					<f:facet name="header">
-						<h:outputText value="Publish Object Version" />
-					</f:facet>
-					<f:facet name="controls">
-						<span style="cursor: pointer"
-							onclick="javascript:Richfaces.hideModalPanel('PublishVO')">X</span>
-					</f:facet>
-					<a4j:form>
-						<h:panelGrid columns="3" id="publishTable">
-							<h:outputText value="&nbsp;" />
-							<h:outputText value="Local Version" />
-							<h:outputText value="Ancestor's Version" />
-							<h:outputText value="Object ID" />
-							<h:outputText value="#{editVObjectBean.VObjectID} " />
-							<h:outputText value="TODO" />
-							<h:outputText value="Object Version" />
-							<h:outputText value="#{editVObjectBean.VObjectVersion}" />
-							<h:outputText value="TODO" />
-							<h:outputText value="Object Name" />
-							<h:outputText value="#{editVObjectBean.VObjectName}" />
-							<h:outputText value="TODO" />
-							<h:outputText value="Object Data" />
-							<h:inputTextarea value="#{editVObjectBean.VObjectDatum}"
-								disabled="true" />
-							<h:outputText value="TODO" />
-							<h:outputText value="Is Work Item" />
-							<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
-								disabled="true" />
-							<h:outputText value="TODO" />
-						</h:panelGrid>
-						<h:commandButton action="#{editVObjectBean.Publish}"
-							value="Publish"
-							onclick="javascript:Richfaces.hideModalPanel('PublishVO')" />
-					</a4j:form>
-				</rich:modalPanel>
-
-				<rich:modalPanel id="RollBackVO" autosized="false"
-					keepVisualState="false" width="315" height="300">
-					<f:facet name="header">
-						<h:outputText value="RollBack Object Version" />
-					</f:facet>
-					<f:facet name="controls">
-						<span style="cursor: pointer"
-							onclick="javascript:Richfaces.hideModalPanel('RollBackVO')">X</span>
-					</f:facet>
-					<a4j:form>
-						<h:panelGrid columns="3" id="rollbackTable">
-							<h:outputText value="&nbsp;" />
-							<h:outputText value="Local Version" />
-							<h:outputText value="Ancestor's Version" />
-							<h:outputText value="Object ID" />
-							<h:outputText value="#{editVObjectBean.VObjectID} " />
-							<h:outputText value="TODO" />
-							<h:outputText value="Object Version" />
-							<h:outputText value="#{editVObjectBean.VObjectVersion}" />
-							<h:outputText value="TODO" />
-							<h:outputText value="Object Name" />
-							<h:outputText value="#{editVObjectBean.VObjectName}" />
-							<h:outputText value="TODO" />
-							<h:outputText value="Object Data" />
-							<h:inputTextarea value="#{editVObjectBean.VObjectDatum}"
-								disabled="true" />
-							<h:outputText value="TODO" />
-							<h:outputText value="Is Work Item" />
-							<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
-								disabled="true" />
-							<h:outputText value="TODO" />
-						</h:panelGrid>
-						<h:commandButton action="#{editVObjectBean.RollBack}"
-							value="Roll Back"
-							onclick="javascript:Richfaces.hideModalPanel('RollBackVO')" />
-					</a4j:form>
-				</rich:modalPanel>
-
-				<rich:modalPanel id="DeleteVO" autosized="false"
-					keepVisualState="false" width="315" height="230">
-					<f:facet name="header">
-						<h:outputText value="Delete Object" />
-					</f:facet>
-					<f:facet name="controls">
-						<span style="cursor: pointer"
-							onclick="javascript:Richfaces.hideModalPanel('DeleteVO')">X</span>
-					</f:facet>
-					<a4j:form>
-						<h:panelGrid columns="2" id="deleteTable">
-							<h:outputText value="Object ID" />
-							<h:outputText value="#{editVObjectBean.VObjectID} " />
-							<h:outputText value="Object Version" />
-							<h:outputText value="#{editVObjectBean.VObjectVersion}" />
-							<h:outputText value="Object Name" />
-							<h:outputText value="#{editVObjectBean.VObjectName}" />
-							<h:outputText value="Object Data" />
-							<h:inputTextarea value="#{editVObjectBean.VObjectDatum}"
-								disabled="true" />
-							<h:outputText value="Is Work Item" />
-							<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
-								disabled="true" />
-						</h:panelGrid>
-						<h:commandButton action="#{editVObjectBean.Delete}" value="Delete"
-							onclick="javascript:Richfaces.hideModalPanel('DeleteVO')" />
-					</a4j:form>
-				</rich:modalPanel>
+				<a4j:include viewId="/pages/includes/editVO.xhtml" />
+				<a4j:include viewId="/pages/includes/viewSubObjects.xhtml" />
+<a4j:include viewId="/pages/includes/publishVO.xhtml" />
+<a4j:include viewId="/pages/includes/rollBackVO.xhtml" />
+<a4j:include viewId="/pages/includes/deleteVO.xhtml" />
 
 			</rich:panel>
 			<a4j:form>

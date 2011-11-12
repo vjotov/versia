@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<rich:modalPanel xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" id="rollBackVO"
+	autosized="false" keepVisualState="false" width="315" height="300">
+	<f:facet name="header">
+		<h:outputText value="RollBack Object Version" />
+	</f:facet>
+	<f:facet name="controls">
+		<span style="cursor: pointer"
+			onclick="javascript:Richfaces.hideModalPanel('RollBackVO')">X</span>
+	</f:facet>
+	<a4j:form>
+		<h:panelGrid columns="3" id="rollbackTable">
+			<h:outputText value="&nbsp;" />
+			<h:outputText value="Local Version" />
+			<h:outputText value="Ancestor's Version" />
+			<h:outputText value="Object ID" />
+			<h:outputText value="#{editVObjectBean.VObjectID} " />
+			<h:outputText value="TODO" />
+			<h:outputText value="Object Version" />
+			<h:outputText value="#{editVObjectBean.VObjectVersion}" />
+			<h:outputText value="TODO" />
+			<h:outputText value="Object Name" />
+			<h:outputText value="#{editVObjectBean.VObjectName}" />
+			<h:outputText value="TODO" />
+			<h:outputText value="Object Data" />
+			<h:inputTextarea value="#{editVObjectBean.VObjectDatum}"
+				disabled="true" />
+			<h:outputText value="TODO" />
+			<h:outputText value="Is Work Item" />
+			<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
+				disabled="true" />
+			<h:outputText value="TODO" />
+		</h:panelGrid>
+		<h:commandButton action="#{editVObjectBean.RollBack}"
+			value="Roll Back"
+			onclick="javascript:Richfaces.hideModalPanel('RollBackVO')" />
+	</a4j:form>
+</rich:modalPanel>

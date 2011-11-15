@@ -1,16 +1,21 @@
 package com.jotov.versia.orm;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="wiaByWSnVO",
+        query="SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :object AND w.workspace = :workspace")
+})
 public class WorkItemAttachement {
 	private int WIAID;
 	private VObject workitem;

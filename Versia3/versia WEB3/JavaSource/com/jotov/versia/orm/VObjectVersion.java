@@ -28,7 +28,7 @@ public class VObjectVersion {
 	private int deleteFlag = 0;
 	private List<VersionArc> precetorsArc = new ArrayList<VersionArc>();
 	private List<VComposer> subObjects;
-	private VComposer superObject; // TODO: it has to be volatile
+	private VComposer superObject; 
 
 	// private List<VObjectVersion> subObjects = new
 	// ArrayList<VObjectVersion>();

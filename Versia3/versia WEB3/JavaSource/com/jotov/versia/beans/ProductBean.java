@@ -45,7 +45,7 @@ public class ProductBean extends aDBbean {
 		EntityTransaction trx = em.getTransaction();
 		trx.begin();
 
-		List<Object> listForPersist = Product.createProduct(newProductName);
+		List<Object> listForPersist = Product.createProduct(newProductName, em);
 		for (Object obj : listForPersist) {
 			em.persist(obj);
 		}

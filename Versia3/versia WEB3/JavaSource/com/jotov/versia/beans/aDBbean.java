@@ -33,13 +33,11 @@ public abstract class aDBbean implements iExecuteQuery {
 
 	@Override
 	public String executeQuery() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String executeQuery(int mode) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

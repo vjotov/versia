@@ -278,6 +278,11 @@
    <to-view-id>/pages/06_distribution.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
+  <navigation-case>
+   <from-action>#{listWorkItemsBean.ManageWorkitem}</from-action>
+   <from-outcome>manage_workitem</from-outcome>
+   <to-view-id>/pages/07_workitems.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/pages/05_history.xhtml</from-view-id>
@@ -292,6 +297,14 @@
   <navigation-case>
    <from-action>#{objectDistributionBean.showWorkspace}</from-action>
    <from-outcome>show_workspace</from-outcome>
+   <to-view-id>/pages/04_workspace.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/pages/07_workitems.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{listWorkItemsBean.ManageWorkspace}</from-action>
+   <from-outcome>manage_workspace</from-outcome>
    <to-view-id>/pages/04_workspace.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>

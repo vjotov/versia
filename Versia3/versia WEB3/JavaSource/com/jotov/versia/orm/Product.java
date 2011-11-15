@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +20,13 @@ public class Product {
 
 	private List<Release> realeses = new ArrayList<Release>();
 
-	public static List<Object> createProduct(String productName) {
+	public static List<Object> createProduct(String productName, EntityManager em) {
 		List<Object> result = new ArrayList<Object>();
 
 		Product newProduct = new Product(productName);
 		result.add(newProduct);
 
-		result.addAll(Release.createRelease(newProduct, "Zero Release", null));
+		result.addAll(Release.createRelease(newProduct, "Zero Release", null, em));
 		return result;
 	}
 

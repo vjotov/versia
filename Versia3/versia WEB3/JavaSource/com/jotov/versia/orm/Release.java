@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,14 +24,14 @@ public class Release {
 	private WSpace masterWorkspace;
 
 	public static List<Object> createRelease(Product product,
-			String releaseName, List<Release> sourceReleases) {
+			String releaseName, List<Release> sourceReleases, EntityManager em) {
 		List<Object> result = new ArrayList<Object>();
 
 		Release newRelease = new Release(product, releaseName);
 		result.add(newRelease);
 
 		result.addAll(ReleaseArc.createArcs(sourceReleases, newRelease));
-		WSpace master = WSpace.createMasterWorkspace(newRelease);
+		WSpace master = WSpace.createMasterWorkspace(newRelease, em);
 		newRelease.setMasterWorkspace(master);
 		return result;
 	}

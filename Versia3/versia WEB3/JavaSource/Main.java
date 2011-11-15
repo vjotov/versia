@@ -35,16 +35,41 @@ public class Main {
 			System.out.println("Before Query");
 			// Product prod = loadProduct(em);
 			
+			//Query q = em.createQuery("SELECT w FROM WSpace w ORDER BY w.rv DESC");
+			//WSpace w = (WSpace) q.getResultList().get(0);
+			
 
 			// VersionArc va = em.find(VersionArc.class, 122);
 			
 			WSpace ws = em.find(WSpace.class, 152);
-//			VObjectVersion superVOV = em.find(VObjectVersion.class, 9);
-//			UserProfile user = em.find(UserProfile.class, 1);
-			ArrayList<VisibleItems> a = VisibileItemsExtractor.buildVersions(ws);
+////			VObjectVersion superVOV = em.find(VObjectVersion.class, 9);
+////			UserProfile user = em.find(UserProfile.class, 1);
+//			ArrayList<VisibleItems> a = VisibileItemsExtractor.buildVersions(ws);
 			em.getTransaction().begin();
-//			publishVersion(superVOV,ws, ws.getAncestorWorkspace(),user, em);
+			int lv = ws.getLv();
+//			Query q1 = em.createQuery("UPDATE WSpace w SET w.lv = w.lv+2 WHERE w.lv >= :lv_parameter");
+//			Query q2 = em.createQuery("UPDATE WSpace w SET w.rv = w.rv+2 WHERE w.rv >= :lv_parameter");
+//			
+//			q1.setParameter("lv_parameter", lv);
+//			q2.setParameter("lv_parameter", lv);
+//			int updated = q1.executeUpdate();
+//			System.out.println("1 Updated "+updated+" LV values of WSpace objects");
+//			updated = q2.executeUpdate();
+//			System.out.println("2 Updated "+updated+" RV values of WSpace objects");
+			
+			//int lv = ws.getLv();
+			Query q1 = em.createQuery("UPDATE WSpace w SET w.lv = w.lv-2 WHERE w.lv >= :lv_parameter");
+			Query q2 = em.createQuery("UPDATE WSpace w SET w.rv = w.rv-2 WHERE w.rv >= :lv_parameter");
+			q1.setParameter("lv_parameter", lv);
+			q2.setParameter("lv_parameter", lv);
+			int updated = q1.executeUpdate();
+			System.out.println("1) Updated "+updated+" LV values of WSpace objects");
+			updated = q2.executeUpdate();
+			System.out.println("2) Updated "+updated+" RV values of WSpace objects");
+			
+			
 			em.getTransaction().commit();
+//			em.getTransaction().rollback();
 			
 			System.out.println("After Query");
 

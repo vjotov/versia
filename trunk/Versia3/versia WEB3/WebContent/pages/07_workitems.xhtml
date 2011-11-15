@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/templates/common.xhtml">
+	<ui:define name="pageSubHeader">Product: #{userSessionBean.product.toString()}/#{userSessionBean.release.toString()}/#{userSessionBean.userProfile.openedWorkspace.WSpaceName}( #{userSessionBean.userProfile.openedWorkspace.WSpaceId} ) - work in space</ui:define>
+	<ui:define name="menuBar">
+		<h:form id="menu_form">
+			<rich:toolBar>
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="Workspace" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="Manage Workspace"
+						action="#{listWorkItemsBean.ManageWorkspace}" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="Help" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="About" />
+				</rich:dropDownMenu>
+			</rich:toolBar>
+		</h:form>
+	</ui:define>
+	<ui:define name="body">
+			<a4j:form>
+				<rich:panel id="workitem_panel">
+					<f:facet name="header">Work Iems </f:facet>
+					<rich:pickList id="WorkitemPickList"
+						value="#{listWorkItemsBean.selected}"
+						copyAllControlLabel="Attach All" copyControlLabel="Attach"
+						removeControlLabel="Detach" removeAllControlLabel="Detach All">
+						<f:selectItems value="#{listWorkItemsBean.options}" />
+					</rich:pickList>
+					<a4j:commandButton value="Save WorkItem Configuration"
+						action="#{listWorkItemsBean.Update()}"></a4j:commandButton>
+				</rich:panel>
+			</a4j:form>
+	</ui:define>
+</ui:composition>
+</html>
+

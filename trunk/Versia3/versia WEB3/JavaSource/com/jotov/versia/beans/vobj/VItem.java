@@ -1,0 +1,214 @@
+package com.jotov.versia.beans.vobj;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import com.jotov.versia.orm.VComposer;
+import com.jotov.versia.orm.VObject;
+import com.jotov.versia.orm.VObjectVersion;
+import com.jotov.versia.orm.WSpace;
+import com.jotov.versia.orm.WorkItemAttachement;
+
+public class VItem {
+	private WSpace workspace;
+	private VObject vObject;
+	private VObjectVersion voVersion;
+	private Integer voID;
+	private Integer versionNumber;
+	private String voName;
+	private String voDatum;
+	private Boolean workitemFlag;
+	private Boolean deletedFlag;
+	private Boolean attachedWIFlag;
+	private Boolean ancestorFlag;
+	private Integer ancestorVersionNumber;
+	private String ancestorVOName;
+	private String ancestorVODatum;
+	private List<VObjectVersion> subObjects = new ArrayList<VObjectVersion>();
+	private List<VisibilityEnum> visibility = new ArrayList<VisibilityEnum>();
+
+	public VItem() {
+	}
+
+	@SuppressWarnings("unchecked")
+	public VItem(VObjectVersion vov, WSpace ws, EntityManager em) {
+		workspace = ws;
+		voVersion = vov;
+		vObject = vov.getVobject();
+		voID = this.getVoID();
+		versionNumber = vov.getVersionNumber();
+		ancestorVOName = vov.getObjectName();
+		ancestorVODatum = vov.getObjectDatum();
+		workitemFlag = new Boolean(vObject.isWorkItem());
+		deletedFlag = new Boolean(vov.getDeleteFlag() != 0);
+
+		if (workitemFlag) {
+			Query q = em.createNamedQuery("wiaByWSnVO");
+			q.setParameter("object", vObject);
+			q.setParameter("workspace", ws);
+
+			attachedWIFlag = ((Integer) q.getSingleResult() > 0);
+		} else
+			attachedWIFlag = false;
+
+		Query q = em
+				.createQuery("SELECT v FROM VObjectVersion v WHERE v.workspace.lv < :lvParamenter AND v.workspace.rv >:rvParameter ORDER BY v.workspace.lv DESC");
+		q.setParameter("lvParameter", ws.getLv());
+		q.setParameter("rvParameter", ws.getRv());
+
+		List<VObjectVersion> ancestorVOVs = q.getResultList();
+		if (ancestorVOVs.size() > 0) {
+			ancestorFlag = true;
+			VObjectVersion ancestorVOV = ancestorVOVs.get(0);
+			ancestorVersionNumber = ancestorVOV.getVersionNumber();
+			ancestorVOName = ancestorVOV.getObjectName();
+			ancestorVODatum = ancestorVOV.getObjectDatum();
+		} else {
+			ancestorFlag = false;
+			ancestorVersionNumber = 0;
+			ancestorVOName = "N/A";
+			ancestorVODatum = "N/A";
+		}
+		
+		List<VComposer> vcLS = voVersion.getSubObjects();
+		for(VComposer vc: vcLS){
+			subObjects.add(vc.getSubObject());
+		}
+	}
+
+	public WSpace getWorkspace() {
+		return workspace;
+	}
+
+	public void setWorkspace(WSpace workspace) {
+		this.workspace = workspace;
+	}
+
+	public VObject getvObject() {
+		return vObject;
+	}
+
+	public void setvObject(VObject vObject) {
+		this.vObject = vObject;
+	}
+
+	public VObjectVersion getVoVersion() {
+		return voVersion;
+	}
+
+	public void setVoVersion(VObjectVersion voVersion) {
+		this.voVersion = voVersion;
+	}
+
+	public Integer getVoID() {
+		return voID;
+	}
+
+	public void setVoID(Integer voID) {
+		this.voID = voID;
+	}
+
+	public Integer getVersionNumber() {
+		return versionNumber;
+	}
+
+	public void setVersionNumber(Integer versionNumber) {
+		this.versionNumber = versionNumber;
+	}
+
+	public String getVoName() {
+		return voName;
+	}
+
+	public void setVoName(String voName) {
+		this.voName = voName;
+	}
+
+	public String getVoDatum() {
+		return voDatum;
+	}
+
+	public void setVoDatum(String voDatum) {
+		this.voDatum = voDatum;
+	}
+
+	public Boolean getWorkitemFlag() {
+		return workitemFlag;
+	}
+
+	public Boolean getDeletedFlag() {
+		return deletedFlag;
+	}
+
+	public void setWorkitemFlag(Boolean workitemFlag) {
+		this.workitemFlag = workitemFlag;
+	}
+
+	public Boolean getAttachedWIFlag() {
+		if (!Object.class.isInstance(attachedWIFlag))
+			calculateAttachedWIFlag();
+		return attachedWIFlag;
+
+	}
+
+	private void calculateAttachedWIFlag() {
+		List<WorkItemAttachement> wias = workspace.getAttachedWorkItems();
+		for (WorkItemAttachement wia : wias) {
+			if (wia.getWorkitem().equals(vObject)) {
+				this.attachedWIFlag = new Boolean(true);
+				break;
+			}
+		}
+		if (!Object.class.isInstance(this.attachedWIFlag))
+			this.attachedWIFlag = new Boolean(false);
+	}
+
+	public Boolean getAncestorFlag() {
+		if (!Object.class.isInstance(ancestorFlag))
+			calculateAncestorFlag();
+		return ancestorFlag;
+	}
+
+	private void calculateAncestorFlag() {
+		// TODO calculation; priority low
+		ancestorFlag = false;
+	}
+
+	public Integer getAncestorVersionNumber() {
+		// TODO calculation; priority low
+		return ancestorVersionNumber;
+	}
+
+	public String getAncestorVOName() {
+		// TODO calculation; priority low
+		return ancestorVOName;
+	}
+
+	public String getAncestorVODatum() {
+		// TODO calculation; priority low
+		return ancestorVODatum;
+	}
+
+	public List<VObjectVersion> getSubObjects() {
+		return subObjects;
+	}
+
+	public void setSubObjects(List<VObjectVersion> subObjects) {
+		this.subObjects = subObjects;
+	}
+
+	public List<VisibilityEnum> getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(List<VisibilityEnum> visibility) {
+		this.visibility = visibility;
+	}
+
+	public void addVisibility(VisibilityEnum v) {
+		visibility.add(v);
+	}
+}

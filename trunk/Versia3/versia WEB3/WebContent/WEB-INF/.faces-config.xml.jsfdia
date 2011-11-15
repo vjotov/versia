@@ -73,6 +73,11 @@
     NAME="output2" PATH="/pages/06_distribution.xhtml"
     TARGET="rules:#pages#06_distribution.xhtml"
     TITLE="#{listVobjectsBean.showDistribution}:show_distribution" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="manage_workitem:#{listWorkItemsBean.ManageWorkitem}:#pages#07_workitems.xhtml"
+    NAME="output3" PATH="/pages/07_workitems.xhtml"
+    TARGET="rules:#pages#07_workitems.xhtml"
+    TITLE="#{listWorkItemsBean.ManageWorkitem}:manage_workitem" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#05_history.xhtml"
@@ -95,6 +100,17 @@
     NAME="output" PATH="/pages/04_workspace.xhtml"
     TARGET="rules:#pages#04_workspace.xhtml"
     TITLE="#{objectDistributionBean.showWorkspace}:show_workspace" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#07_workitems.xhtml"
+  PATH="/pages/07_workitems.xhtml" SHAPE="992,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#07_workitems.xhtml:0" NAME="item"
+   PATH="/pages/07_workitems.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="manage_workspace:#{listWorkItemsBean.ManageWorkspace}:#pages#04_workspace.xhtml"
+    NAME="output" PATH="/pages/04_workspace.xhtml"
+    TARGET="rules:#pages#04_workspace.xhtml"
+    TITLE="#{listWorkItemsBean.ManageWorkspace}:manage_workspace" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

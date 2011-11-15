@@ -40,11 +40,10 @@ public class WSListBean extends aDBbean {
 		// WSpace selectedWorkspace = this.workspaces.get(selectedRow);
 		WSpace selectedWorkspace = em.find(WSpace.class, selectedWorkspaceId);
 		WSpace newOffspring = WSpace.createWorkspace("New Offspring Workspace",
-				selectedWorkspace, null);
+				selectedWorkspace, null, em);
 		em.persist(newOffspring);
 		trx.commit();
 
-		// TODO Auto-generated method stub
 		return null;
 	}
 

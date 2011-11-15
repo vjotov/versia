@@ -6,7 +6,6 @@ public class Second {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		ArrayList<Integer> attachedVoID = new ArrayList<Integer>();
 		attachedVoID.add(new Integer(2435));
 		attachedVoID.add(new Integer(2));

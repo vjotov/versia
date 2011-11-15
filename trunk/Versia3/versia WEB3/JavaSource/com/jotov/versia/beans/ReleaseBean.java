@@ -58,7 +58,7 @@ public class ReleaseBean extends aDBbean {
 		List<Release> presedors = new ArrayList<Release>();
 		presedors.add(selectedRelease);
 		List<Object> objArr = Release.createRelease(session.getProduct(),
-				"New Release " + System.currentTimeMillis(), presedors);
+				"New Release " + System.currentTimeMillis(), presedors, em);
 		for (Object o : objArr) {
 			em.persist(o);
 		}

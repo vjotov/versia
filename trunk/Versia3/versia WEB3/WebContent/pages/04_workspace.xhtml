@@ -19,6 +19,8 @@
 							<h:outputText value="Workspace" />
 						</h:panelGroup>
 					</f:facet>
+					<rich:menuItem value="Manage Workitems"
+						action="#{listWorkItemsBean.ManageWorkitem}" />
 					<rich:menuItem value="Close Workspace"
 						action="#{closeWorkspaceBean.closeWorkspace}" />
 				</rich:dropDownMenu>
@@ -122,26 +124,21 @@
 									<h:outputText styleClass="headerText" value="SubObjects" />
 								</f:facet>
 								<h:graphicImage id="expand" value="#{item.image}" />
-
-
-
 							</rich:column>
 						</rich:scrollableDataTable>
-
-
 					</a4j:form>
 				</rich:panel>
 
 				<a4j:include viewId="/pages/includes/editVO.xhtml" />
 				<a4j:include viewId="/pages/includes/viewSubObjects.xhtml" />
-<a4j:include viewId="/pages/includes/publishVO.xhtml" />
-<a4j:include viewId="/pages/includes/rollBackVO.xhtml" />
-<a4j:include viewId="/pages/includes/deleteVO.xhtml" />
+				<a4j:include viewId="/pages/includes/publishVO.xhtml" />
+				<a4j:include viewId="/pages/includes/rollBackVO.xhtml" />
+				<a4j:include viewId="/pages/includes/deleteVO.xhtml" />
 
 			</rich:panel>
 			<a4j:form>
-				<rich:panel id="workitem">
-					<f:facet name="header">Worki Iems </f:facet>
+				<rich:panel id="workitem_panel">
+					<f:facet name="header">Work Iems </f:facet>
 					<rich:pickList id="WorkitemPickList"
 						value="#{listWorkItemsBean.selected}"
 						copyAllControlLabel="Attach All" copyControlLabel="Attach"

@@ -62,19 +62,19 @@ public class ListWorkItemsBean extends aDBbean {
 		for (WorkItemAttachement itemWIA : itemsWIA) {
 			attached.put(itemWIA.getVoId(), itemWIA);
 		}
-		
+
 		// This array will contain only the remained VoIDs after WIA removal
 		ArrayList<Integer> attachedVoID = new ArrayList<Integer>();
-		
+
 		em.getTransaction().begin();
-		//removing missing workitem attachments
+		// removing missing workitem attachments
 		for (Integer key : attached.keySet()) {
 			if (!selected.contains(key)) {
 				RemoveAttachment(attached.get(key));
 			} else
 				attachedVoID.add(key);
 		}
-		//adding new workitem attachments
+		// adding new workitem attachments
 		for (int selectedItem : selected) {
 			if (!attachedVoID.contains(selectedItem)) {
 				CreateAttachment(selectedItem);
@@ -92,7 +92,6 @@ public class ListWorkItemsBean extends aDBbean {
 	}
 
 	private void CreateAttachment(Integer selectedItem) {
-		// TODO Auto-generated method stub
 		VObject vo = em.find(VObject.class, selectedItem);
 		WorkItemAttachement wia = WorkItemAttachement
 				.createWorkItemAttachement(workspace, vo);
@@ -136,4 +135,11 @@ public class ListWorkItemsBean extends aDBbean {
 		this.selected = selected;
 	}
 
+	public String ManageWorkitem() {
+		return "manage_workitem";
+	}
+
+	public String ManageWorkspace() {
+		return "manage_workspace";
+	}
 }

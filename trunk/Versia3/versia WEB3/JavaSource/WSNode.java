@@ -20,7 +20,6 @@ public class WSNode {
 	}
 
 	public WSNode[] getNodes() {
-		// TODO Auto-generated method stub
 		if (children == null) {
 			List<WSpace> chld = currentNode.getOffspringWorkspaces();
 			if (chld != null) {

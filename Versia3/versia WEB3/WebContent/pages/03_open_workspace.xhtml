@@ -6,8 +6,9 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
+<f:loadBundle basename="resources" var="msg" />
 <ui:composition template="/templates/common.xhtml">
-	<ui:define name="pageSubHeader">Product: #{userSessionBean.product.toString()}/#{userSessionBean.release.toString()} - Open/Create/Update Workspace</ui:define>
+	<ui:define name="pageSubHeader">#{msg.owsSubTitle1}#{userSessionBean.product.toString()}/#{userSessionBean.release.toString()}#{msg.owsSubTitle2}</ui:define>
 	<ui:define name="menuBar">
 		<h:form id="menu_form">
 			<rich:toolBar>
@@ -15,20 +16,20 @@
 					<f:facet name="label">
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-							<h:outputText value="Release" />
+							<h:outputText value="#{msg.menuRelease}" />
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem value="Close Release"
+					<rich:menuItem value="#{msg.menuCloseRelease}"
 						action="#{userSessionBean.closeRelease}" />
 				</rich:dropDownMenu>
 				<rich:dropDownMenu>
 					<f:facet name="label">
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-							<h:outputText value="Help" />
+							<h:outputText value="#{msg.menuHelp}" />
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem value="About"
+					<rich:menuItem value="#{msg.menuAbout}"
 						action="#{userSessionBean.doHelpAbout}" />
 				</rich:dropDownMenu>
 			</rich:toolBar>
@@ -37,34 +38,35 @@
 	<ui:define name="body">
 		<h:form>
 			<rich:panel id="workspace_catalog">
-				<f:facet name="header">List of workspaces</f:facet>
+				<f:facet name="header">#{msg.panelWorkspaces}</f:facet>
 				<rich:dataGrid value="#{wSListBean.workspaces}" var="workspace"
 					columns="1" elements="4" rowKeyVar="rowIndex">
 					<rich:panel bodyClass="pbody">
 						<f:facet name="header">
-							<h:outputText value="Workspaces" />
+							<h:outputText value="#{msg.panelWorkspace}" />
 						</f:facet>
 						<h:panelGrid columns="6" id="workspace_data">
-							<h:outputText value="WSID #{workspace.WSpaceId}# " />
+							<h:outputText value="#{msg.owsWSID}#{workspace.WSpaceId}# " />
 							<h:inputText value="#{workspace.WSpaceName}" styleClass="label" />
 							<h:outputText
-								value="Parent wsid: #{workspace.ancestorWorkspace.WSpaceId}"
+								value="#{msg.owsParentId}#{workspace.ancestorWorkspace.WSpaceId}"
 								styleClass="label" />
-							<a4j:commandButton value="Save"
+							<a4j:commandButton value="#{msg.owsSave}"
 								action="#{wSListBean.updateWorkspace}"
 								reRender="workspace_catalog">
 								<a4j:actionparam name="rowIndexSave" value="#{rowIndex}"
 									assignTo="#{wSListBean.selectedRow}" />
 							</a4j:commandButton>
-							<a4j:commandButton value="Create Offspring"
+							<a4j:commandButton value="#{msg.owsCreateOffspring}"
 								action="#{wSListBean.creareOffspring}"
 								reRender="workspace_catalog">
-								<a4j:actionparam name="WSOffspring" value="#{workspace.WSpaceId}" 
+								<a4j:actionparam name="WSOffspring"
+									value="#{workspace.WSpaceId}"
 									assignTo="#{wSListBean.selectedWorkspaceId}" />
 							</a4j:commandButton>
-							<a4j:commandButton value="Open" 
-								action="#{wSListBean.openWorkspace}" >
-								<a4j:actionparam name="WSOpen" value="#{workspace.WSpaceId}" 
+							<a4j:commandButton value="#{msg.owsOpen}"
+								action="#{wSListBean.openWorkspace}">
+								<a4j:actionparam name="WSOpen" value="#{workspace.WSpaceId}"
 									assignTo="#{wSListBean.selectedWorkspaceId}" />
 							</a4j:commandButton>
 						</h:panelGrid>

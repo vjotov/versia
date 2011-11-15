@@ -7,16 +7,16 @@
 
 <f:loadBundle basename="resources" var="msg" />
 <ui:composition template="/templates/common_login.xhtml">
-<ui:define name="pageSubHeader">Login page</ui:define>
+<ui:define name="pageSubHeader">#{msg.loginSubTitle}</ui:define>
     <ui:define name="body">
         <h:form>
         	<h:panelGrid columns="2">
-        		<h:outputText value="Name" />
+        		<h:outputText value="#{msg.loginName}" />
         		<h:inputText value="#{loginBean.name}" />
-        		<h:outputText value="Password" />
+        		<h:outputText value="#{msg.loginPassword}" />
         		<h:inputSecret value="#{loginBean.password}" />
         	</h:panelGrid>
-        	<h:commandButton value="Login 1" action="#{loginBean.CheckValidUser}" />
+        	<h:commandButton value="#{msg.loginButton}" action="#{loginBean.CheckValidUser}" />
         </h:form>
     </ui:define>
 </ui:composition>

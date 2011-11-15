@@ -6,8 +6,9 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
+<f:loadBundle basename="resources" var="msg" />
 <ui:composition template="/templates/common.xhtml">
-	<ui:define name="pageSubHeader">Product: #{userSessionBean.product.toString()} - Open/Create/Update Release</ui:define>
+	<ui:define name="pageSubHeader">#{msg.rlsSubTitle1}#{userSessionBean.product.toString()}#{msg.rlsSubTitle2}</ui:define>
 	<ui:define name="menuBar">
 		<h:form id="menu_form">
 			<rich:toolBar>
@@ -15,29 +16,29 @@
 					<f:facet name="label">
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-							<h:outputText value="Product" />
+							<h:outputText value="#{msg.menuProduct}" />
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem value="Close Product"
+					<rich:menuItem value="#{msg.menuCloseProduct}"
 						action="#{userSessionBean.closeProduct}" />
 				</rich:dropDownMenu>
 				<rich:dropDownMenu>
 					<f:facet name="label">
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-							<h:outputText value="Release" />
+							<h:outputText value="#{msg.menuRelease}" />
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem value="View Release Graph" />
+					<rich:menuItem value="#{msg.menuReleaseGraph}" />
 				</rich:dropDownMenu>
 				<rich:dropDownMenu>
 					<f:facet name="label">
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-							<h:outputText value="Help" />
+							<h:outputText value="#{msg.menuHelp}" />
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem value="About"
+					<rich:menuItem value="#{msg.menuAbout}"
 						action="#{userSessionBean.doHelpAbout}" />
 				</rich:dropDownMenu>
 			</rich:toolBar>
@@ -49,24 +50,24 @@
 				columns="1" elements="10" rowKeyVar="rowIndex">
 				<rich:panel bodyClass="pbody">
 					<f:facet name="header">
-						<h:outputText value="Release" />
+						<h:outputText value="#{msg.panelRelease}" />
 					</f:facet>
 					<h:panelGrid columns="7" id="release_data">
-						<h:outputText value="ID:" styleClass="label" />
+						<h:outputText value="#{msg.rlsID}" styleClass="label" />
 						<h:outputText value="#{release.releaseId} #" />
-						<h:outputText value="Release : " styleClass="label" />
+						<h:outputText value="#{msg.rlsName}" styleClass="label" />
 						<h:inputText value="#{release.releaseName}" />
-						<a4j:commandButton value="Save"
+						<a4j:commandButton value="#{msg.rlsSave}"
 							action="#{releaseBean.updateRelease}" reRender="main_section">
 							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
 								assignTo="#{releaseBean.selectedRow}" />
 						</a4j:commandButton>
-						<a4j:commandButton value="New from this"
+						<a4j:commandButton value="#{msg.rlsCreateNew}"
 							action="#{releaseBean.createRelease}" reRender="main_section">
 							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
 								assignTo="#{releaseBean.selectedRow}" />
 						</a4j:commandButton>
-						<a4j:commandButton value="Open"
+						<a4j:commandButton value="#{msg.rlsOpen}"
 							action="#{releaseBean.openRelease}" reRender="main_section">
 							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
 								assignTo="#{releaseBean.selectedRow}" />

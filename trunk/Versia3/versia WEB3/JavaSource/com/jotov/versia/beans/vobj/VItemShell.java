@@ -1,30 +1,27 @@
 package com.jotov.versia.beans.vobj;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-
+import com.jotov.versia.beans.aDBbean;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.WSpace;
 
-public class VItemShell {
+public class VItemShell extends aDBbean {
 	private WSpace workspace;
 	private List<VItem> VItems;
-	private EntityManager em;
 
-	public VItemShell(WSpace ws, EntityManager e) {
-		workspace = ws;
-		em = e;
+	public VItemShell(WSpace ws) {
+		workspace = ws; 
 	}
 
-	public void calculate() {
+	@Override
+	public String executeQuery() {
 		HashMap<VObject, VItem> resultMAP = new HashMap<VObject, VItem>();
 		HashMap<VObject, VItem> voMap = reqursiveCalculation(resultMAP,
 				workspace, VisibilityEnum.LOCAL);
 		VItems = (List<VItem>) voMap.values();
+		return null;
 	}
 
 	private HashMap<VObject, VItem> reqursiveCalculation(
@@ -36,11 +33,12 @@ public class VItemShell {
 
 		List<VObjectVersion> vovLS = ws.getLocalVersions();
 		addVitem(viMAP, vovLS, vis);
-		
+
 		if (vis == VisibilityEnum.RELEASE)
 			return viMAP;
 		else
-			return reqursiveCalculation(viMAP, workspace.getAncestorWorkspace(), VisibilityEnum.PARENT);
+			return reqursiveCalculation(viMAP,
+					workspace.getAncestorWorkspace(), VisibilityEnum.PARENT);
 	}
 
 	private void addVitem(HashMap<VObject, VItem> viMAP,

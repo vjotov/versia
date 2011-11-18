@@ -13,16 +13,16 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/commons-collections-3.2.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/commons-lang-2.1.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/commons-pool-1.3.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/geronimo-jms_1.1_spec-1.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/geronimo-jpa_3.0_spec-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/geronimo-jta_1.1_spec-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/ojdbc14.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/openjpa-1.0.2.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/orai18n.jar"/>
-	<classpathentry kind="lib" path="C:/_work/doct/ws/Versia3/versia WEB3/lib/serp-1.13.1.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/commons-pool-1.3.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/geronimo-jms_1.1_spec-1.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/geronimo-jpa_3.0_spec-1.0.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/geronimo-jta_1.1_spec-1.1.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/openjpa-1.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/orai18n.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/serp-1.13.1.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

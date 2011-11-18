@@ -27,7 +27,9 @@ public class VItem {
 	private Integer ancestorVersionNumber;
 	private String ancestorVOName;
 	private String ancestorVODatum;
-	private List<VObjectVersion> subObjects = new ArrayList<VObjectVersion>();
+	private List<VObjectVersion> subVObjectVersions = new ArrayList<VObjectVersion>();
+	private List<VSubItem> subObjects = new ArrayList<VSubItem>();
+
 	private List<VisibilityEnum> visibility = new ArrayList<VisibilityEnum>();
 
 	public VItem() {
@@ -38,28 +40,28 @@ public class VItem {
 		workspace = ws;
 		voVersion = vov;
 		vObject = vov.getVobject();
-		voID = this.getVoID();
+		voID = vObject.getVObjectId();
 		versionNumber = vov.getVersionNumber();
-		ancestorVOName = vov.getObjectName();
-		ancestorVODatum = vov.getObjectDatum();
+		voName = vov.getObjectName();
 		workitemFlag = new Boolean(vObject.isWorkItem());
 		deletedFlag = new Boolean(vov.getDeleteFlag() != 0);
 
 		if (workitemFlag) {
 			Query q = em.createNamedQuery("wiaByWSnVO");
 			q.setParameter("object", vObject);
-			q.setParameter("workspace", ws);
+			q.setParameter("wspace", ws);
 
 			attachedWIFlag = ((Integer) q.getSingleResult() > 0);
 		} else
 			attachedWIFlag = false;
 
 		Query q = em
-				.createQuery("SELECT v FROM VObjectVersion v WHERE v.workspace.lv < :lvParamenter AND v.workspace.rv >:rvParameter ORDER BY v.workspace.lv DESC");
+				.createQuery("SELECT v FROM VObjectVersion v WHERE v.workspace.lv < :lvParameter AND v.workspace.rv >:rvParameter ORDER BY v.workspace.lv DESC");
 		q.setParameter("lvParameter", ws.getLv());
 		q.setParameter("rvParameter", ws.getRv());
 
-		List<VObjectVersion> ancestorVOVs = q.getResultList();
+		List<VObjectVersion> ancestorVOVs = (List<VObjectVersion>) q
+				.getResultList();
 		if (ancestorVOVs.size() > 0) {
 			ancestorFlag = true;
 			VObjectVersion ancestorVOV = ancestorVOVs.get(0);
@@ -72,10 +74,13 @@ public class VItem {
 			ancestorVOName = "N/A";
 			ancestorVODatum = "N/A";
 		}
-		
+
 		List<VComposer> vcLS = voVersion.getSubObjects();
-		for(VComposer vc: vcLS){
-			subObjects.add(vc.getSubObject());
+		for (VComposer vc : vcLS) {
+			VObjectVersion svo = vc.getSubObject();
+			subVObjectVersions.add(vc.getSubObject());
+			subObjects.add(new VSubItem(svo.getVobject().getVObjectId(), svo
+					.getVersionNumber(), svo.getObjectName()));
 		}
 	}
 
@@ -167,37 +172,27 @@ public class VItem {
 	}
 
 	public Boolean getAncestorFlag() {
-		if (!Object.class.isInstance(ancestorFlag))
-			calculateAncestorFlag();
 		return ancestorFlag;
 	}
 
-	private void calculateAncestorFlag() {
-		// TODO calculation; priority low
-		ancestorFlag = false;
-	}
-
 	public Integer getAncestorVersionNumber() {
-		// TODO calculation; priority low
 		return ancestorVersionNumber;
 	}
 
 	public String getAncestorVOName() {
-		// TODO calculation; priority low
 		return ancestorVOName;
 	}
 
 	public String getAncestorVODatum() {
-		// TODO calculation; priority low
 		return ancestorVODatum;
 	}
 
-	public List<VObjectVersion> getSubObjects() {
-		return subObjects;
+	public List<VObjectVersion> getSubVObjectVersions() {
+		return subVObjectVersions;
 	}
 
-	public void setSubObjects(List<VObjectVersion> subObjects) {
-		this.subObjects = subObjects;
+	public void setSubVObjectVersions(List<VObjectVersion> subVObjectVersions) {
+		this.subVObjectVersions = subVObjectVersions;
 	}
 
 	public List<VisibilityEnum> getVisibility() {
@@ -210,5 +205,13 @@ public class VItem {
 
 	public void addVisibility(VisibilityEnum v) {
 		visibility.add(v);
+	}
+
+	public List<VSubItem> getSubObjects() {
+		return subObjects;
+	}
+
+	public void setSubObjects(List<VSubItem> subObjects) {
+		this.subObjects = subObjects;
 	}
 }

@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 @Entity
 @NamedQueries({
     @NamedQuery(name="wiaByWSnVO",
-        query="SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :object AND w.workspace = :workspace")
+        query="SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :object AND w.workspace = :wspace")
 })
 public class WorkItemAttachement {
 	private int WIAID;

@@ -2,19 +2,15 @@ package com.jotov.versia.beans;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-
-import com.jotov.versia.beans.vobj.VisibileItemsExtractor;
-import com.jotov.versia.beans.vobj.VisibleItems;
+import com.jotov.versia.beans.vobj.ListVobjectsBean;
 import com.jotov.versia.orm.VComposer;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.VersionArc;
 import com.jotov.versia.orm.WSpace;
 import com.jotov.versia.orm.WorkItemAttachement;
-import com.sun.swing.internal.plaf.synth.resources.synth;
 
 public class EditVObjectBean extends aDBbean {
 	// private VObject vo;
@@ -22,6 +18,7 @@ public class EditVObjectBean extends aDBbean {
 	private String NewData;
 	private Boolean isWorkItem;
 	private UserSessionBean session;
+	private ListVobjectsBean lvBean;
 
 	@Override
 	public String executeQuery(int mode) {
@@ -262,5 +259,13 @@ public class EditVObjectBean extends aDBbean {
 			}
 		}
 		return false;
+	}
+
+	public ListVobjectsBean getLvBean() {
+		return lvBean;
+	}
+
+	public void setLvBean(ListVobjectsBean lvBean) {
+		this.lvBean = lvBean;
 	}
 }

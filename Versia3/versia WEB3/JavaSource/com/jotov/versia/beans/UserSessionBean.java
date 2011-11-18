@@ -1,5 +1,6 @@
 package com.jotov.versia.beans;
 
+import com.jotov.versia.beans.vobj.VItemShell;
 import com.jotov.versia.beans.vobj.Visibility;
 import com.jotov.versia.orm.Product;
 import com.jotov.versia.orm.Release;
@@ -15,6 +16,7 @@ public class UserSessionBean {
 	private WSpace workspace;
 	private Visibility visibleVersions;
 	private VObjectVersion selectedVersion;
+	private VItemShell vs;
 
 	public UserSessionBean() {
 	}
@@ -84,22 +86,10 @@ public class UserSessionBean {
 		this.selectedVersion = selectedVersion;
 	}
 
-//	@Override
-//	public String executeQuery(int mode) {
-//		switch (mode) {
-//		case 1:
-//			return pCloseWorkspace();
-//		default:
-//			return null;
-//		}
-//	}
-//
-//	private String pCloseWorkspace() {
-//		em.getTransaction().begin();
-//		workspace.setOpenedByUser(null);
-//		userProfile.setOpenedWorkspace(null);
-//		em.getTransaction().commit();
-//		return null;
-//	}
-
+	public VItemShell getVItemShell() {
+		if(vs == null || !vs.getWorkspace().equals(workspace)) {
+			vs = new VItemShell(workspace);
+		}
+		return vs;
+	}
 }

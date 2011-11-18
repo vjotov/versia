@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import org.richfaces.component.UIScrollableDataTable;
 import org.richfaces.model.selection.SimpleSelection;
+
+import com.jotov.versia.beans.EditVObjectBean;
 import com.jotov.versia.beans.UserSessionBean;
 import com.jotov.versia.beans.aDBbean;
 import com.jotov.versia.orm.VObjectVersion;
@@ -13,9 +15,11 @@ public class ListVobjectsBean extends aDBbean {
 	private UserSessionBean session;
 	private SimpleSelection selection = new SimpleSelection();
 	private UIScrollableDataTable table;
-	private ArrayList<VisibleItems> selectedItems;
+	private ArrayList<VItem> selectedItems;
 	private VObjectVersion selectedVersion;
 	private int selectedRow;
+
+	private EditVObjectBean evoBean;
 
 	public String Save() {
 		System.out.println("Save");
@@ -23,21 +27,21 @@ public class ListVobjectsBean extends aDBbean {
 	}
 
 	public String selectVov() {
-		selectedVersion = selectedItems.get(selectedRow).getVov();
+		selectedVersion = selectedItems.get(selectedRow).getVoVersion();
 		return null;
 	}
 
 	public String takeSelection() {
-		selectedItems = new ArrayList<VisibleItems>();
+		selectedItems = new ArrayList<VItem>();
 		Iterator<Object> iterator = getSelection().getKeys();
 		while (iterator.hasNext()) {
 			Object key = iterator.next();
 			table.setRowKey(key);
 			if (table.isRowAvailable()) {
-				getSelectedItems().add((VisibleItems) table.getRowData());
+				getSelectedItems().add((VItem) table.getRowData());
 			}
 		}
-		VObjectVersion vov = selectedItems.get(0).getVov();
+		VObjectVersion vov = selectedItems.get(0).getVoVersion();
 		session.setSelectedVersion(vov);
 		return null;
 	}
@@ -50,11 +54,13 @@ public class ListVobjectsBean extends aDBbean {
 		this.session = session;
 	}
 
-	public List<VisibleItems> getVisibleItems() {
-		return VisibileItemsExtractor.buildVersions(session.getWorkspace());
+	public List<VItem> getVisibleItems() {
+		// return VisibileItemsExtractor.buildVersions(session.getWorkspace());
+		dbean.executeQuery(session.getVItemShell());
+		return session.getVItemShell().getVItems();
 	}
 
-	public VisibleItems getSelectedItem() {
+	public VItem getSelectedItem() {
 		return selectedItems.get(0);
 	}
 
@@ -66,11 +72,11 @@ public class ListVobjectsBean extends aDBbean {
 		this.selection = selection;
 	}
 
-	public ArrayList<VisibleItems> getSelectedItems() {
+	public ArrayList<VItem> getSelectedItems() {
 		return selectedItems;
 	}
 
-	public void setSelectedItems(ArrayList<VisibleItems> selectedItems) {
+	public void setSelectedItems(ArrayList<VItem> selectedItems) {
 		this.selectedItems = selectedItems;
 	}
 
@@ -106,12 +112,21 @@ public class ListVobjectsBean extends aDBbean {
 		return "show_distribution";
 	}
 
-	public List<VisibleSubItem> getSubobjects() {
+	public List<VSubItem> getSubobjects() {
 		if (Object.class.isInstance(this.selectedItems)
 				&& this.selectedItems.size() > 0)
 
-			return this.selectedItems.get(0).getSubobjects();
+			return this.selectedItems.get(0).getSubObjects();
 		else
-			return new ArrayList<VisibleSubItem>();
+			return new ArrayList<VSubItem>();
 	}
+
+	public EditVObjectBean getEvoBean() {
+		return evoBean;
+	}
+
+	public void setEvoBean(EditVObjectBean evoBean) {
+		this.evoBean = evoBean;
+	}
+
 }

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.jotov.versia.beans.UserSessionBean;
+
 @Entity
 public class VersionArc {
 	private int arcId;
@@ -27,10 +29,10 @@ public class VersionArc {
 	}
 	
 	public static VersionArc createArcs(VObjectVersion target,
-			VObjectVersion precedor, WSpace workspace, UserProfile user) {
+			VObjectVersion precedor, WSpace workspace, UserSessionBean session) {
 		
-		VersionArc nva = new VersionArc(user,precedor,target);
-		List<Cause> causes = Cause.createCauses(nva,workspace);
+		VersionArc nva = new VersionArc(session.getUserProfile(),precedor,target);
+		List<Cause> causes = Cause.createCauses(nva,workspace, session);
 		nva.setCauses(causes);
 		return nva;
 	}

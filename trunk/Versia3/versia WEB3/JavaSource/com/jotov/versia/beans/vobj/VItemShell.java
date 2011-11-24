@@ -1,5 +1,6 @@
 package com.jotov.versia.beans.vobj;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.jotov.versia.beans.aDBbean;
@@ -10,17 +11,20 @@ import com.jotov.versia.orm.WSpace;
 public class VItemShell extends aDBbean {
 	private WSpace workspace;
 	private List<VItem> VItems;
+	private boolean ready = false;
 
 	public VItemShell(WSpace ws) {
-		workspace = ws; 
+		workspace = ws;
 	}
 
 	@Override
 	public String executeQuery() {
+		// construction
 		HashMap<VObject, VItem> resultMAP = new HashMap<VObject, VItem>();
 		HashMap<VObject, VItem> voMap = reqursiveCalculation(resultMAP,
 				workspace, VisibilityEnum.LOCAL);
-		VItems = (List<VItem>) voMap.values();
+		VItems = new ArrayList<VItem>(voMap.values());
+		ready = true;
 		return null;
 	}
 
@@ -37,8 +41,8 @@ public class VItemShell extends aDBbean {
 		if (vis == VisibilityEnum.RELEASE)
 			return viMAP;
 		else
-			return reqursiveCalculation(viMAP,
-					workspace.getAncestorWorkspace(), VisibilityEnum.PARENT);
+			return reqursiveCalculation(viMAP, ws.getAncestorWorkspace(),
+					VisibilityEnum.PARENT);
 	}
 
 	private void addVitem(HashMap<VObject, VItem> viMAP,
@@ -78,6 +82,10 @@ public class VItemShell extends aDBbean {
 
 	public void setVItems(List<VItem> vItems) {
 		VItems = vItems;
+	}
+
+	public boolean isReady() {
+		return ready;
 	}
 
 }

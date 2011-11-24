@@ -71,7 +71,7 @@ public class EditVObjectBean extends aDBbean {
 
 			pVOV.setWorkspace(ancestorWS);
 			pVOV.addPrecetorsArc(VersionArc.createArcs(pVOV, ancestorVOV,
-					ancestorWS, session.getUserProfile()));
+					ancestorWS, session));
 			ws.removeLocalVersion(pVOV);
 			ancestorWS.addLocalVersion(pVOV);
 
@@ -108,7 +108,7 @@ public class EditVObjectBean extends aDBbean {
 		em.getTransaction().begin();
 		VObjectVersion deletedVersion = VObjectVersion.markDeleteVersion(
 				session.getWorkspace(), session.getSelectedVersion(),
-				session.getUserProfile());
+				session);
 		em.persist(session.getSelectedVersion());
 		em.persist(deletedVersion);
 		em.getTransaction().commit();
@@ -127,7 +127,7 @@ public class EditVObjectBean extends aDBbean {
 
 			VObjectVersion nv = VObjectVersion.createVersion(vo, NewName,
 					NewData, session.getWorkspace(), precedors,
-					session.getUserProfile());
+					session);
 
 			vo.setWorkItem(isWorkItem);
 			oldVer.setWorkspace(null);

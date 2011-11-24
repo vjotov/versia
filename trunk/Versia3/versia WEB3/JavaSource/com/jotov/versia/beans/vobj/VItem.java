@@ -48,10 +48,11 @@ public class VItem {
 
 		if (workitemFlag) {
 			Query q = em.createNamedQuery("wiaByWSnVO");
-			q.setParameter("object", vObject);
+//			Query q = em.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :object AND w.workspace = :wspace");
+			q.setParameter("obj", vObject);
 			q.setParameter("wspace", ws);
 
-			attachedWIFlag = ((Integer) q.getSingleResult() > 0);
+			attachedWIFlag = ((Long) q.getSingleResult() > 0);
 		} else
 			attachedWIFlag = false;
 
@@ -213,5 +214,12 @@ public class VItem {
 
 	public void setSubObjects(List<VSubItem> subObjects) {
 		this.subObjects = subObjects;
+	}
+	
+	public String getImage(){
+		if( this.subObjects.size()== 0)
+			return "img/tree_empty.gif";
+		else 
+			return "img/tree_expand.gif";
 	}
 }

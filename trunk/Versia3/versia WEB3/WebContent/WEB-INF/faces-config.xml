@@ -21,6 +21,11 @@
   <managed-bean-name>userSessionBean</managed-bean-name>
   <managed-bean-class>com.jotov.versia.beans.UserSessionBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>app</property-name>
+   <property-class>com.jotov.versia.beans.ApplicationBean</property-class>
+   <value>#{applicationBean}</value>
+  </managed-property>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>dBConnectBean</managed-bean-name>
@@ -208,6 +213,11 @@
   <managed-bean-name>orderBean</managed-bean-name>
   <managed-bean-class>OrderBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>applicationBean</managed-bean-name>
+  <managed-bean-class>com.jotov.versia.beans.ApplicationBean</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
  </managed-bean>
  <navigation-rule>
   <display-name>login</display-name>

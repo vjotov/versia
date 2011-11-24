@@ -1,24 +1,37 @@
 package com.jotov.versia.beans;
 
+import javax.annotation.PostConstruct;
+
 import com.jotov.versia.beans.vobj.VItemShell;
-import com.jotov.versia.beans.vobj.Visibility;
+//import com.jotov.versia.beans.vobj.Visibility;
 import com.jotov.versia.orm.Product;
 import com.jotov.versia.orm.Release;
 import com.jotov.versia.orm.UserProfile;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.WSpace;
 
-public class UserSessionBean {
+public class UserSessionBean implements iSessionAdaptor {
 	private UserProfile userProfile;
 	// private String currentPage = "/pages/00_welcome.xhtml";
 	private Product product;
 	private Release release;
 	private WSpace workspace;
-	private Visibility visibleVersions;
+	// private Visibility visibleVersions;
 	private VObjectVersion selectedVersion;
 	private VItemShell vs;
+	private ApplicationBean app;
 
 	public UserSessionBean() {
+	}
+
+	@Override
+	public void executeClean() {
+		vs = null;
+	}
+
+	@PostConstruct
+	public void init() {
+		app.Subscribe(this);
 	}
 
 	public UserProfile getUserProfile() {
@@ -70,13 +83,13 @@ public class UserSessionBean {
 		this.workspace = workspace;
 	}
 
-	public Visibility getVisibleVersions() {
-		return visibleVersions;
-	}
-
-	public void setVisibleVersions(Visibility visibleVersions) {
-		this.visibleVersions = visibleVersions;
-	}
+	// public Visibility getVisibleVersions() {
+	// return visibleVersions;
+	// }
+	//
+	// public void setVisibleVersions(Visibility visibleVersions) {
+	// this.visibleVersions = visibleVersions;
+	// }
 
 	public VObjectVersion getSelectedVersion() {
 		return selectedVersion;
@@ -87,9 +100,18 @@ public class UserSessionBean {
 	}
 
 	public VItemShell getVItemShell() {
-		if(vs == null || !vs.getWorkspace().equals(workspace)) {
+		if (vs == null || !vs.getWorkspace().equals(workspace)) {
 			vs = new VItemShell(workspace);
 		}
 		return vs;
 	}
+
+	public ApplicationBean getApp() {
+		return app;
+	}
+
+	public void setApp(ApplicationBean application) {
+		this.app = application;
+	}
+
 }

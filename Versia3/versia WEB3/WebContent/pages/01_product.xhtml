@@ -89,7 +89,7 @@
 				<h:inputText value="#{productBean.newProductName}">
 					<f:validateLength></f:validateLength>
 				</h:inputText>
-				<a4j:commandButton value="#{msg.Create}"
+				<a4j:commandButton value="#{msg.productCreate}"
 					action="#{productBean.createProduct()}" reRender="main_section" />
 			</h:panelGrid>
 		</rich:panel>

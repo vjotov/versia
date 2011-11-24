@@ -3,7 +3,6 @@ package com.jotov.versia.beans.vobj;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 import com.jotov.versia.beans.UserSessionBean;
@@ -27,21 +26,19 @@ public class ListWorkItemsBean extends aDBbean {
 	@PostConstruct
 	public void init() {
 		// loading available workitems
-		this.workspace = session.getWorkspace();
-		ArrayList<VisibleItems> available = VisibileItemsExtractor
-				.getAvailableWorkitems(this.workspace);
-		options.clear();
-
-		for (VisibleItems item : available) {
-			options.add(new SelectItem(item.getObjectId(), item.getObjectName()));
+		if (session.getVItemShell() == null && session.getVItemShell().isReady()==false) {
+			dbean.executeQuery(session.getVItemShell());
 		}
+		this.workspace = session.getWorkspace();
 
-		// loading of attached workitems
-		List<WorkItemAttachement> itemsWIA = this.workspace
-				.getAttachedWorkItems();
+		ArrayList<VItem> vitems = new ArrayList<VItem>();
+
+		options.clear();
 		selected.clear();
-		for (WorkItemAttachement item : itemsWIA) {
-			selected.add(item.getVoId());
+
+		for (VItem vi : vitems) {
+			selected.add(vi.getVoID());
+			options.add(new SelectItem(vi.getVoID(), vi.getAncestorVOName()));
 		}
 	}
 

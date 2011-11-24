@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
+import com.jotov.versia.beans.UserSessionBean;
+
 @Entity
 public class VObjectVersion {
 	private int globalVPId;
@@ -39,7 +41,7 @@ public class VObjectVersion {
 
 	public static VObjectVersion createVersion(VObject vObject, String name,
 			String datum, WSpace workspace, List<VObjectVersion> precedors,
-			UserProfile user) {
+			UserSessionBean session) {
 
 		int versionNumber = getNextVersionNumber(vObject);
 
@@ -54,20 +56,20 @@ public class VObjectVersion {
 			}
 
 			VersionArc va = VersionArc.createArcs(newVersion, pr, workspace,
-					user);
+					session);
 			newVersion.addPrecetorsArc(va);
 		}
 		return newVersion;
 	}
 
 	public static VObjectVersion markDeleteVersion(WSpace workspace2,
-			VObjectVersion selectedVersion, UserProfile usr) {
+			VObjectVersion selectedVersion, UserSessionBean session) {
 
 		ArrayList<VObjectVersion> precedors = new ArrayList<VObjectVersion>();
 		precedors.add(selectedVersion);
 		VObjectVersion deletedVersion = createVersion(
 				selectedVersion.getVobject(), selectedVersion.objectName, null,
-				workspace2, precedors, usr);
+				workspace2, precedors, session);
 		deletedVersion.setDeleteFlag(1);
 		return deletedVersion;
 	}

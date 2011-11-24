@@ -2,7 +2,6 @@ package com.jotov.versia.orm;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,9 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import com.jotov.versia.beans.UserSessionBean;
+import com.jotov.versia.beans.vobj.VItem;
 
-import com.jotov.versia.beans.vobj.VisibileItemsExtractor;
-import com.jotov.versia.beans.vobj.VisibleItems;
 
 @Entity
 public class Cause {
@@ -21,24 +20,18 @@ public class Cause {
 	private VersionArc arc;
 	private VObjectVersion cause;
 
-	public static List<Cause> createCauses(VersionArc nva, WSpace workspace) {
+	public static List<Cause> createCauses(VersionArc nva, WSpace workspace,
+			UserSessionBean session) {
 
 		List<WorkItemAttachement> wiaList = workspace.getAttachedWorkItems();
-		if(wiaList.size()==0)
+		if (wiaList.size() == 0)
 			return null;
-		
-		List<VisibleItems> viList = VisibileItemsExtractor
-				.getAvailableWorkitems(workspace);
-		
-		ArrayList<Integer> wi = new ArrayList<Integer>();
-		for (WorkItemAttachement wiaItem : wiaList) {
-			wi.add(wiaItem.getVoId());
-		}
+
+		List<VItem> vitems = session.getVItemShell().getVItems();
 		ArrayList<Cause> causeList = new ArrayList<Cause>();
-		for (VisibleItems viItem : viList) {
-			if (wi.contains(viItem.getObjectId())) {
-				causeList.add(new Cause(nva, viItem.getVov()));
-			}
+		for (VItem vi : vitems) {
+			if (vi.getWorkitemFlag() && vi.getAttachedWIFlag())
+				causeList.add(new Cause(nva, vi.getVoVersion()));
 		}
 
 		return causeList;

@@ -11,6 +11,7 @@ import com.jotov.versia.orm.WSpace;
 public class VItemShell extends aDBbean {
 	private WSpace workspace;
 	private List<VItem> VItems;
+	private HashMap<VObjectVersion, VItem> vovVItemMap = new HashMap<VObjectVersion, VItem>();
 	private boolean ready = false;
 
 	public VItemShell(WSpace ws) {
@@ -24,8 +25,20 @@ public class VItemShell extends aDBbean {
 		HashMap<VObject, VItem> voMap = reqursiveCalculation(resultMAP,
 				workspace, VisibilityEnum.LOCAL);
 		VItems = new ArrayList<VItem>(voMap.values());
+		populateMap();
 		ready = true;
 		return null;
+	}
+	public VItem getItemByVOV(VObjectVersion vov) {
+		if (vovVItemMap.containsKey(vov))
+			return vovVItemMap.get(vov);
+		return null;
+	}
+
+	private void populateMap() {
+		for (VItem vi:VItems){
+			vovVItemMap.put(vi.getVoVersion(), vi);
+		}
 	}
 
 	private HashMap<VObject, VItem> reqursiveCalculation(

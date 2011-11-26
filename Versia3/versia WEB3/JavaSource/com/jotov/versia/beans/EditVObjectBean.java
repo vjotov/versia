@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import com.jotov.versia.beans.vobj.ListVobjectsBean;
+import com.jotov.versia.beans.vobj.VItem;
 import com.jotov.versia.orm.VComposer;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
@@ -54,15 +55,16 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void publishVersion(VObjectVersion pVOV, WSpace ws,
+	private synchronized void publishVersion(VObjectVersion pVOV, WSpace ws,
 			WSpace ancestorWS) {
+
 		// Separate method for recursive publication of sub-objects of a
 		// composed object
-		
+
 		if (!pVOV.getWorkspace().equals(ws))
 			// not local object => nothing to publicate
 			return;
-		
+
 		VObjectVersion ancestorVOV = pVOV.getAncestorVersion();
 		if (Object.class.isInstance(ancestorVOV)) {
 
@@ -107,8 +109,7 @@ public class EditVObjectBean extends aDBbean {
 	private String deleteVersion() {
 		em.getTransaction().begin();
 		VObjectVersion deletedVersion = VObjectVersion.markDeleteVersion(
-				session.getWorkspace(), session.getSelectedVersion(),
-				session);
+				session.getWorkspace(), session.getSelectedVersion(), session);
 		em.persist(session.getSelectedVersion());
 		em.persist(deletedVersion);
 		em.getTransaction().commit();
@@ -126,8 +127,7 @@ public class EditVObjectBean extends aDBbean {
 			precedors.add(oldVer);
 
 			VObjectVersion nv = VObjectVersion.createVersion(vo, NewName,
-					NewData, session.getWorkspace(), precedors,
-					session);
+					NewData, session.getWorkspace(), precedors, session);
 
 			vo.setWorkItem(isWorkItem);
 			oldVer.setWorkspace(null);
@@ -144,39 +144,61 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void Save() {
+		if(this.isReadonly()) {
+			System.out.println("editVObjectBean.Save()/0 failed - object is read only");
+			resetVars();
+			return ;			
+		}
+			
 		System.out.println("editVObjectBean.Save()/0");
 		dbean.executeQuery(this, 1);
 		session.setSelectedVersion(null);
+		session.executeClean();
+		resetVars();
+	}
+
+	private void resetVars() {
 		isWorkItem = null;
 		NewData = null;
 		NewName = null;
 	}
 
 	public void Publish() {
+		//TODO to think when it is deleted to allow publish
+		if(this.isReadonly()) {
+			resetVars();
+			return ;			
+		}
 		System.out.println("editVObjectBean.Publish()/0");
 		dbean.executeQuery(this, 2);
 		session.setSelectedVersion(null);
-		isWorkItem = null;
-		NewData = null;
-		NewName = null;
+		session.getApp().NotifyCleanAll();
+		resetVars();
 	}
 
 	public void RollBack() {
+		//TODO to think when it is deleted to allow rollback
+		if(this.isReadonly()) {
+			resetVars();
+			return ;			
+		}
 		System.out.println("editVObjectBean.RollBack()/0");
 		dbean.executeQuery(this, 3);
 		session.setSelectedVersion(null);
-		isWorkItem = null;
-		NewData = null;
-		NewName = null;
+		session.getApp().NotifyCleanAll();
+		resetVars();
 	}
 
 	public void Delete() {
+		if(this.isReadonly()) {
+			resetVars();
+			return ;			
+		}
 		System.out.println("editVObjectBean.Delete()/0");
 		dbean.executeQuery(this, 4);
 		session.setSelectedVersion(null);
-		isWorkItem = null;
-		NewData = null;
-		NewName = null;
+		session.getApp().NotifyCleanAll();
+		resetVars();
 	}
 
 	public Integer getVObjectID() {
@@ -244,21 +266,18 @@ public class EditVObjectBean extends aDBbean {
 		VObjectVersion vov = session.getSelectedVersion();
 		if (vov == null)
 			return false;
-		VObject vo = vov.getVobject();
+		VItem vitem = session.getVItemShell().getItemByVOV(vov);
 
-		if (vov.getDeleteFlag() == 1)
+		if (vitem.getDeletedFlag() || (vitem.getAttachedWIFlag()))
 			// Deleted object are read only
+			// Attached WI are read only
 			return true;
-		else if (vo.isWorkItem()) {
-			// attached WI are read only
-			List<WorkItemAttachement> wia_ls = session.getWorkspace()
-					.getAttachedWorkItems();
-			for (WorkItemAttachement wia : wia_ls) {
-				if (vo.equals(wia.getWorkitem()))
-					return true;
-			}
-		}
 		return false;
+	}
+
+	public Integer getAncestorVersionNumber() {
+
+		return null;
 	}
 
 	public ListVobjectsBean getLvBean() {

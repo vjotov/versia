@@ -26,19 +26,23 @@ public class ListWorkItemsBean extends aDBbean {
 	@PostConstruct
 	public void init() {
 		// loading available workitems
-		if (session.getVItemShell() == null && session.getVItemShell().isReady()==false) {
+		if (session.getVItemShell() == null
+				&& session.getVItemShell().isReady() == false) {
 			dbean.executeQuery(session.getVItemShell());
 		}
 		this.workspace = session.getWorkspace();
 
-		ArrayList<VItem> vitems = new ArrayList<VItem>();
+		List<VItem> vitems = session.getVItemShell().getVItems();
 
 		options.clear();
 		selected.clear();
 
 		for (VItem vi : vitems) {
-			selected.add(vi.getVoID());
-			options.add(new SelectItem(vi.getVoID(), vi.getAncestorVOName()));
+			if (vi.getWorkitemFlag())
+				options.add(new SelectItem(vi.getVoID(), vi.getVoName()));
+			if (vi.getAttachedWIFlag())
+				selected.add(vi.getVoID());
+
 		}
 	}
 
@@ -55,7 +59,7 @@ public class ListWorkItemsBean extends aDBbean {
 	private void SaveWorkItemConfiguration() {
 		List<WorkItemAttachement> itemsWIA = workspace.getAttachedWorkItems();
 		HashMap<Integer, WorkItemAttachement> attached = new HashMap<Integer, WorkItemAttachement>();
-		// preparing map of void->workitem attachment
+		// preparing map of voID->workitem attachment
 		for (WorkItemAttachement itemWIA : itemsWIA) {
 			attached.put(itemWIA.getVoId(), itemWIA);
 		}

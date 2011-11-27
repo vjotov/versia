@@ -219,6 +219,11 @@
   <managed-bean-class>com.jotov.versia.beans.ApplicationBean</managed-bean-class>
   <managed-bean-scope>application</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>showWorkitemsBean</managed-bean-name>
+  <managed-bean-class>com.jotov.versia.beans.showWorkitemsBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <display-name>login</display-name>
   <from-view-id>/pages/login.xhtml</from-view-id>
@@ -289,8 +294,8 @@
    <redirect/>
   </navigation-case>
   <navigation-case>
-   <from-action>#{listWorkItemsBean.ManageWorkitem}</from-action>
-   <from-outcome>manage_workitem</from-outcome>
+   <from-action>#{showWorkitemsBean.showWorkitems}</from-action>
+   <from-outcome>show_woritems</from-outcome>
    <to-view-id>/pages/07_workitems.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
@@ -313,8 +318,8 @@
  <navigation-rule>
   <from-view-id>/pages/07_workitems.xhtml</from-view-id>
   <navigation-case>
-   <from-action>#{listWorkItemsBean.ManageWorkspace}</from-action>
-   <from-outcome>manage_workspace</from-outcome>
+   <from-action>#{showWorkitemsBean.showWorkspace}</from-action>
+   <from-outcome>show_workspace</from-outcome>
    <to-view-id>/pages/04_workspace.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>

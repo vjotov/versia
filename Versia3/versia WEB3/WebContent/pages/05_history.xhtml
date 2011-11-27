@@ -13,7 +13,7 @@
 		<h:form id="menu_form">
 			<rich:toolBar>
 				<rich:menuItem value="Back to Workspace"
-						action="#{objectHistoryBean.showWorkspace}" />
+					action="#{objectHistoryBean.showWorkspace}" />
 				<rich:dropDownMenu>
 					<f:facet name="label">
 						<h:panelGroup>
@@ -28,8 +28,33 @@
 	</ui:define>
 	<ui:define name="body">
 		<rich:panel>
-			<f:facet name="header">Object History</f:facet>
-
+			<a4j:form>
+				<f:facet name="header">Object History</f:facet>
+				<h:panelGrid columns="2">
+					<rich:panel>
+						<f:facet name="header">Object Versions</f:facet>
+						<rich:scrollableDataTable name="versions" selectionMode="single">
+							<rich:column id="make">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Make" />
+								</f:facet>
+								<h:outputText value="#{}" />
+							</rich:column>
+						</rich:scrollableDataTable>
+					</rich:panel>
+					<rich:panel>
+						<f:facet name="header">Causes</f:facet>
+						<rich:scrollableDataTable name="causes" selectionMode="single">
+							<rich:column id="make">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Make" />
+								</f:facet>
+								<h:outputText value="#{}" />
+							</rich:column>
+						</rich:scrollableDataTable>
+					</rich:panel>
+				</h:panelGrid>
+			</a4j:form>
 		</rich:panel>
 	</ui:define>
 </ui:composition>

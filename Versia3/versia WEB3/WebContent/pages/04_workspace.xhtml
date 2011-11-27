@@ -24,7 +24,29 @@
 					<rich:menuItem value="Close Workspace"
 						action="#{closeWorkspaceBean.closeWorkspace}" />
 				</rich:dropDownMenu>
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="Objects statistics" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="Object History"
+						action="#{listVobjectsBean.showHistory}" />
+					<rich:menuItem value="Object Distribution"
+						action="#{listVobjectsBean.showDistribution}" />
 
+				</rich:dropDownMenu>
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="Workitems" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="Manage Workitems"
+						action="#{showWorkitemsBean.showWorkitems}" />
+				</rich:dropDownMenu>
 				<rich:dropDownMenu>
 					<f:facet name="label">
 						<h:panelGroup>
@@ -38,122 +60,97 @@
 		</h:form>
 	</ui:define>
 	<ui:define name="body">
-		<h:panelGrid columns="2">
-			<rich:panel id="left">
-				<rich:panel>
-					<f:facet name="header">Create Object </f:facet>
-					<a4j:form>
-						<h:panelGrid columns="2">
-							<h:outputText value="New Object Name:" />
-							<h:inputText value="#{createObjectBean.name}" />
-							<h:outputText value="New Object Data:" />
-							<h:inputText value="#{createObjectBean.datum}" />
-							<a4j:commandButton action="#{createObjectBean.CreateObject}"
-								reRender="visibleObjects" value="Create Object" />
-						</h:panelGrid>
-					</a4j:form>
-				</rich:panel>
-
-				<rich:panel>
-					<f:facet name="header">Visible Objects</f:facet>
-					<a4j:form>
-						<a4j:commandButton value="Edit" reRender="editTable"
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('editVO');">
-						</a4j:commandButton>
-						<a4j:commandButton value="View SubObjects"
-							reRender="subObjectsTable"
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('viewSubObjects');">
-						</a4j:commandButton>
-						<a4j:commandButton value="Publish" reRender="publishTable"
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('publishVO');">
-						</a4j:commandButton>
-						<a4j:commandButton value="Roll Back" reRender="rollbackTable"
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('rollBackVO');">
-						</a4j:commandButton>
-						<a4j:commandButton value="Delete" reRender="deleteTable"
-							action="#{listVobjectsBean.takeSelection}"
-							oncomplete="javascript:Richfaces.showModalPanel('deleteVO');">
-						</a4j:commandButton>
-						<a4j:commandButton value="History"
-							action="#{listVobjectsBean.showHistory}">
-						</a4j:commandButton>
-						<a4j:commandButton value="Distribution"
-							action="#{listVobjectsBean.showDistribution}">
-						</a4j:commandButton>
-						<rich:spacer height="20px" />
-						<rich:scrollableDataTable id="visibleObjects" rowKeyVar="rkv"
-							frozenColCount="1" height="400px" width="400px" rows="40"
-							columnClasses="col" value="#{listVobjectsBean.visibleItems}"
-							var="item" binding="#{listVobjectsBean.table}"
-							selection="#{listVobjectsBean.selection}" selectionMode="single">
-							<!-- sortMode="single" sortOrder="#{listVobjectsBean.order}"
-							selection="#{listVobjectsBean.selection}" -->
-							<rich:column id="rowNum" width="25">
-								<h:outputText value="#{rkv}" />
-							</rich:column>
-							<rich:column id="objectId" width="50">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="ObjectID" />
-								</f:facet>
-								<h:outputText value="#{item.voID}" />
-							</rich:column>
-							<rich:column id="verionNumber" width="40">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="VerNo" />
-								</f:facet>
-								<h:outputText value="#{item.versionNumber}" />
-							</rich:column>
-							<rich:column id="objectName">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Name" />
-								</f:facet>
-								<h:outputText value="#{item.voName}" />
-							</rich:column>
-							<rich:column id="vvector">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Visibility" />
-								</f:facet>
-								<h:outputText value="#{item.visibility}" />
-							</rich:column>
-							<rich:column width="60">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="SubObjects" />
-								</f:facet>
-								<h:graphicImage id="expand" value="#{item.image}" />
-							</rich:column>
-						</rich:scrollableDataTable>
-					</a4j:form>
-				</rich:panel>
-
-				<a4j:include viewId="/pages/includes/editVO.xhtml" />
-				<a4j:include viewId="/pages/includes/viewSubObjects.xhtml" />
-				<a4j:include viewId="/pages/includes/publishVO.xhtml" />
-				<a4j:include viewId="/pages/includes/rollBackVO.xhtml" />
-				<a4j:include viewId="/pages/includes/deleteVO.xhtml" />
-
-			</rich:panel>
+		<rich:panel id="left">
 			<rich:panel>
+				<f:facet name="header">Create Object </f:facet>
 				<a4j:form>
-					<rich:panel id="workitem_panel">
-						<f:facet name="header">Work Iems </f:facet>
-						<rich:pickList id="WorkitemPickList"
-							value="#{listWorkItemsBean.selected}"
-							copyAllControlLabel="Attach All" copyControlLabel="Attach"
-							removeControlLabel="Detach" removeAllControlLabel="Detach All">
-							<f:selectItems value="#{listWorkItemsBean.options}" />
-						</rich:pickList>
-						<a4j:commandButton value="Save WorkItem Configuration"
-							action="#{listWorkItemsBean.Update()}"></a4j:commandButton>
-					</rich:panel>
+					<h:panelGrid columns="2">
+						<h:outputText value="New Object Name:" />
+						<h:inputText value="#{createObjectBean.name}" />
+						<h:outputText value="New Object Data:" />
+						<h:inputText value="#{createObjectBean.datum}" />
+						<a4j:commandButton action="#{createObjectBean.CreateObject}"
+							reRender="visibleObjects" value="Create Object" />
+					</h:panelGrid>
 				</a4j:form>
 			</rich:panel>
-		</h:panelGrid>
 
+			<rich:panel>
+				<f:facet name="header">Visible Objects</f:facet>
+				<a4j:form>
+					<a4j:commandButton value="Edit" reRender="editTable"
+						action="#{listVobjectsBean.takeSelection}"
+						oncomplete="javascript:Richfaces.showModalPanel('editVO');">
+					</a4j:commandButton>
+					<a4j:commandButton value="View SubObjects"
+						reRender="subObjectsTable"
+						action="#{listVobjectsBean.takeSelection}"
+						oncomplete="javascript:Richfaces.showModalPanel('viewSubObjects');">
+					</a4j:commandButton>
+					<a4j:commandButton value="Publish" reRender="publishTable"
+						action="#{listVobjectsBean.takeSelection}"
+						oncomplete="javascript:Richfaces.showModalPanel('publishVO');">
+					</a4j:commandButton>
+					<a4j:commandButton value="Roll Back" reRender="rollbackTable"
+						action="#{listVobjectsBean.takeSelection}"
+						oncomplete="javascript:Richfaces.showModalPanel('rollBackVO');">
+					</a4j:commandButton>
+					<a4j:commandButton value="Delete" reRender="deleteTable"
+						action="#{listVobjectsBean.takeSelection}"
+						oncomplete="javascript:Richfaces.showModalPanel('deleteVO');">
+					</a4j:commandButton>
+					<rich:spacer height="20px" />
+					<rich:scrollableDataTable id="visibleObjects" rowKeyVar="rkv"
+						frozenColCount="1" height="400px" width="400px" rows="40"
+						columnClasses="col" value="#{listVobjectsBean.visibleItems}"
+						var="item" binding="#{listVobjectsBean.table}"
+						selection="#{listVobjectsBean.selection}" selectionMode="single">
+						<!-- sortMode="single" sortOrder="#{listVobjectsBean.order}"
+							selection="#{listVobjectsBean.selection}" -->
+						<rich:column id="rowNum" width="25">
+							<h:outputText value="#{rkv}" />
+						</rich:column>
+						<rich:column id="objectId" width="50">
+							<f:facet name="header">
+								<h:outputText styleClass="headerText" value="ObjectID" />
+							</f:facet>
+							<h:outputText value="#{item.voID}" />
+						</rich:column>
+						<rich:column id="verionNumber" width="40">
+							<f:facet name="header">
+								<h:outputText styleClass="headerText" value="VerNo" />
+							</f:facet>
+							<h:outputText value="#{item.versionNumber}" />
+						</rich:column>
+						<rich:column id="objectName">
+							<f:facet name="header">
+								<h:outputText styleClass="headerText" value="Name" />
+							</f:facet>
+							<h:outputText value="#{item.voName}" />
+						</rich:column>
+						<rich:column id="vvector">
+							<f:facet name="header">
+								<h:outputText styleClass="headerText" value="Visibility" />
+							</f:facet>
+							<h:outputText value="#{item.visibility}" />
+						</rich:column>
+						<rich:column width="60">
+							<f:facet name="header">
+								<h:outputText styleClass="headerText" value="SubObjects" />
+							</f:facet>
+							<h:graphicImage id="expand" value="#{item.image}" />
+						</rich:column>
+					</rich:scrollableDataTable>
+				</a4j:form>
+			</rich:panel>
 
+			<a4j:include viewId="/pages/includes/editVO.xhtml" />
+			<a4j:include viewId="/pages/includes/viewSubObjects.xhtml" />
+			<a4j:include viewId="/pages/includes/publishVO.xhtml" />
+			<a4j:include viewId="/pages/includes/rollBackVO.xhtml" />
+			<a4j:include viewId="/pages/includes/deleteVO.xhtml" />
+
+		</rich:panel>
 
 	</ui:define>
 </ui:composition>

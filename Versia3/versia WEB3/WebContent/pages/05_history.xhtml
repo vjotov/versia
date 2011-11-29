@@ -33,46 +33,47 @@
 				<h:panelGrid columns="2">
 					<rich:panel>
 						<f:facet name="header">Object Versions</f:facet>
-						<rich:scrollableDataTable name="versions" selectionMode="single"
-							rowKeyVar="rkv" frozenColCount="1" height="400px" width="400px"
+						
+						<rich:scrollableDataTable id="versionsTable" selectionMode="single"
+							rowKeyVar="rkv" frozenColCount="1" height="400px" width="600px"
 							rows="40" columnClasses="col"
 							value="#{objectHistoryBean.historyItems}" var="item"
-							binding="#{objectHistoryBean.table}"
-							selection="#{objectHistoryBean.selection}">
+							binding="#{objectHistoryBean.table}" 
+							selection="#{objectHistoryBean.selection}" >
 							<rich:column id="rowNum" width="25">
 								<h:outputText value="#{rkv}" />
 							</rich:column>
-							<rich:column id="arcid">
+							<rich:column id="arcid"  width="30" >
 								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Arc ID" />
+									<h:outputText styleClass="headerText" value="Arc ID"/>
 								</f:facet>
 								<h:outputText value="#{item.arcID}" />
 							</rich:column>
-							<rich:column id="tvid">
+							<rich:column id="tvid" width="30" >
 								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Target VersionID" />
+									<h:outputText styleClass="headerText" value="Targ.VerID" />
 								</f:facet>
 								<h:outputText value="#{item.targetID}" />
 							</rich:column>
-							<rich:column id="tvnum">
+							<rich:column id="tvnum" width="30" >
 								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Target VersionNum" />
+									<h:outputText styleClass="headerText" value="Targ.VerNum" />
 								</f:facet>
 								<h:outputText value="#{item.targetVersionNumber}" />
 							</rich:column>
-							<rich:column id="pvid">
+							<rich:column id="pvid" width="30" >
 								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Precedor VersionID" />
+									<h:outputText styleClass="headerText" value="PreVerID" />
 								</f:facet>
 								<h:outputText value="#{item.precedorID}" />
 							</rich:column>
-							<rich:column id="pvnum">
+							<rich:column id="pvnum" width="30" >
 								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Precedor VersionNum" />
+									<h:outputText styleClass="headerText" value="PreVerNum" />
 								</f:facet>
 								<h:outputText value="#{item.precedorVersionNumber}" />
 							</rich:column>
-							<rich:column id="arcdate">
+							<rich:column id="arcdate" width="30" >
 								<f:facet name="header">
 									<h:outputText styleClass="headerText" value="Date" />
 								</f:facet>
@@ -88,9 +89,12 @@
 					</rich:panel>
 					<rich:panel>
 						<f:facet name="header">Causes</f:facet>
-						<rich:scrollableDataTable name="causes" selectionMode="single" 
-							value="#{objectHistoryBean.selection.causeItems}" var="causeitem" rowKeyVar="rkv" frozenColCount="1" height="400px" width="400px">
-							<rich:column id="rowNum" width="25">
+						
+						<rich:scrollableDataTable id="causesTable" selectionMode="single"
+							value="#{objectHistoryBean.selection.causeItems}" var="causeitem"
+							rowKeyVar="rkv" frozenColCount="1" height="400px" width="400px">
+							
+							<rich:column id="crowNum" width="25">
 								<h:outputText value="#{rkv}" />
 							</rich:column>
 							<rich:column id="cid">

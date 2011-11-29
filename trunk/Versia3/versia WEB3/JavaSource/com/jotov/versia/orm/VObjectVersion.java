@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -20,6 +22,10 @@ import javax.persistence.Transient;
 import com.jotov.versia.beans.UserSessionBean;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="vovGetAllVersions",
+        query="SELECT v FROM VObjectVersion v WHERE v.vobject = :obj ")
+})
 public class VObjectVersion {
 	private int globalVPId;
 	private VObject vobject;

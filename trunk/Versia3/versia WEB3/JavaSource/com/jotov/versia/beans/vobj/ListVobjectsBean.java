@@ -107,12 +107,10 @@ public class ListVobjectsBean extends aDBbean {
 	}
 
 	public String showHistory() {
-		takeSelection();
 		return "show_history";
 	}
 
 	public String showDistribution() {
-		takeSelection();
 		return "show_distribution";
 	}
 

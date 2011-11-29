@@ -99,6 +99,8 @@
 						action="#{listVobjectsBean.takeSelection}"
 						oncomplete="javascript:Richfaces.showModalPanel('deleteVO');">
 					</a4j:commandButton>
+					<a4j:commandButton value="Select Row"
+						action="#{listVobjectsBean.takeSelection}" />
 					<rich:spacer height="20px" />
 					<rich:scrollableDataTable id="visibleObjects" rowKeyVar="rkv"
 						frozenColCount="1" height="400px" width="400px" rows="40"

@@ -1,15 +1,26 @@
 package com.jotov.versia.beans.vobj;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.jotov.versia.orm.Cause;
 import com.jotov.versia.orm.VersionArc;
 
 public class HistoryItem {
 	private VersionArc va;
-	private List<CauseItem> causeItems;
+	private List<CauseItem> causeItems = new ArrayList<CauseItem>();
 	
+	public HistoryItem(VersionArc va) {
+		super();
+		this.va = va;
+		List<Cause> causes = va.getCauses();
+		
+		for (Cause c : causes) {
+			causeItems.add(new CauseItem(c));
+		}
+	}
 	public int getArcID(){
 		return va.getArcId();
 	}

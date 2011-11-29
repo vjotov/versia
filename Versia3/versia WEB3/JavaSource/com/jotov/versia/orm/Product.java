@@ -21,11 +21,11 @@ public class Product {
 	private List<Release> realeses = new ArrayList<Release>();
 
 	public static List<Object> createProduct(String productName, EntityManager em) {
-		List<Object> result = new ArrayList<Object>();
+		ArrayList<Object> result = new ArrayList<Object>();
 
 		Product newProduct = new Product(productName);
 		result.add(newProduct);
-
+		
 		result.addAll(Release.createRelease(newProduct, "Zero Release", null, em));
 		return result;
 	}
@@ -80,5 +80,10 @@ public class Product {
 	// List<Release> releases = this.getRealeses();
 	// releases.add(release);
 	// }
+
+	public void addRelease(Release newRelease) {
+		realeses.add(newRelease);
+		
+	}
 
 }

@@ -71,13 +71,13 @@ public class WSpace {
 	public static WSpace createMasterWorkspace(Release rel, EntityManager em) {
 		WSpace result = createWorkspace("Zero Workspace", null, rel, em);
 		result.setReleaseMaster(rel);
-		
-		// create initial workitem
-		VObject firstVO = VObject.createVObject("First Object", "", result,
-				null);
-		WorkItemAttachement wia = WorkItemAttachement
-				.createWorkItemAttachement(result, firstVO);
-		result.addAttachedWorkItem(wia);
+
+		// create initial workitem - there is an error during persistence
+		// VObject firstVO = VObject.createVObject("First Object", "", result,
+		// null);
+		// WorkItemAttachement wia = WorkItemAttachement
+		// .createWorkItemAttachement(result, firstVO);
+		// result.addAttachedWorkItem(wia);
 
 		return result;
 	}
@@ -224,7 +224,8 @@ public class WSpace {
 		this.releaseMaster = release_master;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "workspace")
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+			CascadeType.REFRESH }, mappedBy = "workspace")
 	public List<WorkItemAttachement> getAttachedWorkItems() {
 		return attachedWorkItems;
 	}

@@ -27,7 +27,8 @@ function toggleDetails(image) {
 <head>
 <title><ui:insert name="pageTitle">Versia <h:outputText
 			value="#{userSessionBean.product.productName}" />
-	</ui:insert></title>
+	</ui:insert>
+</title>
 <meta http-equiv="cache-control" content="no-cache" />
 <style type="text/css">
 body {
@@ -77,13 +78,11 @@ input {
 			</tr>
 			<tr>
 				<td height="1" width="100%" bgcolor="#CAD6E0"><ui:insert
-						name="pageSubHeader">Page sub header</ui:insert>
-				</td>
+						name="pageSubHeader">Page sub header</ui:insert></td>
 			</tr>
 			<tr>
 				<td height="1" width="100%" bgcolor="#CAD6E0"><ui:insert
-						name="menuBar">Menu bar</ui:insert>
-				</td>
+						name="menuBar">Menu bar</ui:insert></td>
 			</tr>
 			<tr>
 				<td width="100%" colspan="2">
@@ -92,12 +91,10 @@ input {
 						<tbody>
 							<tr>
 								<td align="center" width="100%" valign="middle"><ui:insert
-										name="body">Page Body</ui:insert>
-								</td>
+										name="body">Page Body</ui:insert></td>
 							</tr>
 						</tbody>
-					</table>
-				</td>
+					</table></td>
 			</tr>
 
 			<tr>
@@ -106,6 +103,19 @@ input {
 			</tr>
 		</tbody>
 	</table>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10347530-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </body>
 
 </html>

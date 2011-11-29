@@ -30,7 +30,7 @@ public class VObjectVersion {
 	private int deleteFlag = 0;
 	private List<VersionArc> precetorsArc = new ArrayList<VersionArc>();
 	private List<VComposer> subObjects;
-	private VComposer superObject; 
+	private VComposer superObject;
 
 	// private List<VObjectVersion> subObjects = new
 	// ArrayList<VObjectVersion>();
@@ -49,16 +49,17 @@ public class VObjectVersion {
 				name, datum, workspace);
 		vObject.addVersion(newVersion);
 		workspace.addLocalVersion(newVersion);
-		for (VObjectVersion pr : precedors) {
-			if (pr.getWorkspace() == workspace) {
-				workspace.removeLocalVersion(pr);
-				pr.setWorkspace(null);
-			}
+		if (Object.class.isInstance(precedors))
+			for (VObjectVersion pr : precedors) {
+				if (pr.getWorkspace() == workspace) {
+					workspace.removeLocalVersion(pr);
+					pr.setWorkspace(null);
+				}
 
-			VersionArc va = VersionArc.createArcs(newVersion, pr, workspace,
-					session);
-			newVersion.addPrecetorsArc(va);
-		}
+				VersionArc va = VersionArc.createArcs(newVersion, pr,
+						workspace, session);
+				newVersion.addPrecetorsArc(va);
+			}
 		return newVersion;
 	}
 

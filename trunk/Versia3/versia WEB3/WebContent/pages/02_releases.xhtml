@@ -45,8 +45,8 @@
 		</h:form>
 	</ui:define>
 	<ui:define name="body">
-		<h:form name="main_section">
-			<rich:dataGrid value="#{releaseBean.releases}" var="release"
+		<h:form>
+			<rich:dataGrid id="releaseGrid" value="#{releaseBean.releases}" var="release"
 				columns="1" elements="10" rowKeyVar="rowIndex">
 				<rich:panel bodyClass="pbody">
 					<f:facet name="header">
@@ -58,17 +58,17 @@
 						<h:outputText value="#{msg.rlsName}" styleClass="label" />
 						<h:inputText value="#{release.releaseName}" />
 						<a4j:commandButton value="#{msg.rlsSave}"
-							action="#{releaseBean.updateRelease}" reRender="main_section">
+							action="#{releaseBean.updateRelease}" reRender="releaseGrid">
 							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
 								assignTo="#{releaseBean.selectedRow}" />
 						</a4j:commandButton>
 						<a4j:commandButton value="#{msg.rlsCreateNew}"
-							action="#{releaseBean.createRelease}" reRender="main_section">
+							action="#{releaseBean.createRelease}" reRender="releaseGrid">
 							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
 								assignTo="#{releaseBean.selectedRow}" />
 						</a4j:commandButton>
 						<a4j:commandButton value="#{msg.rlsOpen}"
-							action="#{releaseBean.openRelease}" reRender="main_section">
+							action="#{releaseBean.openRelease}" >
 							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
 								assignTo="#{releaseBean.selectedRow}" />
 						</a4j:commandButton>

@@ -52,7 +52,7 @@
 	<h:form name="main_section">
 		<rich:panel>
 			<f:facet name="header">#{msg.panelOpenEditProducts}</f:facet>
-			<rich:dataGrid value="#{productBean.products}" var="product"
+			<rich:dataGrid id="productGrid" value="#{productBean.products}" var="product"
 				columns="1" elements="10" rowKeyVar="rowIndex"  ajaxKeys="#{repeatBean.rowsToUpdate}">
 				<rich:panel bodyClass="pbody" id="num">
 					<f:facet name="header">
@@ -90,7 +90,7 @@
 					<f:validateLength></f:validateLength>
 				</h:inputText>
 				<a4j:commandButton value="#{msg.productCreate}"
-					action="#{productBean.createProduct()}" reRender="main_section" />
+					action="#{productBean.createProduct()}" reRender="productGrid" />
 			</h:panelGrid>
 		</rich:panel>
 		 <a4j:log hotkey="D"/>

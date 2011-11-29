@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-
 @Entity
 public class Release {
 	private int releaseId;
@@ -29,16 +28,21 @@ public class Release {
 
 		Release newRelease = new Release(product, releaseName);
 		result.add(newRelease);
+		product.addRelease(newRelease);
 
 		result.addAll(ReleaseArc.createArcs(sourceReleases, newRelease));
 		WSpace master = WSpace.createMasterWorkspace(newRelease, em);
 		newRelease.setMasterWorkspace(master);
+		result.add(master);
 		return result;
 	}
-	@OneToOne(fetch=FetchType.LAZY, mappedBy="releaseMaster", cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
-	public WSpace getMasterWorkspace(){
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "releaseMaster", cascade = {
+			CascadeType.PERSIST, CascadeType.REFRESH })
+	public WSpace getMasterWorkspace() {
 		return masterWorkspace;
 	}
+
 	public void setMasterWorkspace(WSpace master) {
 		this.masterWorkspace = master;
 	}
@@ -54,8 +58,8 @@ public class Release {
 	}
 
 	@Id
-	@GeneratedValue(generator="ReleaseSeq", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="ReleaseSeq", sequenceName="SQ_RELEASE")
+	@GeneratedValue(generator = "ReleaseSeq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "ReleaseSeq", sequenceName = "SQ_RELEASE")
 	public int getReleaseId() {
 		return releaseId;
 	}
@@ -85,7 +89,8 @@ public class Release {
 	public String toString() {
 		return "(" + this.getReleaseId() + ") " + this.getReleaseName();
 	}
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REFRESH}, fetch=FetchType.LAZY, mappedBy="release")
+
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY, mappedBy = "release")
 	public List<WSpace> getWorkspaces() {
 		return workspaces;
 	}

@@ -33,23 +33,89 @@
 				<h:panelGrid columns="2">
 					<rich:panel>
 						<f:facet name="header">Object Versions</f:facet>
-						<rich:scrollableDataTable name="versions" selectionMode="single">
-							<rich:column id="make">
+						<rich:scrollableDataTable name="versions" selectionMode="single"
+							rowKeyVar="rkv" frozenColCount="1" height="400px" width="400px"
+							rows="40" columnClasses="col"
+							value="#{objectHistoryBean.historyItems}" var="item"
+							binding="#{objectHistoryBean.table}"
+							selection="#{objectHistoryBean.selection}">
+							<rich:column id="rowNum" width="25">
+								<h:outputText value="#{rkv}" />
+							</rich:column>
+							<rich:column id="arcid">
 								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Make" />
+									<h:outputText styleClass="headerText" value="Arc ID" />
 								</f:facet>
-								<h:outputText value="#{}" />
+								<h:outputText value="#{item.arcID}" />
+							</rich:column>
+							<rich:column id="tvid">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Target VersionID" />
+								</f:facet>
+								<h:outputText value="#{item.targetID}" />
+							</rich:column>
+							<rich:column id="tvnum">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Target VersionNum" />
+								</f:facet>
+								<h:outputText value="#{item.targetVersionNumber}" />
+							</rich:column>
+							<rich:column id="pvid">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Precedor VersionID" />
+								</f:facet>
+								<h:outputText value="#{item.precedorID}" />
+							</rich:column>
+							<rich:column id="pvnum">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Precedor VersionNum" />
+								</f:facet>
+								<h:outputText value="#{item.precedorVersionNumber}" />
+							</rich:column>
+							<rich:column id="arcdate">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Date" />
+								</f:facet>
+								<h:outputText value="#{item.date}" />
+							</rich:column>
+							<rich:column id="arcuser">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="User" />
+								</f:facet>
+								<h:outputText value="#{item.user}" />
 							</rich:column>
 						</rich:scrollableDataTable>
 					</rich:panel>
 					<rich:panel>
 						<f:facet name="header">Causes</f:facet>
-						<rich:scrollableDataTable name="causes" selectionMode="single">
-							<rich:column id="make">
+						<rich:scrollableDataTable name="causes" selectionMode="single" 
+							value="#{objectHistoryBean.selection.causeItems}" var="causeitem" rowKeyVar="rkv" frozenColCount="1" height="400px" width="400px">
+							<rich:column id="rowNum" width="25">
+								<h:outputText value="#{rkv}" />
+							</rich:column>
+							<rich:column id="cid">
 								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Make" />
+									<h:outputText styleClass="headerText" value="Cause ID" />
 								</f:facet>
-								<h:outputText value="#{}" />
+								<h:outputText value="#{causeitem.causeId}" />
+							</rich:column>
+							<rich:column id="cvoid">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Object ID" />
+								</f:facet>
+								<h:outputText value="#{causeitem.voID}" />
+							</rich:column>
+							<rich:column id="coname">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Object Name" />
+								</f:facet>
+								<h:outputText value="#{causeitem.objectName}" />
+							</rich:column>
+							<rich:column id="cversion">
+								<f:facet name="header">
+									<h:outputText styleClass="headerText" value="Object Version" />
+								</f:facet>
+								<h:outputText value="#{causeitem.versionNumber}" />
 							</rich:column>
 						</rich:scrollableDataTable>
 					</rich:panel>

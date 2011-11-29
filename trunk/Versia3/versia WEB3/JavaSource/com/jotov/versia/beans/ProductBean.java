@@ -49,6 +49,7 @@ public class ProductBean extends aDBbean {
 		for (Object obj : listForPersist) {
 			em.persist(obj);
 		}
+
 		trx.commit();
 
 		newProductName = new String();

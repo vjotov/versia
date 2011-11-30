@@ -109,28 +109,28 @@
 						selection="#{listVobjectsBean.selection}" selectionMode="single">
 						<!-- sortMode="single" sortOrder="#{listVobjectsBean.order}"
 							selection="#{listVobjectsBean.selection}" -->
-						<rich:column id="rowNum" width="25">
+						<rich:column width="25">
 							<h:outputText value="#{rkv}" />
 						</rich:column>
-						<rich:column id="objectId" width="50">
+						<rich:column id="voID" width="50">
 							<f:facet name="header">
 								<h:outputText styleClass="headerText" value="ObjectID" />
 							</f:facet>
 							<h:outputText value="#{item.voID}" />
 						</rich:column>
-						<rich:column id="verionNumber" width="40">
+						<rich:column id="versionNumber" width="40">
 							<f:facet name="header">
 								<h:outputText styleClass="headerText" value="VerNo" />
 							</f:facet>
 							<h:outputText value="#{item.versionNumber}" />
 						</rich:column>
-						<rich:column id="objectName">
+						<rich:column id="voName">
 							<f:facet name="header">
 								<h:outputText styleClass="headerText" value="Name" />
 							</f:facet>
 							<h:outputText value="#{item.voName}" />
 						</rich:column>
-						<rich:column id="vvector">
+						<rich:column id="visibility">
 							<f:facet name="header">
 								<h:outputText styleClass="headerText" value="Visibility" />
 							</f:facet>

@@ -38,15 +38,29 @@ public class WSpace {
 		super();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static WSpace createWorkspace(String workspaceName,
 			WSpace ancestorWorkspace, Release rel, EntityManager em) {
 		WSpace ws;
 		if (ancestorWorkspace == null) { // Creation of master workspace
-			Query q = em
-					.createQuery("SELECT w FROM WSpace w ORDER BY w.rv DESC");
-			WSpace w = (WSpace) q.getResultList().get(0);
-			ws = new WSpace(workspaceName, ancestorWorkspace, rel,
-					w.getRv() + 1, w.getRv() + 2);
+			Query q = em.createQuery("SELECT count(w) FROM WSpace w");
+			long a =  (Long) q.getSingleResult();
+			
+			if (a == 0) {
+				// first ever run of script
+				ws = new WSpace(workspaceName, ancestorWorkspace, rel, 1, 2);
+			} else {
+				Query q2 = em
+						.createQuery("SELECT w FROM WSpace w ORDER BY w.rv DESC");
+
+				List b = q2.getResultList();
+
+				WSpace w = (WSpace) b.get(0);
+				ws = new WSpace(workspaceName, ancestorWorkspace, rel,
+						w.getRv() + 1, w.getRv() + 2);
+
+			}
+
 		} else { // adding sub-workspace
 			int lv = ancestorWorkspace.getRv();
 			Query q1 = em

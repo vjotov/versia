@@ -32,7 +32,8 @@
 		</h:panelGrid>
 		<h:commandButton action="#{editVObjectBean.Save}" value="Save"
 			onclick="javascript:Richfaces.hideModalPanel('editPanel')"
-			disabled="#{editVObjectBean.readonly}">
-		</h:commandButton>
+			disabled="#{editVObjectBean.readonly}" />
+		<h:commandButton value="Cancel"
+			onclick="javascript:Richfaces.hideModalPanel('editVO')" />
 	</a4j:form>
 </rich:modalPanel>

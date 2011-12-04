@@ -13,7 +13,7 @@ public class VisibileItemsExtractor {
 
 	static public ArrayList<VisibleItems> buildVersions(WSpace workspace) {
 		HashMap<VObject, VisibleItems> voMap = constructVisibility(workspace,
-				new HashMap<VObject, VisibleItems>(), VisibilityEnum.LOCAL);
+				new HashMap<VObject, VisibleItems>(), VisibilityEnum.L);
 		ArrayList<VisibleItems> result = new ArrayList<VisibleItems>(
 				voMap.values());
 		for (VisibleItems vitem : result) {
@@ -47,15 +47,15 @@ public class VisibileItemsExtractor {
 			WSpace workspace, HashMap<VObject, VisibleItems> map,
 			VisibilityEnum ve) {
 		if (workspace.getAncestorWorkspace() == null)
-			ve = VisibilityEnum.RELEASE;
+			ve = VisibilityEnum.R;
 
 		ArrayList<VObjectVersion> local = (ArrayList<VObjectVersion>) workspace
 				.getLocalVersions();
 		addObjects(map, local, ve);
 
-		if (ve != VisibilityEnum.RELEASE)
+		if (ve != VisibilityEnum.R)
 			return constructVisibility(workspace.getAncestorWorkspace(), map,
-					VisibilityEnum.PARENT);
+					VisibilityEnum.P);
 		else
 			return map;
 	}
@@ -69,13 +69,13 @@ public class VisibileItemsExtractor {
 				if (vov.getDeleteFlag() == 0)
 					vi.addVvector(ve);
 				else
-					vi.addVvector(VisibilityEnum.DELETED);
+					vi.addVvector(VisibilityEnum.D);
 			} else {
 				VisibleItems vi;
 				if (vov.getDeleteFlag() == 0)
 					vi = new VisibleItems(vobj, vov, ve);
 				else
-					vi = new VisibleItems(vobj, vov, VisibilityEnum.DELETED);
+					vi = new VisibleItems(vobj, vov, VisibilityEnum.D);
 				map.put(vobj, vi);
 			}
 		}

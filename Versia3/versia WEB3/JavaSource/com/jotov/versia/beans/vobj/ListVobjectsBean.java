@@ -56,11 +56,12 @@ public class ListVobjectsBean extends aDBbean {
 
 	public List<VItem> getVisibleItems() {
 		// return VisibileItemsExtractor.buildVersions(session.getWorkspace());
-		if (session.getVItemShell().isReady()==false) {
+		if (session.getVItemShell().isReady() == false) {
 			dbean.executeQuery(session.getVItemShell());
 		}
 		return session.getVItemShell().getVItems();
 	}
+
 
 	public VItem getSelectedItem() {
 		return selectedItems.get(0);

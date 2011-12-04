@@ -39,6 +39,9 @@
 		</h:panelGrid>
 		<h:commandButton action="#{editVObjectBean.RollBack}"
 			value="Roll Back"
+			onclick="javascript:Richfaces.hideModalPanel('RollBackVO')"
+			disabled="#{editVObjectBean.roRollback}" />
+		<h:commandButton value="Cancel"
 			onclick="javascript:Richfaces.hideModalPanel('RollBackVO')" />
 	</a4j:form>
 </rich:modalPanel>

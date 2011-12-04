@@ -24,11 +24,12 @@ public class VItem {
 	private Boolean deletedFlag;
 	private Boolean attachedWIFlag;
 	private Boolean ancestorFlag;
+	private Boolean ancestorAWI;
 	private Integer ancestorVersionNumber;
 	private String ancestorVOName;
 	private String ancestorVODatum;
-	private List<VObjectVersion> subVObjectVersions = new ArrayList<VObjectVersion>();
-	private List<VSubItem> subObjects = new ArrayList<VSubItem>();
+	private List<VObjectVersion> subVObjectVersions;
+	private List<VSubItem> subObjects;
 
 	private List<VisibilityEnum> visibility = new ArrayList<VisibilityEnum>();
 
@@ -47,15 +48,17 @@ public class VItem {
 		deletedFlag = new Boolean(vov.getDeleteFlag() != 0);
 
 		if (workitemFlag) {
-			Query q = em.createNamedQuery("wiaByWSnVO");
-//			Query q = em.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :object AND w.workspace = :wspace");
+			visibility.add(VisibilityEnum.WI);
+			Query q = em.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :obj AND w.workspace = :wspace");
 			q.setParameter("obj", vObject);
 			q.setParameter("wspace", ws);
 
-			attachedWIFlag = ((Long) q.getSingleResult() > 0);
+			List<Long> a = q.getResultList();
+			attachedWIFlag = (a.size() > 0 && a.get(0) > 0);
 		} else
 			attachedWIFlag = false;
-
+		if (attachedWIFlag)
+			visibility.add(VisibilityEnum.A);
 		Query q = em
 				.createQuery("SELECT v FROM VObjectVersion v WHERE v.workspace.lv < :lvParameter AND v.workspace.rv >:rvParameter ORDER BY v.workspace.lv DESC");
 		q.setParameter("lvParameter", ws.getLv());
@@ -65,24 +68,27 @@ public class VItem {
 				.getResultList();
 		if (ancestorVOVs.size() > 0) {
 			ancestorFlag = true;
-			VObjectVersion ancestorVOV = ancestorVOVs.get(0);
-			ancestorVersionNumber = ancestorVOV.getVersionNumber();
-			ancestorVOName = ancestorVOV.getObjectName();
-			ancestorVODatum = ancestorVOV.getObjectDatum();
+			VObjectVersion ancestorVersion = ancestorVOVs.get(0);
+			ancestorVersionNumber = ancestorVersion.getVersionNumber();
+			ancestorVOName = ancestorVersion.getObjectName();
+			ancestorVODatum = ancestorVersion.getObjectDatum();
 		} else {
 			ancestorFlag = false;
 			ancestorVersionNumber = 0;
 			ancestorVOName = "N/A";
 			ancestorVODatum = "N/A";
+
 		}
 
-		List<VComposer> vcLS = voVersion.getSubObjects();
-		for (VComposer vc : vcLS) {
-			VObjectVersion svo = vc.getSubObject();
-			subVObjectVersions.add(vc.getSubObject());
-			subObjects.add(new VSubItem(svo.getVobject().getVObjectId(), svo
-					.getVersionNumber(), svo.getObjectName()));
-		}
+		if (Object.class.isInstance(ws.getAncestorWorkspace())) {
+			Query q2 = em.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :obj AND w.workspace = :wspace");
+			q2.setParameter("obj", vObject);
+			q2.setParameter("wspace", ws.getAncestorWorkspace());
+
+			List<Long> a = q2.getResultList();
+			ancestorAWI = (a.size() > 0 && a.get(0) > 0);
+		} else
+			ancestorAWI = false;
 	}
 
 	public WSpace getWorkspace() {
@@ -141,19 +147,19 @@ public class VItem {
 		this.voDatum = voDatum;
 	}
 
-	public Boolean getWorkitemFlag() {
+	public Boolean isWorkitem() {
 		return workitemFlag;
 	}
 
-	public Boolean getDeletedFlag() {
+	public Boolean isDeleted() {
 		return deletedFlag;
 	}
 
-	public void setWorkitemFlag(Boolean workitemFlag) {
+	public void setWorkitem(Boolean workitemFlag) {
 		this.workitemFlag = workitemFlag;
 	}
 
-	public Boolean getAttachedWIFlag() {
+	public Boolean isAttachedWI() {
 		if (!Object.class.isInstance(attachedWIFlag))
 			calculateAttachedWIFlag();
 		return attachedWIFlag;
@@ -172,7 +178,7 @@ public class VItem {
 			this.attachedWIFlag = new Boolean(false);
 	}
 
-	public Boolean getAncestorFlag() {
+	public Boolean hasAncestor() {
 		return ancestorFlag;
 	}
 
@@ -189,6 +195,18 @@ public class VItem {
 	}
 
 	public List<VObjectVersion> getSubVObjectVersions() {
+		if (subVObjectVersions == null) {
+			subVObjectVersions = new ArrayList<VObjectVersion>();
+			subObjects = new ArrayList<VSubItem>();
+
+			List<VComposer> vcLS = voVersion.getSubObjects();
+			for (VComposer vc : vcLS) {
+				VObjectVersion svo = vc.getSubObject();
+				subVObjectVersions.add(vc.getSubObject());
+				subObjects.add(new VSubItem(svo.getVobject().getVObjectId(),
+						svo.getVersionNumber(), svo.getObjectName()));
+			}
+		}
 		return subVObjectVersions;
 	}
 
@@ -209,17 +227,34 @@ public class VItem {
 	}
 
 	public List<VSubItem> getSubObjects() {
+		if (subObjects == null) {
+			subVObjectVersions = new ArrayList<VObjectVersion>();
+			subObjects = new ArrayList<VSubItem>();
+
+			List<VComposer> vcLS = voVersion.getSubObjects();
+			for (VComposer vc : vcLS) {
+				VObjectVersion svo = vc.getSubObject();
+				subVObjectVersions.add(vc.getSubObject());
+				subObjects.add(new VSubItem(svo.getVobject().getVObjectId(),
+						svo.getVersionNumber(), svo.getObjectName()));
+			}
+		}
 		return subObjects;
 	}
 
 	public void setSubObjects(List<VSubItem> subObjects) {
 		this.subObjects = subObjects;
 	}
-	
-	public String getImage(){
-		if( this.subObjects.size()== 0)
+
+	public String getImage() {
+		if (getSubObjects().size() == 0)
 			return "img/tree_empty.gif";
-		else 
+		else
 			return "img/tree_expand.gif";
 	}
+
+	public Boolean isAncestorAWI() {
+		return ancestorAWI;
+	}
+
 }

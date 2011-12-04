@@ -16,6 +16,7 @@ public class CreateObjectBean extends aDBbean {
 
 	public void CreateObject() {
 		dbean.executeQuery(this);
+		session.getApp().NotifyCleanAll();
 	}
 
 	@Override
@@ -29,7 +30,9 @@ public class CreateObjectBean extends aDBbean {
 			em.persist(obj);
 			trx.commit();
 		} catch (Exception e) {
-			trx.rollback();
+			if(trx.isActive())
+				trx.rollback();
+			e.printStackTrace(System.err);
 		}
 		return null;
 	}

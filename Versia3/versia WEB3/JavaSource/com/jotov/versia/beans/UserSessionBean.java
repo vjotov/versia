@@ -100,7 +100,7 @@ public class UserSessionBean implements iSessionAdaptor {
 	}
 
 	public VItemShell getVItemShell() {
-		if (vs == null || !vs.getWorkspace().equals(workspace)) {
+		if (!Object.class.isInstance(vs) || !vs.getWorkspace().equals(workspace)) {
 			vs = new VItemShell(workspace);
 		}
 		return vs;

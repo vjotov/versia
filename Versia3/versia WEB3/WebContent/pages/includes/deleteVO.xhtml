@@ -30,6 +30,9 @@
 				disabled="true" />
 		</h:panelGrid>
 		<h:commandButton action="#{editVObjectBean.Delete}" value="Delete"
+			onclick="javascript:Richfaces.hideModalPanel('DeleteVO')"
+			disabled="#{editVObjectBean.readonly}"/>
+		<h:commandButton value="Cancel"
 			onclick="javascript:Richfaces.hideModalPanel('DeleteVO')" />
 	</a4j:form>
 </rich:modalPanel>

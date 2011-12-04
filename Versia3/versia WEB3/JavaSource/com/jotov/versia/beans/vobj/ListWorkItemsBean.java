@@ -38,9 +38,10 @@ public class ListWorkItemsBean extends aDBbean {
 		selected.clear();
 
 		for (VItem vi : vitems) {
-			if (vi.getWorkitemFlag())
-				options.add(new SelectItem(vi.getVoID(), vi.getVoName()));
-			if (vi.getAttachedWIFlag())
+			if (vi.isWorkitem())
+				if (!vi.isDeleted())
+					options.add(new SelectItem(vi.getVoID(), vi.getVoName()));
+			if (vi.isAttachedWI())
 				selected.add(vi.getVoID());
 
 		}
@@ -101,8 +102,8 @@ public class ListWorkItemsBean extends aDBbean {
 	}
 
 	public String Update() {
-		System.out.println("ListWorkItemsBean/Update()");
 		dbean.executeQuery(this, 1);
+		session.getApp().NotifyCleanAll();
 		return null;
 	}
 

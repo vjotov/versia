@@ -38,6 +38,9 @@
 			<h:outputText value="TODO" />
 		</h:panelGrid>
 		<h:commandButton action="#{editVObjectBean.Publish}" value="Publish"
+			onclick="javascript:Richfaces.hideModalPanel('PublishVO')"
+			disabled="#{editVObjectBean.roPublicable}" />
+		<h:commandButton value="Cancel"
 			onclick="javascript:Richfaces.hideModalPanel('PublishVO')" />
 	</a4j:form>
 </rich:modalPanel>

@@ -23,7 +23,7 @@ public class VItemShell extends aDBbean {
 		// construction
 		HashMap<VObject, VItem> resultMAP = new HashMap<VObject, VItem>();
 		HashMap<VObject, VItem> voMap = reqursiveCalculation(resultMAP,
-				workspace, VisibilityEnum.LOCAL);
+				workspace, VisibilityEnum.L);
 		VItems = new ArrayList<VItem>(voMap.values());
 		populateMap();
 		ready = true;
@@ -45,17 +45,17 @@ public class VItemShell extends aDBbean {
 			HashMap<VObject, VItem> viMAP, WSpace ws, VisibilityEnum vis) {
 
 		if (ws.getAncestorWorkspace() == null) {
-			vis = VisibilityEnum.RELEASE;
+			vis = VisibilityEnum.R;
 		}
 
 		List<VObjectVersion> vovLS = ws.getLocalVersions();
 		addVitem(viMAP, vovLS, vis);
 
-		if (vis == VisibilityEnum.RELEASE)
+		if (vis == VisibilityEnum.R)
 			return viMAP;
 		else
 			return reqursiveCalculation(viMAP, ws.getAncestorWorkspace(),
-					VisibilityEnum.PARENT);
+					VisibilityEnum.P);
 	}
 
 	private void addVitem(HashMap<VObject, VItem> viMAP,
@@ -68,14 +68,14 @@ public class VItemShell extends aDBbean {
 				if (vov.getDeleteFlag() == 0)
 					vitem.addVisibility(vis);
 				else
-					vitem.addVisibility(VisibilityEnum.DELETED);
+					vitem.addVisibility(VisibilityEnum.D);
 			} else {
 				// create new vitem and add to map
 				VItem vitem = new VItem(vov, workspace, em);
 				if (vov.getDeleteFlag() == 0)
 					vitem.addVisibility(vis);
 				else
-					vitem.addVisibility(VisibilityEnum.DELETED);
+					vitem.addVisibility(VisibilityEnum.D);
 				viMAP.put(vobj, vitem);
 			}
 		}

@@ -30,7 +30,7 @@ public class Cause {
 		List<VItem> vitems = session.getVItemShell().getVItems();
 		ArrayList<Cause> causeList = new ArrayList<Cause>();
 		for (VItem vi : vitems) {
-			if (vi.getWorkitemFlag() && vi.getAttachedWIFlag())
+			if (vi.isWorkitem() && vi.isAttachedWI())
 				causeList.add(new Cause(nva, vi.getVoVersion()));
 		}
 

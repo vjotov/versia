@@ -222,6 +222,8 @@ public class WSpace {
 	}
 
 	public void addLocalVersion(VObjectVersion localVersion) {
+		if(!Object.class.isInstance(localVersions))
+			localVersions = new ArrayList<VObjectVersion>(); 
 		this.localVersions.add(localVersion);
 	}
 

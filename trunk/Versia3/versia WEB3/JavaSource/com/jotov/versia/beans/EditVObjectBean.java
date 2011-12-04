@@ -11,7 +11,6 @@ import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.VersionArc;
 import com.jotov.versia.orm.WSpace;
-import com.jotov.versia.orm.WorkItemAttachement;
 
 public class EditVObjectBean extends aDBbean {
 	// private VObject vo;
@@ -72,8 +71,10 @@ public class EditVObjectBean extends aDBbean {
 			ancestorWS.removeLocalVersion(ancestorVOV);
 
 			pVOV.setWorkspace(ancestorWS);
-			pVOV.addPrecetorsArc(VersionArc.createArcs(pVOV, ancestorVOV,
-					ancestorWS, session));
+			VersionArc va = VersionArc.createArcs(pVOV, ancestorVOV,
+					ancestorWS, session);
+			va.setNotes("publication");
+			pVOV.addPrecetorsArc(va);
 			ws.removeLocalVersion(pVOV);
 			ancestorWS.addLocalVersion(pVOV);
 
@@ -128,14 +129,19 @@ public class EditVObjectBean extends aDBbean {
 
 			VObjectVersion nv = VObjectVersion.createVersion(vo, NewName,
 					NewData, session.getWorkspace(), precedors, session);
-
-			vo.setWorkItem(isWorkItem);
+			if (isWorkItem)
+				vo.setWorkItem("TRUE");
+			else
+				vo.setWorkItem("FALSE");
 			oldVer.setWorkspace(null);
 			em.persist(nv);
 			em.persist(oldVer);
 		}
 		if (vo.isWorkItem() != this.isWorkItem) {
-			vo.setWorkItem(isWorkItem);
+			if (isWorkItem)
+				vo.setWorkItem("TRUE");
+			else
+				vo.setWorkItem("FALSE");
 			em.persist(vo);
 		}
 
@@ -144,12 +150,13 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void Save() {
-		if(this.isReadonly()) {
-			System.out.println("editVObjectBean.Save()/0 failed - object is read only");
+		if (this.isReadonly()) {
+			System.out
+					.println("editVObjectBean.Save()/0 failed - object is read only");
 			resetVars();
-			return ;			
+			return;
 		}
-			
+
 		System.out.println("editVObjectBean.Save()/0");
 		dbean.executeQuery(this, 1);
 		session.setSelectedVersion(null);
@@ -164,10 +171,10 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void Publish() {
-		//TODO to think when it is deleted to allow publish
-		if(this.isReadonly()) {
+		// TODO to think when it is deleted to allow publish
+		if (this.isReadonly()) {
 			resetVars();
-			return ;			
+			return;
 		}
 		System.out.println("editVObjectBean.Publish()/0");
 		dbean.executeQuery(this, 2);
@@ -177,10 +184,10 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void RollBack() {
-		//TODO to think when it is deleted to allow rollback
-		if(this.isReadonly()) {
+		// TODO to think when it is deleted to allow rollback
+		if (this.isReadonly()) {
 			resetVars();
-			return ;			
+			return;
 		}
 		System.out.println("editVObjectBean.RollBack()/0");
 		dbean.executeQuery(this, 3);
@@ -190,9 +197,9 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void Delete() {
-		if(this.isReadonly()) {
+		if (this.isReadonly()) {
 			resetVars();
-			return ;			
+			return;
 		}
 		System.out.println("editVObjectBean.Delete()/0");
 		dbean.executeQuery(this, 4);
@@ -268,9 +275,34 @@ public class EditVObjectBean extends aDBbean {
 			return false;
 		VItem vitem = session.getVItemShell().getItemByVOV(vov);
 
-		if (vitem.getDeletedFlag() || (vitem.getAttachedWIFlag()))
+		if (vitem.isDeleted() || (vitem.isAttachedWI()))
 			// Deleted object are read only
 			// Attached WI are read only
+			return true;
+		return false;
+	}
+	
+	public boolean isRoPublicable() {
+		VObjectVersion vov = session.getSelectedVersion();
+		if (vov == null)
+			return false;
+		VItem vitem = session.getVItemShell().getItemByVOV(vov);
+
+		if (vitem.isAttachedWI() || vitem.isAncestorAWI())
+			// Attached WI cannot be published
+			// and WI attached in ancestor's WS
+			return true;
+		return false;
+	}
+	
+	public boolean isRoRollback() {
+		VObjectVersion vov = session.getSelectedVersion();
+		if (vov == null)
+			return false;
+		VItem vitem = session.getVItemShell().getItemByVOV(vov);
+
+		if ( (vitem.isAttachedWI()))
+			// Attached WI cannot be roll-backed
 			return true;
 		return false;
 	}

@@ -33,9 +33,9 @@
 				<h:panelGrid columns="2">
 					<rich:panel>
 						<f:facet name="header">Object Versions</f:facet>
-						<a4j:commandButton value="Prepare Causes >>"
+						<a4j:commandButton value="1) Prepare Causes >>"
 							action="#{objectHistoryBean.takeSelection}"></a4j:commandButton>
-						<a4j:commandButton value="Show Causes >>>" reRender="causesTable">
+						<a4j:commandButton value="2) Show Causes >>>" reRender="causesTable">
 						</a4j:commandButton>
 						<rich:scrollableDataTable id="versionsTable"
 							selectionMode="single" rowKeyVar="rkv" frozenColCount="1"

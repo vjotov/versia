@@ -21,7 +21,7 @@
 	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/geronimo-jpa_3.0_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/geronimo-jta_1.1_spec-1.1.jar"/>
 	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/ojdbc14.jar"/>
-	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/openjpa-1.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/openjpa-all-2.1.1.jar"/>
 	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/orai18n.jar"/>
 	<classpathentry kind="lib" path="D:/vobx_shared/versia_ws/versia WEB3/lib/serp-1.13.1.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>

@@ -24,7 +24,7 @@
 					<rich:menuItem value="Close Workspace"
 						action="#{closeWorkspaceBean.closeWorkspace}" />
 				</rich:dropDownMenu>
-				<rich:dropDownMenu>
+				<rich:dropDownMenu disabled="true">
 					<f:facet name="label">
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
@@ -34,7 +34,7 @@
 					<rich:menuItem value="Object History"
 						action="#{listVobjectsBean.showHistory}" />
 					<rich:menuItem value="Object Distribution"
-						action="#{listVobjectsBean.showDistribution}" />
+						action="#{listVobjectsBean.showDistribution}" disabled="true" />
 
 				</rich:dropDownMenu>
 				<rich:dropDownMenu>
@@ -77,6 +77,8 @@
 
 			<rich:panel>
 				<f:facet name="header">Visible Objects</f:facet>
+				<h:outputText value="If the table below is empty, please press Refresh button of your Browser." /><br /> 
+				<h:outputText value="If the table below is still empty, then you have an empty workspace or there is an error in the prototype." />
 				<a4j:form>
 					<a4j:commandButton value="Edit" reRender="editTable"
 						action="#{listVobjectsBean.takeSelection}"
@@ -91,16 +93,17 @@
 						action="#{listVobjectsBean.takeSelection}"
 						oncomplete="javascript:Richfaces.showModalPanel('publishVO');">
 					</a4j:commandButton>
-					<a4j:commandButton value="Roll Back" reRender="rollbackTable"
+					<a4j:commandButton value="Put Back" reRender="rollbackTable"
 						action="#{listVobjectsBean.takeSelection}"
 						oncomplete="javascript:Richfaces.showModalPanel('rollBackVO');">
 					</a4j:commandButton>
 					<a4j:commandButton value="Delete" reRender="deleteTable"
 						action="#{listVobjectsBean.takeSelection}"
 						oncomplete="javascript:Richfaces.showModalPanel('deleteVO');">
-					</a4j:commandButton>
-					<a4j:commandButton value="Select Row"
+					</a4j:commandButton><br />
+					<a4j:commandButton value="1)Select Row"
 						action="#{listVobjectsBean.takeSelection}" />
+						<a4j:commandButton value="2)View Hystory of selected Item" action="#{listVobjectsBean.showHistory}"/>
 					<rich:spacer height="20px" />
 					<rich:scrollableDataTable id="visibleObjects" rowKeyVar="rkv"
 						frozenColCount="1" height="400px" width="400px" rows="40"

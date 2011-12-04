@@ -37,6 +37,7 @@
 				to be commented out here since the provided examples all specify the values 
 				via System properties. -->
 			<property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@localhost:1521:xe" />
+			<!--property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@192.168.1.14:1521:xe" /-->
 			<property name="openjpa.ConnectionDriverName" value="oracle.jdbc.OracleDriver" />
 			<!-- property name="openjpa.ConnectionURL" value="jdbc:derby:openjpa-database;create=true"/ -->
 			<!-- property name="openjpa.ConnectionDriverName" value="oracle.jdbc.OracleDriver"/ -->

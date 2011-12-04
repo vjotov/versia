@@ -23,6 +23,7 @@ public class VersionArc {
 	private VObjectVersion target;
 	private List<Cause> causes = new ArrayList<Cause>();
 	private Date arcDate = new Date();
+	private String notes = "N/A";
 	
 	public VersionArc() {
 		super();
@@ -98,6 +99,14 @@ public class VersionArc {
 
 	public void setArcDate(Date arcDate) {
 		this.arcDate = arcDate;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 

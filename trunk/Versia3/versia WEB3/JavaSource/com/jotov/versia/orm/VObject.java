@@ -10,13 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import org.apache.openjpa.persistence.ExternalValues;
-import org.apache.openjpa.persistence.Type;
+import javax.persistence.Transient;
 
 @Entity
 public class VObject {
 	private int VObjectId;
-	private boolean WorkItem = false;
+	private String WorkItem = "FALSE";
 	private List<VObjectVersion> versions = new ArrayList<VObjectVersion>();
 	private List<WorkItemAttachement> attachedAsWorkItem = new ArrayList<WorkItemAttachement>();
 
@@ -65,14 +64,22 @@ public class VObject {
 		this.versions.add(version);
 	}
 
-	@ExternalValues({"true=TRUE", "false=FALSE"}) 
-	@Type(String.class)
-	public boolean isWorkItem() {
+	// @ExternalValues({"true=TRUE", "false=FALSE"})
+	// @Type(String.class)
+	public String getWorkItem() {
 		return WorkItem;
 	}
 
-	public void setWorkItem(boolean worItem) {
+	public void setWorkItem(String worItem) {
 		WorkItem = worItem;
+	}
+
+	@Transient
+	public boolean isWorkItem() {
+		if (WorkItem == null || WorkItem.equals("FALSE"))
+			return false;
+		else
+			return true;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "workitem")

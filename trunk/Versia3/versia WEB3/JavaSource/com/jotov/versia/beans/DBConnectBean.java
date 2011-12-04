@@ -32,7 +32,7 @@ public class DBConnectBean {
 			eq.resetEntityManager();
 		} catch (Exception e) {
 			System.err.println("DBConnectBean executeQuery/1 " + e.getMessage());
-			System.err.println(e.getStackTrace());
+			e.printStackTrace(System.err);
 		}
 		return result;
 	}

@@ -77,6 +77,9 @@ public class VObjectVersion {
 		VObjectVersion deletedVersion = createVersion(
 				selectedVersion.getVobject(), selectedVersion.objectName, null,
 				workspace2, precedors, session);
+		for (VersionArc pa :deletedVersion.precetorsArc){
+			pa.setNotes("Delete");
+		}
 		deletedVersion.setDeleteFlag(1);
 		return deletedVersion;
 	}

@@ -37,7 +37,7 @@ public abstract class aDBbean implements iExecuteQuery {
 	}
 
 	@Override
-	public String executeQuery(int mode) {
+	public String executeQuery(int mode) throws Exception {
 		return null;
 	}
 

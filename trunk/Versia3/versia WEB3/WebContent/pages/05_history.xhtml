@@ -27,106 +27,91 @@
 		</h:form>
 	</ui:define>
 	<ui:define name="body">
-		<rich:panel>
+		<rich:panel style="height: 150px; width: 900px">
 			<a4j:form>
 				<f:facet name="header">Object History</f:facet>
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3">
 					<rich:panel>
 						<f:facet name="header">Object Versions</f:facet>
-						<a4j:commandButton value="1) Prepare Causes >>"
-							action="#{objectHistoryBean.takeSelection}"></a4j:commandButton>
-						<a4j:commandButton value="2) Show Causes >>>" reRender="causesTable">
-						</a4j:commandButton>
-						<rich:scrollableDataTable id="versionsTable"
-							selectionMode="single" rowKeyVar="rkv" frozenColCount="1"
-							height="400px" width="600px" rows="40" columnClasses="col"
-							value="#{objectHistoryBean.historyItems}" var="item"
-							binding="#{objectHistoryBean.table}"
-							selection="#{objectHistoryBean.selection}">
-							<rich:column width="25">
-								<h:outputText value="#{rkv}" />
+						<rich:dataTable id="objectVersionTable"
+							value="#{objectHistoryBean.vovHistoryItem}" var="versionItem"
+							rows="10">
+							<a4j:support event="onRowClick">
+								<f:setPropertyActionListener value="#{versionItem}"
+									target="#{objectHistoryBean.selectedVOVHistoryItem}" />
+							</a4j:support>
+							<rich:column width="30px">
+								<f:facet name="header">Ver#</f:facet>
+								#{versionItem.versionNumber}
 							</rich:column>
-							<rich:column id="arcID" width="50">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Arc ID" />
-								</f:facet>
-								<h:outputText value="#{item.arcID}" />
+							<rich:column width="170px">
+								<f:facet name="header">Name</f:facet>
+								#{versionItem.name}
 							</rich:column>
-							<rich:column id="targetID" width="50">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Targ.VerID" />
-								</f:facet>
-								<h:outputText value="#{item.targetID}" />
-							</rich:column>
-							<rich:column id="targetVersionNumber" width="50">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Targ.VerNum" />
-								</f:facet>
-								<h:outputText value="#{item.targetVersionNumber}" />
-							</rich:column>
-							<rich:column id="precedorID" width="50">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="PreVerID" />
-								</f:facet>
-								<h:outputText value="#{item.precedorID}" />
-							</rich:column>
-							<rich:column id="precedorVersionNumber" width="50">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="PreVerNum" />
-								</f:facet>
-								<h:outputText value="#{item.precedorVersionNumber}" />
-							</rich:column>
-							<rich:column id="date" width="70">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Date" />
-								</f:facet>
-								<h:outputText value="#{item.date}" />
-							</rich:column>
-							<rich:column id="user" width="40">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="User" />
-								</f:facet>
-								<h:outputText value="#{item.user}" />
-							</rich:column>
-						</rich:scrollableDataTable>
-					</rich:panel>
-					<rich:panel>
-						<f:facet name="header">Causes</f:facet>
+							<f:facet name="footer">
+								<rich:datascroller maxPages="4" selectedStyle="font-weight:bold"
+									align="center" />
+							</f:facet>
+						</rich:dataTable>
 
-						<rich:scrollableDataTable id="causesTable" selectionMode="single"
-							value="#{objectHistoryBean.selectedItem.causeItems}"
-							var="causeitem" rowKeyVar="rkv" frozenColCount="1" height="400px"
-							width="400px">
 
-							<rich:column width="25">
-								<h:outputText value="#{rkv}" />
-							</rich:column>
-							<rich:column id="causeId">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Cause ID" />
-								</f:facet>
-								<h:outputText value="#{causeitem.causeId}" />
-							</rich:column>
-							<rich:column id="voID">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object ID" />
-								</f:facet>
-								<h:outputText value="#{causeitem.voID}" />
-							</rich:column>
-							<rich:column id="objectName">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object Name" />
-								</f:facet>
-								<h:outputText value="#{causeitem.objectName}" />
-							</rich:column>
-							<rich:column id="versionNumber">
-								<f:facet name="header">
-									<h:outputText styleClass="headerText" value="Object Version" />
-								</f:facet>
-								<h:outputText value="#{causeitem.versionNumber}" />
-							</rich:column>
-						</rich:scrollableDataTable>
 					</rich:panel>
+					<a4j:outputPanel ajaxRendered="true">
+						<rich:panel>
+							<f:facet name="header">Precedors</f:facet>
+							<rich:dataTable
+								rendered="#{not empty objectHistoryBean.selectedVOVHistoryItem}"
+								value="#{objectHistoryBean.selectedVOVHistoryItem.precedors}"
+								var="precedeItem" rows="10">
+								<a4j:support event="onRowClick">
+									<f:setPropertyActionListener value="#{precedeItem}"
+										target="#{objectHistoryBean.selectedPrecedorItem}" />
+								</a4j:support>
+								<rich:column width="30px">
+									<f:facet name="header">Ver#</f:facet>
+								#{precedeItem.versionNumber}
+							</rich:column>
+								<rich:column width="170px">
+									<f:facet name="header">Name</f:facet>
+								#{precedeItem.name}
+							</rich:column>
+							<f:facet name="footer">
+								<rich:datascroller maxPages="4" selectedStyle="font-weight:bold"
+									align="center" />
+							</f:facet>
+							</rich:dataTable>
+						</rich:panel>
+					</a4j:outputPanel>
+					<a4j:outputPanel ajaxRendered="true">
+						<rich:panel>
+							<f:facet name="header">Causes</f:facet>
+							<rich:dataTable
+								rendered="#{not empty objectHistoryBean.selectedPrecedorItem}"
+								value="#{objectHistoryBean.selectedPrecedorItem.causes}"
+								var="causeItem" width="200px" rows="10">
+								<rich:column width="30">
+									<f:facet name="header">Cause Id</f:facet>
+								#{causeItem.causeId}
+							</rich:column>
+								<rich:column width="30">
+									<f:facet name="header">ObjectId</f:facet>
+								#{causeItem.voID}
+							</rich:column>
+								<rich:column width="30">
+									<f:facet name="header">ObjVer#</f:facet>
+								#{causeItem.versionNumber}
+							</rich:column>
+								<rich:column width="110">
+									<f:facet name="header">ObjName</f:facet>
+								#{causeItem.objectName}
+							</rich:column>
+							<f:facet name="footer">
+								<rich:datascroller maxPages="4" selectedStyle="font-weight:bold"
+									align="center" />
+							</f:facet>
+							</rich:dataTable>
+						</rich:panel>
+					</a4j:outputPanel>
 				</h:panelGrid>
 			</a4j:form>
 		</rich:panel>

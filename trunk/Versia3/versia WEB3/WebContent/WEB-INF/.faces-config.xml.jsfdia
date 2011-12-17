@@ -5,9 +5,9 @@
   <PROCESS-ITEM ID="rules:#pages#login.xhtml:0" NAME="item"
    PATH="/pages/login.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="success:#{loginBean.CheckValidUser}:#pages#01_product.xhtml"
-    NAME="output" PATH="/pages/01_product.xhtml"
-    TARGET="rules:#pages#01_product.xhtml"
+    ID="success:#{loginBean.CheckValidUser}:#pages#01_prod_rel_wss.xhtml"
+    NAME="output" PATH="/pages/01_prod_rel_wss.xhtml"
+    TARGET="rules:#pages#01_prod_rel_wss.xhtml"
     TITLE="#{loginBean.CheckValidUser}:success" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
@@ -59,9 +59,9 @@
   <PROCESS-ITEM ID="rules:#pages#04_workspace.xhtml:0" NAME="item"
    PATH="/pages/04_workspace.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="workspace_closed:#{closeWorkspaceBean.closeWorkspace}:#pages#03_open_workspace.xhtml"
-    NAME="output" PATH="/pages/03_open_workspace.xhtml"
-    TARGET="rules:#pages#03_open_workspace.xhtml"
+    ID="workspace_closed:#{closeWorkspaceBean.closeWorkspace}:#pages#01_prod_rel_wss.xhtml"
+    NAME="output" PATH="/pages/01_prod_rel_wss.xhtml"
+    TARGET="rules:#pages#01_prod_rel_wss.xhtml"
     TITLE="#{closeWorkspaceBean.closeWorkspace}:workspace_closed" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="show_history:#{listVobjectsBean.showHistory}:#pages#05_history.xhtml"
@@ -78,17 +78,6 @@
     NAME="output3" PATH="/pages/07_workitems.xhtml"
     TARGET="rules:#pages#07_workitems.xhtml"
     TITLE="#{showWorkitemsBean.showWorkitems}:show_woritems" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#05_history.xhtml"
-  PATH="/pages/05_history.xhtml" SHAPE="944,241,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#05_history.xhtml:0" NAME="item"
-   PATH="/pages/05_history.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="show_workspace:#{objectHistoryBean.showWorkspace}:#pages#04_workspace.xhtml"
-    NAME="output" PATH="/pages/04_workspace.xhtml"
-    TARGET="rules:#pages#04_workspace.xhtml"
-    TITLE="#{objectHistoryBean.showWorkspace}:show_workspace" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#06_distribution.xhtml"
@@ -111,6 +100,28 @@
     NAME="output" PATH="/pages/04_workspace.xhtml"
     TARGET="rules:#pages#04_workspace.xhtml"
     TITLE="#{showWorkitemsBean.showWorkspace}:show_workspace" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#05_history.xhtml"
+  PATH="/pages/05_history.xhtml" SHAPE="496,449,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#05_history.xhtml:0" NAME="item"
+   PATH="/pages/05_history.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="show_workspace:#{objectHistoryBean.showWorkspace}:#pages#04_workspace.xhtml"
+    NAME="output" PATH="/pages/04_workspace.xhtml"
+    TARGET="rules:#pages#04_workspace.xhtml"
+    TITLE="#{objectHistoryBean.showWorkspace}:show_workspace" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#01_prod_rel_wss.xhtml"
+  PATH="/pages/01_prod_rel_wss.xhtml" SHAPE="240,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#01_prod_rel_wss.xhtml:0" NAME="item"
+   PATH="/pages/01_prod_rel_wss.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="open:#{prwBean.openWorkSpace}:#pages#04_workspace.xhtml"
+    NAME="output" PATH="/pages/04_workspace.xhtml"
+    TARGET="rules:#pages#04_workspace.xhtml"
+    TITLE="#{prwBean.openWorkSpace}:open" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

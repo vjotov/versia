@@ -83,14 +83,6 @@ public class UserSessionBean implements iSessionAdaptor {
 		this.workspace = workspace;
 	}
 
-	// public Visibility getVisibleVersions() {
-	// return visibleVersions;
-	// }
-	//
-	// public void setVisibleVersions(Visibility visibleVersions) {
-	// this.visibleVersions = visibleVersions;
-	// }
-
 	public VObjectVersion getSelectedVersion() {
 		return selectedVersion;
 	}

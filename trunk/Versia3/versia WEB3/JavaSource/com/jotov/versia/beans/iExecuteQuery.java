@@ -6,7 +6,7 @@ public interface iExecuteQuery {
 
 	String executeQuery();
 
-	String executeQuery(int mode);
+	String executeQuery(int mode) throws Exception;
 
 	void setEntityManager(EntityManager em);
 

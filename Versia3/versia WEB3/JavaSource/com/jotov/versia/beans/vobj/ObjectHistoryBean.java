@@ -1,33 +1,30 @@
 package com.jotov.versia.beans.vobj;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
 import javax.persistence.Query;
-
-import org.richfaces.component.UIScrollableDataTable;
-import org.richfaces.model.selection.SimpleSelection;
-
 import com.jotov.versia.beans.UserSessionBean;
 import com.jotov.versia.beans.aDBbean;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
-import com.jotov.versia.orm.VersionArc;
 
 public class ObjectHistoryBean extends aDBbean {
 	private UserSessionBean session;
-	private List<HistoryItem> historyItems = new ArrayList<HistoryItem>();
-	private ArrayList<HistoryItem> selectedItems;
-	private UIScrollableDataTable table;
-	private SimpleSelection selection = new SimpleSelection();
-	private HistoryItem selectedItem;
-	private int selectedRow;
+//	private List<HistoryItem> historyItems = new ArrayList<HistoryItem>();
+//	private ArrayList<HistoryItem> selectedItems;
+//	private UIScrollableDataTable table;
+//	private SimpleSelection selection = new SimpleSelection();
+//	private HistoryItem selectedItem;
+//	private int selectedRow;
+
+	private List<VOVHistoryItem> vovHistoryItem = new ArrayList<VOVHistoryItem>();
+	private VOVHistoryItem selectedVOVHistoryItem;
+	private PrecedorItem selectedPrecedorItem;
 
 	public ObjectHistoryBean() {
 	}
 
-	public String takeSelection() {
+	/*public String takeSelection() {
 		selectedItems = new ArrayList<HistoryItem>();
 		Iterator<Object> iterator = getSelection().getKeys();
 		while (iterator.hasNext()) {
@@ -39,11 +36,12 @@ public class ObjectHistoryBean extends aDBbean {
 		}
 		selectedItem = selectedItems.get(0);
 		return null;
-	}
+	}*/
 
 	public String showWorkspace() {
-		historyItems = null;
-		selectedItem = null;
+		vovHistoryItem = null;
+		selectedVOVHistoryItem = null;
+		selectedPrecedorItem = null;
 		return "show_workspace";
 	}
 
@@ -55,13 +53,13 @@ public class ObjectHistoryBean extends aDBbean {
 		this.session = session;
 	}
 
-	public List<HistoryItem> getHistoryItems() {
+	/*public List<HistoryItem> getHistoryItems() {
 		if (historyItems == null || historyItems.size() == 0) {
 			historyItems = new ArrayList<HistoryItem>();
 			dbean.executeQuery(this);
 		}
 		return historyItems;
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -71,16 +69,20 @@ public class ObjectHistoryBean extends aDBbean {
 		q.setParameter("obj", obj);
 		List<VObjectVersion> res = (List<VObjectVersion>) q.getResultList();
 		for (VObjectVersion vov : res) {
-			List<VersionArc> precedors = vov.getPrecetorsArc();
-			for (VersionArc arc : precedors) {
-				historyItems.add(new HistoryItem(arc));
-			}
+			vovHistoryItem.add(new VOVHistoryItem(vov));
+
 		}
-		// TODO implement
-		return null;
+		/*
+		 * VObject obj = session.getSelectedVersion().getVobject(); Query q =
+		 * em.createNamedQuery("vovGetAllVersions"); q.setParameter("obj", obj);
+		 * List<VObjectVersion> res = (List<VObjectVersion>) q.getResultList();
+		 * for (VObjectVersion vov : res) { List<VersionArc> precedors =
+		 * vov.getPrecetorsArc(); for (VersionArc arc : precedors) {
+		 * historyItems.add(new HistoryItem(arc)); } } // TODO implement
+		 */return null;
 	}
 
-	public UIScrollableDataTable getTable() {
+	/*public UIScrollableDataTable getTable() {
 		return table;
 	}
 
@@ -118,6 +120,32 @@ public class ObjectHistoryBean extends aDBbean {
 
 	public void setSelectedItems(ArrayList<HistoryItem> selectedItems) {
 		this.selectedItems = selectedItems;
+	}
+*/
+	public List<VOVHistoryItem> getVovHistoryItem() {
+		if (vovHistoryItem == null)
+			vovHistoryItem = new ArrayList<VOVHistoryItem>();
+		if (vovHistoryItem.size() == 0)
+			dbean.executeQuery(this);
+
+		return vovHistoryItem;
+	}
+
+	public void setSelectedVOVHistoryItem(VOVHistoryItem selectedVOVHistoryItem) {
+		this.selectedVOVHistoryItem = selectedVOVHistoryItem;
+		this.selectedPrecedorItem = null;
+	}
+
+	public VOVHistoryItem getSelectedVOVHistoryItem() {
+		return selectedVOVHistoryItem;
+	}
+
+	public PrecedorItem getSelectedPrecedorItem() {
+		return selectedPrecedorItem;
+	}
+
+	public void setSelectedPrecedorItem(PrecedorItem selectedPrecedorItem) {
+		this.selectedPrecedorItem = selectedPrecedorItem;
 	}
 
 }

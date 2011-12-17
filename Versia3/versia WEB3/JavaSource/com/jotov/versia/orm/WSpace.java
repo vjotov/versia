@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Query;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 @Entity
 public class WSpace {
@@ -44,8 +45,8 @@ public class WSpace {
 		WSpace ws;
 		if (ancestorWorkspace == null) { // Creation of master workspace
 			Query q = em.createQuery("SELECT count(w) FROM WSpace w");
-			long a =  (Long) q.getSingleResult();
-			
+			long a = (Long) q.getSingleResult();
+
 			if (a == 0) {
 				// first ever run of script
 				ws = new WSpace(workspaceName, ancestorWorkspace, rel, 1, 2);
@@ -181,6 +182,14 @@ public class WSpace {
 		this.ancestorWSpace = ancestorWorkspace;
 	}
 
+	@Transient
+	public int getAncestorWSId() {
+		if (Object.class.isInstance(ancestorWSpace))
+			return ancestorWSpace.getWSpaceId();
+		else
+			return 0;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ancestorWorkspace", cascade = {
 			CascadeType.PERSIST, CascadeType.REFRESH })
 	public List<WSpace> getOffspringWorkspaces() {
@@ -199,6 +208,14 @@ public class WSpace {
 
 	public void setOpenedByUser(UserProfile openedByUser) {
 		this.openedByUser = openedByUser;
+	}
+	
+	@Transient
+	public String getOpenedBy() {
+		if(Object.class.isInstance(openedByUser))
+			return openedByUser.getUserName();
+		else
+			return "n/a";
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, optional = true, cascade = {
@@ -222,8 +239,8 @@ public class WSpace {
 	}
 
 	public void addLocalVersion(VObjectVersion localVersion) {
-		if(!Object.class.isInstance(localVersions))
-			localVersions = new ArrayList<VObjectVersion>(); 
+		if (!Object.class.isInstance(localVersions))
+			localVersions = new ArrayList<VObjectVersion>();
 		this.localVersions.add(localVersion);
 	}
 

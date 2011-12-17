@@ -3,27 +3,27 @@ package com.jotov.versia.beans.vobj;
 import com.jotov.versia.orm.Cause;
 
 public class CauseItem {
-	private Cause cause;
+	private Cause causeEntity;
 
 	public CauseItem(Cause cause) {
 		super();
-		this.cause = cause;
+		this.causeEntity = cause;
 	}
 
 	public int getCauseId() {
-		return cause.getCauseId();
+		return causeEntity.getCauseId();
 	}
 
 	public int getVoID() {
-		return cause.getCause().getVobject().getVObjectId();
+		return causeEntity.getCause().getVobject().getVObjectId();
 	}
 
 	public int getVersionNumber() {
-		return cause.getCause().getVersionNumber();
+		return causeEntity.getCause().getVersionNumber();
 	}
 
 	public String getObjectName() {
-		return cause.getCause().getObjectName();
+		return causeEntity.getCause().getObjectName();
 	}
 	
 }

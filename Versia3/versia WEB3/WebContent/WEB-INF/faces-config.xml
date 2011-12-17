@@ -224,13 +224,34 @@
   <managed-bean-class>com.jotov.versia.beans.showWorkitemsBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>prwBean</managed-bean-name>
+  <managed-bean-class>com.jotov.versia.beans.ProductReleaseWorkspaceBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>dbean</property-name>
+   <property-class>com.jotov.versia.beans.DBConnectBean</property-class>
+   <value>#{dBConnectBean}</value>
+  </managed-property>
+  <managed-property>
+   <property-name>session</property-name>
+   <property-class>com.jotov.versia.beans.UserSessionBean</property-class>
+   <value>#{userSessionBean}</value>
+  </managed-property>
+ </managed-bean>
  <navigation-rule>
   <display-name>login</display-name>
   <from-view-id>/pages/login.xhtml</from-view-id>
-  <navigation-case>
+  <!-- <navigation-case>
    <from-action>#{loginBean.CheckValidUser}</from-action>
    <from-outcome>success</from-outcome>
    <to-view-id>/pages/01_product.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case> -->
+  <navigation-case>
+   <from-action>#{loginBean.CheckValidUser}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/pages/01_prod_rel_wss.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
  </navigation-rule>
@@ -278,7 +299,7 @@
   <navigation-case>
    <from-action>#{closeWorkspaceBean.closeWorkspace}</from-action>
    <from-outcome>workspace_closed</from-outcome>
-   <to-view-id>/pages/03_open_workspace.xhtml</to-view-id>
+   <to-view-id>/pages/01_prod_rel_wss.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   <navigation-case>
@@ -320,6 +341,15 @@
   <navigation-case>
    <from-action>#{showWorkitemsBean.showWorkspace}</from-action>
    <from-outcome>show_workspace</from-outcome>
+   <to-view-id>/pages/04_workspace.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <display-name>openWorkspace</display-name>
+  <from-view-id>/pages/01_prod_rel_wss.xhtml</from-view-id>
+  <navigation-case>
+   <from-action>#{prwBean.openWorkSpace}</from-action>
+   <from-outcome>open</from-outcome>
    <to-view-id>/pages/04_workspace.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>

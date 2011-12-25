@@ -6,96 +6,78 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
-	<f:loadBundle basename="resources" var="msg" />
+<f:loadBundle basename="resources" var="msg" />
 <ui:composition template="/templates/common.xhtml">
-<ui:define name="pageSubHeader">#{msg.productSubTite}</ui:define>
-<ui:define name="menuBar">
-	<h:form id="menu_form">
-		<rich:toolBar>
-			<rich:dropDownMenu>
-				<f:facet name="label">
-					<h:panelGroup>
-						<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-						<h:outputText value="#{msg.menuProduct}" />
-					</h:panelGroup>
-				</f:facet>
-				<rich:menuItem value="#{msg.menuOpenProduct}"
-					action="#{userSessionBean.doOpenProduct}" />
-			</rich:dropDownMenu>
-			<rich:dropDownMenu>
-				<f:facet name="label">
-					<h:panelGroup>
-						<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-						<h:outputText value="#{msg.menuAdmin}" />
-					</h:panelGroup>
-				</f:facet>
-				<rich:menuItem value="#{msg.menuManageActions}"
-					action="#{userSessionBean.doManageActions}"
-					reRender="main_section" />
-				<rich:menuItem value="#{msg.menuManageUsers}"
-					action="#{userSessionBean.doManageUsers}" />
-			</rich:dropDownMenu>
-			<rich:dropDownMenu>
-				<f:facet name="label">
-					<h:panelGroup>
-						<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-						<h:outputText value="#{msg.menuHelp}" />
-					</h:panelGroup>
-				</f:facet>
-				<rich:menuItem value="#{msg.menuAbout}"
-					action="#{userSessionBean.doHelpAbout}" />
-			</rich:dropDownMenu>
-		</rich:toolBar>
-	</h:form>
-</ui:define>
-<ui:define name="body">
-	<h:form name="main_section">
-		<rich:panel>
-			<f:facet name="header">#{msg.panelOpenEditProducts}</f:facet>
-			<rich:dataGrid id="productGrid" value="#{productBean.products}" var="product"
-				columns="1" elements="10" rowKeyVar="rowIndex"  ajaxKeys="#{repeatBean.rowsToUpdate}">
-				<rich:panel bodyClass="pbody" id="num">
-					<f:facet name="header">
-						<h:outputText value="#{msg.productProduct}" />
+	<ui:define name="pageSubHeader">#{msg.productSubTite}</ui:define>
+	<ui:define name="menuBar">
+		<h:form id="menu_form">
+			<rich:toolBar>
+				<rich:dropDownMenu>
+					<f:facet name="label"> 
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="#{msg.menuManageDone}" />
+						</h:panelGroup>
 					</f:facet>
-					<h:panelGrid columns="4" id="product_data">
-	
-						<h:outputText value="#  #{rowIndex}:#{product.productId}:" />
-						<h:inputText value="#{product.productName}" />
-						<a4j:commandButton value="#{msg.productSave}"
-							action="#{productBean.updateProduct}" reRender="num">
-							<a4j:actionparam name="rowIndexSave" value="#{rowIndex}"
-								assignTo="#{productBean.selectedRow}" />
-						</a4j:commandButton>
-						<a4j:commandButton value="#{msg.productOpen} #{product.productId}"
-							action="#{productBean.openProduct}" reRender="main_section">
-							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
-								assignTo="#{productBean.selectedRow}" />
-						</a4j:commandButton>
-	
-					</h:panelGrid>
-				</rich:panel>
-				<f:facet name="footer"> 
-					<rich:datascroller></rich:datascroller>
-				</f:facet>
-			</rich:dataGrid>
-		</rich:panel>
-	</h:form>
-	<h:form>
-		<rich:panel bodyClass="pbody">
-			<f:facet name="header">#{msg.panelCreateProduct}</f:facet>
-			<h:panelGrid columns="3" id="new_product_data">
-				<h:outputText value="#{msg.productNewName}" styleClass="label" />
-				<h:inputText value="#{productBean.newProductName}">
-					<f:validateLength></f:validateLength>
-				</h:inputText>
-				<a4j:commandButton value="#{msg.productCreate}"
-					action="#{productBean.createProduct()}" reRender="productGrid" />
-			</h:panelGrid>
-		</rich:panel>
-		 <a4j:log hotkey="D"/>
-	</h:form>
-</ui:define>
+					<rich:menuItem value="#{msg.menuItemManageDone}" submitMode="ajax"
+						action="#{navBean.doneManage}" />
+				</rich:dropDownMenu>
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="#{msg.menuHelp}" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="#{msg.menuAbout}"
+						action="#{userSessionBean.doHelpAbout}" />
+				</rich:dropDownMenu>
+			</rich:toolBar>
+		</h:form>
+	</ui:define>
+	<ui:define name="body">
+		<h:form name="main_section">
+			<rich:panel>
+				<f:facet name="header">#{msg.panelOpenEditProducts}</f:facet>
+				<rich:dataGrid id="productGrid" value="#{productBean.products}"
+					var="product" columns="1" elements="10" rowKeyVar="rowIndex"
+					ajaxKeys="#{repeatBean.rowsToUpdate}">
+					<rich:panel bodyClass="pbody" id="num">
+						<f:facet name="header">
+							<h:outputText value="#{msg.productProduct}" />
+						</f:facet>
+						<h:panelGrid columns="4" id="product_data">
+
+							<h:outputText value="#  #{rowIndex}:#{product.productId}:" />
+							<h:inputText value="#{product.productName}" />
+							<a4j:commandButton value="#{msg.productSave}"
+								action="#{productBean.updateProduct}" reRender="num">
+								<a4j:actionparam name="rowIndexSave" value="#{rowIndex}"
+									assignTo="#{productBean.selectedRow}" />
+							</a4j:commandButton>
+						</h:panelGrid>
+					</rich:panel>
+					<f:facet name="footer">
+						<rich:datascroller></rich:datascroller>
+					</f:facet>
+				</rich:dataGrid>
+			</rich:panel>
+		</h:form>
+		<h:form>
+			<rich:panel bodyClass="pbody">
+				<f:facet name="header">#{msg.panelCreateProduct}</f:facet>
+				<h:panelGrid columns="3" id="new_product_data">
+					<h:outputText value="#{msg.productNewName}" styleClass="label" />
+					<h:inputText value="#{productBean.newProductName}">
+						<f:validateLength></f:validateLength>
+					</h:inputText>
+					<a4j:commandButton value="#{msg.productCreate}"
+						action="#{productBean.createProduct()}" reRender="productGrid" />
+				</h:panelGrid>
+			</rich:panel>
+			<a4j:log hotkey="D" />
+		</h:form>
+	</ui:define>
 </ui:composition>
 </html>
 

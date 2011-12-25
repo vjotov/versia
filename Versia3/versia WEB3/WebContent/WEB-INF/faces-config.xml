@@ -239,6 +239,16 @@
    <value>#{userSessionBean}</value>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>navBean</managed-bean-name>
+  <managed-bean-class>com.jotov.versia.beans.NavigationBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>session</property-name>
+   <property-class>com.jotov.versia.beans.UserSessionBean</property-class>
+   <value>#{userSessionBean}</value>
+  </managed-property>
+ </managed-bean>
  <navigation-rule>
   <display-name>login</display-name>
   <from-view-id>/pages/login.xhtml</from-view-id>
@@ -258,39 +268,26 @@
  <navigation-rule>
   <from-view-id>/pages/01_product.xhtml</from-view-id>
   <navigation-case>
-   <from-action>#{productBean.openProduct}</from-action>
-   <from-outcome>open_release</from-outcome>
-   <to-view-id>/pages/02_releases.xhtml</to-view-id>
-   <redirect/>
+   <from-action>#{navBean.doneManage}</from-action>
+   <from-outcome>done</from-outcome>
+   <to-view-id>/pages/01_prod_rel_wss.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/pages/02_releases.xhtml</from-view-id>
   <navigation-case>
-   <from-action>#{userSessionBean.closeProduct}</from-action>
-   <from-outcome>open_product</from-outcome>
-   <to-view-id>/pages/01_product.xhtml</to-view-id>
-   <redirect/>
-  </navigation-case>
-  <navigation-case>
-   <from-action>#{releaseBean.openRelease}</from-action>
-   <from-outcome>open_workspace</from-outcome>
-   <to-view-id>/pages/03_open_workspace.xhtml</to-view-id>
+   <from-action>#{navBean.doneManage}</from-action>
+   <from-outcome>done</from-outcome>
+   <to-view-id>/pages/01_prod_rel_wss.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/pages/03_open_workspace.xhtml</from-view-id>
   <navigation-case>
-   <from-action>#{userSessionBean.closeRelease}</from-action>
-   <from-outcome>open_release</from-outcome>
-   <to-view-id>/pages/02_releases.xhtml</to-view-id>
-   <redirect/>
-  </navigation-case>
-  <navigation-case>
-   <from-action>#{wSListBean.openWorkspace}</from-action>
-   <from-outcome>open_workspace</from-outcome>
-   <to-view-id>/pages/04_workspace.xhtml</to-view-id>
+   <from-action>#{navBean.doneManage}</from-action>
+   <from-outcome>done</from-outcome>
+   <to-view-id>/pages/01_prod_rel_wss.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
  </navigation-rule>
@@ -351,6 +348,21 @@
    <from-action>#{prwBean.openWorkSpace}</from-action>
    <from-outcome>open</from-outcome>
    <to-view-id>/pages/04_workspace.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{navBean.manageProducts}</from-action>
+   <from-outcome>manage_products</from-outcome>
+   <to-view-id>/pages/01_product.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{navBean.manageReleases}</from-action>
+   <from-outcome>manage_release</from-outcome>
+   <to-view-id>/pages/02_releases.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{navBean.manageWorkspaces}</from-action>
+   <from-outcome>manage_workspaces</from-outcome>
+   <to-view-id>/pages/03_open_workspace.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <application>

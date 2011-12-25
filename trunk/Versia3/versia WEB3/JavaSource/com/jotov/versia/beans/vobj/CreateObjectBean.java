@@ -16,6 +16,8 @@ public class CreateObjectBean extends aDBbean {
 
 	public void CreateObject() {
 		dbean.executeQuery(this);
+		Name = "";
+		Datum = "";
 		session.getApp().NotifyCleanAll();
 	}
 

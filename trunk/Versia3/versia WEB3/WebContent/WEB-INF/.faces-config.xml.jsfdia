@@ -16,10 +16,10 @@
   <PROCESS-ITEM ID="rules:#pages#01_product.xhtml:0" NAME="item"
    PATH="/pages/01_product.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="open_release:#{productBean.openProduct}:#pages#02_releases.xhtml"
-    NAME="output" PATH="/pages/02_releases.xhtml"
-    TARGET="rules:#pages#02_releases.xhtml"
-    TITLE="#{productBean.openProduct}:open_release" model-entity="JSFProcessItemOutput"/>
+    ID="done:#{navBean.doneManage}:#pages#01_prod_rel_wss.xhtml"
+    NAME="output1" PATH="/pages/01_prod_rel_wss.xhtml"
+    TARGET="rules:#pages#01_prod_rel_wss.xhtml"
+    TITLE="#{navBean.doneManage}:done" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#02_releases.xhtml"
@@ -27,15 +27,10 @@
   <PROCESS-ITEM ID="rules:#pages#02_releases.xhtml:0" NAME="item"
    PATH="/pages/02_releases.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="open_product:#{userSessionBean.closeProduct}:#pages#01_product.xhtml"
-    NAME="output" PATH="/pages/01_product.xhtml"
-    TARGET="rules:#pages#01_product.xhtml"
-    TITLE="#{userSessionBean.closeProduct}:open_product" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="open_workspace:#{releaseBean.openRelease}:#pages#03_open_workspace.xhtml"
-    NAME="output1" PATH="/pages/03_open_workspace.xhtml"
-    TARGET="rules:#pages#03_open_workspace.xhtml"
-    TITLE="#{releaseBean.openRelease}:open_workspace" model-entity="JSFProcessItemOutput"/>
+    ID="done:#{navBean.doneManage}:#pages#01_prod_rel_wss.xhtml"
+    NAME="output" PATH="/pages/01_prod_rel_wss.xhtml"
+    TARGET="rules:#pages#01_prod_rel_wss.xhtml"
+    TITLE="#{navBean.doneManage}:done" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#03_open_workspace.xhtml"
@@ -43,15 +38,10 @@
   <PROCESS-ITEM ID="rules:#pages#03_open_workspace.xhtml:0" NAME="item"
    PATH="/pages/03_open_workspace.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="open_release:#{userSessionBean.closeRelease}:#pages#02_releases.xhtml"
-    NAME="output" PATH="/pages/02_releases.xhtml"
-    TARGET="rules:#pages#02_releases.xhtml"
-    TITLE="#{userSessionBean.closeRelease}:open_release" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="open_workspace:#{wSListBean.openWorkspace}:#pages#04_workspace.xhtml"
-    NAME="output1" PATH="/pages/04_workspace.xhtml"
-    TARGET="rules:#pages#04_workspace.xhtml"
-    TITLE="#{wSListBean.openWorkspace}:open_workspace" model-entity="JSFProcessItemOutput"/>
+    ID="done:#{navBean.doneManage}:#pages#01_prod_rel_wss.xhtml"
+    NAME="output" PATH="/pages/01_prod_rel_wss.xhtml"
+    TARGET="rules:#pages#01_prod_rel_wss.xhtml"
+    TITLE="#{navBean.doneManage}:done" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#04_workspace.xhtml"
@@ -122,6 +112,21 @@
     NAME="output" PATH="/pages/04_workspace.xhtml"
     TARGET="rules:#pages#04_workspace.xhtml"
     TITLE="#{prwBean.openWorkSpace}:open" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="manage_products:#{navBean.manageProducts}:#pages#01_product.xhtml"
+    NAME="output1" PATH="/pages/01_product.xhtml"
+    TARGET="rules:#pages#01_product.xhtml"
+    TITLE="#{navBean.manageProducts}:manage_products" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="manage_release:#{navBean.manageReleases}:#pages#02_releases.xhtml"
+    NAME="output2" PATH="/pages/02_releases.xhtml"
+    TARGET="rules:#pages#02_releases.xhtml"
+    TITLE="#{navBean.manageReleases}:manage_release" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="manage_workspaces:#{navBean.manageWorkspaces}:#pages#03_open_workspace.xhtml"
+    NAME="output3" PATH="/pages/03_open_workspace.xhtml"
+    TARGET="rules:#pages#03_open_workspace.xhtml"
+    TITLE="#{navBean.manageWorkspaces}:manage_workspaces" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

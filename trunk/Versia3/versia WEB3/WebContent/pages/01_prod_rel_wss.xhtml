@@ -19,12 +19,12 @@
 							<h:outputText value="#{msg.menuManage}" />
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem value="#{msg.menuManageProduct}"
-						action="#{userSessionBean.doOpenProduct}" />
+					<rich:menuItem value="#{msg.menuManageProduct}"  submitMode="ajax" 
+						action="#{navBean.manageProducts}" />
 					<rich:menuItem value="#{msg.menuManageRelease}"
-						action="#{userSessionBean.doOpenProduct}" />
+						action="#{navBean.manageReleases}" />
 					<rich:menuItem value="#{msg.menuManageWorspace}"
-						action="#{userSessionBean.doOpenProduct}" />
+						action="#{navBean.manageWorkspaces}" />
 				</rich:dropDownMenu>
 
 				<rich:dropDownMenu>

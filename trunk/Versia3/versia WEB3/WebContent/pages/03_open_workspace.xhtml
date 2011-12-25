@@ -13,14 +13,14 @@
 		<h:form id="menu_form">
 			<rich:toolBar>
 				<rich:dropDownMenu>
-					<f:facet name="label">
+					<f:facet name="label"> 
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
-							<h:outputText value="#{msg.menuRelease}" />
+							<h:outputText value="#{msg.menuManageDone}" />
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem value="#{msg.menuCloseRelease}"
-						action="#{userSessionBean.closeRelease}" />
+					<rich:menuItem value="#{msg.menuItemManageDone}" submitMode="ajax"
+						action="#{navBean.doneManage}" />
 				</rich:dropDownMenu>
 				<rich:dropDownMenu>
 					<f:facet name="label">
@@ -64,11 +64,7 @@
 									value="#{workspace.WSpaceId}"
 									assignTo="#{wSListBean.selectedWorkspaceId}" />
 							</a4j:commandButton>
-							<a4j:commandButton value="#{msg.owsOpen}"
-								action="#{wSListBean.openWorkspace}">
-								<a4j:actionparam name="WSOpen" value="#{workspace.WSpaceId}"
-									assignTo="#{wSListBean.selectedWorkspaceId}" />
-							</a4j:commandButton>
+							
 						</h:panelGrid>
 					</rich:panel>
 					<f:facet name="footer">

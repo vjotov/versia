@@ -6,7 +6,7 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich" id="editVO" autosized="false"
-	keepVisualState="false" width="315" height="230">
+	keepVisualState="false" width="500" height="400">
 	<f:facet name="header">
 		<h:outputText value="Edit Object" />
 	</f:facet>
@@ -29,7 +29,14 @@
 			<h:outputText value="Is Work Item" />
 			<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
 				disabled="#{editVObjectBean.readonly}" />
+			<h:outputText value="Sub Objects:" />
+			<rich:pickList id="SubObjects" value="#{editVObjectBean.selected}"
+				copyAllControlLabel="Attach All" copyControlLabel="Attach"
+				removeControlLabel="Detach" removeAllControlLabel="Detach All">
+				<f:selectItems value="#{editVObjectBean.options}" />
+			</rich:pickList>
 		</h:panelGrid>
+
 		<h:commandButton action="#{editVObjectBean.Save}" value="Save"
 			onclick="javascript:Richfaces.hideModalPanel('editPanel')"
 			disabled="#{editVObjectBean.readonly}" />

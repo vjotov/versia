@@ -13,8 +13,6 @@ import com.jotov.versia.orm.WorkItemAttachement;
 
 public class ListWorkItemsBean extends aDBbean {
 	private UserSessionBean session;
-	// private List<VisibleItems> attachedWorkitems;
-	// private List<VisibleItems> availableWorkitems;
 	private WSpace workspace;
 	private List<SelectItem> options = new ArrayList<SelectItem>();
 	private List<Integer> selected = new ArrayList<Integer>();

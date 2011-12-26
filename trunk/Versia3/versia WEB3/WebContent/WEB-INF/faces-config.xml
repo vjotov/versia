@@ -312,7 +312,7 @@
    <redirect/>
   </navigation-case>
   <navigation-case>
-   <from-action>#{showWorkitemsBean.showWorkitems}</from-action>
+   <from-action>#{navBean.showWorkitems}</from-action>
    <from-outcome>show_woritems</from-outcome>
    <to-view-id>/pages/07_workitems.xhtml</to-view-id>
   </navigation-case>
@@ -336,7 +336,7 @@
  <navigation-rule>
   <from-view-id>/pages/07_workitems.xhtml</from-view-id>
   <navigation-case>
-   <from-action>#{showWorkitemsBean.showWorkspace}</from-action>
+   <from-action>#{navBean.showWorkspace}</from-action>
    <from-outcome>show_workspace</from-outcome>
    <to-view-id>/pages/04_workspace.xhtml</to-view-id>
   </navigation-case>

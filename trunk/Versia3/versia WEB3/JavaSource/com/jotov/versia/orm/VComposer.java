@@ -6,16 +6,24 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-@Entity
+@Entity 
 public class VComposer {
 	private VObjectVersion superObject;
 	private VObjectVersion subObject;
 
+	public static VComposer createComposition(VObjectVersion superObject,
+			VObjectVersion subObject) {
+		VComposer vc = new VComposer();
+		vc.superObject = superObject;
+		vc.subObject = subObject;
+		return vc;
+	}
+
 	public VComposer() {
 
 	}
-	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH}, fetch=FetchType.LAZY)
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	public VObjectVersion getSuperObject() {
 		return superObject;
 	}
@@ -23,8 +31,8 @@ public class VComposer {
 	public void setSuperObject(VObjectVersion superObject) {
 		this.superObject = superObject;
 	}
-	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH}, fetch=FetchType.LAZY)
+
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	public VObjectVersion getSubObject() {
 		return subObject;
 	}
@@ -32,6 +40,5 @@ public class VComposer {
 	public void setSubObject(VObjectVersion subObject) {
 		this.subObject = subObject;
 	}
-	
-	
+
 }

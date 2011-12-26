@@ -190,6 +190,15 @@ public class VObjectVersion {
 	public List<VComposer> getSubObjects() {
 		return subObjects;
 	}
+	
+	@Transient
+	public List<Integer> getSubObgectGIDs() {
+		List<Integer> result = new ArrayList<Integer>();
+		for(VComposer vc:subObjects) {
+			result.add(vc.getSubObject().getGlobalVPId());
+		}
+		return result;
+	}
 
 	public void setSubObjects(List<VComposer> subObjects) {
 		this.subObjects = subObjects;

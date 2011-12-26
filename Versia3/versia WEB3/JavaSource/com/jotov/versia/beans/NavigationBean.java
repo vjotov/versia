@@ -34,4 +34,12 @@ public class NavigationBean {
 		return "done";
 	}
 
+	public String showWorkitems() {
+		return "show_woritems";
+	}
+
+	public String showWorkspace() {
+		return "show_workspace";
+	}
+
 }

@@ -2,6 +2,8 @@ package com.jotov.versia.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.model.SelectItem;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import com.jotov.versia.beans.vobj.ListVobjectsBean;
@@ -19,6 +21,8 @@ public class EditVObjectBean extends aDBbean {
 	private Boolean isWorkItem;
 	private UserSessionBean session;
 	private ListVobjectsBean lvBean;
+	private List<SelectItem> options = new ArrayList<SelectItem>();
+	private List<Integer> selected = new ArrayList<Integer>();
 
 	@Override
 	public String executeQuery(int mode) {
@@ -107,7 +111,7 @@ public class EditVObjectBean extends aDBbean {
 		return null;
 	}
 
-	private String deleteVersion() {
+	private synchronized String deleteVersion() {
 		em.getTransaction().begin();
 		VObjectVersion deletedVersion = VObjectVersion.markDeleteVersion(
 				session.getWorkspace(), session.getSelectedVersion(), session);
@@ -117,12 +121,12 @@ public class EditVObjectBean extends aDBbean {
 		return null;
 	}
 
-	private String createNewVersion() {
+	private synchronized String createNewVersion() {
 		EntityTransaction trx = em.getTransaction();
 		trx.begin();
 		VObjectVersion oldVer = session.getSelectedVersion();
 		VObject vo = oldVer.getVobject();
-		if (!oldVer.getObjectName().equals(NewName)
+		if (!oldVer.getObjectName().equals(NewName) || isChangedComposition()
 				|| !oldVer.getObjectDatum().equals(NewData)) {
 			ArrayList<VObjectVersion> precedors = new ArrayList<VObjectVersion>();
 			precedors.add(oldVer);
@@ -134,10 +138,16 @@ public class EditVObjectBean extends aDBbean {
 			else
 				vo.setWorkItem("FALSE");
 			oldVer.setWorkspace(null);
+			
+			saveNewComposition();
+			updateSuperObject();
+
+
 			em.persist(nv);
 			em.persist(oldVer);
 		}
 		if (vo.isWorkItem() != this.isWorkItem) {
+			// workitem flag doesn't change version
 			if (isWorkItem)
 				vo.setWorkItem("TRUE");
 			else
@@ -147,6 +157,38 @@ public class EditVObjectBean extends aDBbean {
 
 		trx.commit();
 		return null;
+	}
+
+	private void updateSuperObject() {
+		if(Object.class.isInstance(session.getSelectedVersion().getSuperObject())) {
+			//TODO:to updateSuperObject...
+		}
+		else
+			return;
+	}
+
+	private void saveNewComposition() {
+		for(int i:selected) {
+			VObjectVersion subObject = em.find(VObjectVersion.class, i);
+			VComposer newVC= VComposer.createComposition(session.getSelectedVersion(), subObject);
+			em.persist(newVC);
+		}
+	}
+
+	private boolean isChangedComposition() {
+		VObjectVersion oldVer = session.getSelectedVersion();
+		List<Integer> oldCompositionList = oldVer.getSubObgectGIDs();
+		if(oldCompositionList.size() != selected.size())
+			return true;
+		for (int i : oldCompositionList) {
+			if (!selected.contains(i))
+				return true;
+		}
+		for (int i : selected) {
+			if (!oldCompositionList.contains(i))
+				return true;
+		}
+		return false;
 	}
 
 	public void Save() {
@@ -168,6 +210,8 @@ public class EditVObjectBean extends aDBbean {
 		isWorkItem = null;
 		NewData = null;
 		NewName = null;
+		options = new ArrayList<SelectItem>();
+		selected = new ArrayList<Integer>();
 	}
 
 	public void Publish() {
@@ -248,14 +292,6 @@ public class EditVObjectBean extends aDBbean {
 			return vov.getVersionNumber();
 	}
 
-	public UserSessionBean getSession() {
-		return session;
-	}
-
-	public void setSession(UserSessionBean session) {
-		this.session = session;
-	}
-
 	public boolean getIsWorkItem() {
 		if (isWorkItem == null && session.getSelectedVersion() != null)
 			isWorkItem = new Boolean(session.getSelectedVersion().getVobject()
@@ -281,7 +317,7 @@ public class EditVObjectBean extends aDBbean {
 			return true;
 		return false;
 	}
-	
+
 	public boolean isRoPublicable() {
 		VObjectVersion vov = session.getSelectedVersion();
 		if (vov == null)
@@ -294,14 +330,14 @@ public class EditVObjectBean extends aDBbean {
 			return true;
 		return false;
 	}
-	
+
 	public boolean isRoRollback() {
 		VObjectVersion vov = session.getSelectedVersion();
 		if (vov == null)
 			return false;
 		VItem vitem = session.getVItemShell().getItemByVOV(vov);
 
-		if ( (vitem.isAttachedWI()))
+		if ((vitem.isAttachedWI()))
 			// Attached WI cannot be roll-backed
 			return true;
 		return false;
@@ -318,5 +354,64 @@ public class EditVObjectBean extends aDBbean {
 
 	public void setLvBean(ListVobjectsBean lvBean) {
 		this.lvBean = lvBean;
+	}
+
+	public List<SelectItem> getOptions() {
+		if (options.size() == 0 && session.getSelectedVersion() != null)
+			calculateOptions();
+		return options;
+	}
+
+	private void calculateOptions() {
+		List<VObjectVersion> vovs = getAllVisibleNotSubVersions();
+		options = new ArrayList<SelectItem>();
+		for (VObjectVersion vov : vovs) {
+			options.add(new SelectItem(vov.getGlobalVPId(), vov.getObjectName()));
+		}
+	}
+
+	private List<VObjectVersion> getAllVisibleNotSubVersions() {
+		List<VItem> vItems = session.getVItemShell().getVItems();
+		List<VObjectVersion> resultList = new ArrayList<VObjectVersion>();
+		for (VItem vItem : vItems) {
+			VObjectVersion vov = vItem.getVoVersion();
+
+			if (!vov.equals(session.getSelectedVersion())
+					&& (vov.getSuperObject() == null || vov.getSubObjects()
+							.equals(session.getSelectedVersion())))
+				resultList.add(vov);
+		}
+		return resultList;
+	}
+
+	public void setOptions(List<SelectItem> options) {
+		this.options = options;
+	}
+
+	public List<Integer> getSelected() {
+		if (selected.size() == 0 && session.getSelectedVersion() != null)
+			calculateSelected();
+		return selected;
+	}
+
+	private void calculateSelected() {
+		VObjectVersion vov = session.getSelectedVersion();
+		List<VComposer> subObjects = vov.getSubObjects();
+		selected = new ArrayList<Integer>();
+		for (VComposer subObject : subObjects) {
+			selected.add(subObject.getSubObject().getGlobalVPId());
+		}
+	}
+
+	public void setSelected(List<Integer> selected) {
+		this.selected = selected;
+	}
+
+	public UserSessionBean getSession() {
+		return session;
+	}
+
+	public void setSession(UserSessionBean session) {
+		this.session = session;
 	}
 }

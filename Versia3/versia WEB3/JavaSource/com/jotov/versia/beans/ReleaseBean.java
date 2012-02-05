@@ -24,6 +24,8 @@ public class ReleaseBean extends aDBbean {
 			return newRelease();
 		case 3:
 			return saveRelease();
+		case 4:
+			return createFirstRelease();
 		default:
 			return null;
 		}
@@ -66,6 +68,19 @@ public class ReleaseBean extends aDBbean {
 		trx.commit();
 		return null;
 	}
+	private String createFirstRelease() {
+		EntityTransaction trx = em.getTransaction();
+		trx.begin();
+		
+		List<Release> presedors = new ArrayList<Release>();
+		List<Object> objArr = Release.createRelease(session.getProduct(),
+				"New Release " + System.currentTimeMillis(), presedors, em);
+		for (Object o : objArr) {
+			em.persist(o);
+		}
+		trx.commit();
+		return null;
+	}
 
 	@SuppressWarnings("unchecked")
 	private String loadRelease() {
@@ -86,6 +101,10 @@ public class ReleaseBean extends aDBbean {
 
 	public void updateRelease() {
 		dbean.executeQuery(this, 3);
+	}
+	
+	public void createNewRelease() {
+		dbean.executeQuery(this, 4);
 	}
 
 	// GETTERS & SETTERS

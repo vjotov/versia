@@ -40,7 +40,7 @@ public class Main {
 			// VersionArc va = em.find(VersionArc.class, 122);
 
 			WSpace ws = em.find(WSpace.class, 152);
-			VObject vObject = em.find(VObject.class, 1);
+			VObject vObject = em.find(VObject.class, 5);
 			// // VObjectVersion superVOV = em.find(VObjectVersion.class, 9);
 			// // UserProfile user = em.find(UserProfile.class, 1);
 			// ArrayList<VisibleItems> a =
@@ -49,8 +49,18 @@ public class Main {
 			// Query q =
 			// em.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :obj AND w.workspace = :wspace");
 
-			VObject obj = VObject.createVObject("vo1", "vo1v0", ws, null);
-			em.persist(obj);
+			Query q = em
+					.createQuery("SELECT v FROM VObjectVersion v WHERE v.workspace = :wsParameter AND v.vobject = :objParameter");
+			q.setParameter("wsParameter", ws);
+			q.setParameter("objParameter", 	vObject);
+			// TODO Auto-generated method stub
+			List<VObjectVersion> ancestorVOVs = (List<VObjectVersion>) q
+					.getResultList();
+			VObjectVersion a;
+			if (ancestorVOVs.size() > 0) {
+				a = ancestorVOVs.get(0);
+			}
+//			em.persist(obj);
 
 			// Query q1 =
 			// em.createQuery("UPDATE WSpace w SET w.lv = w.lv+2 WHERE w.lv >= :lv_parameter");

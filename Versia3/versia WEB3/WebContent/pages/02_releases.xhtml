@@ -13,7 +13,7 @@
 		<h:form id="menu_form">
 			<rich:toolBar>
 				<rich:dropDownMenu>
-					<f:facet name="label"> 
+					<f:facet name="label">
 						<h:panelGroup>
 							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
 							<h:outputText value="#{msg.menuManageDone}" />
@@ -37,8 +37,8 @@
 	</ui:define>
 	<ui:define name="body">
 		<h:form>
-			<rich:dataGrid id="releaseGrid" value="#{releaseBean.releases}" var="release"
-				columns="1" elements="10" rowKeyVar="rowIndex">
+			<rich:dataGrid id="releaseGrid" value="#{releaseBean.releases}"
+				var="release" columns="1" elements="10" rowKeyVar="rowIndex">
 				<rich:panel bodyClass="pbody">
 					<f:facet name="header">
 						<h:outputText value="#{msg.panelRelease}" />
@@ -58,13 +58,20 @@
 							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
 								assignTo="#{releaseBean.selectedRow}" />
 						</a4j:commandButton>
-						
+
 					</h:panelGrid>
 				</rich:panel>
 				<f:facet name="footer">
 					<rich:datascroller></rich:datascroller>
 				</f:facet>
 			</rich:dataGrid>
+			<h:panelGrid columns="1" id="release_data">
+				<a4j:commandButton value="#{msg.rlsCreateNewRelease}"
+					action="#{releaseBean.createNewRelease}" reRender="releaseGrid">
+					<a4j:actionparam name="rowIndex" value="#{rowIndex}"
+						assignTo="#{releaseBean.selectedRow}" />
+				</a4j:commandButton>
+			</h:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

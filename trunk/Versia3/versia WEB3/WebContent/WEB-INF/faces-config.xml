@@ -220,11 +220,6 @@
   <managed-bean-scope>application</managed-bean-scope>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>showWorkitemsBean</managed-bean-name>
-  <managed-bean-class>com.jotov.versia.beans.showWorkitemsBean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
- </managed-bean>
- <managed-bean>
   <managed-bean-name>prwBean</managed-bean-name>
   <managed-bean-class>com.jotov.versia.beans.ProductReleaseWorkspaceBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>

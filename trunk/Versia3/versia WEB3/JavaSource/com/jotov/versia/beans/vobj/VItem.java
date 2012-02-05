@@ -25,6 +25,7 @@ public class VItem {
 	private Boolean attachedWIFlag;
 	private Boolean ancestorFlag;
 	private Boolean ancestorAWI;
+	private Integer ancestorVOVGID;
 	private Integer ancestorVersionNumber;
 	private String ancestorVOName;
 	private String ancestorVODatum;
@@ -72,12 +73,13 @@ public class VItem {
 			ancestorVersionNumber = ancestorVersion.getVersionNumber();
 			ancestorVOName = ancestorVersion.getObjectName();
 			ancestorVODatum = ancestorVersion.getObjectDatum();
+			ancestorVOVGID = ancestorVersion.getGlobalVPId();
 		} else {
 			ancestorFlag = false;
 			ancestorVersionNumber = 0;
 			ancestorVOName = "N/A";
 			ancestorVODatum = "N/A";
-
+			ancestorVOVGID = -1;
 		}
 
 		if (Object.class.isInstance(ws.getAncestorWorkspace())) {
@@ -255,6 +257,10 @@ public class VItem {
 
 	public Boolean isAncestorAWI() {
 		return ancestorAWI;
+	}
+
+	public Integer getAncestorVOVGID() {
+		return ancestorVOVGID;
 	}
 
 }

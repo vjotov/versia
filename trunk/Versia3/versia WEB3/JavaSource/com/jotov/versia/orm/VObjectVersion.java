@@ -22,11 +22,8 @@ import javax.persistence.Transient;
 import com.jotov.versia.beans.UserSessionBean;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name="vovGetAllVersions",
-        query="SELECT v FROM VObjectVersion v WHERE v.vobject = :obj ")
-})
-public class VObjectVersion {
+@NamedQueries({ @NamedQuery(name = "vovGetAllVersions", query = "SELECT v FROM VObjectVersion v WHERE v.vobject = :obj ") })
+public class VObjectVersion implements Cloneable {
 	private int globalVPId;
 	private VObject vobject;
 	private int versionNumber;
@@ -69,19 +66,45 @@ public class VObjectVersion {
 		return newVersion;
 	}
 
-	public static VObjectVersion markDeleteVersion(WSpace workspace2,
+	public static VObjectVersion markDeleteVersion(WSpace selectedWorkspace,
 			VObjectVersion selectedVersion, UserSessionBean session) {
 
 		ArrayList<VObjectVersion> precedors = new ArrayList<VObjectVersion>();
 		precedors.add(selectedVersion);
 		VObjectVersion deletedVersion = createVersion(
 				selectedVersion.getVobject(), selectedVersion.objectName, null,
-				workspace2, precedors, session);
-		for (VersionArc pa :deletedVersion.precetorsArc){
+				selectedWorkspace, precedors, session);
+		for (VersionArc pa : deletedVersion.precetorsArc) {
 			pa.setNotes("Delete");
 		}
 		deletedVersion.setDeleteFlag(1);
 		return deletedVersion;
+	}
+
+	public static VObjectVersion newSuperObjectVersion(
+			VObjectVersion superObjectOldVer,
+			VObjectVersion changedSubObjectVersion, UserSessionBean session)
+			throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		List<VObjectVersion> precedors = new ArrayList<VObjectVersion>();
+		precedors.add(superObjectOldVer);
+		WSpace ws = changedSubObjectVersion.getWorkspace();
+
+		VObjectVersion newSuperObjectVersion = createVersion(
+				superObjectOldVer.getVobject(), superObjectOldVer.objectName,
+				superObjectOldVer.objectDatum, ws, precedors, session);
+
+		copySubObjects(superObjectOldVer, newSuperObjectVersion,
+				changedSubObjectVersion);
+
+		return newSuperObjectVersion;
+	}
+
+	private static void copySubObjects(VObjectVersion superObjectOldVer,
+			VObjectVersion newSuperObjectVersion,
+			VObjectVersion changedSubObjectVersion) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private static int getNextVersionNumber(VObject vObject) {
@@ -190,11 +213,11 @@ public class VObjectVersion {
 	public List<VComposer> getSubObjects() {
 		return subObjects;
 	}
-	
+
 	@Transient
 	public List<Integer> getSubObgectGIDs() {
 		List<Integer> result = new ArrayList<Integer>();
-		for(VComposer vc:subObjects) {
+		for (VComposer vc : subObjects) {
 			result.add(vc.getSubObject().getGlobalVPId());
 		}
 		return result;
@@ -212,6 +235,23 @@ public class VObjectVersion {
 	public void setSuperObject(VComposer superObject) {
 		this.superObject = superObject;
 	}
+
+	@Transient
+	public int getSuperObgectGID() {
+		return superObject.getSuperObject().getGlobalVPId();
+	}
+
+	// @Transient
+	// public HashMap<WSpace, VObjectVersion> getSuperObgectWS_VOVs() {
+	// HashMap<WSpace, VObjectVersion> result = new HashMap<WSpace,
+	// VObjectVersion>();
+	// for (VComposer vc : superObjects) {
+	// WSpace WS = vc.getSuperObject().getWorkspace();
+	// if (Object.class.isInstance(WS))
+	// result.put(WS, vc.getSuperObject());
+	// }
+	// return result;
+	// }
 
 	@Override
 	public String toString() {
@@ -231,6 +271,17 @@ public class VObjectVersion {
 			}
 		}
 		return null;
+	}
+
+	@Transient
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
+
+		}
 	}
 
 }

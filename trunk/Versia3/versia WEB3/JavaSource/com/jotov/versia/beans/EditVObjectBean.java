@@ -2,10 +2,10 @@ package com.jotov.versia.beans;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.model.SelectItem;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+
 import com.jotov.versia.beans.vobj.ListVobjectsBean;
 import com.jotov.versia.beans.vobj.VItem;
 import com.jotov.versia.orm.VComposer;
@@ -25,16 +25,16 @@ public class EditVObjectBean extends aDBbean {
 	private List<Integer> selected = new ArrayList<Integer>();
 
 	@Override
-	public String executeQuery(int mode) {
+	public synchronized String executeQuery(int mode) {
 		switch (mode) {
 		case 1:
-			return createNewVersion();
+			return createNewVersion("create");
 		case 2:
 			return publishVersion();
 		case 3:
 			return rollbackVersion();
 		case 4:
-			return deleteVersion();
+			return createNewVersion("delete");
 		default:
 			return null;
 		}
@@ -57,7 +57,6 @@ public class EditVObjectBean extends aDBbean {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	private synchronized void publishVersion(VObjectVersion pVOV, WSpace ws,
 			WSpace ancestorWS) {
 
@@ -67,6 +66,10 @@ public class EditVObjectBean extends aDBbean {
 		if (!pVOV.getWorkspace().equals(ws))
 			// not local object => nothing to publicate
 			return;
+
+		VObjectVersion localVerOfAncestorSuperObject = getAncestorSuperObject(pVOV, ws);
+		if(Object.class.isInstance(localVerOfAncestorSuperObject))
+			publishVersion(localVerOfAncestorSuperObject, ws, ancestorWS);
 
 		VObjectVersion ancestorVOV = pVOV.getAncestorVersion();
 		if (Object.class.isInstance(ancestorVOV)) {
@@ -88,64 +91,148 @@ public class EditVObjectBean extends aDBbean {
 			ancestorWS.addLocalVersion(pVOV);
 		}
 
-		Query query = em
-				.createQuery("SELECT c FROM VComposer c WHERE c.superObject = :super");
-		query.setParameter("super", pVOV);
-		List<VComposer> vcs = query.getResultList();
+		List<VComposer> vcs = pVOV.getSubObjects();
 		for (VComposer vc : vcs) {
-			publishVersion(vc.getSubObject(), ws, ancestorWS);
+			VObjectVersion subObject = vc.getSubObject();
+
+			// publication only of local subObject versions
+			if (subObject.getWorkspace().equals(ws))
+				publishVersion(subObject, ws, ancestorWS);
 		}
 	}
 
+	private VObjectVersion getAncestorSuperObject(VObjectVersion pVOV,
+			WSpace currentWS) {
+
+		// get ancestor visible version
+		VObjectVersion ancestorVisibleVersion = getAncestorVisibleVersion(pVOV,
+				currentWS);
+		if (Object.class.isInstance(ancestorVisibleVersion)) {
+			// try to get VComposer with that version
+			VComposer vc = ancestorVisibleVersion.getSuperObject();
+
+			// get superObject and return it
+			if (Object.class.isInstance(vc)) {
+				VObjectVersion ancestorSuperObjectVersion = vc.getSuperObject();
+				return getLocalSuperObjectVersion(ancestorSuperObjectVersion,
+						currentWS);
+			}
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private VObjectVersion getLocalSuperObjectVersion(
+			VObjectVersion ancestorSuperObjectVersion, WSpace currentWS) {
+		Query q = em
+				.createQuery("SELECT v FROM VObjectVersion v WHERE v.workspace = :wsParameter AND v.vobject = :objParameter");
+		q.setParameter("wsParameter", currentWS);
+		q.setParameter("objParameter", ancestorSuperObjectVersion.getVobject());
+		
+		List<VObjectVersion> ancestorVOVs = (List<VObjectVersion>) q
+		.getResultList();
+		if (ancestorVOVs.size() > 0) {
+			return ancestorVOVs.get(0);
+		}
+		
+		return null;
+	}
+
+	private VObjectVersion getAncestorVisibleVersion(VObjectVersion pVOV,
+			WSpace currentWS) {
+		if (Object.class.isInstance(currentWS.getAncestorWorkspace())) {
+			VItem vitem = new VItem(pVOV, currentWS, em);
+
+			return em.find(VObjectVersion.class, vitem.getAncestorVOVGID());
+		}
+		return null;
+	}
+
 	private synchronized String rollbackVersion() {
-		WSpace ws = session.getWorkspace();
+		WSpace currentWS = session.getWorkspace();
 		VObjectVersion localVOV = session.getSelectedVersion();
-		if (localVOV.getWorkspace().equals(ws)) {
+		if (localVOV.getWorkspace().equals(currentWS)) {
 			// RollBack of local versions only
 			em.getTransaction().begin();
-			ws.removeLocalVersion(localVOV);
-			localVOV.setWorkspace(null);
-			em.persist(localVOV);
+			rollbackVersion(currentWS, localVOV);
+			
+			
+			
+			
+			
 			em.getTransaction().commit();
 		}
 		return null;
 	}
+	private synchronized void rollbackVersion(WSpace selectedWS, VObjectVersion vov) {
+		selectedWS.removeLocalVersion(vov);
+		vov.setWorkspace(null);
+		em.persist(vov);
+		
+		//process subObjects
+		VObjectVersion ancestorVisibleObjectVersion = getAncestorVisibleVersion(vov, selectedWS);
+		if(Object.class.isInstance(ancestorVisibleObjectVersion)){
+			List<VComposer> ancestorComposions = ancestorVisibleObjectVersion.getSubObjects();
+			for (VComposer vc:ancestorComposions) {
+				VObjectVersion ancestorSubVOVersion = vc.getSubObject();
+				VObjectVersion localSubVOVersion = getLovalVerion(ancestorSubVOVersion,selectedWS);
+				
+				// recursive rollback of all sub-objects
+				rollbackVersion(selectedWS, localSubVOVersion);				
+			}
+		}
+	}
 
-	private synchronized String deleteVersion() {
-		em.getTransaction().begin();
-		VObjectVersion deletedVersion = VObjectVersion.markDeleteVersion(
-				session.getWorkspace(), session.getSelectedVersion(), session);
-		em.persist(session.getSelectedVersion());
-		em.persist(deletedVersion);
-		em.getTransaction().commit();
+	private VObjectVersion getLovalVerion(VObjectVersion ancestorVOVersion,
+			WSpace selectedWS) {
+		// TODO Auto-generated method stub
+		VObject vObj = ancestorVOVersion.getVobject();
+		List<VObjectVersion> localVerions = selectedWS.getLocalVersions();
+		for (VObjectVersion lvov:localVerions) {
+			if(vObj.equals(lvov.getVobject()))
+				return lvov;
+		}
 		return null;
 	}
 
-	private synchronized String createNewVersion() {
+	private synchronized String createNewVersion(String createParameter) {
 		EntityTransaction trx = em.getTransaction();
 		trx.begin();
 		VObjectVersion oldVer = session.getSelectedVersion();
 		VObject vo = oldVer.getVobject();
 		if (!oldVer.getObjectName().equals(NewName) || isChangedComposition()
 				|| !oldVer.getObjectDatum().equals(NewData)) {
+			// initialisation
 			ArrayList<VObjectVersion> precedors = new ArrayList<VObjectVersion>();
 			precedors.add(oldVer);
+			WSpace currentWS = session.getWorkspace();
+			VObjectVersion newVer;
 
-			VObjectVersion nv = VObjectVersion.createVersion(vo, NewName,
-					NewData, session.getWorkspace(), precedors, session);
-			if (isWorkItem)
-				vo.setWorkItem("TRUE");
-			else
-				vo.setWorkItem("FALSE");
-			oldVer.setWorkspace(null);
-			
+			// create new version
+			if (createParameter.equalsIgnoreCase("create"))
+				newVer = VObjectVersion.createVersion(vo, NewName, NewData,
+						currentWS, precedors, session);
+			else if (createParameter.equalsIgnoreCase("delete"))
+				newVer = VObjectVersion.markDeleteVersion(currentWS, oldVer,
+						session);
+			else {
+				trx.rollback();
+				return null;
+			}
+
+			updateSuperObject(newVer, oldVer);
+
+			// update old verion's woekspace attachment, if needed
+			if (currentWS.equals(oldVer.getWorkspace())) {
+				oldVer.setWorkspace(null);
+				em.persist(oldVer);
+			}
+
 			saveNewComposition();
-			updateSuperObject();
+			em.persist(newVer);
 
-
-			em.persist(nv);
-			em.persist(oldVer);
 		}
+		// update workitem settings (they are on object level)
 		if (vo.isWorkItem() != this.isWorkItem) {
 			// workitem flag doesn't change version
 			if (isWorkItem)
@@ -159,18 +246,54 @@ public class EditVObjectBean extends aDBbean {
 		return null;
 	}
 
-	private void updateSuperObject() {
-		if(Object.class.isInstance(session.getSelectedVersion().getSuperObject())) {
-			//TODO:to updateSuperObject...
-		}
-		else
+	private void updateSuperObject(VObjectVersion newVer, VObjectVersion oldVer) {
+		VComposer superObjComp = oldVer.getSuperObject();
+		if (Object.class.isInstance(superObjComp)) {
+			VObjectVersion oldSuperObjectVer = superObjComp.getSuperObject();
+			WSpace currentWS = session.getWorkspace();
+
+			List<VObjectVersion> precedors = new ArrayList<VObjectVersion>();
+			precedors.add(oldSuperObjectVer);
+			VObjectVersion newSuperObjectVer = VObjectVersion.createVersion(
+					oldSuperObjectVer.getVobject(),
+					oldSuperObjectVer.getObjectName(),
+					oldSuperObjectVer.getObjectDatum(), newVer.getWorkspace(),
+					precedors, session);
+			if (currentWS.equals(oldSuperObjectVer.getWorkspace())) {
+				oldSuperObjectVer.setWorkspace(null);
+				em.persist(oldSuperObjectVer);
+			}
+			copySuperObjectComposition(newSuperObjectVer, oldSuperObjectVer,
+					newVer, oldVer);
+
+			// recursive update of superObjects
+			updateSuperObject(newSuperObjectVer, oldSuperObjectVer);
+		} else
 			return;
 	}
 
+	private void copySuperObjectComposition(VObjectVersion newSuperObjectVer,
+			VObjectVersion oldSuperObjectVer, VObjectVersion newVer,
+			VObjectVersion oldVer) {
+
+		List<VComposer> oldComposers = oldSuperObjectVer.getSubObjects();
+		for (VComposer vc : oldComposers) {
+			VComposer nvc;
+			if (vc.getSubObject().equals(oldVer)) {
+				nvc = VComposer.createComposition(newSuperObjectVer, newVer);
+			} else {
+				nvc = VComposer.createComposition(newSuperObjectVer,
+						vc.getSubObject());
+			}
+			em.persist(nvc);
+		}
+	}
+
 	private void saveNewComposition() {
-		for(int i:selected) {
+		for (int i : selected) {
 			VObjectVersion subObject = em.find(VObjectVersion.class, i);
-			VComposer newVC= VComposer.createComposition(session.getSelectedVersion(), subObject);
+			VComposer newVC = VComposer.createComposition(
+					session.getSelectedVersion(), subObject);
 			em.persist(newVC);
 		}
 	}
@@ -178,7 +301,7 @@ public class EditVObjectBean extends aDBbean {
 	private boolean isChangedComposition() {
 		VObjectVersion oldVer = session.getSelectedVersion();
 		List<Integer> oldCompositionList = oldVer.getSubObgectGIDs();
-		if(oldCompositionList.size() != selected.size())
+		if (oldCompositionList.size() != selected.size())
 			return true;
 		for (int i : oldCompositionList) {
 			if (!selected.contains(i))
@@ -215,7 +338,6 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void Publish() {
-		// TODO to think when it is deleted to allow publish
 		if (this.isReadonly()) {
 			resetVars();
 			return;
@@ -228,7 +350,6 @@ public class EditVObjectBean extends aDBbean {
 	}
 
 	public void RollBack() {
-		// TODO to think when it is deleted to allow rollback
 		if (this.isReadonly()) {
 			resetVars();
 			return;

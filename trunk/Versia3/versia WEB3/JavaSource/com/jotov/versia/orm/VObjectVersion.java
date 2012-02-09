@@ -1,6 +1,7 @@
 package com.jotov.versia.orm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -15,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
@@ -33,7 +33,7 @@ public class VObjectVersion implements Cloneable {
 	private int deleteFlag = 0;
 	private List<VersionArc> precetorsArc = new ArrayList<VersionArc>();
 	private List<VComposer> subObjects;
-	private VComposer superObject;
+	private List<VComposer> superObjects;
 
 	// private List<VObjectVersion> subObjects = new
 	// ArrayList<VObjectVersion>();
@@ -227,31 +227,30 @@ public class VObjectVersion implements Cloneable {
 		this.subObjects = subObjects;
 	}
 
-	@OneToOne(mappedBy = "subObject", fetch = FetchType.LAZY)
-	public VComposer getSuperObject() {
-		return superObject;
+	@OneToMany(mappedBy = "subObject", fetch = FetchType.LAZY)
+	public List<VComposer> getSuperObjects() {
+		return superObjects;
 	}
 
-	public void setSuperObject(VComposer superObject) {
-		this.superObject = superObject;
+	public void setSuperObjects(List<VComposer> superObject) {
+		this.superObjects = superObject;
 	}
+
+	/*
+	 * @Transient public int getSuperObgectGID() { return
+	 * superObjects.getSuperObject().getGlobalVPId(); }
+	 */
 
 	@Transient
-	public int getSuperObgectGID() {
-		return superObject.getSuperObject().getGlobalVPId();
+	public HashMap<WSpace, VObjectVersion> getSuperObgectWS_VOVs() {
+		HashMap<WSpace, VObjectVersion> result = new HashMap<WSpace, VObjectVersion>();
+		for (VComposer vc : superObjects) {
+			WSpace WS = vc.getSuperObject().getWorkspace();
+			if (Object.class.isInstance(WS))
+				result.put(WS, vc.getSuperObject());
+		}
+		return result;
 	}
-
-	// @Transient
-	// public HashMap<WSpace, VObjectVersion> getSuperObgectWS_VOVs() {
-	// HashMap<WSpace, VObjectVersion> result = new HashMap<WSpace,
-	// VObjectVersion>();
-	// for (VComposer vc : superObjects) {
-	// WSpace WS = vc.getSuperObject().getWorkspace();
-	// if (Object.class.isInstance(WS))
-	// result.put(WS, vc.getSuperObject());
-	// }
-	// return result;
-	// }
 
 	@Override
 	public String toString() {
@@ -274,14 +273,44 @@ public class VObjectVersion implements Cloneable {
 	}
 
 	@Transient
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		try {
-			return super.clone();
-		} catch (CloneNotSupportedException e) {
+	public VObjectVersion getSuperObject() {
+		HashMap<WSpace, VObjectVersion> ws_SuperVOVs = getSuperObgectWS_VOVs();
+		if (ws_SuperVOVs.size() > 0)
+			return getSuperObject(ws_SuperVOVs, workspace);
+		else
 			return null;
+	}
 
-		}
+	@Transient
+	public VObjectVersion getAncestorSuperObjectVersion() {
+		HashMap<WSpace, VObjectVersion> ws_SuperVOVs = getSuperObgectWS_VOVs();
+		if (ws_SuperVOVs.size() > 0)
+			return getSuperObject(ws_SuperVOVs,
+					workspace.getAncestorWorkspace());
+
+		return null;
+	}
+
+	@Transient
+	private VObjectVersion getSuperObject(
+			HashMap<WSpace, VObjectVersion> ws_SuperVOVs, WSpace selectedWS) {
+		if (Object.class.isInstance(selectedWS)) {
+			if (ws_SuperVOVs.containsKey(selectedWS))
+				return ws_SuperVOVs.get(selectedWS);
+			else
+				return getSuperObject(ws_SuperVOVs,
+						selectedWS.getAncestorWorkspace());
+		} else
+			return null;
+	}
+
+	@Transient
+	public VObjectVersion getLocalSuperObgect() {
+		HashMap<WSpace, VObjectVersion> ws_SuperVOVs = getSuperObgectWS_VOVs();
+		if (ws_SuperVOVs.containsKey(workspace))
+			return ws_SuperVOVs.get(workspace);
+		else
+			return null;
 	}
 
 }

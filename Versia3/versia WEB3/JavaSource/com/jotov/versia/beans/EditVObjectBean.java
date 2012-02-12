@@ -100,15 +100,6 @@ public class EditVObjectBean extends aDBbean {
 		}
 	}
 
-	private VObjectVersion getAncestorVisibleVersion(VObjectVersion pVOV,
-			WSpace currentWS) {
-
-		VItem vitem = new VItem(pVOV, currentWS, em);
-
-		return em.find(VObjectVersion.class, vitem.getAncestorVOVGID());
-
-	}
-
 	private synchronized String rollbackVersion() {
 		WSpace currentWS = session.getWorkspace();
 		VObjectVersion localVOV = session.getSelectedVersion();
@@ -129,8 +120,7 @@ public class EditVObjectBean extends aDBbean {
 		em.persist(vov);
 
 		// process subObjects
-		VObjectVersion ancestorVisibleObjectVersion = getAncestorVisibleVersion(
-				vov, selectedWS);
+		VObjectVersion ancestorVisibleObjectVersion = session.getOpenWsRegistry().getAncestorVisibleVersion(selectedWS, vov);
 		if (Object.class.isInstance(ancestorVisibleObjectVersion)) {
 			List<VComposer> ancestorComposions = ancestorVisibleObjectVersion
 					.getSubObjects();
@@ -497,4 +487,5 @@ public class EditVObjectBean extends aDBbean {
 	public void setSession(UserSessionBean session) {
 		this.session = session;
 	}
+
 }

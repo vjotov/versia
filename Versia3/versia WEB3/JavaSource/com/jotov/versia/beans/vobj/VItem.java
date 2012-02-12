@@ -2,11 +2,9 @@ package com.jotov.versia.beans.vobj;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import com.jotov.versia.orm.VComposer;
+import com.jotov.versia.beans.ApplicationBean;
 import com.jotov.versia.orm.VObject;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.WSpace;
@@ -29,8 +27,8 @@ public class VItem {
 	private Integer ancestorVersionNumber;
 	private String ancestorVOName;
 	private String ancestorVODatum;
-	private List<VObjectVersion> subVObjectVersions;
 	private List<VSubItem> subObjects;
+	private ApplicationBean application;
 
 	private List<VisibilityEnum> visibility = new ArrayList<VisibilityEnum>();
 
@@ -38,7 +36,9 @@ public class VItem {
 	}
 
 	@SuppressWarnings("unchecked")
-	public VItem(VObjectVersion vov, WSpace ws, EntityManager em) {
+	public VItem(VObjectVersion vov, WSpace ws, EntityManager em,
+			ApplicationBean app) {
+		application = app;
 		workspace = ws;
 		voVersion = vov;
 		vObject = vov.getVobject();
@@ -50,7 +50,8 @@ public class VItem {
 
 		if (workitemFlag) {
 			visibility.add(VisibilityEnum.WI);
-			Query q = em.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :obj AND w.workspace = :wspace");
+			Query q = em
+					.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :obj AND w.workspace = :wspace");
 			q.setParameter("obj", vObject);
 			q.setParameter("wspace", ws);
 
@@ -60,30 +61,26 @@ public class VItem {
 			attachedWIFlag = false;
 		if (attachedWIFlag)
 			visibility.add(VisibilityEnum.A);
-		Query q = em
-				.createQuery("SELECT v FROM VObjectVersion v WHERE v.workspace.lv < :lvParameter AND v.workspace.rv >:rvParameter ORDER BY v.workspace.lv DESC");
-		q.setParameter("lvParameter", ws.getLv());
-		q.setParameter("rvParameter", ws.getRv());
 
-		List<VObjectVersion> ancestorVOVs = (List<VObjectVersion>) q
-				.getResultList();
-		if (ancestorVOVs.size() > 0) {
-			ancestorFlag = true;
-			VObjectVersion ancestorVersion = ancestorVOVs.get(0);
-			ancestorVersionNumber = ancestorVersion.getVersionNumber();
-			ancestorVOName = ancestorVersion.getObjectName();
-			ancestorVODatum = ancestorVersion.getObjectDatum();
-			ancestorVOVGID = ancestorVersion.getGlobalVPId();
-		} else {
+		VObjectVersion ancestorVersion = application.getOpenWsRegistry()
+				.getAncestorVisibleVersion(workspace, vObject);
+		if (ancestorVersion == null) {
 			ancestorFlag = false;
 			ancestorVersionNumber = 0;
 			ancestorVOName = "N/A";
 			ancestorVODatum = "N/A";
 			ancestorVOVGID = -1;
+		} else {
+			ancestorFlag = true;
+			ancestorVersionNumber = ancestorVersion.getVersionNumber();
+			ancestorVOName = ancestorVersion.getObjectName();
+			ancestorVODatum = ancestorVersion.getObjectDatum();
+			ancestorVOVGID = ancestorVersion.getGlobalVPId();
 		}
 
 		if (Object.class.isInstance(ws.getAncestorWorkspace())) {
-			Query q2 = em.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :obj AND w.workspace = :wspace");
+			Query q2 = em
+					.createQuery("SELECT COUNT(w) FROM WorkItemAttachement w WHERE w.workitem = :obj AND w.workspace = :wspace");
 			q2.setParameter("obj", vObject);
 			q2.setParameter("wspace", ws.getAncestorWorkspace());
 
@@ -197,24 +194,14 @@ public class VItem {
 	}
 
 	public List<VObjectVersion> getSubVObjectVersions() {
-		if (subVObjectVersions == null) {
-			subVObjectVersions = new ArrayList<VObjectVersion>();
-			subObjects = new ArrayList<VSubItem>();
-
-			List<VComposer> vcLS = voVersion.getSubObjects();
-			for (VComposer vc : vcLS) {
-				VObjectVersion svo = vc.getSubObject();
-				subVObjectVersions.add(vc.getSubObject());
-				subObjects.add(new VSubItem(svo.getVobject().getVObjectId(),
-						svo.getVersionNumber(), svo.getObjectName()));
-			}
-		}
-		return subVObjectVersions;
+		return application.getOpenWsRegistry()
+				.getSubObjects(workspace, vObject);
 	}
 
-	public void setSubVObjectVersions(List<VObjectVersion> subVObjectVersions) {
-		this.subVObjectVersions = subVObjectVersions;
-	}
+	// public void setSubVObjectVersions(List<VObjectVersion>
+	// subVObjectVersions) {
+	// this.subVObjectVersions = subVObjectVersions;
+	// }
 
 	public List<VisibilityEnum> getVisibility() {
 		return visibility;
@@ -230,23 +217,21 @@ public class VItem {
 
 	public List<VSubItem> getSubObjects() {
 		if (subObjects == null) {
-			subVObjectVersions = new ArrayList<VObjectVersion>();
 			subObjects = new ArrayList<VSubItem>();
+			List<VObjectVersion> subVers = application.getOpenWsRegistry()
+					.getSubObjects(workspace, vObject);
 
-			List<VComposer> vcLS = voVersion.getSubObjects();
-			for (VComposer vc : vcLS) {
-				VObjectVersion svo = vc.getSubObject();
-				subVObjectVersions.add(vc.getSubObject());
-				subObjects.add(new VSubItem(svo.getVobject().getVObjectId(),
-						svo.getVersionNumber(), svo.getObjectName()));
+			for (VObjectVersion vov : subVers) {
+				subObjects.add(new VSubItem(vov.getVobject().getVObjectId(),
+						vov.getVersionNumber(), vov.getObjectName()));
 			}
 		}
 		return subObjects;
 	}
 
-	public void setSubObjects(List<VSubItem> subObjects) {
-		this.subObjects = subObjects;
-	}
+	// public void setSubObjects(List<VSubItem> subObjects) {
+	// this.subObjects = subObjects;
+	// }
 
 	public String getImage() {
 		if (getSubObjects().size() == 0)

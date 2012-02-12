@@ -1,14 +1,13 @@
 package com.jotov.versia.beans;
 
 import javax.annotation.PostConstruct;
-
 import com.jotov.versia.beans.vobj.VItemShell;
-//import com.jotov.versia.beans.vobj.Visibility;
 import com.jotov.versia.orm.Product;
 import com.jotov.versia.orm.Release;
 import com.jotov.versia.orm.UserProfile;
 import com.jotov.versia.orm.VObjectVersion;
 import com.jotov.versia.orm.WSpace;
+import com.jotov.versia.util.OpenWSRegistry;
 
 public class UserSessionBean implements iSessionAdaptor {
 	private UserProfile userProfile;
@@ -40,6 +39,10 @@ public class UserSessionBean implements iSessionAdaptor {
 
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;
+	}
+	
+	public OpenWSRegistry getOpenWsRegistry() {
+		return app.getOpenWsRegistry();
 	}
 
 	// /////////////////////////////////////////
@@ -93,7 +96,8 @@ public class UserSessionBean implements iSessionAdaptor {
 
 	public VItemShell getVItemShell() {
 		if (!Object.class.isInstance(vs) || !vs.getWorkspace().equals(workspace)) {
-			vs = new VItemShell(workspace);
+			app.getOpenWsRegistry().refresh(workspace);
+			vs = new VItemShell(workspace, app);
 		}
 		return vs;
 	}

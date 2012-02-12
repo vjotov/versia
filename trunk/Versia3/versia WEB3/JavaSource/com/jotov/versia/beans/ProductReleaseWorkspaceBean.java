@@ -47,6 +47,7 @@ public class ProductReleaseWorkspaceBean extends aDBbean {
 			em.getTransaction().begin();
 			session.getWorkspace().setOpenedByUser(user);
 			em.getTransaction().commit();
+			session.getOpenWsRegistry().register(session.getWorkspace());
 		}
 		return null;
 	}
@@ -144,4 +145,5 @@ public class ProductReleaseWorkspaceBean extends aDBbean {
 		} else
 			return null;
 	}
+
 }

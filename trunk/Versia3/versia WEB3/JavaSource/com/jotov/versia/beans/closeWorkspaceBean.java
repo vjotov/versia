@@ -19,7 +19,9 @@ public class closeWorkspaceBean extends aDBbean {
 		
 		em.persist(session.getUserProfile());
 		em.getTransaction().commit();
-		session.setWorkspace(null);
+		
+		session.getOpenWsRegistry().unregister(session.getWorkspace());
+		session.setWorkspace(null);		
 		return "workspace_closed";
 	}
 

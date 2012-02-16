@@ -258,19 +258,19 @@ public class VObjectVersion implements Cloneable {
 				+ "(" + this.getGlobalVPId() + ") - " + this.getObjectName();
 	}
 
-	@Transient
-	public VObjectVersion getAncestorVersion() {
-		WSpace aws = workspace.getAncestorWorkspace();
-		if (Object.class.isInstance(aws)) {
-			List<VObjectVersion> vovList = aws.getLocalVersions();
-			for (VObjectVersion vov : vovList) {
-				if (vov.getVobject().equals(vobject)) {
-					return vov;
-				}
-			}
-		}
-		return null;
-	}
+//	@Transient
+//	public VObjectVersion getAncestorVersion() {
+//		WSpace aws = workspace.getAncestorWorkspace();
+//		if (Object.class.isInstance(aws)) {
+//			List<VObjectVersion> vovList = aws.getLocalVersions();
+//			for (VObjectVersion vov : vovList) {
+//				if (vov.getVobject().equals(vobject)) {
+//					return vov;
+//				}
+//			}
+//		}
+//		return null;
+//	}
 
 	@Transient
 	public VObjectVersion getSuperObject() {

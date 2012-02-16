@@ -28,15 +28,14 @@ public class OpenWSRegistry {
 		ancestorVisibleVersion = new HashMap<vwPair, VObjectVersion>();
 		visibilityFlags = new HashMap<vwPair, List<VisibilityEnum>>();
 	}
-	
+
 	public static OpenWSRegistry getSingleton() {
 		if (registry == null)
 			registry = new OpenWSRegistry();
 		return registry;
 	}
 
-	public synchronized List<VObjectVersion> getLocalVersions(
-			WSpace wspace) {
+	public synchronized List<VObjectVersion> getLocalVersions(WSpace wspace) {
 
 		if (Object.class.isInstance(wspace) && isWorkspaceLoaded(wspace)
 				&& registry.visibleVersion.containsKey(wspace)) {
@@ -63,8 +62,7 @@ public class OpenWSRegistry {
 		return getSubObjects(ws, superObjv.getVobject());
 	}
 
-	public synchronized VObjectVersion getSuperObject(WSpace ws,
-			VObject Obj) {
+	public synchronized VObjectVersion getSuperObject(WSpace ws, VObject Obj) {
 
 		vwPair key = new vwPair(ws, Obj);
 
@@ -81,8 +79,8 @@ public class OpenWSRegistry {
 		return getSuperObject(ws, ObjV.getVobject());
 	}
 
-	public synchronized  VObjectVersion getAncestorVisibleVersion(
-			WSpace ws, VObject Obj) {
+	public synchronized VObjectVersion getAncestorVisibleVersion(WSpace ws,
+			VObject Obj) {
 
 		vwPair key = new vwPair(ws, Obj);
 
@@ -94,13 +92,13 @@ public class OpenWSRegistry {
 		return null;
 	}
 
-	public synchronized VObjectVersion getAncestorVisibleVersion(
-			WSpace ws, VObjectVersion ObjV) {
+	public synchronized VObjectVersion getAncestorVisibleVersion(WSpace ws,
+			VObjectVersion ObjV) {
 		return getAncestorVisibleVersion(ws, ObjV.getVobject());
 	}
 
-	public synchronized  List<VisibilityEnum> getVisibilityFlag(
-			WSpace ws, VObject Obj) {
+	public synchronized List<VisibilityEnum> getVisibilityFlag(WSpace ws,
+			VObject Obj) {
 
 		vwPair key = new vwPair(ws, Obj);
 
@@ -112,8 +110,8 @@ public class OpenWSRegistry {
 		return null;
 	}
 
-	public synchronized  List<VisibilityEnum> getVisibilityFlag(
-			WSpace ws, VObjectVersion ObjV) {
+	public synchronized List<VisibilityEnum> getVisibilityFlag(WSpace ws,
+			VObjectVersion ObjV) {
 		return getVisibilityFlag(ws, ObjV.getVobject());
 	}
 
@@ -135,7 +133,7 @@ public class OpenWSRegistry {
 		}
 	}
 
-	public synchronized  void unregister(WSpace wspace) {
+	public synchronized void unregister(WSpace wspace) {
 		if (Object.class.isInstance(wspace) && isWorkspaceLoaded(wspace)) {
 			List<VObjectVersion> vovLs = getLocalVersions(wspace);
 			for (VObjectVersion vov : vovLs) {
@@ -171,7 +169,6 @@ public class OpenWSRegistry {
 			vwPair key = new vwPair(wspace, obj);
 			registry.ancestorVisibleVersion.put(key, vov);
 		}
-		
 
 		// visibility flag
 		for (VObject obj : localVersions.keySet()) {
@@ -210,14 +207,13 @@ public class OpenWSRegistry {
 			ancestorVersionsFlag = true;
 
 		if (Object.class.isInstance(wspace.getAncestorWorkspace())) {
-			doLoadVersions(wspace.getAncestorWorkspace(), localVersions, ancestorVersions,
-					ancestorVersionsFlag, VisibilityEnum.P,
+			doLoadVersions(wspace.getAncestorWorkspace(), localVersions,
+					ancestorVersions, ancestorVersionsFlag, VisibilityEnum.P,
 					visibilityAccumulator);
 		}
 	}
 
-	private void addVisibilityFlag(VObject obj,
-			VisibilityEnum visibilityFlag,
+	private void addVisibilityFlag(VObject obj, VisibilityEnum visibilityFlag,
 			HashMap<VObject, List<VisibilityEnum>> visibilityAccumulator) {
 
 		List<VisibilityEnum> visibilityList;
@@ -238,9 +234,12 @@ public class OpenWSRegistry {
 		for (VObjectVersion vov : vovLs) {
 			List<VComposer> comLs = vov.getSubObjects();
 			ArrayList<VObjectVersion> subObjectList = new ArrayList<VObjectVersion>();
+			
 			if (Object.class.isInstance(comLs) && comLs.size() != 0) {
 				for (VComposer vc : comLs) {
-					subObjectList.add(vc.getSubObject());
+					VObjectVersion sprObject = vc.getSuperObject();
+					if (sprObject.getWorkspace() != null)
+						subObjectList.add(vc.getSubObject());
 				}
 			}
 			vwPair key = new vwPair(wspace, vov.getVobject());

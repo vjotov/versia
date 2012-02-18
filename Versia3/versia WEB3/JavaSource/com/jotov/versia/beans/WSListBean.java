@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import com.jotov.versia.orm.Release;
 import com.jotov.versia.orm.UserProfile;
 import com.jotov.versia.orm.WSpace;
 
@@ -38,12 +39,14 @@ public class WSListBean extends aDBbean {
 		EntityTransaction trx = em.getTransaction();
 		trx.begin();
 		// WSpace selectedWorkspace = this.workspaces.get(selectedRow);
+		em.clear();
 		WSpace selectedWorkspace = em.find(WSpace.class, selectedWorkspaceId);
 		WSpace newOffspring = WSpace.createWorkspace("New Offspring Workspace",
 				selectedWorkspace, null, em);
 		em.persist(newOffspring);
 		trx.commit();
-
+		em.clear();
+		//em.merge(session.getRelease());
 		return null;
 	}
 
@@ -64,34 +67,40 @@ public class WSListBean extends aDBbean {
 	public void creareOffspring() {
 		dbean.executeQuery(this, 2);
 	}
-	
-	public String openWorkspace(){
+
+	public String openWorkspace() {
 		return dbean.executeQuery(this, 4);
 	}
-	
+
 	private String doOpenWorkspace() {
 		WSpace selectedWorkspace = em.find(WSpace.class, selectedWorkspaceId);
 		UserProfile user = session.getUserProfile();
 		EntityTransaction trx = em.getTransaction();
 		trx.begin();
 		UserProfile openUser = selectedWorkspace.getOpenedByUser();
-		Boolean b2 = Object.class.isInstance(selectedWorkspace.getPublicationByUser());
-			if( (openUser == null || user.equals(openUser)) && b2 == false) {
-				user.setOpenedWorkspace(selectedWorkspace);
-				em.persist(user);
-				em.persist(selectedWorkspace);
-				trx.commit();
-				session.setWorkspace(selectedWorkspace);
-				return "open_workspace";
-			} else {
-				trx.rollback();
-				return "busy_workspace";
-			}
+		Boolean b2 = Object.class.isInstance(selectedWorkspace
+				.getPublicationByUser());
+		if ((openUser == null || user.equals(openUser)) && b2 == false) {
+			user.setOpenedWorkspace(selectedWorkspace);
+			em.persist(user);
+			em.persist(selectedWorkspace);
+			trx.commit();
+			session.setWorkspace(selectedWorkspace);
+			return "open_workspace";
+		} else {
+			trx.rollback();
+			return "busy_workspace";
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private String loadWorspaces() {
-
+		Release release = session.getRelease();
+		if (!em.contains(release)){
+			Release r = em.find(Release.class, release.getReleaseId());
+			session.setRelease(r);
+		}
+			
 		if (session.getRelease() != null) {
 			Query query = em
 					.createQuery("select w from WSpace w where w.release=:rel ORDER BY w.wSpaceId");

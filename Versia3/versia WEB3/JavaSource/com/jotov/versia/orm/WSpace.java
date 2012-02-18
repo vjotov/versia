@@ -40,7 +40,7 @@ public class WSpace {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static WSpace createWorkspace(String workspaceName,
+	public static synchronized WSpace createWorkspace(String workspaceName,
 			WSpace ancestorWorkspace, Release rel, EntityManager em) {
 		WSpace ws;
 		if (ancestorWorkspace == null) { // Creation of master workspace
@@ -77,7 +77,8 @@ public class WSpace {
 			updated = q2.executeUpdate();
 			System.out.println("2) Add offspring WS - Updated " + updated
 					+ " RV values of WSpace objects");
-
+			em.flush();
+			
 			ws = new WSpace(workspaceName, ancestorWorkspace, rel, lv, lv + 1);
 		}
 		return ws;
@@ -137,12 +138,16 @@ public class WSpace {
 	private WSpace(String workspaceName, WSpace ancestorWorkspace, Release rel,
 			int lv, int rv) {
 		super();
+		System.out.println("creating of workspace, name:" + workspaceName
+				+ " ancestor:" + ancestorWorkspace + " LV:" + lv + " RV:" + rv);
 		this.wSpaceName = workspaceName;
 		this.ancestorWSpace = ancestorWorkspace;
 		if (ancestorWorkspace == null)
 			this.release = rel;
 		else
 			this.release = ancestorWorkspace.getRelease();
+		this.lv = lv;
+		this.rv = rv;
 	}
 
 	@Id
@@ -209,10 +214,10 @@ public class WSpace {
 	public void setOpenedByUser(UserProfile openedByUser) {
 		this.openedByUser = openedByUser;
 	}
-	
+
 	@Transient
 	public String getOpenedBy() {
-		if(Object.class.isInstance(openedByUser))
+		if (Object.class.isInstance(openedByUser))
 			return openedByUser.getUserName();
 		else
 			return "n/a";

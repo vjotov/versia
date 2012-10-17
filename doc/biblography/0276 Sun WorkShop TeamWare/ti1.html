@@ -1,0 +1,86 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Basic Concepts of TeamWare File Management
+</font></h2>
+<img src="BlueLine-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/BlueLine.gif">
+
+<h4><font size=4>Bringover
+</font></h4><ul><p><li>What is a bringover?</li>
+
+<dl><a name="106818">
+<p><dd>The transaction in which you copy one or more directories from the parent workspace to your own child workspace.
+<p></a></dl><p><li>Why do a bringover?</li>
+
+<dl><a name="106820">
+<p><dd>To furnish your workspace a copy of each directory and file you need to work on. Also, to refresh your workspace with the latest version of those directories and files.
+<p></a></dl><p><li>When should I do a bringover?</li>
+
+<dl><a name="106822">
+<p><dd>Often! TeamWare prompts you to do a bringover if your workspace contains old file versions. However, you should do another bringover each time you begin working on a set of files.
+<p></a></dl><p><li>How do I do a bringover?</li>
+
+<dl><a name="106824">
+<p><dd>For the first time: Configuring -&gt; Actions -&gt; Bringover Create
+<p></a><a name="106825">
+<p><dd>To refresh: Configuring -&gt; Actions -&gt; Bringover Update
+<p></a></dl></ul><h4><font size=4>Putback
+</font></h4><ul><p><li>What is a putback?</li>
+
+<dl><a name="106828">
+<p><dd>The transaction in which you copy files you&#39;ve changed from your own child workspace back to the parent workspace.
+<p></a></dl><p><li>Why do a putback?</li>
+
+<dl><a name="106830">
+<p><dd>To update the parent workspace with the changes you&#39;ve made. Also, to let your teammates refresh their own child workspaces with your changes, so you&#39;re all working on the same version of the files. 
+<p></a></dl><p><li>When should I do a putback?</li>
+
+<dl><a name="106832">
+<p><dd>Each time you finish making changes and want to notify other team members that the parent workspace has been updated.
+<p></a></dl><p><li>How do I do a putback?</li>
+
+<dl><a name="106834">
+<p><dd>Actions -&gt; Putback 
+<p></a></dl></ul><h4><font size=4>Freezepoint
+</font></h4><ul><p><li>What is a freezepoint?</li>
+
+<dl><a name="106837">
+<p><dd>A snapshot of a directory that you have set aside at a particular point in time. You&#39;ve &#34;frozen&#34; that version so that you can keep on developing the source code, and can come back to that version when you need to. A freezepoint is a lightweight but intelligent pointer to a specific file version. 
+<p></a></dl><p><li>Why create a freezepoint?</li>
+
+<dl><a name="106839">
+<p><dd>To archive source code at a particular point in its life cycle. For example, to set a particular build aside for later reference, while you continue working on the next build.
+<p></a></dl><p><li>When should I create a freezepoint?</li>
+
+<dl><a name="106841">
+<p><dd>Freezepoints aren&#39;t obligatory, but you can create one whenever your project has a need to safeguard an old version of the code. 
+<p></a></dl><p><li>How do I work with freezepoints?</li>
+
+<dl><a name="106843">
+<p><dd>To create a freezepoint: TeamWare -&gt; Freezepointing -&gt; Creation
+<p></a><a name="106844">
+<p><dd>To extract the whole file from a freezepoint: TeamWare -&gt; Freezepointing -&gt; Extraction
+<p></a></dl></ul><h4><font size=4>File Merge
+</font></h4><ul><p><li>What is a merge?</li>
+
+<dl><a name="106847">
+<p><dd>The transaction in which you compare two versions of a file&#45;&#45;the version from your child workspace and the version now in the parent workspace&#45;&#45;side by side. There, youselectively merge the differences so that the two versions become one file that reflects changes from two developers. When you&#39;re doing a file merge, you can choose whether to ignore or incorporate each difference in the source code. 
+<p></a></dl><p><li>Why do merge files?</li>
+
+<dl><a name="106867">
+<p><dd>To keep source code from &#34;forking&#34; as two developers change the same file. Also, to update the parent workspace with a single, current copy of that file.
+<p></a></dl><p><li>When do I do a file merge?</li>
+
+<dl><a name="106869">
+<p><dd>If you try to put back a file that someone else has already put back with different changes, TeamWare automatically brings up the Merging window with the two versions displayed. If you know in advance that two files need merging, you can bring up the Merging window yourself.
+<p></a></dl><p><li>How do I do a file merge?</li>
+
+<dl><a name="106853">
+<p><dd>TeamWare -&gt; Merging
+<p></a></dl></ul>
+<br>
+
+<br> 
+
+

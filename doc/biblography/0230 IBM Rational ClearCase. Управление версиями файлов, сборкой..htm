@@ -1,0 +1,1473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0055)http://cmcons.com/tech_rational/IBM_Rational_ClearCase/ -->
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<TITLE>IBM Rational ClearCase</TITLE>
+<META name="description" content="IBM Rational ClearCase">
+<META name="keywords" content="IBM Rational ClearCase, ibm, rational, конфигурации, план управления, IBM, rational, внедрение, rational, microsoft, продажа rational, консалтинг rational, clearcase, clearquest, ibm, управление конфигурациями, процесс, ЖЦ ПС, soda, тестирование ibm rational clearcase, ibm rational clearquest, внедрение, обучение, курсы, лекции, учеба, консалтинг, см-консалт, сертификация, advanced, cmm, cmmi, лицензии, продажа софта, скачать, robot, rft, решения, software architect, управление, проект, сертиикация, диплом, сертификат, апробация, проекты сопровождения программных средств, конфигурационное управление, разработка, технология выполнения процессов жизненного цикла, проекты нормативных документов, шаблоны распорядительных документов, управление изменениями, управление требованиями, тестирование, ibm, ibm rational, clearcase, clearquest, purify, purify plus, testmanager, rational unified process, suite, suite bundle, robot, внедрение, пилотный проект, разработка систем, системы, управление, проектами, приложения для rational, консалтинг, обучение, система отчетности, управление правами, командная строка, configuration management, integrator, merge, merge manager, rup, заказ, поставка, тренинги, семинары, разработка по, методология, сопровождение по, процессы разработки по, rup, управление конфигурациями, контроль конфигурации, документирование, качество, по, жц пс, концепция, vision, артефакт, xde, жизненный цикл, экстримальное программирование, методология, гост, исо, gost, iso, cmm, crm, change reruest management, test plan, риски, шаблон, template, rose, бизнес-моделирование, анализ и проектирование, дизайн-модель, заказ, поставка, cc, cvs, pvcs, source safe, source save, описание, документация, настройка, конфигспек, конфиг спек, config spec, управление версиями, rational software, учебник, clear case, clear quest, vs, сравнение, анализ, что лучше, soda, manual test, visual test, microsoft, visual studio, access, oracle, db2, sql, ms, ms sql, кодирование, ucm, api, multisite, синхронизация, региональное удаление, uml, ibm, rational">
+
+<META http-equiv="Content-Language" content="ru">
+
+
+<LINK rel="stylesheet" type="text/css" href="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/style.css">
+</HEAD><BODY bgcolor="#FFFFFF" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+
+<TABLE border="0" cellpadding="0" cellspacing="0" width="100&percnt;">
+<TBODY><TR>
+<TD height="100" colspan="2">
+
+<TABLE border="0" cellpadding="0" cellspacing="0" width="100&percnt;">
+<TBODY><TR>
+<TD class="logo" width="145" align="center" style="padding-left:10px;">
+
+<A href="http://cmcons.com/"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/logo.jpg" alt="СМ-Консалт" width="160" height="120"></A>
+Консалтинг в области разработки ПО
+<BR><BR>
+
+</TD>
+<TD style="padding-left:75px;">
+
+<!--  Верхнее меню -->
+<TABLE border="0" cellspacing="0" cellpadding="0">
+  <TBODY><TR>
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/clients/"><SPAN style="">Клиенты и партнеры</SPAN></A>
+    </TD>
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/nanotech/"><SPAN style="">НАНО технологии</SPAN></A>
+    </TD>
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/portfolio/"><SPAN style="">Портфолио и квалификация</SPAN></A>
+				</TD></TR>
+				<TR>
+			
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/lectures/"><SPAN style="">Тренинги и обучение</SPAN></A>
+    </TD>
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/solutions/"><SPAN style="">Решения и услуги</SPAN></A>
+    </TD>
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/faq/"><SPAN style="">Вопросы-ответы</SPAN></A>
+				</TD></TR>
+				<TR>
+			
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/glossary/"><SPAN style="">IT Глоссарий</SPAN></A>
+    </TD>
+    <TD width="1"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top_menu_separator.gif" width="1"></TD>
+    <TD class="top_menu">
+      <A href="http://cmcons.com/map/"><SPAN style="">Карта сайта</SPAN></A>
+    </TD>
+  </TR>
+</TBODY></TABLE>
+</TD>
+<TD style="float: right"> 
+
+<DIV style="width: 183px; float:right; padding-right: 70px; height: 110px"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/ibmbp.jpg" width="183" height="90"></DIV>
+
+<BR>
+<DIV style="padding-right: 20px;">
+<FORM method="get" action="http://cmcons.com/search/">
+<INPUT type="text" size="15" name="text" value="" maxlength="200" style="width: 200px" class="input_buttom_search">
+<INPUT type="submit" class="input_buttom_search_button" value="  Поиск ">
+</FORM>
+</DIV>
+
+
+
+
+</TD>
+</TR>
+</TBODY></TABLE>
+
+</TD>
+<TD>
+
+
+
+</TD>
+
+</TR>
+
+<TR>
+
+<TD width="180" valign="top">
+
+<!-- Центральное меню -->
+<TABLE border="0" width="100&percnt;" height="200" cellspacing="0" cellpadding="0" style="margin-left:4px; margin-right:4px;">
+  <TBODY><TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/events/"><SPAN style="">Календарь событий и мероприятий</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/about_us/"><SPAN style="">О компании СМ-Консалт</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/consulting_all/"><SPAN style="">Основные услуги СМ-Консалт</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/news/"><SPAN style="">Новости</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/shop/"><SPAN style="">Интернет-магазин тренингов, решений и услуг</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/presentation/"><SPAN style="">Медиа склад (презентации, видео)</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/tech_rational/"><SPAN style="font-weight: bold">Описание инструментов IBM Rational, MS TFS, Jira, Subversion</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/feedback/"><SPAN style="">Обратная связь</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/articles/"><SPAN style="">Статьи</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/downloads/"><SPAN style="">Скачивание (download)</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/users/"><SPAN style="">Личный кабинет</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+  <TR>
+    <TD width="100&percnt;">
+      <DIV style="padding-left: 0px;"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/menu_point.gif" class="menu_point" width="4" height="7"><A href="http://cmcons.com/kontakty/"><SPAN style="">Контакты</SPAN></A>
+      </DIV>
+    </TD>
+  </TR>
+  <TR>
+    <TD width="100&percnt;" class="menu_line">
+  </TR>
+</TBODY></TABLE>
+
+
+
+<BR>
+<A href="http://cmcons.com/solutions/our_solutions/"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/english.gif" width="24" height="16">
+<H3>Важный материал:</H3>
+</A><DIV><A href="http://cmcons.com/showbanner/?list_id=1491165"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/24.gif"></A></DIV>
+<!-- subscr -->
+
+
+<H3>
+Наши партнёры:</H3>
+<A href="http://uml2.ru/"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/uml2_logo.jpg" alt="UML2RU" width="140" height="55"></A>
+<BR>
+<A href="http://www.sqalab.ru/"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/sqalab.gif" alt="UML2RU" width="140" height="61"></A>
+<BR><BR>
+
+<H3>Наша рассылка:</H3>
+
+<FORM target="_top" action="http://subscribe.ru/member/quick" method="POST">
+<INPUT type="hidden" name="action" value="quick">
+<TABLE border="0" cellspacing="0" cellpadding="2"><TBODY><TR><TD align="LEFT">
+<INPUT type="hidden" name="grp" value="economics.tech.cmconsult">
+<A href="http://subscribe.ru/catalog/economics.tech.cmconsult" target="_top">СМ-Консалт </A><BR>
+<INPUT type="text" name="email" size="20" maxlength="100" value="ваш e-mail">
+<BR><INPUT type="image" name="Подписаться" border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/navy.gif" width="88" height="31">
+</TD></TR>
+<TR><TD align="left">
+<A href="mailto:economics.tech.cmconsult-sub@subscribe.ru?subj=subscribe">Подписаться письмом</A>
+</TD></TR>
+</TBODY></TABLE>
+<INPUT type="hidden" name="src" value="list_economics.tech.cmconsult">
+</FORM>
+<BR><BR>
+
+
+
+
+<BR><BR><BR><BR>
+
+
+<BR><BR>
+
+</TD>
+
+
+
+<TD style="padding-left: 30px; width: 750px; vertical-align: top;">
+	<!--img border="0" src="/img/logo.png" width="475" height="200"-->
+
+<SCRIPT>
+  <!--
+			
+			function ShowImgWindow(title, src, width, height)
+			{
+				obj = window.open("", "", "scrollbars=0,dialog=0,minimizable=1,modal=1,width="+width+",height="+height+",resizable=0");
+				obj.document.write("<html>");
+				obj.document.write("<head>");
+			
+				obj.document.write("<title>"+title+"</title>");
+			
+				obj.document.write("</head>");
+			
+				obj.document.write("<body topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>");
+			
+				obj.document.write("<img src=\""+src+"\" />");
+			
+				obj.document.write("</body>");
+				obj.document.write("</html>");
+			}
+			
+			-->
+</SCRIPT>
+<H3>IBM Rational ClearCase. Управление версиями файлов, сборкой.</H3>
+<DIV style="float: left; margin: 0px 0px 0px 0px"></DIV>
+<DIV style="clear: both"></DIV>
+<P></P><H1>IBM Rational ClearCase. Управление версиями файлов, сборкой.</H1>
+<P>
+&nbsp;
+</P>
+<H2>Общее описание</H2>
+<H3>Краткая характеристика процесса Управления Конфигурациями</H3>
+<P>
+Основная задача управления конфигурациями&nbsp;— установление и&nbsp;поддержание
+целостности проектных данных на&nbsp;протяжении всего жизненного цикла
+развития проекта.
+</P>
+<P>
+Управление конфигурациями обеспечивает идентификацию конфигурации
+выпускаемых ПС (версия ПС&nbsp;в&nbsp;целом, версии подсистем, их&nbsp;состав и&nbsp;связи
+между элементами, входящими в&nbsp;состав ПС). Управление конфигурациями
+обеспечивает систематизированное управление изменениями конфигурации,
+поддержание ее&nbsp;целостности и&nbsp;актуальности на&nbsp;протяжении всего
+жизненного цикла проекта. Результаты разработки, которые поставляются
+клиенту, находятся под&nbsp;управлением системы управления конфигурацией.
+</P>
+<P>
+Библиотеки базовых линий должны быть установлены и&nbsp;содержать
+работающие версии релизов. Под&nbsp;базовыми линиями здесь и&nbsp;далее
+понимается набор версий исходных файлов, составляющих конкретную версию
+откомпилированного релиза. Изменения базовых линий программного
+продукта, построенных на&nbsp;основе библиотеки базовых линий, должны быть
+управляемыми посредством контроля изменений и&nbsp;аудита конфигураций,
+что&nbsp;полностью обеспечивается инструментом IBM&nbsp;Rational ClearCase.
+</P>
+<P>
+В&nbsp;дополнении к&nbsp;сказанному УК&nbsp;по&nbsp;RUP&nbsp;включает:
+</P>
+<UL>
+	<LI>
+	·        Идентификацию элементов конфигурации;
+	</LI>
+	<LI>
+	·        Контроль изменений отдельных элементов и&nbsp;конфигурации в&nbsp;целом;
+	</LI>
+	<LI>
+	·        Ревизию изменений в&nbsp;конфигурации;
+	</LI>
+	<LI>
+	·        Учет  элементов конфигурации;
+	</LI>
+	<LI>
+	·        Формирование отчетности по&nbsp;статусам элементов и&nbsp;их&nbsp;конфигураций.
+	</LI>
+</UL>
+<P>
+&nbsp;&nbsp;
+</P>
+<H3>Упрощение процесса управления версиями</H3>
+<P align="left">
+Разработка программного обеспечения никогда не&nbsp;была
+простым делом. В&nbsp;процессе разработки всегда возникает задача управления
+различными
+продуктами, релизами и&nbsp;версиями. Все&nbsp;усложняется, когда двое&nbsp;или более
+разработчиков в&nbsp;одно и&nbsp;то&nbsp;же время работают над&nbsp;одним и&nbsp;тем&nbsp;же кодом,
+особенно если&nbsp;они&nbsp;находятся в&nbsp;разных местах. Проблемы возникают
+и&nbsp;при&nbsp;сопровождении множества версий ПС (например, ПС, код&nbsp;которой
+оптимизирован под&nbsp;разные типы операционных систем,&nbsp;или под&nbsp;разные типы
+микропроцессоров).
+</P>
+<P>
+В&nbsp;последнем случае без&nbsp;применения специальных средств управления
+конфигурацией сложно обойтись, поскольку внесение изменений
+в&nbsp;предыдущие релизы всегда связано с&nbsp;дополнительными затратами
+на&nbsp;поиски
+версии (часто бывает, что&nbsp;в&nbsp;проектах старые версии подлежат
+архивированию и&nbsp;удалению, для&nbsp;работы с&nbsp;ними приходится поднимать архив)
+и&nbsp;на&nbsp;поиски исполнителя. Зачастую бывает, что&nbsp;проще создать новую
+версию, чем&nbsp;изменить предыдущую.
+</P>
+<P>
+С&nbsp;использованием IBM&nbsp;Rational ClearCase в&nbsp;вышеописанной ситуации,
+достаточно было просто вернуться к&nbsp;предыдущей версии, получив при&nbsp;этом
+полный набор артефактов проекта (версии исходных файлов, документация,
+требования, модели, скрипты тестирования), соответствующий предыдущей
+версии, и&nbsp;на&nbsp;его&nbsp;основе построить новую версию. Вся&nbsp;процедура перехода
+к&nbsp;предыдущему релизу заняла бы&nbsp;не&nbsp;более 1&nbsp;минуты.
+</P>
+<P>
+IBM&nbsp;Rational ClearCase позволет радикально изменить представление
+о&nbsp;конфигурационном управлении и&nbsp;поднять планку качества и&nbsp;скорости
+исполнения на&nbsp;новую высоту.<BR>
+IBM&nbsp;Rational ClearCase упрощает процесс внесения изменений. ClearCase
+помогает командам разработчиков ПС&nbsp;контролировать все, что&nbsp;возникает
+и&nbsp;меняется в&nbsp;процессе разработки – от&nbsp;требований и&nbsp;проектных моделей
+до&nbsp;исходных текстов, откомпилированных релизов и&nbsp;Web-контента, запросов
+на&nbsp;изменение и&nbsp;тестовых сценариев.
+</P>
+<P>
+Являясь высоко масштабируемым средством, IBM&nbsp;Rational ClearCase
+может помочь как&nbsp;небольшим командам разработчиков, так&nbsp;и&nbsp;крупным
+транснациональным корпорациям, предлагая все&nbsp;необходимые функции
+конфигурационного управления:<BR>
+</P>
+<UL>
+	<LI>&nbsp;
+	управление версиями файлов и&nbsp;каталогов; </LI>
+	<LI>&nbsp;
+	управление рабочим пространством; </LI>
+	<LI>&nbsp;
+	управление сборкой;</LI>
+	<LI>&nbsp;
+	управление процессами.
+	</LI>
+</UL>
+<P align="center">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/51_1.gif" border="1" height="302" width="327">
+</P>
+<P>
+ClearCase осуществляет управлением версий, рабочим пространством, сборкой и&nbsp;процессами
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+<SPAN lang="EN-US">ClearCase</SPAN> – инструментальное 
+средство <SPAN lang="EN-US">Rational</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">Software</SPAN> для&nbsp;осуществления 
+конфигурационного управления. СС&nbsp;является&nbsp; 
+масштабируемым средством клиент/сервер. <SPAN lang="EN-US">ClearCase</SPAN>
+отвечает за&nbsp;хранение и&nbsp;отслеживание всех артефактов проекта.
+Минимальная единица хранения информации в&nbsp;СС&nbsp;– это&nbsp;файл. Соответственно
+все&nbsp;манипуляции над&nbsp; проектом ориентированны именно на&nbsp;работу
+с&nbsp;файлами. <SPAN lang="EN-US">ClearCase</SPAN> 
+универсальное средство конфигурационного управления, позволяющее конечному 
+пользователю расширять собственные возможности при&nbsp;помощи специальных средств. В&nbsp;числе которых и&nbsp;<SPAN lang="EN-US">COM</SPAN> 
+доступ и&nbsp;возможности по&nbsp;изменению графического интерфейса. И&nbsp;что&nbsp;немаловажно – 
+это&nbsp;возможность создавать скрипты на&nbsp;языке <SPAN lang="EN-US">Perl</SPAN>, что&nbsp;может расширить базовую 
+функциональность до&nbsp;любого уровня сложности.
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+Как&nbsp;правило, 
+<SPAN lang="EN-US">ClearCase</SPAN> выбирают 
+компании с&nbsp;большим числом сотрудников и&nbsp;с&nbsp;большим числом проектов, которые 
+необходимо поддерживать одновременно. Данный выбор вполне оправдан, так&nbsp;как&nbsp;на&nbsp;данный момент <SPAN lang="EN-US">CC</SPAN> 
+является единственным средством, позволяющим работать с&nbsp;любым подмножеством 
+проектов как&nbsp;локально, так&nbsp;и&nbsp;распределено (объединение географически удаленных 
+команд разработчиков).
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+Посредством специальных видов разработчики и&nbsp;менеджеры могут следить
+за&nbsp;ходом изменений в&nbsp;реальном масштабе времени, получая нужные версии
+для&nbsp;редактирования и&nbsp;просмотра без&nbsp;дополнительной синхронизации
+с&nbsp;базой, что&nbsp;в&nbsp;разы увеличивает «поворотливость» больших систем,
+позволяя быстро переходить от&nbsp;версии к&nbsp;версии, от&nbsp;проекта к&nbsp;проекту.
+Реализовать этот уникальный подход позволяют представления (<SPAN lang="EN-US">views</SPAN>), основанные на&nbsp;особой файловой системе <SPAN lang="EN-US">MVFS</SPAN> (<SPAN lang="EN-US">Multi</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">Version</SPAN><SPAN lang="EN-US"> 
+</SPAN><SPAN lang="EN-US">File</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">System</SPAN>), являющейся их&nbsp;неотъемлемой 
+частью. 
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+Помимо всех 
+стандартных средств, присущих всем средствам версионного контроля, СС&nbsp;содержит в&nbsp;себе средства сборки проектов, с&nbsp; 
+сохранением среды сборки. 
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+Для&nbsp;реализации 
+всех возможностей <SPAN lang="EN-US">ClearCase</SPAN> использует две&nbsp;методологии 
+управления данными: «базовую» и&nbsp;<SPAN lang="EN-US">UCM</SPAN> (<SPAN lang="EN-US">Unified</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">Change</SPAN><SPAN lang="EN-US"> 
+</SPAN><SPAN lang="EN-US">Management</SPAN>). 
+Каждая из&nbsp;которых&nbsp; является эффективной в&nbsp;своем секторе.
+</P>
+<UL>
+	<LI>
+	<SPAN style="font-family: Symbol"><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"></SPAN></SPAN><SPAN lang="EN-US">UCM</SPAN> рекомендуется для&nbsp;применения в&nbsp;небольших компаниях, не&nbsp;имеющих культуры управления версиями, а&nbsp;также для&nbsp;тех, 
+	кто&nbsp;хочет быстро получить управляемый проект минимальными силами, без&nbsp;выделения 
+	специальных ролей под&nbsp;реализацию. По&nbsp;своей сути <SPAN lang="EN-US">UCM</SPAN> – это&nbsp;сборник правил и&nbsp;рекомендаций, 
+	следовать которым&nbsp; должен любой 
+	работающий с&nbsp;ним. <SPAN lang="EN-US">UCM</SPAN>&nbsp; 
+	представляется менее гибким&nbsp; 
+	процессом;
+	</LI>
+	<LI>
+	<SPAN style="font-family: Symbol"></SPAN> «базовый» способ ведения рекомендуется для&nbsp;больших компаний 
+	со&nbsp;сложной иерархией,&nbsp;либо тем, кто&nbsp;желает «настроить» и&nbsp;отладить <SPAN lang="EN-US">ClearCase</SPAN>
+	под&nbsp;свои внутренние процессы. Базовый СС&nbsp;представляет неограниченные
+	возможности&nbsp; по надстройке конфигурационной политике, то&nbsp;есть
+	это&nbsp;наиболее гибкий процесс. 
+	</LI>
+</UL>
+<P class="MsoNormal" style="line-height: 150&percnt;">
+<O:P>&nbsp;</O:P>
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;">
+<B>Компания СМ-Консалт рекомендует 
+использовать для&nbsp;небольших команд модель </B><B><SPAN lang="EN-US">UCM</SPAN>, для&nbsp;больших,&nbsp;либо для&nbsp;тех, кому 
+нужна максимальная гибкость и&nbsp;эффективность – базовую.<O:P></O:P></B>
+</P>
+<B>&nbsp;При 
+внедрении максимальный эффект можно получить используя полнофункциональный 
+</B><B><SPAN lang="EN-US">ClearCase</SPAN> (не версию </B><B><SPAN lang="EN-US">ClearCase</SPAN><SPAN lang="EN-US"> </SPAN></B><B><SPAN lang="EN-US">LT</SPAN>, входящую в&nbsp;</B><B><SPAN lang="EN-US">Suite</SPAN>).</B>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;">
+<B><O:P></O:P></B>
+</P>
+<P>
+&nbsp;
+</P>
+<H2>Версионный контроль всех электронных материалов</H2>
+<P>
+IBM&nbsp;Rational ClearCase управляет версиями всех содержащихся
+в&nbsp;электронном виде рабочих материалов в&nbsp;ходе всего цикла разработки ПС.
+</P>
+<P>
+IBM&nbsp;Rational ClearCase отслеживает изменения каждого файла
+и&nbsp;каталога, поддерживает полную аннотированную историю версий любых
+типов
+объектов: исходного текста, двоичных файлов, исполняемых файлов,
+документации, моделей, тестовых скриптов, библиотек, Web-артефактов
+и&nbsp;т.д. <BR>
+IBM&nbsp;Rational позволяет участникам проекта безболезненно возвращаться
+на&nbsp;любое количество версий назад. Участники проекта, при&nbsp;этом, получают
+полный набор артефактов проекта, относящихся к&nbsp;выбранной версии.
+</P>
+<H2>Ускорение командной разработки</H2>
+<P>
+IBM&nbsp;Rational ClearCase ускоряет командную разработку, за&nbsp;счет
+поддержки параллельной разработки. Применение автоматизированного
+ветвления для&nbsp;распараллеливания позволяет нескольким разработчикам
+одновременно проектировать, кодировать, тестировать и&nbsp;улучшать ПС&nbsp;на&nbsp;основе общего кода, не&nbsp;мешая друг другу.
+</P>
+<P>
+IBM&nbsp;Rational ClearCase имеет мощные средства сравнения и&nbsp;слияния
+версий, позволяющие автоматически принимать непересекающиеся изменения
+и&nbsp;выявлять конфликтующие изменения для&nbsp;быстрого их&nbsp;исправления.
+Для&nbsp;сравнения и&nbsp;объединения нестандартных типов файлов IBM&nbsp;Rational
+ClearCase содержит в&nbsp;себе механизмы, позволяющие подключать любые
+внешние модули, осуществляющие работу с&nbsp;нестандартными типами данных.
+</P>
+<P align="center">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/51_2.gif" border="1" height="380" width="359"> 
+</P>
+<P>
+Множественное ветвление и&nbsp;контроль над&nbsp;объединением, делают
+ClearCase лучшим из&nbsp;существующих средств конфигурационного управления
+</P>
+<H2>Гибкое управление рабочим пространством</H2>
+<P>
+Для&nbsp;работы с&nbsp;версиями в&nbsp;IBM&nbsp;Rational ClearCase применяется система
+представлений (Views). Представления дают возможность разработчикам
+получать доступ к&nbsp;версиям, которые необходимы для&nbsp;выполнения конкретной
+задачи, в&nbsp;то&nbsp;же время защищая от&nbsp;непроверенных изменений, сделанных
+другими членами команды. 
+</P>
+<P>
+Разработчики могут выбирать между двумя типами представлений,
+оптимизированными для&nbsp;сетевой (Dynamic View) и&nbsp;для&nbsp;локальной модели
+использования (Snapshot View). <BR>
+<B>Динамическое представление</B> предлагает пользователям
+мгновенное обновление изменившихся исходных файлов и&nbsp;данных проекта
+при&nbsp;помощи сетевой файловой системы, прозрачной для&nbsp;пользователя.
+</P>
+<P>
+Конечному пользователю можно очень просто контролировать файлы
+в&nbsp;реальном масштабе времени, поскольку обращение к&nbsp;версионной базе
+происходит через специальное сетевое подключение, как&nbsp;к&nbsp;обычному
+сетевому ресурсу.
+</P>
+<P>
+Система динамических представлений позволяет проводить
+автоматизированную сборку проекта и&nbsp;его&nbsp;аудит встроенными средствами
+IBM&nbsp;Rational ClearCase. Работая с&nbsp;динамическими представлениями, можно
+раз&nbsp;и&nbsp;навсегда избавиться от&nbsp;проблемы постоянной синхронизации своих
+версий с&nbsp;проектными.
+</P>
+<P>
+<B> Локальное представление</B> поддерживает модель
+автономного использования для&nbsp;работы вне&nbsp;сети. Данный тип&nbsp;представления
+является единственно возможным, когда участник проекта должен вести
+локальную разработку вне&nbsp;офиса.
+</P>
+<P align="center">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/51_3.gif" border="1" height="250" width="517">
+</P>
+<P>
+ClearCase управляет не&nbsp;только версиями файлов, но&nbsp;и&nbsp;версиями
+каталогов. ClearCase тесно интегрируется с&nbsp;операционной системой,
+что&nbsp;позволяет использовать его&nbsp;в&nbsp;качестве основы для&nbsp;любых программных
+продуктов, с&nbsp;которыми нет&nbsp;прямой интеграции
+</P>
+<P>
+Независимо от&nbsp;типа представления IBM&nbsp;Rational ClearCase обеспечивает
+прозрачный доступ к&nbsp;функциям конфигурационного управления из&nbsp;привычных
+сред разработки, таких, как&nbsp;IBM&nbsp;VisualAge for&nbsp;Java, IBM&nbsp;WebSphere
+Studio, Microsoft Visual Studio и&nbsp;Sybase PowerBuilder. Кроме того,
+специальные настройки графического интерфейса позволяют разработчикам
+концентрировать свое внимание на&nbsp;приоритетных задачах и&nbsp;функциях и&nbsp;не&nbsp;отвлекаться на&nbsp;рутинные процедуры.
+</P>
+<H2>Объединение конфигурационного управления и&nbsp;управления изменениями</H2>
+<P>
+Для&nbsp;полнофункционального управления изменениями IBM&nbsp;Rational
+ClearCase интегрируется с&nbsp;IBM&nbsp;Rational ClearQuest — удобным
+инструментом управления изменениями и&nbsp;отслеживания дефектов. Объединяя
+функции конфигурационного управления и&nbsp;управления изменениями,
+IBM&nbsp;Rational ClearCase и&nbsp;IBM&nbsp;Rational ClearQuest обеспечивают мощную
+платформу для&nbsp;контроля изменений всех рабочих материалов, которые
+возникают в&nbsp;процессе разработки.
+</P>
+<P>
+Используемые совместно, IBM&nbsp;Rational ClearCase и&nbsp;IBM&nbsp;Rational
+ClearQuest помогают связывать запросы на&nbsp;изменения непосредственно
+с&nbsp;изменениями в&nbsp;коде&nbsp;или Web-контенте, что&nbsp;позволяет определять
+изменения, влияющие на&nbsp;качество разрабатываемых программных средств.
+</P>
+<P>
+С&nbsp;помощью автоматизации рабочего процесса IBM&nbsp;Rational ClearCase
+и&nbsp;IBM&nbsp;Rational ClearQuest обеспечивают общие согласованные процессы
+регистрации, разделения доступа, разрешения и&nbsp;контроля изменений.
+Эти&nbsp;процессы могут быть настроены на&nbsp;потребности конкретного проекта
+с&nbsp;учетом типа запроса на&nbsp;изменение&nbsp;или внутренних правил. Такое
+сочетание
+гарантирует разработчикам, что&nbsp;они&nbsp;будут работать с&nbsp;теми версиями
+файлов, которые им&nbsp;нужны. Менеджерам проекта интеграция позволяет точно
+определять текущее состояние проекта, выдавать задания, контролировать
+их&nbsp;исполнение и&nbsp;регулировать нагрузку на&nbsp;участников проекта, а&nbsp;также
+отслеживать состояние проекта по&nbsp;таким метрикам, как&nbsp;число запросов
+в&nbsp;работе, количество версий в&nbsp;разработке и&nbsp;число дефектов.
+</P>
+<P>
+Интеграция IBM&nbsp;Rational ClearCase и&nbsp;IBM&nbsp;Rational ClearQuest обеспечивает:<BR>
+</P>
+<UL>
+	<LI>однозначную связь запросов на&nbsp;изменения с&nbsp;версиями артефактов в&nbsp;версионном хранилище;</LI>
+	<LI>выдачу, контроль и&nbsp;составление отчетов о&nbsp;запросах на&nbsp;изменения;</LI>
+	<LI>согласованность процесса внесения изменений.
+	</LI>
+</UL>
+<P align="center">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/51_4.gif" border="1" height="330" width="446">
+</P>
+<P>
+Интеграция ClearCase+ClearQuest позволяет создавать и&nbsp;отслеживать
+связи между запросами на&nbsp;изменения и&nbsp;версиями файлов и&nbsp;директорий,
+которые редактировались при&nbsp;работе с&nbsp;запросом (например, при&nbsp;устранении
+найденной ошибки в&nbsp;коде)
+</P>
+<H2>Объединение управления изменениями с&nbsp;практическим опытом применения</H2>
+<P>
+Unified Change Management (UCM) является процессом управления
+изменениями, созданным Rational Software на&nbsp;основе наиболее эффективных
+и&nbsp;проверенных практикой процессов — от&nbsp;постановки требований до&nbsp;выпуска
+релиза. UCM&nbsp;определяет согласованный, основанный на&nbsp;задачах процесс
+управления изменениями, который рабочие группы могут сразу&nbsp;же применять
+при&nbsp;разработке ПС. Объединяя достоинства IBM&nbsp;Rational ClearCase
+и&nbsp;IBM&nbsp;Rational ClearQuest, UCM&nbsp;является ключевым компонентом
+IBM&nbsp;Rational
+Unified Process, представляющим собой всеобъемлющую структуру
+для&nbsp;разработки ПС, основанную на&nbsp;передовом опыте в&nbsp;области создания
+и&nbsp;сопровождения сложных информационных систем. UCM&nbsp;позволяет управлять
+изменениями на&nbsp;уровне задач вместо отслеживания изменений в&nbsp;отдельных
+файлах. С&nbsp;помощью UCM&nbsp;задачи автоматически ассоциируются со&nbsp;своим
+набором изменений, включающим все&nbsp;версии файлов и&nbsp;директорий,
+измененных для&nbsp;решения данной конкретной задачи.
+</P>
+<H2>Автоматизация взаимодействия</H2>
+<P>
+Автоматизируя многие трудоемкие задачи, UCM&nbsp;позволяет разработчикам
+фокусировать свое внимание на&nbsp;задачах более высокого уровня.
+Разработчики могут в&nbsp;любой момент присоединиться к&nbsp;проекту.
+IBM&nbsp;Rational ClearCase автоматически заполняет рабочие пространства
+разработчиков правильным набором версий файлов и&nbsp;поддерживает
+их&nbsp;в&nbsp;актуальном состоянии по&nbsp;ходу разработки. По&nbsp;мере продвижения
+работы IBM&nbsp;Rational ClearCase автоматически производит сбор информации
+по&nbsp;всему
+набору законченных изменений.
+</P>
+<H2>Поддержка многофункциональных команд</H2>
+<P>
+Будучи частью Team Unifying Platform, IBM&nbsp;Rational ClearCase
+и&nbsp;UCM&nbsp;создают инфраструктуру управления изменениями для&nbsp;поддержки
+многофункциональных команд. Это&nbsp;обеспечивает удобный доступ к&nbsp;данным
+в&nbsp;течение всего жизненного цикла создания ПС&nbsp;всем его&nbsp;участникам,
+а&nbsp;также
+предоставлет командам все&nbsp;необходимые инструменты, позволяющие
+управлять изменениями и&nbsp;следить за&nbsp;качеством разрабатываемых
+программных систем — от&nbsp;постановки требований до&nbsp;релиза.<BR>
+С&nbsp;помощью решения, базирующегося на&nbsp;ClearCase, команды разработчиков
+могут контролировать все&nbsp;рабочие материалы, возникающие по&nbsp;ходу
+разработки, включая требования, визуальные модели, документацию
+и&nbsp;тестовые сценарии. Например, аналитики, используя IBM&nbsp;Rational Suite
+AnalystStudio, могут связывать требования с&nbsp;конкретными запросами
+на&nbsp;изменения и&nbsp;наборами изменений. 
+</P>
+<P align="center">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/51_5.gif" border="1" height="360" width="482">
+</P>
+<P>
+Мощные механизмы сравнения и&nbsp;слияния помогают разработчикам с&nbsp;минимальным числом рутинных операций объединять свои исправления
+</P>
+<H2>Масштабируемость решений для&nbsp;конфигурационного управления</H2>
+<P>
+IBM&nbsp;Rational ClearCase — полное решение для&nbsp;конфигурационного
+управления ПС, которое может масштабироваться от&nbsp;небольших рабочих
+групп до&nbsp;транснациональных компаний. Команды, работающие над&nbsp;проектами,
+где&nbsp;не&nbsp;требуется репликация (копирование) баз&nbsp;данных и&nbsp;распределенный
+доступ к&nbsp;файлам, могут начать с&nbsp;IBM&nbsp;Rational ClearCase LT&nbsp;— решения
+для&nbsp;небольших рабочих групп. Когда у&nbsp;организации появляется потребность
+в&nbsp;конфигурационном управлении на&nbsp;уровне предприятия, например
+в&nbsp;расширенном управлении сборкой&nbsp;или в&nbsp;использовании распределенных
+версионных хранилищ, репликации данных, пользователи IBM&nbsp;Rational
+ClearCase LT&nbsp;могут легко провести модернизацию и&nbsp;перейти на&nbsp;полную
+версию ClearCase. При&nbsp;этом не&nbsp;требуется изменять процессы, данные&nbsp;или
+методы работы.
+</P>
+<P>
+Для&nbsp;географически распределенных рабочих групп, работающих над&nbsp;общим
+проектом, необходим IBM&nbsp;Rational ClearCase MultiSite, являющийся
+средством для&nbsp;удаленной совместной работы и&nbsp;обеспечивающий непрерывную
+параллельную разработку для&nbsp;регионально удаленных рабочих групп.
+Технология расширенной репликации позволяет распределенным командам
+одновременно работать над&nbsp;общими проектами с&nbsp;локальным доступом к&nbsp;рабочим материалам.
+</P>
+<P>
+IBM&nbsp;Rational ClearCase MultiSite обеспечивает:<BR>
+</P>
+<UL>
+	<LI>поддержку распределенной разработки в&nbsp;географически удаленных точках;</LI>
+	<LI>автоматическую репликацию и&nbsp;синхронизацию данных;</LI>
+	<LI>&nbsp;рабочим группам локальный доступ к&nbsp;рабочим материалам.
+	</LI>
+</UL>
+<P align="center">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/51_6.gif" border="1" height="310" width="390">
+</P>
+<P>
+Возможность объединения регионально удаленных проектных групп делает
+ClearCase незаменимым инструментом. MultiSite автоматически производит
+обмен данными через Интернет, причем, для&nbsp;конечного разработчика все&nbsp;операции по&nbsp;синхронизации данных абсолютно прозрачны.
+</P>
+<H2>Расширение функциональности</H2>
+<P>
+IBM&nbsp;Rational ClearCase предоставляет полностью документированный
+API&nbsp;на&nbsp;основе COM. Это&nbsp;позволяет интегрировать IBM&nbsp;Rational ClearCase
+с&nbsp;любыми внешними программными продуктам, встраивая их&nbsp;в&nbsp;общий процесс.
+</P>
+<P>
+Имея в&nbsp;своем арсенале такой мощный скриптовй язык как&nbsp;Perl,
+IBM&nbsp;Rational ClearCase предоставляет практически безграничные
+возможности
+по&nbsp;улучшению собственной функциональности, автоматизации рутинных
+операций и&nbsp;выполнению действий, изначально не&nbsp;предусмотренных
+в&nbsp;стандартной конфигурации.
+</P>
+<P>
+&nbsp;
+</P>
+<H2>Подробности о&nbsp;IBM&nbsp;Rational ClearCase&nbsp;</H2>
+<H3>Репозиторий&nbsp; IBM&nbsp;Rational ClearCase </H3>
+<P>
+&nbsp;
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+Основой 
+проекта является VOB&nbsp;– Version Object Base – защищенный, масштабируемый 
+репозиторий, хранящий в&nbsp;себе всю&nbsp;историю всех компонентов проекта (файлов с&nbsp;исходными текстами, документами, и&nbsp;т.д.).
+</P>
+<DIV style="text-align: justify">
+</DIV>
+<DIV style="text-align: justify">
+</DIV>
+<P class="MsoCaption" style="line-height: 150&percnt;; text-align: justify">
+VOB&nbsp;представляет
+собой набор файлов и&nbsp;директорий, которые физически хранятся
+на&nbsp;выделенном компьютере. Репозиторий создается только в&nbsp;открытых (<SPAN lang="EN-US">shared</SPAN>) каталогах. Собственный 
+физический формат VOB&nbsp;не&nbsp;документирован. Все&nbsp;операции над&nbsp;файлами и&nbsp;каталогами 
+делаются только через систему представлений.
+</P>
+<P class="MsoCaption" style="line-height: 150&percnt;; text-align: center">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/image036.png" height="260" width="346">
+</P>
+<P class="MsoCaption" style="line-height: 150&percnt;; text-align: center">
+<A title="_Toc157665958">&nbsp;</A><SPAN lang="EN-US"></SPAN>Внешний 
+вид закладки<SPAN lang="EN-US"> VOBS </SPAN>окна<SPAN lang="EN-US"> ClearCase details. </SPAN>Здесь расположены 
+основные операции над&nbsp;VOB’ами. Исключение составляет операция удаления, 
+выполняемая из&nbsp;командной строки администратором
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+&nbsp;<BR>
+<SPAN lang="EN-US">VOB</SPAN><SPAN lang="EN-US"> 
+</SPAN>полностью отвечает за&nbsp;сохранность всех объектов репозитория.&nbsp; 
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+Примеры 
+объектов версионного хранения:
+</P>
+<UL>
+	<LI>Функциональная модель деятельности организации;
+	</LI>
+	<LI>Концептуальная модель данных;
+	</LI>
+	<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"></SPAN>Логическая модель;
+	</LI>
+	<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"> </SPAN>Реляционная модель данных;
+	</LI>
+	<LI>Модели данных приложений;
+	</LI>
+	<LI>Модели данных интерфейса;
+	</LI>
+	<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"> </SPAN>Модули прототипов системы: 
+	</LI>
+</UL>
+<UL>
+	<UL>
+		<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"></SPAN><B>экраны, 
+		<O:P></O:P></B>
+		</LI>
+	</UL>
+	<UL>
+		<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"> </SPAN><B>меню,<O:P></O:P></B>
+		</LI>
+	</UL>
+	<UL>
+		<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"></SPAN><B>отчеты, 
+		<O:P></O:P></B>
+		</LI>
+	</UL>
+	<UL>
+		<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"> </SPAN><B>модули 
+		процедур.<O:P></O:P></B></LI>
+	</UL>
+</UL>
+<P class="MsoNormal" style="margin-left: 72pt; text-indent: -18pt; line-height: 150&percnt;">
+&nbsp;
+</P>
+<UL>
+	<LI>Планы тестирования;
+	</LI>
+	<LI>Спецификации тестовых&nbsp; 
+	процедур;
+	</LI>
+	<LI><SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"> </SPAN>Документация.
+	</LI>
+</UL>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+Представляя собой обычную файловую структуру, репозиторий нуждается
+в&nbsp;описании иерархии. При&nbsp;внедрении, основной из&nbsp;задач является
+формирование структуры каталогов. Это&nbsp;особенно важно, так&nbsp;как&nbsp;<SPAN lang="EN-US">ClearCase</SPAN><SPAN lang="EN-US"> </SPAN>имеет 
+разные способы реализации эффективного хранения, специфичные для&nbsp;проектов 
+разного типа и&nbsp;масштаба.
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+В&nbsp;пилотном проекте выбирается наилучший способ для&nbsp;проекта, выбранного для&nbsp;пилота 
+на&nbsp;основе лучших практик и&nbsp;рекомендаций <SPAN lang="EN-US">RUP</SPAN>.
+</P>
+<TABLE class="MsoTableGrid" style="border: medium none ; width: 418.15pt; border-collapse: collapse" border="1" cellpadding="0" cellspacing="0" width="558">
+	<TBODY>
+		<TR>
+			<TD style="width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;; text-align: center" align="center">
+			<B>Каталог</B><B><SPAN lang="EN-US"> проекта<O:P></O:P></SPAN></B>
+			</P>
+			</TD>
+			<TD style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;; text-align: center" align="center">
+			<B><SPAN lang="EN-US">Типичное содержание</SPAN></B><B>,</B><B><SPAN lang="EN-US"> 
+			описание<O:P></O:P></SPAN></B>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 418.15pt" colspan="2" valign="top" width="558">
+			<P class="Tabletext" style="line-height: 150&percnt;; text-align: center" align="center">
+			<B>Уровень 
+			</B><B><SPAN lang="EN-US">VOB`</SPAN></B><B>а</B><B><SPAN lang="EN-US"><O:P></O:P></SPAN></B>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">common<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Общий каталог 
+			проекта (например, может служить для&nbsp;хранения скриптов сборки по&nbsp;проекту, общих 
+			для&nbsp;всех компонент)<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">bin<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог бинарных и&nbsp;исполняемых файлов<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">build<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог 
+			сборок<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">doc<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог 
+			документации, планов и&nbsp;т.п.<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">install<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог 
+			инсталляционных файлов<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">mdl<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог моделей 
+			проекта в&nbsp;<SPAN lang="EN-US">Rational</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">Rose</SPAN>, <SPAN lang="EN-US">MS</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">Visio</SPAN> и&nbsp;т.п.<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">src<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог исходных 
+			кодов<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">tests<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог тестовых 
+			скриптов, сценариев, примеров, тестового инструментария и&nbsp;т.п.<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 418.15pt" colspan="2" valign="top" width="558">
+			<P class="Tabletext" style="line-height: 150&percnt;; text-align: center" align="center">
+			<B>Уровень 
+			компоненты<O:P></O:P></B>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">bin<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог бинарных и&nbsp;исполняемых файлов <O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">doc<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог 
+			документации, планов и&nbsp;т.п.<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">install<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог 
+			инсталляционных файлов<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">mdl<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог моделей 
+			проекта в&nbsp;<SPAN lang="EN-US">Rational</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">Rose</SPAN>, <SPAN lang="EN-US">MS</SPAN><SPAN lang="EN-US"> </SPAN><SPAN lang="EN-US">Visio</SPAN> и&nbsp;т.п.<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">src<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог исходных 
+			кодов для&nbsp;этой компоненты<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; width: 4cm" valign="top" width="151">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			<SPAN lang="EN-US">tests<O:P></O:P></SPAN>
+			</P>
+			</TD>
+			<TD style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; width: 304.75pt" valign="top" width="406">
+			<P class="Tabletext" style="line-height: 150&percnt;">
+			Каталог тестовых 
+			скриптов, сценариев, примеров, тестового инструментария и&nbsp;т.п.<O:P></O:P>
+			</P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+&nbsp;
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/image038.png" alt="Пример структуры каталогов реального проекта" height="292" width="287">
+&nbsp;<BR>
+&nbsp;
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+&nbsp;
+</P>
+<H3>Ветвление и&nbsp;версионность в&nbsp;ClearCase</H3>
+<P class="MsoNormal" style="margin-left: 18pt; line-height: 150&percnt;; text-align: justify" align="left">
+&nbsp;<SPAN style="color: black">Каждый файл в&nbsp;ClearCase представляет собой контейнер с&nbsp;подмножеством версий. Версии в&nbsp;совокупности представляют историю каждого 
+изменения данного файла. Соответственно, история изменений, может быть 
+представлена в&nbsp;виде отдельного списка, а&nbsp;может быть представлена деревом версий. 
+Дерево версий представляется действительно полноценном (древовидном) виде. Версия в&nbsp;</SPAN><SPAN style="color: black" lang="EN-US">CC</SPAN><SPAN style="color: black" lang="EN-US"> </SPAN><SPAN style="color: black">– это&nbsp;целое 
+число.</SPAN>
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+<SPAN style="color: black"></SPAN><B><SPAN style="color: black" lang="EN-US">ClearCase</SPAN><SPAN style="color: black" lang="EN-US"> использует дельтовидное хранение файлов в&nbsp;репозитории  (только разницу между файлами), что&nbsp;делает его&nbsp;очень мощным 
+инструментом.</SPAN></B>
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+<B><SPAN style="color: black" lang="EN-US">ClearCase</SPAN><SPAN style="color: black"> поддерживает дельтовидное хранение для&nbsp;всех типов файлов  (как бинарных, так&nbsp;и&nbsp;текстовых).<O:P></O:P></SPAN></B> <BR>
+</P>
+<P class="MsoNormal" style="text-indent: 27pt; line-height: 150&percnt;; text-align: justify">
+При&nbsp;внедрении оценивается все&nbsp;ключевые факторы, влияющие на&nbsp;выбор модели ветвления. 
+При&nbsp;этом важную роль играют следующие факторы:
+</P>
+<UL>
+	<LI>
+	<SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"></SPAN>Наличие у&nbsp;компании нескольких центров разработок;
+	</LI>
+	<LI>
+	<SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"></SPAN>Интенсивность исправлений;
+	</LI>
+	<LI>
+	<SPAN style="font-family: Symbol"></SPAN>Тип продукта (коробочный&nbsp;или сопровождаемая система);
+	</LI>
+	<LI>
+	<SPAN style="font-family: &#39;Times New&nbsp;Roman&#39;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal"></SPAN>Наличие уникальных версий (например, для&nbsp;разных 
+	заказчиков) </LI>
+</UL>
+<P>
+&nbsp;
+</P>
+<H1>Ссылки по IBM Rational ClearCase</H1>
+<TABLE border="0">
+	<TBODY>
+		<TR>
+			<TD style="background-color: #999999"><FONT size="2">Лучшие тренинги </FONT><FONT size="2"><B><A href="http://cmcons.com/about_us/">СМ-Консалт</A> </B></FONT><FONT size="2">по IBM Rational ClearCase <BR>
+			</FONT>
+			</TD>
+			<TD style="background-color: #999999">
+			<UL>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/shop/Trainings/praktika_i_tekhnologija_vnedrenija_protsessa_konfiguratsionnogo_upravlenija_i_upravlenija_izmenenijami_na_osnove_ibm_rup_clearcase_i_clearquest/">Практика
+				и технология внедрения процесса конфигурационного управления и
+				управления изменениями на основе IBM RUP, ClearCase и ClearQuest.</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/shop/Trainings/planirovanie_osushhestvlenie_i_podderzhka_konfiguratsionnogo_upravlenija_i_upravlenija_izmenenijami_na_osnove_ibm_rational_clearcase_i_clearquest/">Планирование,
+				осуществление и поддержка конфигурационного управления и управления
+				изменениями на основе IBM Rational ClearCase и ClearQuest</A></SPAN></LI>
+			</UL>
+			</TD>
+		</TR>
+		<TR>
+			<TD valign="top"><FONT size="2">Оригинальные решения <B><A href="http://cmcons.com/about_us/">СМ-Консалт</A></B>  для IBM Rational ClearCase</FONT></TD>
+			<TD valign="top">
+			<UL>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/shop/sulution/modul_formirovanija_avtomatizirovannojj_otchetnosti_dlja_proektov_upravljaemykh_posredstvom_ibm_rational_clearcase/">Визуальная система управления политикой доступа для IBM Rational ClearQuest и ClearCase</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/shop/sulution/modul_formirovanija_avtomatizirovannojj_otchetnosti_dlja_proektov_upravljaemykh_posredstvom_ibm_rational_clearcase/">Модуль интеграции ClearCase и системы 1С для разработчиков, использующих данную платформу для разработки</A></SPAN></LI>
+				<LI class="news_title"><A href="http://cmcons.com/shop/sulution/modul_formirovanija_avtomatizirovannojj_otchetnosti_dlja_proektov_upravljaemykh_posredstvom_ibm_rational_clearcase/">одуль формирования автоматизированной отчетности для проектов управляемых посредством IBM Rational ClearCase</A> <BR>
+				</LI>
+			</UL>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="background-color: #999999"><FONT size="2">Проекты внедрения ClearCase <B><A href="http://cmcons.com/portfolio/informatsija_o_spetsialistakh_kompanii_sm-konsalt/">сотрудниками </A></B> компании <B><A href="http://cmcons.com/about_us/">СМ-Консалт</A></B></FONT></TD>
+			<TD style="background-color: #999999">
+			<UL>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/oao_tatneft_upravlenie_tatasuneft_2005_god_razvitie_proekta_kopija_27012008_183213/">ОАО Национальный Банк ТРАСТ</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/oao_tatneft_upravlenie_tatasuneft_2005_god_razvitie_proekta_kopija_27012008_183213/">Банк Русский Стандарт<BR>
+				</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/oao_tatneft_upravlenie_tatasuneft_2005_god_razvitie_proekta_kopija_27012008_183213/">ОАО "Татнефть". Управление "ТатАСУнефть"<BR>
+				</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/irkut-avia/">Иркут-авиа<BR>
+				</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/sberbank_rf/">Сбербанк РФ<BR>
+				</A></SPAN></LI>
+				<LI class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/peter-servis_bilingovye_sistemy/">Петер-Сервис. Билинговые системы</A>
+				<BR>
+				</LI>
+				<LI class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/aplana_software_services_kompanija_aplana_predostavljaet_ves_spektr_uslug_po_vnedreniju_metodologijj_i_tekhnologijj_razrabotki_programmnogo_obespechenija_vkljuchaja_vypolnenie_sovmestnykh_s_zakazchikom_pilotnykh_proektov_po_vnedreniju_kompleksnojj_metodol/">ЗАО Аплана Софтвер</A><BR>
+				</LI>
+				<LI class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/vneshtorgbank_podrazdelenie_upravlenie_razrabotki_informatsionno-kommunikatsionnykh_sistem_kopija_27012008_175012/">"ВНЕШТОРГБАНК". Подразделение "Управление разработки информационно-коммуникационных систем".</A>
+				<BR>
+				</LI>
+				<LI class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/centro_bank/">Центральный Банк Российской Федерации. Подразделение "Глобальные Информационные Системы".</A>
+				<BR>
+				</LI>
+				<LI class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/russkijj_aljuminijj/">Русский Алюминий. Производство первичного алюминия и сплавов.</A><BR>
+				</LI>
+				<LI class="news_title"><A href="http://cmcons.com/portfolio/otzyvy_o_nas_nashikh_klientov/kompanija_hrs_hotel_and_restaraunt_systems_-_sistemy_dlja_gostinits_i_restoranov/">Компания HRS (Hotel and Restaraunt Systems) - Системы для гостиниц и ресторанов.</A>&nbsp;&nbsp; &nbsp; <BR>
+				</LI>
+			</UL>
+			</TD>
+		</TR>
+		<TR>
+			<TD><FONT size="2">Статьи о ClearCase на сайте <B><A href="http://cmcons.com/about_us/">СМ-Консалт</A></B></FONT></TD>
+			<TD>
+			<UL>
+				<LI><SPAN class="news_title"><A href="http://cmcons.com/articles/CC_CQ/"><B>Управление конфигурациями и изменениями. Инструменты IBM Rational ClearCase и ClearQuest</B></A><A href="http://cmcons.com/articles/CC_CQ/">
+				</A></SPAN></LI>
+			</UL>
+			</TD>
+		</TR>
+		<TR>
+			<TD valign="top"><FONT size="2">Статьи наших авторов на сайте IBM</FONT></TD>
+			<TD class="news_title" valign="top">
+			<UL>
+				<LI><SPAN class="news_title"><B><A href="http://www.ibm.com/developerworks/ru/library/plan-uk/index.html"><B>Разработка плана управления конфигурацией</B></A></B></SPAN></LI>
+			</UL>
+			</TD>
+		</TR>
+		<TR>
+			<TD style="background-color: #999999" valign="top"><FONT size="2">Статьи в интернете<BR>
+			</FONT></TD>
+			<TD style="background-color: #999999" valign="top">
+			<UL>
+				<LI><SPAN class="news_title"><A href="http://www.ibm.com/developerworks/ru/">IBM<BR>
+				</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://www.citforum.ru/programming/case.shtml">Citforum<BR>
+				</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://www.rusdoc.ru/reviews/programming/se/">Rusdoc<BR>
+				</A></SPAN></LI>
+				<LI><SPAN class="news_title"><A href="http://ru.wikipedia.org/wiki/Rational_ClearCase">Wikipedia</A> <A href="http://ru.wikipedia.org/wiki/Rational_ClearCase"> </A><BR>
+				</SPAN> </LI>
+			</UL>
+			</TD>
+		</TR>
+		<TR>
+			<TD valign="top"><FONT size="2">О <B><A href="http://cmcons.com/about_us/">СМ-Консалт</A></B></FONT> 
+			</TD>
+			<TD valign="top">&nbsp;</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<BR>
+<P>
+&nbsp;
+</P>
+<P>
+&nbsp;
+</P><P></P>
+<P>26.01.2008</P>
+<P class="title">Добавить комментарий (анонимные комментарии не публикуются!!!)</P>
+<FORM action="" method="post">
+  <TABLE border="0" cellspacing="0" cellpadding="2">
+    <TBODY><TR>
+      <TD>ФИО:&nbsp;</TD>
+      <TD>
+        <INPUT type="text" size="50" name="comment_autor" value="">
+      </TD>
+    </TR>
+    <TR>
+      <TD>E-mail:&nbsp;</TD>
+      <TD>
+        <INPUT type="text" size="50" name="comment_email" value="">
+      </TD>
+    </TR>
+    <TR>
+      <TD>Тема:&nbsp;</TD>
+      <TD>
+        <INPUT type="text" size="50" name="comment_subject" value="">
+      </TD>
+    </TR>
+    <TR>
+      <TD>Комментарий:&nbsp;</TD>
+      <TD>
+        <TEXTAREA name="comment_text" cols="50" rows="10"></TEXTAREA>
+      </TD>
+    </TR>
+    <TR>
+      <TD>Оценка:&nbsp;</TD>
+      <TD>
+        <INPUT type="radio" name="item_comment_grade" value="0" id="id_item_comment_grade_0">
+	&nbsp;<LABEL for="id_item_comment_grade_0"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"></LABEL>
+        <BR>
+        <INPUT type="radio" name="item_comment_grade" value="1" id="id_item_comment_grade_1">
+	&nbsp;<LABEL for="id_item_comment_grade_1"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"></LABEL>
+        <BR>
+        <INPUT type="radio" name="item_comment_grade" value="2" id="id_item_comment_grade_2">
+	&nbsp;<LABEL for="id_item_comment_grade_2"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"></LABEL>
+        <BR>
+        <INPUT type="radio" name="item_comment_grade" value="3" id="id_item_comment_grade_3">
+	&nbsp;<LABEL for="id_item_comment_grade_3"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"></LABEL>
+        <BR>
+        <INPUT type="radio" name="item_comment_grade" value="4" id="id_item_comment_grade_4">
+	&nbsp;<LABEL for="id_item_comment_grade_4"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_gray.gif"></LABEL>
+        <BR>
+        <INPUT type="radio" name="item_comment_grade" value="5" id="id_item_comment_grade_5">
+	&nbsp;<LABEL for="id_item_comment_grade_5"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/stars_single.gif"></LABEL>
+        <BR>
+      </TD>
+    </TR>
+    <TR>
+      <TD>Код подтверждения:</TD>
+      <TD>
+        <DIV style="float: left"><IMG style="border: 1px solid #777777" src="http://cmcons.com/captcha.php?get_captcha=9118&height=28" title="Код подтверждения"></DIV>
+        <DIV style="float: left; margin-left: 10px; margin-top: 5px">
+          <INPUT type="hidden" name="captcha_key" value="9118">
+          <INPUT type="text" name="captcha_keystring" size="15">
+        </DIV>
+      </TD>
+    </TR>
+    <TR>
+      <TD>
+      <TD>
+        <INPUT type="submit" name="add_comment" value="Добавить комментарий">
+      </TD>
+    </TR>
+  </TBODY></TABLE>
+</FORM><SCRIPT language="JavaScript">
+   function testData1() 
+   {
+   
+   
+      if (document.form1.elements['pole1'].value == "") {
+      alert ("\nЗаполните поле \"ФИО\"!\t\n")
+      document.form1.elements['pole1'].focus();
+      return false;      
+     }
+
+   
+   
+      if (document.form1.elements['e-mail'].value == "") {
+      alert ("\nЗаполните поле \"E-mail\"!\t\n")
+      document.form1.elements['e-mail'].focus();
+      return false;      
+     }
+
+   
+   }
+</SCRIPT>
+<H1>Форма контакта со специалистами СМ-Консалт</H1>
+<FORM name="form1" action="http://cmcons.com/feedback/" method="post" enctype="multipart/formdata">
+  <INPUT type="hidden" name="MAX_FILE_SIZE" value="2097152">
+  <TABLE border="0" cellpadding="2" cellspacing="0">
+    <TBODY><TR>
+      <TD>ФИО<SUP>
+          <FONT color="red">*</FONT>
+        </SUP> &nbsp;</TD>
+      <TD>
+        <INPUT type="text" name="pole1" value="" size="50" onmouseout="this.className=&quot;input&quot;" onmouseover="this.className=&quot;input_blur&quot;;">
+      </TD>
+    </TR>
+    <TR>
+      <TD>Компания &nbsp;</TD>
+      <TD>
+        <INPUT type="text" name="company" value="" size="50" onmouseout="this.className=&quot;input&quot;" onmouseover="this.className=&quot;input_blur&quot;;">
+      </TD>
+    </TR>
+    <TR>
+      <TD>Тип запроса &nbsp;</TD>
+      <TD>
+        <SELECT name="type">
+          <OPTION value="Запрос дополнительных материалов">Запрос дополнительных материалов</OPTION>
+          <OPTION value="Проблемы со скачиванием материалов с сайта">Проблемы со скачиванием материалов с сайта</OPTION>
+          <OPTION value="Запрос стоимости продуктов">Запрос стоимости продуктов</OPTION>
+          <OPTION value="Проблемы с сайтом">Проблемы с сайтом</OPTION>
+          <OPTION value="Технический вопрос по IBM Rational">Технический вопрос по IBM Rational</OPTION>
+          <OPTION value="Технический вопрос по решениям СМ-Консалт">Технический вопрос по решениям СМ-Консалт</OPTION>
+          <OPTION value="Другое">Другое</OPTION>
+        </SELECT>
+      </TD>
+    </TR>
+    <TR>
+      <TD>Телефон &nbsp;</TD>
+      <TD>
+        <INPUT type="text" name="pole2" value="" size="50" onmouseout="this.className=&quot;input&quot;" onmouseover="this.className=&quot;input_blur&quot;;">
+      </TD>
+    </TR>
+    <TR>
+      <TD>E-mail<SUP>
+          <FONT color="red">*</FONT>
+        </SUP> &nbsp;</TD>
+      <TD>
+        <INPUT type="text" name="e-mail" value="Ваш@email.ru" size="50" onmouseout="this.className=&quot;input&quot;" onmouseover="this.className=&quot;input_blur&quot;;">
+      </TD>
+    </TR>
+    <TR>
+      <TD>Комментарий &nbsp;</TD>
+      <TD>
+        <TEXTAREA onmouseout="this.className=&quot;input&quot;" onmouseover="this.className=&quot;input_blur&quot;;" name="commet" cols="50" rows="10" wrap="off"></TEXTAREA>
+      </TD>
+    </TR>
+    <TR>
+      <TD>Предпочтительный способ связи &nbsp;</TD>
+      <TD>
+        <SELECT name="sposob">
+          <OPTION value="Телефон">Телефон</OPTION>
+          <OPTION value="Электронная почта">Электронная почта</OPTION>
+        </SELECT>
+      </TD>
+    </TR>
+    <TR>
+      <TD>Код подтверждения</TD>
+      <TD>
+        <DIV style="float: left"><IMG style="border: 1px solid #000000" src="http://cmcons.com/captcha.php?get_captcha=67007&height=20" title="Код подтверждения"></DIV>
+        <DIV style="float: left; margin-left: 5px">
+          <INPUT type="text" name="captcha_keystring">
+          <INPUT type="hidden" name="captcha_key" value="67007" size="5">
+        </DIV>
+      </TD>
+    </TR>
+    <TR>
+      <TD colspan="2" align="center">
+        <INPUT onclick="return testData1()" type="submit" name="Submit" value="Отправить">
+      </TD>
+    </TR>
+  </TBODY></TABLE>
+</FORM>
+
+</TD>
+</TR>
+</TBODY></TABLE>
+
+<!-- Вызов шаблона для текущей страницы -->
+
+
+
+<!-- Начало вывода нижнего блока - Footer -->
+<CENTER><BR>
+<DIV><A href="http://cmcons.com/showbanner/?list_id=1491166"><IMG border="0" src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/31.gif"></A></DIV>
+</CENTER><TABLE border="0" cellpadding="0" cellspacing="0" width="100&percnt;">
+<TBODY><TR>
+<TD width="475" class="footer_line" style="padding-top:15px; padding-bottom:10px;">&nbsp;</TD>
+<TD width="180" class="footer_line">
+<TD>
+
+
+<!-- баннер -->
+
+
+
+</TR>
+<TR>
+
+
+
+
+<TD width="475" style="padding-bottom:20px;">
+
+
+
+
+
+
+<B>Copyright © 2009 СМ Консалт </B> | <A href="mailto:rational.tools.info@gmail.com">rational.tools.info@gmail.com</A> | <A href="http://cmcons.com/">www.cmcons.com</A> | <A href="http://cmcons.com/map2.htm">Карта сайта</A>
+</TD>
+<TD width="370">
+
+<!--Rating@Mail.ru COUNTEr--><SCRIPT language="JavaScript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer)
+js=10//--></SCRIPT><SCRIPT language="JavaScript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></SCRIPT><SCRIPT language="JavaScript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></SCRIPT><SCRIPT language="JavaScript1.3" type="text/javascript"><!--
+js=13//--></SCRIPT><SCRIPT language="JavaScript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=785388"'+
+' target=_top><img src="http://db.cf.bb.a0.top.list.ru/counter'+
+'?id=785388;t=56;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru"'+' border=0 height=31 width=88/><\/a>')
+if(11<js)d.write('<'+'!-- ')//--></SCRIPT><A href="http://top.mail.ru/jump?from=785388" target="_top"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/counter" alt="Рейтинг@Mail.ru" border="0" height="31" width="88/"></A><!-- <noscript><a
+target=_top href="http://top.mail.ru/jump?from=785388"><img
+src="http://db.cf.bb.a0.top.list.ru/counter?js=na;id=785388;t=56"
+border=0 height=31 width=88
+alt="Рейтинг@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>')//--><!--/COUNTER-->
+
+<!--begin of Rambler's Top100 code -->
+<A href="http://top100.rambler.ru/top100/">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/top100.cnt" alt="" width="1" height="1" border="0"></A>
+<!--end of Top100 code-->
+
+
+<!--begin of Top100 logo-->
+<A href="http://top100.rambler.ru/top100/">
+<IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/banner-88x31-rambler-darkblue2.gif" alt="Rambler&#39;s Top100" width="88" height="31" border="0"></A>
+<!--end of Top100 logo -->
+
+
+<!--LiveInternet counter--><SCRIPT type="text/javascript">document.write('<a href="http://www.liveinternet.ru/click" target=_blank><img src="http://counter.yadro.ru/hit?t18.11;r' + escape(document.referrer) + ((typeof(screen)=='undefined')?'':';s'+screen.width+'*'+screen.height+'*'+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ';u' + escape(document.URL) + ';' + Math.random() + '" border=0 width=88 height=31 alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодн\я"><\/a>')</SCRIPT><A href="http://www.liveinternet.ru/click" target="_blank"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/hit" border="0" width="88" height="31" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня"></A><!--/LiveInternet-->
+
+<!-- HostCMS Counter ваваыавыаваываываываыаы -->
+<SCRIPT language="javascript">
+js_v="1.0";path="rand="+Math.random()+"&id=1&refer="+escape(document.referrer)+"&current_page="+escape(window.location.href);
+document.cookie="hostmake=1; path=/"; path+="&cookie="+(document.cookie?"Y":"N");
+</SCRIPT>
+<SCRIPT language="javascript1.1">
+js_v="1.1";path+="&java="+(navigator.javaEnabled()?"Y":"N")
+</SCRIPT>
+<SCRIPT language="javascript1.2">js_v="1.2";
+path+="&screen="+screen.width+'x'+screen.height+"&px="+(((navigator.appName.substring(0,9)=="Microsoft"))?screen.colorDepth:screen.pixelDepth)
+</SCRIPT>
+<SCRIPT language="javascript1.3">js_v="1.3";
+</SCRIPT>
+<SCRIPT language="javascript">path+="&js_version="+js_v;
+document.write("<a href=http://www.cmcons.com/><img src='http://www.cmcons.com/counter/counter.php?"+path+"&counter=2' border=0 alt=\"HostCMS Counter\" width=\"88\" height=\"31\"></a>")
+</SCRIPT><A href="http://www.cmcons.com/"><IMG src="./0230 IBM Rational ClearCase. Управление версиями файлов, сборкой._files/counter.php" border="0" alt="HostCMS Counter" width="88" height="31"></A><NOSCRIPT></NOSCRIPT>
+<!-- HostCMS Counter -->	
+
+</TD>
+<TD>
+
+</TD>
+</TR>
+
+</TBODY></TABLE>
+
+
+
+</BODY></HTML>

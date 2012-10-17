@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="Derek R. Price, email:derek AT ximbiot DOT com" />
+<title>CVS&mdash;Concurrent Versions System v1.11.22: 12. Keyword substitution</title>
+<link rel="stylesheet" type="text/css"
+     href="reset-fonts-grids.css" tppabs="http://ximbiot.com/branding/yui/build/reset-fonts-grids/reset-fonts-grids.css" />
+<link rel="stylesheet" type="text/css"
+     href="container.css" tppabs="http://ximbiot.com/branding/yui/build/container/assets/skins/sam/container.css" />
+<link rel="stylesheet" type="text/css" href="style.css" tppabs="http://ximbiot.com/branding/style.css" />
+<link rel="alternate stylesheet" type="text/css" media="screen"
+    title="bare bones" href="/branding/friendly.css" />
+<link rel="icon" type="image/png" href="/branding/logo-16x16.png" />
+
+<script type='text/javascript'
+         src="yahoo-min.js" tppabs="http://ximbiot.com/branding/yui/build/yahoo/yahoo-min.js"></script>
+<script type='text/javascript'
+         src="yahoo-dom-event.js" tppabs="http://ximbiot.com/branding/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type='text/javascript'
+         src="container-min.js" tppabs="http://ximbiot.com/branding/yui/build/container/container-min.js"></script>
+<script type='text/javascript'
+         src="event-min.js" tppabs="http://ximbiot.com/branding/yui/build/event/event-min.js"></script>
+<script type='text/javascript'
+         src="element-beta-min.js" tppabs="http://ximbiot.com/branding/yui/build/element/element-beta-min.js"></script>
+<script type='text/javascript' src="cookies.js" tppabs="http://ximbiot.com/branding/cookies.js"></script>
+<script type='text/javascript' src="functions.js" tppabs="http://ximbiot.com/branding/functions.js"></script>
+</head>
+
+<body id="body" class=" yui-skin-sam">
+<div id="doc3" class="yui-t4">
+
+<div id="hd" class="banner">
+<div id="header-content">
+<div id="header-text">Your source for CVS &amp; Subversion support.</div>
+
+
+</div>
+</div><!-- hd -->
+
+<div id="bd">
+<div id="yui-main">
+<div class="yui-b">
+<div class="yui-g">
+
+<div class="google-search">
+<form method="get" action="http://www.google.com/custom" target="_top">
+<input type=hidden name="domains" value="ximbiot.com" />
+<table> 
+<td><input type="text" name="q" size="31" maxlength="255" value="" />
+<input type="submit" style="font-weight:bold"
+			 name="sa" value="Search" /></td>
+</tr><tr>
+<td nowrap="nowrap">
+<input type="radio" name="as_q" id="as_q1" value="site:ximbiot.com" />
+<label for="as_q1">ximbiot.com</label>
+<input type="radio" name="as_q" id="as_q2"
+      value="intitle:CVS intitle:v1.11.22 site:ximbiot.com"
+    checked="checked" />
+<label for="as_q2">this manual</label>
+</td>
+</tr>
+</table>
+<input type="hidden" name="client" value="pub-9647251212076433" />
+<input type="hidden" name="forid" value="1" />
+<input type="hidden" name="ie" value="ISO-8859-1" />
+<input type="hidden" name="oe" value="ISO-8859-1" />
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1;" />
+<input type="hidden" name="hl" value="en" />
+<!-- SiteSearch Google -->
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="content">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on June, 9 2006 by texi2html 1.77 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>CVS&mdash;Concurrent Versions System v1.11.22: 12. Keyword substitution</title>
+
+<meta name="description" content="CVS&mdash;Concurrent Versions System v1.11.22: 12. Keyword substitution">
+<meta name="keywords" content="CVS&mdash;Concurrent Versions System v1.11.22: 12. Keyword substitution">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.77">
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Keyword-substitution"></a>
+<a name="SEC97"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="cvs_11.html#SEC96" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_11.html#SEC96" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC98" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs_11.html#SEC95" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_11.html#SEC95" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 12. Keyword substitution </h1>
+
+
+<p>As long as you edit source files inside a working
+directory you can always find out the state of
+your files via <samp>`cvs status'</samp> and <samp>`cvs log'</samp>.
+But as soon as you export the files from your
+development environment it becomes harder to identify
+which revisions they are.
+</p>
+<p><small>CVS</small> can use a mechanism known as <em>keyword
+substitution</em> (or <em>keyword expansion</em>) to help
+identifying the files.  Embedded strings of the form
+<code>$<var>keyword</var>$</code> and
+<code>$<var>keyword</var>:&hellip;$</code> in a file are replaced
+with strings of the form
+<code>$<var>keyword</var>:<var>value</var>$</code> whenever you obtain
+a new revision of the file.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC98">12.1 Keyword List</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Keywords
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC99">12.2 Using keywords</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC100">12.3 Avoiding substitution</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC101">12.4 Substitution modes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#SEC102">12.5 Problems with the $<i></i>Log$ keyword.</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="Keyword-list"></a>
+<a name="SEC98"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC97" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC99" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.1 Keyword List </h2>
+
+
+<p>This is a list of the keywords:
+</p>
+<dl compact="compact">
+<dd><a name="IDX181"></a>
+</dd>
+<dt> <code>$<i></i>Author$</code></dt>
+<dd><p>The login name of the user who checked in the revision.
+</p>
+<a name="IDX182"></a>
+</dd>
+<dt> <code>$<i></i>Date$</code></dt>
+<dd><p>The date and time (UTC) the revision was checked in.
+</p>
+<a name="IDX183"></a>
+</dd>
+<dt> <code>$<i></i>Header$</code></dt>
+<dd><p>A standard header containing the full pathname of the
+<small>RCS</small> file, the revision number, the date (UTC), the
+author, the state, and the locker (if locked).  Files
+will normally never be locked when you use <small>CVS</small>.
+</p>
+<a name="IDX184"></a>
+</dd>
+<dt> <code>$<i></i>Id$</code></dt>
+<dd><p>Same as <code>$<i></i>Header$</code>, except that the <small>RCS</small>
+filename is without a path.
+</p>
+<a name="IDX185"></a>
+</dd>
+<dt> <code>$<i></i>Name$</code></dt>
+<dd><p>Tag name used to check out this file.  The keyword is
+expanded only if one checks out with an explicit tag
+name.  For example, when running the command <code>cvs
+co -r first</code>, the keyword expands to <samp>`Name: first'</samp>.
+</p>
+<a name="IDX186"></a>
+</dd>
+<dt> <code>$<i></i>Locker$</code></dt>
+<dd><p>The login name of the user who locked the revision
+(empty if not locked, which is the normal case unless
+<code>cvs admin -l</code> is in use).
+</p>
+<a name="IDX187"></a>
+</dd>
+<dt> <code>$<i></i>Log$</code></dt>
+<dd><p>The log message supplied during commit, preceded by a
+header containing the <small>RCS</small> filename, the revision
+number, the author, and the date (UTC).  Existing log
+messages are <em>not</em> replaced.  Instead, the new log
+message is inserted after <code>$<i></i>Log:&hellip;$</code>.
+Each new line is prefixed with the same string which
+precedes the <code>$Log</code> keyword.  For example, if the
+file contains:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  /* Here is what people have been up to:
+   *
+   * $<i></i>Log: frob.c,v $
+   * Revision 1.1  1997/01/03 14:23:51  joe
+   * Add the superfrobnicate option
+   *
+   */
+</pre></td></tr></table>
+
+<p>then additional lines which are added when expanding
+the <code>$Log</code> keyword will be preceded by <samp>`   * '</samp>.
+Unlike previous versions of <small>CVS</small> and <small>RCS</small>, the
+<em>comment leader</em> from the <small>RCS</small> file is not used.
+The <code>$Log</code> keyword is useful for
+accumulating a complete change log in a source file,
+but for several reasons it can be problematic.
+See section <a href="#SEC102">Problems with the $<i></i>Log$ keyword.</a>.
+</p>
+<a name="IDX188"></a>
+</dd>
+<dt> <code>$<i></i>RCSfile$</code></dt>
+<dd><p>The name of the RCS file without a path.
+</p>
+<a name="IDX189"></a>
+</dd>
+<dt> <code>$<i></i>Revision$</code></dt>
+<dd><p>The revision number assigned to the revision.
+</p>
+<a name="IDX190"></a>
+</dd>
+<dt> <code>$<i></i>Source$</code></dt>
+<dd><p>The full pathname of the RCS file.
+</p>
+<a name="IDX191"></a>
+</dd>
+<dt> <code>$<i></i>State$</code></dt>
+<dd><p>The state assigned to the revision.  States can be
+assigned with <code>cvs admin -s</code>&mdash;see <a href="cvs_16.html#SEC119" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC119">admin options</a>.
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="Using-keywords"></a>
+<a name="SEC99"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC98" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC100" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.2 Using keywords </h2>
+
+<p>To include a keyword string you simply include the
+relevant text string, such as <code>$<i></i>Id$</code>, inside the
+file, and commit the file.  <small>CVS</small> will automatically (Or,
+more accurately, as part of the update run that
+automatically happens after a commit.)
+expand the string as part of the commit operation.
+</p>
+<p>It is common to embed the <code>$<i></i>Id$</code> string in
+the source files so that it gets passed through to
+generated files.  For example, if you are managing
+computer program source code, you might include a
+variable which is initialized to contain that string.
+Or some C compilers may provide a <code>#pragma ident</code>
+directive.  Or a document management system might
+provide a way to pass a string through to generated
+files.
+</p>
+
+<a name="IDX192"></a>
+<p>The <code>ident</code> command (which is part of the <small>RCS</small>
+package) can be used to extract keywords and their
+values from a file.  This can be handy for text files,
+but it is even more useful for extracting keywords from
+binary files.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">$ ident samp.c
+samp.c:
+     $<i></i>Id: samp.c,v 1.5 1993/10/19 14:57:32 ceder Exp $
+$ gcc samp.c
+$ ident a.out
+a.out:
+     $<i></i>Id: samp.c,v 1.5 1993/10/19 14:57:32 ceder Exp $
+</pre></td></tr></table>
+<a name="IDX193"></a>
+<p>S<small>CCS</small> is another popular revision control system.
+It has a command, <code>what</code>, which is very similar to
+<code>ident</code> and used for the same purpose.  Many sites
+without <small>RCS</small> have <small>SCCS</small>.  Since <code>what</code>
+looks for the character sequence <code>@(#)</code> it is
+easy to include keywords that are detected by either
+command.  Simply prefix the keyword with the
+magic <small>SCCS</small> phrase, like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">static char *id=&quot;@(#) $<i></i>Id: ab.c,v 1.5 1993/10/19 14:57:32 ceder Exp $&quot;;
+</pre></td></tr></table>
+<hr size="6">
+<a name="Avoiding-substitution"></a>
+<a name="SEC100"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC99" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC101" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.3 Avoiding substitution </h2>
+
+<p>Keyword substitution has its disadvantages.  Sometimes
+you might want the literal text string
+<samp>`$<i></i>Author$'</samp> to appear inside a file without
+<small>CVS</small> interpreting it as a keyword and expanding it
+into something like <samp>`$<i></i>Author: ceder $'</samp>.
+</p>
+<p>There is unfortunately no way to selectively turn off
+keyword substitution.  You can use <samp>`-ko'</samp>
+(see section <a href="#SEC101">Substitution modes</a>) to turn off keyword
+substitution entirely.
+</p>
+<p>In many cases you can avoid using keywords in
+the source, even though they appear in the final
+product.  For example, the source for this manual
+contains <samp>`$@asis{}Author$'</samp> whenever the text
+<samp>`$<i></i>Author$'</samp> should appear.  In <code>nroff</code>
+and <code>troff</code> you can embed the null-character
+<code>\&amp;</code> inside the keyword for a similar effect.
+</p>
+<hr size="6">
+<a name="Substitution-modes"></a>
+<a name="SEC101"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC100" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC102" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.4 Substitution modes </h2>
+
+<p>Each file has a stored default substitution mode, and
+each working directory copy of a file also has a
+substitution mode.  The former is set by the <samp>`-k'</samp>
+option to <code>cvs add</code> and <code>cvs admin</code>; the
+latter is set by the <samp>`-k'</samp> or <samp>`-A'</samp> options to <code>cvs
+checkout</code> or <code>cvs update</code>.
+<code>cvs diff</code> and <code>cvs rdiff</code> also
+have <samp>`-k'</samp> options.
+For some examples,
+see <a href="cvs_9.html#SEC79" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_9.html#SEC79">Handling binary files</a>, and <a href="cvs_5.html#SEC64" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#SEC64">Merging and keywords</a>.
+</p>
+<p>The modes available are:
+</p>
+<dl compact="compact">
+<dt> <samp>`-kkv'</samp></dt>
+<dd><p>Generate keyword strings using the default form, e.g.
+<code>$<i></i>Revision: 5.7 $</code> for the <code>Revision</code>
+keyword.
+</p>
+</dd>
+<dt> <samp>`-kkvl'</samp></dt>
+<dd><p>Like <samp>`-kkv'</samp>, except that a locker's name is always
+inserted if the given revision is currently locked.
+The locker's name is only relevant if <code>cvs admin
+-l</code> is in use.
+</p>
+</dd>
+<dt> <samp>`-kk'</samp></dt>
+<dd><p>Generate only keyword names in keyword strings; omit
+their values.  For example, for the <code>Revision</code>
+keyword, generate the string <code>$<i></i>Revision$</code>
+instead of <code>$<i></i>Revision: 5.7 $</code>.  This option
+is useful to ignore differences due to keyword
+substitution when comparing different revisions of a
+file (see section <a href="cvs_5.html#SEC64" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#SEC64">Merging and keywords</a>).
+</p>
+</dd>
+<dt> <samp>`-ko'</samp></dt>
+<dd><p>Generate the old keyword string, present in the working
+file just before it was checked in.  For example, for
+the <code>Revision</code> keyword, generate the string
+<code>$<i></i>Revision: 1.1 $</code> instead of
+<code>$<i></i>Revision: 5.7 $</code> if that is how the
+string appeared when the file was checked in.
+</p>
+</dd>
+<dt> <samp>`-kb'</samp></dt>
+<dd><p>Like <samp>`-ko'</samp>, but also inhibit conversion of line
+endings between the canonical form in which they are
+stored in the repository (linefeed only), and the form
+appropriate to the operating system in use on the
+client.  For systems, like unix, which use linefeed
+only to terminate lines, this is the same as
+<samp>`-ko'</samp>.  For more information on binary files, see
+<a href="cvs_9.html#SEC79" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_9.html#SEC79">Handling binary files</a>.
+</p>
+</dd>
+<dt> <samp>`-kv'</samp></dt>
+<dd><p>Generate only keyword values for keyword strings.  For
+example, for the <code>Revision</code> keyword, generate the string
+<code>5.7</code> instead of <code>$<i></i>Revision: 5.7 $</code>.
+This can help generate files in programming languages
+where it is hard to strip keyword delimiters like
+<code>$<i></i>Revision: $</code> from a string.  However,
+further keyword substitution cannot be performed once
+the keyword names are removed, so this option should be
+used with care.
+</p>
+<p>One often would like to use <samp>`-kv'</samp> with <code>cvs
+export</code>&mdash;see section <a href="cvs_16.html#SEC136" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC136">export&mdash;Export sources from CVS, similar to checkout</a>.  But be aware that doesn't
+handle an export containing binary files correctly.
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="Log-keyword"></a>
+<a name="SEC102"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC101" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC97" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.5 Problems with the $<i></i>Log$ keyword. </h2>
+
+<p>The <code>$<i></i>Log$</code> keyword is somewhat
+controversial.  As long as you are working on your
+development system the information is easily accessible
+even if you do not use the <code>$<i></i>Log$</code>
+keyword&mdash;just do a <code>cvs log</code>.  Once you export
+the file the history information might be useless
+anyhow.
+</p>
+<p>A more serious concern is that <small>CVS</small> is not good at
+handling <code>$<i></i>Log$</code> entries when a branch is
+merged onto the main trunk.  Conflicts often result
+from the merging operation.
+</p>
+<p>People also tend to &quot;fix&quot; the log entries in the file
+(correcting spelling mistakes and maybe even factual
+errors).  If that is done the information from
+<code>cvs log</code> will not be consistent with the
+information inside the file.  This may or may not be a
+problem in real life.
+</p>
+<p>It has been suggested that the <code>$<i></i>Log$</code>
+keyword should be inserted <em>last</em> in the file, and
+not in the files header, if it is to be used at all.
+That way the long list of change messages will not
+interfere with everyday source file browsing.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC97" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_13.html#SEC103" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC103" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>Derek R. Price</em> on <em>June, 9 2006</em> using <a href="javascript:if(confirm('http://www.nongnu.org/texi2html/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.nongnu.org/texi2html/'" tppabs="http://www.nongnu.org/texi2html/"><em>texi2html 1.77</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>
+
+
+
+
+
+
+</div><!-- #content -->
+
+
+</div><!-- .yui-g -->
+</div><!-- .yui-b -->
+</div><!-- #yui-main -->
+
+<div class="yui-b">
+
+<p><a href="javascript:if(confirm('http://ximbiot.com/dereks-resume.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/dereks-resume.html'" tppabs="http://ximbiot.com/dereks-resume.html">Derek Price</a>, CVS developer and technical
+editor of 
+<a target='_blank'
+     href="javascript:if(confirm('http://www.amazon.com/gp/product/0596527039?ie=UTF8&tag=ximbiot-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527039  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.amazon.com/gp/product/0596527039?ie=UTF8&tag=ximbiot-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527039'" tppabs="http://www.amazon.com/gp/product/0596527039?ie=UTF8&tag=ximbiot-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527039">Essential
+CVS (Essentials line from O'Reilly Press)</a>
+<img src="ir-t=ximbiot-20&l=as2&o=1&a=0596527039" tppabs="http://www.assoc-amazon.com/e/ir?t=ximbiot-20&l=as2&o=1&a=0596527039"
+   width="1" height="1" border="0" alt=""
+   style="border:none !important; margin:0px !important;" />,
+and others offer <a href="javascript:if(confirm('http://ximbiot.com/services.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/services.html'" tppabs="http://ximbiot.com/services.html">consulting services</a> and
+<a href="javascript:if(confirm('http://ximbiot.com/training.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/training.html'" tppabs="http://ximbiot.com/training.html">training</a> through Ximbiot.</p>
+
+<p><iframe   src="cm-t=ximbiot-20&o=1&p=8&l=as1&asins=0596527039&fc1=000000&IS2=1&lt1=_blank&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" tppabs="http://rcm.amazon.com/e/cm?t=ximbiot-20&o=1&p=8&l=as1&asins=0596527039&fc1=000000&IS2=1&lt1=_blank&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr"
+        style="width:120px;height:240px;" scrolling="no" marginwidth="0"
+ marginheight="0" frameborder="0"></iframe></p>
+
+<p><script language="javascript" src="zpanel-zp=117573496727537514" tppabs="http://www.zazzle.com/api/zp/zpanel?zp=117573496727537514"></script></p>
+<p><a target="_blank" href="javascript:if(confirm('http://validator.w3.org/check?uri=referer  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://validator.w3.org/check?uri=referer'" tppabs="http://validator.w3.org/check?uri=referer">
+<img class="PoweredByLogo" src="w3c-valid-xhtml10-44x16.png" tppabs="http://ximbiot.com/branding/w3c-valid-xhtml10-44x16.png"
+       alt="[ Valid XHTML 1.0! ]" /></a>
+<a target="_blank" href="javascript:if(confirm('http://jigsaw.w3.org/css-validator/check/referer  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://jigsaw.w3.org/css-validator/check/referer'" tppabs="http://jigsaw.w3.org/css-validator/check/referer">
+<img class="PoweredByLogo" src="w3c-valid-css-44x16.png" tppabs="http://ximbiot.com/branding/w3c-valid-css-44x16.png"
+       alt="[ Valid CSS! ]" /></a></p>
+
+</div><!-- .yui-b -->
+</div><!-- #bd -->
+
+</div><!-- #bd -->
+
+<div id="ft" class="banner">
+<div class="horizontal-menu" id="siteindex"><ul class="menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/hosting.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/hosting.html'" tppabs="http://ximbiot.com/hosting.html">hosting</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/services.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/services.html'" tppabs="http://ximbiot.com/services.html">installation</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/SCM_support.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/SCM_support.html'" tppabs="http://ximbiot.com/SCM_support.html">support</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/training/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/training/'" tppabs="http://ximbiot.com/training/">training</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/privacy.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/privacy.html'" tppabs="http://ximbiot.com/privacy.html">privacy</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/use.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/use.html'" tppabs="http://ximbiot.com/use.html">use</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/contact_us.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/contact_us.html'" tppabs="http://ximbiot.com/contact_us.html">contact</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/'" tppabs="http://ximbiot.com/">about</a></li>
+</ul>
+</div>
+<div id="contact-info-right" class="contact-info">
+<br />
+<br />
+<a href="mailto:info@ximbiot.com">info@ximbiot.com</a><br />
+&nbsp;
+</div>
+<div id="contact-info-left" class="contact-info">
+Ximbiot LLC<br />
+695 E Square Lake Rd<br />
+Troy, MI&nbsp; 48085-3169
+</div>
+<div id="contact-info-center" class="contact-info">
+<br />
+(248) 835-1260<br />
+(248) 835-1263 Fax
+</div>
+
+</div><!-- #ft -->
+
+</div><!-- #doc3 -->
+
+<div id="sidebar-left" class="sidebar">
+
+<h1><a href="javascript:if(confirm('http://ximbiot.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/'" tppabs="http://ximbiot.com/">
+<img height="102" width="59" class="Logo"
+        src="logo-59x102.png" tppabs="http://ximbiot.com/branding/logo-59x102.png" alt="Ximbiot Logo" /><br />
+Ximbiot</a></h1>
+
+<p>Site navigation:</p>
+<ul class="menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/my/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/my/'" tppabs="http://ximbiot.com/my/">My Account</a></li>
+<li>
+<h2><a href="#" onclick="return kadabra('services-menu')">Ximbiot Services <span id="icon-services-menu">(+/-)</span></a></h2>
+<ul id="services-menu" class="collapsible-menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/hosting.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/hosting.html'" tppabs="http://ximbiot.com/hosting.html" title="Professional CVS and Subversion Hosting">Hosting</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/services.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/services.html'" tppabs="http://ximbiot.com/services.html" title="Professional CVS and Subversion Installation">Installation</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/SCM_support.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/SCM_support.html'" tppabs="http://ximbiot.com/SCM_support.html" title="Professional CVS and Subversion Support">Technical Support</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/training/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/training/'" tppabs="http://ximbiot.com/training/" title="Professional CVS and Subversion Training, On-site or Online">Training</a></li>
+</ul>
+<script type="text/javascript">setDefaultState ('services-menu', 'block');</script>
+</li>
+<li>
+<h2><a href="#" onclick="return kadabra('doc-menu')">Documentation <span id="icon-doc-menu">(+/-)</span></a></h2>
+<ul id="doc-menu" class="collapsible-menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/'" tppabs="http://ximbiot.com/cvs/">About CVS</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/wiki/Main%20Page  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/wiki/Main%20Page#CVS_Downloads'" tppabs="http://ximbiot.com/cvs/wiki/Main%20Page#CVS_Downloads">CVS Downloads</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/wiki/CVS%20FAQ  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/wiki/CVS%20FAQ'" tppabs="http://ximbiot.com/cvs/wiki/CVS%20FAQ">CVS FAQ</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/manual/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/manual/'" tppabs="http://ximbiot.com/cvs/manual/">CVS Manuals</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/wiki/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/wiki/'" tppabs="http://ximbiot.com/cvs/wiki/">CVS Wiki</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/cvshome/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/cvshome/'" tppabs="http://ximbiot.com/cvs/cvshome/">cvshome.org Archive</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/texi2html/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/texi2html/'" tppabs="http://ximbiot.com/texi2html/">Texi2HTML</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/texi2html/manuals/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/texi2html/manuals/'" tppabs="http://ximbiot.com/texi2html/manuals/">Texi2HTML Manuals</a></li>
+</ul>
+<script type="text/javascript">setDefaultState ('doc-menu', 'block');</script>
+</li>
+</ul>
+
+
+</div>
+
+<script type='text/javascript'>
+var timer;
+var moveFt = function() {
+    var vph = YAHOO.util.Dom.getViewportHeight();
+    var dh = YAHOO.util.Dom.get ('bd').offsetHeight;
+    var ft = YAHOO.util.Dom.get ('ft');
+    if (vph > dh) {
+	/* The 10px/60px is a fudge factor below and I'm not sure where it is
+	 * coming from.  10px looks right in IE and 60px looks right in all
+	 * the other browsers I've tested.  This fudge only looks right with
+	 * our default font size and breaks, especially, with more accessible
+	 * (larger) fonts.
+	 *
+	 * If I assume that 10px is approximately the height of the bottom
+	 * scroll bar, then the other 50px may be due to what I can only call
+	 * a rendering error in Mozilla and Safari.  If I turn the
+	 * background-color red on #fd, then it is only 10px or so tall and
+	 * doesn't surround all its children.
+	 */
+	var newOffset = vph - dh - ft.offsetHeight
+			- (YAHOO.env.ua.ie ? 10 : YAHOO.env.ua.opera ? 80 : 60);
+	// As above, 20px is arbitrary - could maybe compute 1em in pixels.
+        if (newOffset < 20) {
+	    newOffset = '1em';
+	} else {
+	    newOffset += 'px';
+	}
+	YAHOO.util.Dom.setStyle (ft, 'margin-top', newOffset);
+    } else {
+	YAHOO.util.Dom.setStyle (ft, 'margin-top', '1em');
+    }
+};
+var startResizeTimer = function(el, o) {
+    if (timer) { timer.cancel(); }
+    timer = YAHOO.lang.later (250, window, moveFt, o);
+};
+
+/* And call the moveFt function on window render.
+ *
+ * Need to use a timer for IE - otherwise it generates a resize event every
+ * time we move the footer, which loops infinitely.
+ */
+YAHOO.util.Event.onDOMReady (moveFt);
+YAHOO.util.Event.addListener (window, 'load', moveFt);
+YAHOO.util.Event.addListener (window, 'resize', startResizeTimer);
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www./");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-130779-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

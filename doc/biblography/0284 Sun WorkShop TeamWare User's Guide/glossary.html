@@ -1,0 +1,432 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher 5.0.4">
+<meta name="TEMPLATEBASE" content="SunLook1.0">
+<meta name="LASTUPDATED" content="Fri Mar 31 17:03:02 2000">
+<title>Glossary</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr bgcolor="cccccc">
+
+<td align="left">
+&nbsp;&nbsp;<font face="helvetica,arial" size="2">Sun WorkShop TeamWare User's Guide</font>
+</td>
+
+<td valign="top" align="right"><a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html"><IMG SRC="home01.gif" tppabs="http://docs.sun.com/source/806-3573/images/home01.gif" ALT="Home" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html"><IMG SRC="toc01.gif" tppabs="http://docs.sun.com/source/806-3573/images/toc01.gif" ALT="Contents" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="errormsgs.html" tppabs="http://docs.sun.com/source/806-3573/errormsgs.html"><IMG SRC="prev01.gif" tppabs="http://docs.sun.com/source/806-3573/images/prev01.gif" ALT="Previous" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html"><IMG SRC="next01.gif" tppabs="http://docs.sun.com/source/806-3573/images/next01.gif" ALT="Next" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html"><IMG SRC="index01.gif" tppabs="http://docs.sun.com/source/806-3573/images/index01.gif" ALT="Index" WIDTH="30" HEIGHT="26" BORDER="0" VSPACE="0"></a></td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+<br clear="all">
+
+<hr>
+
+<blockquote>
+
+<h1 align="left">
+  <a name="1800"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Glossary</font>
+</h1>
+
+<div align="right">
+<h5 align="left">
+  <a name="73"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Access control</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="74"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A feature in Configuring you can use to control access to workspaces.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="75"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Branch (SCCS)</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="76"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A delta or series of deltas that are placed off of the main line of deltas in an SCCS history file. </font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="77"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Bringover Create</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="78"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The transaction used to copy groups of files from a parent workspace to a nonexistent child workspace. The new child workspace is created as a result of the transaction. All Configuring transactions are performed from the perspective of the child workspace; hence, the Bringover Create transaction "brings over" files to the child from the parent workspace. See also <em>Bringover Update, Workspace,</em> and <em>Putback</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="65"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Bringover Update</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="123"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The transaction used to update an existing child workspace with respect to files contained in its parent workspace. All Configuring transactions are performed from the perspective of the child workspace; hence, the Bringover Update transaction "brings over" files to the child from the parent workspace. See also <em>Bringover Create, Workspace</em>, and <em>Putback</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="79"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Child workspace</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="80"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A workspace that has a parent workspace listed in its <code>Codemgr_wsdata/parents</code> file. Development work is typically done in child workspaces and put back to parent workspaces after it has been tested. Configuring transactions are viewed from the child workspace perspective and all conflicts are resolved in the child workspace.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="4072"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><code>Codemgr_wsdata	 	 <br></code>directory</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="4061"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Every TeamWare workspace contains a "metadata" directory in its root directory named <code>Codemgr_wsdata</code>. Configuring stores data about the workspace in <code>Codemgr_wsdata</code>. The presence of this directory is the sole factor that defines it as a TeamWare workspace (as opposed to a normal directory). Configuring commands use the presence or absence of this directory to determine whether a directory is a workspace. See <a href="underhood.html#9814" tppabs="http://docs.sun.com/source/806-3573/underhood.html#9814">Workspace Metadata Directory</a> for more information.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3821"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Configuring</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3822"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The tool you use to manage Sun WorkShop TeamWare workspaces. See <a href="config.html#17064" tppabs="http://docs.sun.com/source/806-3573/config.html#17064">Chapter 2</a>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="81"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Conflict</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="82"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The condition that exists when a file has changed in both the child and parent workspace.  Conflicts are identified by the Bringover Update transaction and are resolved by using the Resolve transaction.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="83"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Copy-Modify-Merge</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="84"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The concurrent development model upon which Configuring is based. Using this model, multiple developers concurrently <em>copy</em> sources from a common area, <em>modify</em> the source in isolation, and then <em>merge</em> those changes with changes made by other developers.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="85"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Create</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="137"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Used in Configuring transaction output. Files are said to be created if they exist in the source workspace and not in the destination workspace, and are copied into the destination workspace as part of a Bringover or Putback transaction.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="136"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Default path</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="86"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The branch in an SCCS history file upon which the next delta will be added. This is indicated in a history file by a solid line. </font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="87"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><code>def.dir.flp</code></font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="112"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The default FLP shipped with Configuring is <code>def.dir.flp</code>; this FLP recursively descends directory hierarchies and lists all files for which SCCS history files exist. See <em>FLP</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3220"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Delta</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3227"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The set of differences between two versions of a file checked into SCCS. When you check in a file, SCCS records only the line-by-line differences between the text you check in and the previous version of the file. This set of differences is known as a delta. The file version that you initially checked out was constructed from a set of accumulated deltas. The terms delta and version are often used synonymously; however, their meanings are not the same. It is possible to retrieve a version that omits selected deltas. See <em>Version</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="126"> </a><font face="Verdana, Arial, Helvetica, sans-serif">FLP</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="88"> </a><font face="Verdana, Arial, Helvetica, sans-serif">An FLP or <em>File List Program </em>is a program or script that generates a list of files that Configuring uses during Bringover and Putback transactions. See <em>def.dir.flp</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="1139"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Freezepointing</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="1140"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The Sun WorkShop TeamWare tool you use to make snapshots of workspaces (or portions of them) at important junctures or "freezepoints." See <a href="freezepoint.html#6422" tppabs="http://docs.sun.com/source/806-3573/freezepoint.html#6422">Chapter 8</a>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="89"> </a><font face="Verdana, Arial, Helvetica, sans-serif">g-file (SCCS)</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="90"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The working copy of a file retrieved from an SCCS history file by the <br><code>sccs-get</code> command.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="848"> </a><font face="Verdana, Arial, Helvetica, sans-serif">History files</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="852"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When you initially put a file under SCCS control, a history file is created for the new SCCS file. The initial version of the history file uses the complete text of the source file. The initial history file is the file that further deltas are compared to. Owing to its prefix (s.), the history file is often referred to as the s.file (s-dot-file).</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="4129"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Integration Request Identifier</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="4130"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A "password" required by Putback Validation before Configuring will allow a putback.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="91"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Integration workspace</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="92"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A workspace to which multiple developers put back their work.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="93"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Lock</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="94"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To assure consistency, the Configuring file transfer transactions Bringover and Putback lock workspaces while they are working in them. Locks are recorded in the <code>Codemgr_wsdata/lock</code> file in each workspace; the Configuring commands consult that file before acting in a workspace.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3886"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Merge</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="96"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To produce a single version of a file from two conflicting files. Accomplished with the assistance of the Merging tool.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3874"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Merging</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3875"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The Sun WorkShop TeamWare tool you use to merge two different versions of the same file. See <a href="merge.html#7618" tppabs="http://docs.sun.com/source/806-3573/merge.html#7618">Chapter 6</a>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3943"> </a><font face="Verdana, Arial, Helvetica, sans-serif">MR</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3944"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Modification Request. A "password" required by Versioning before a file can be checked in. </font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="97"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Notification</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="98"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A Configuring feature that mails notices of events, such as changes to files or directories, to users.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3899"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Parent workspace</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3900"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A workspace that has a child workspace. Parent workspaces are typically used as integration areas, because development, testing, and conflict resolution occur in child workspaces.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="101"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Putback</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="129"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The transaction used to update a parent workspace with respect to files contained in its child workspace. All Configuring transfer transactions are performed from the perspective of the child workspace; the Putback transaction "puts back" files to the parent from the child workspace. See also <em>Bringover Create, Bringover Update, </em>and<em> Workspace</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3919"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Putback Validation</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3920"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A Configuring feature that allows you to control which putbacks are allowed to a specific workspace.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="103"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Reparent</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="104"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To change the parent of a child workspace.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="105"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Resolve</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="106"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To produce a new delta of a file from two conflicting deltas. See <em>Merge</em> and <em>Conflict</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="107"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Root directory</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="108"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The top-level directory of a Configuring workspace. This directory's path name is the name by which the workspace is referred.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3914"> </a><font face="Verdana, Arial, Helvetica, sans-serif">RTI</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3913"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Request To Integrate, the heading used to record an Integration Request Identifier in a workspace history file.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="858"> </a><font face="Verdana, Arial, Helvetica, sans-serif">SCCS Delta ID (SID)</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3987"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A SID is the number used to represent a specific delta. This is a two-part number, with the parts separated by a dot (.). The SID of the initial delta is 1.1 by default. The first part of the SID is referred to as the release number and the second, the level number. When you check in a delta, the level number is increased automatically.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3993"> </a><font face="Verdana, Arial, Helvetica, sans-serif">SCCS file properties</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3994"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Properties that you can assign to individual files. </font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="4020"> </a><font face="Verdana, Arial, Helvetica, sans-serif">SCCS history file</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3999"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The file that contains a given file's delta history; also referred to as an "s-dot-file." All SCCS history files must be located in a directory named SCCS, which is located in the same directory as the g-file. See <em>g-file</em>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3989"> </a><font face="Verdana, Arial, Helvetica, sans-serif">SCCS Mergeable ID (SMID)	 	     </font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="1649"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A SMID is a number generated using the Xerox Secure Hash Function that ensures that every delta is uniquely identifiable, even if its SID is changed.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="132"> </a><font face="Verdana, Arial, Helvetica, sans-serif">SID</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="133"> </a><font face="Verdana, Arial, Helvetica, sans-serif">See SCCS delta ID.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="1687"> </a><font face="Verdana, Arial, Helvetica, sans-serif">SMID</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="1676"> </a><font face="Verdana, Arial, Helvetica, sans-serif">See SCCS Mergeable ID.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="4112"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Uncheckout</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="3852"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To return a file to the state it was in before the most recent check out. </font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="3863"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Undo</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="114"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To return a workspace to the state it was in before the most recent Bringover or Putback transaction, thereby "undoing" the action of the transaction.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="138"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Update</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="139"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Files are said to be updated during a Bringover or Putback transaction if they exist in both the source workspace and in the destination workspace, and have changed in the source workspace. The SCCS history file in the destination workspace is updated with new deltas from the source workspace.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="831"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Version</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="835"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When you check in a file, SCCS records only the line-by-line differences between the text you check in and the previous version of the file. This set of differences is known as a delta. The file version that you initially checked out was constructed from a set of accumulated deltas. The terms delta and version are often used synonymously; however, their meanings are not the same. It is possible to retrieve a version that omits selected deltas. See <a href="glossary.html#3220" tppabs="http://docs.sun.com/source/806-3573/glossary.html#3220"><em>Delta</em></a>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="117"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Versioning</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="116"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The Sun WorkShop TeamWare tool you use to manage Sun WorkShop TeamWare files. See <a href="version.html#4220" tppabs="http://docs.sun.com/source/806-3573/version.html#4220">Chapter 5</a>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="115"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Workspace</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="4012"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A workspace is a specially designated directory, its subdirectories, and the files contained in those directories. Usually each developer on a project works in their own isolated workspace concurrently with other developers programming in other workspaces. Configuring provides utilities to manage workspaces. See <a href="config.html#17064" tppabs="http://docs.sun.com/source/806-3573/config.html#17064">Chapter 2</a>.</font>
+  </dl>
+<div align="right">
+<h5 align="left">
+  <a name="4013"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Workspace hierarchy</font>
+</h5>
+</div>
+  <dl>
+     <dd> <a name="120"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A hierarchy of parent and child workspaces in which programmers and release engineers can develop, test, share, and release software products. </font>
+  </dl>
+
+</blockquote>
+
+<hr>
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="6" cellspacing-"0" border="0">
+<tr>
+<td valign="top" align="left">
+<font size="2">
+<a href="javascript:if(confirm('http://www.sun.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/'" tppabs="http://www.sun.com/">Sun Microsystems, Inc.</a><br>
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/PRN.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/PRN.html'" tppabs="http://docs.sun.com/source/806-3573/PRN.html">Copyright information</a>. All rights reserved.<br>
+<a href="javascript:if(confirm('http://www.sun.com/cgi-bin/comment-form.pl  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/cgi-bin/comment-form.pl'" tppabs="http://www.sun.com/cgi-bin/comment-form.pl">Feedback</a><br>
+</font>
+</td>
+
+<td valign="top" align="right">
+<font face="helvetica,arial" size="2">
+<a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html">Library</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html">Contents</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="errormsgs.html" tppabs="http://docs.sun.com/source/806-3573/errormsgs.html">Previous</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html">Next</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html">Index</a>
+</font>
+</td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+</body>
+</html>

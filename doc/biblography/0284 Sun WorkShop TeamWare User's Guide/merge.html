@@ -1,0 +1,923 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher 5.0.4">
+<meta name="TEMPLATEBASE" content="SunLook1.0">
+<meta name="LASTUPDATED" content="Mon Apr 03 18:54:33 2000">
+<title>Resolving Differences Between Files</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr bgcolor="cccccc">
+
+<td align="left">
+&nbsp;&nbsp;<font face="helvetica,arial" size="2">Sun WorkShop TeamWare User's Guide</font>
+</td>
+
+<td valign="top" align="right"><a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html"><IMG SRC="home01.gif" tppabs="http://docs.sun.com/source/806-3573/images/home01.gif" ALT="Home" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html"><IMG SRC="toc01.gif" tppabs="http://docs.sun.com/source/806-3573/images/toc01.gif" ALT="Contents" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="version.html" tppabs="http://docs.sun.com/source/806-3573/version.html"><IMG SRC="prev01.gif" tppabs="http://docs.sun.com/source/806-3573/images/prev01.gif" ALT="Previous" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="versionadv.html" tppabs="http://docs.sun.com/source/806-3573/versionadv.html"><IMG SRC="next01.gif" tppabs="http://docs.sun.com/source/806-3573/images/next01.gif" ALT="Next" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html"><IMG SRC="index01.gif" tppabs="http://docs.sun.com/source/806-3573/images/index01.gif" ALT="Index" WIDTH="30" HEIGHT="26" BORDER="0" VSPACE="0"></a></td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+<br clear="all">
+
+<hr>
+
+<blockquote>
+
+<div align="center">
+<h1 align="left">
+  <a name="7618"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Chapter 6 </font>
+</h1>
+</div>
+
+<h1 align="left">
+  <a name="2327"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Resolving Differences Between Files</font>
+</h1>
+
+
+<p>
+  <a name="5054"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When two copies of the same file have had changes made to them, these files are in conflict. When you try to put back a file that you have changed in your child workspace, but it has also been changed in the parent workspace, the Sun WorkShop TeamWare tools will prevent you from putting back the file until you have resolved the differences between them. Merging is the tool you use to resolve conflicts between files.</font>
+</p>
+
+
+<p>
+  <a name="4713"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The chapter covers the following topics:</font>
+</p>
+
+<ul type=disc><a name="4649"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#5242" tppabs="http://docs.sun.com/source/806-3573/merge.html#5242">Starting Merging</a></font><a name="4652"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#6907" tppabs="http://docs.sun.com/source/806-3573/merge.html#6907">Resolving Conflicts in a Workspace</a></font><a name="4658"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#5377" tppabs="http://docs.sun.com/source/806-3573/merge.html#5377">Viewing the Merging Window</a></font><a name="4662"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#5209" tppabs="http://docs.sun.com/source/806-3573/merge.html#5209">Resolving Differences</a></font><a name="4666"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#4800" tppabs="http://docs.sun.com/source/806-3573/merge.html#4800">Using Automatic Merging</a></font><a name="7453"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#7416" tppabs="http://docs.sun.com/source/806-3573/merge.html#7416">Undoing Changes</a></font><a name="253"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#7413" tppabs="http://docs.sun.com/source/806-3573/merge.html#7413">Merging Options</a></font><a name="4681"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="merge.html#4825" tppabs="http://docs.sun.com/source/806-3573/merge.html#4825">Merging Example</a></font></ul>
+<h2>
+  <a name="5242"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Starting Merging</font>
+</h2>
+
+
+<p>
+  <a name="6758"> </a><font face="Verdana, Arial, Helvetica, sans-serif">In the Configuring window, a workspace with conflicts has an icon in which one of the files is red and red motion lines indicate a conflict. In <a href="merge.html#6767" tppabs="http://docs.sun.com/source/806-3573/merge.html#6767">FIGURE&nbsp;6-1</a>, <code>ws2</code> has a file in conflict with its parent, <code>ws1</code>.</font>
+</p>
+
+
+<a name="6765"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="merge6.gif" tppabs="http://docs.sun.com/source/806-3573/images/merge6.gif" height="183" width="424">
+<br></font>
+
+<a name="6767"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 6-1 	</b>&nbsp;&nbsp;Workspace Conflict Example</font>
+<p>
+  <a name="6729"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Conflicts need not be resolved immediately. You can continue to make changes and create new deltas in conflicted files in the child workspace. New deltas are created on a branch; when you finally resolve the conflict, the latest delta is the one merged with the version brought over from the parent. <em>Conflicts must be resolved before you can put back the files to the parent</em>. If you attempt a putback and files are in conflict, Configuring will prompt you to perform a bringover and then display the conflicted files in the Resolve tab of the Transactions dialog box.</font>
+</p>
+
+
+<p>
+  <a name="5249"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can start Merging in two places:</font>
+</p>
+
+<ul type=disc><a name="6711"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The Teamware menu</font><a name="5253"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The Resolve tab of the Transactions dialog box</font></ul>
+<h3>
+  <a name="6697"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Starting Merging From the TeamWare Menu</font>
+</h3>
+
+
+<p>
+  <a name="6698"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To start Merging, Choose TeamWare <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Merging in the main window of Configuring, Versioning, or Freezepointing.</font>
+</p>
+
+
+<h3>
+  <a name="5154"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Starting Merging From the Resolve Tab</font>
+</h3>
+
+
+<p>
+  <a name="7434"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The Resolve tab of the Transactions dialog box acts as intermediary between you and Merging. It lists conflicted files that are detected during Bringover Update transactions. The Resolve transaction allows you to select the conflicted file, and starts Merging with the conflicted files already loaded. Configuring automatically takes you to the Resolve tab of the Transactions dialog box if you chose to resolve a conflict during a putback. You can also open the Resolve tab by choosing Actions <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Resolve.</font>
+</p>
+
+
+<h3>
+  <a name="5377"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Viewing the Merging Window</font>
+</h3>
+
+
+<p>
+  <a name="5907"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When you start Merging, the Merging window appears (see <a href="merge.html#6924" tppabs="http://docs.sun.com/source/806-3573/merge.html#6924">FIGURE&nbsp;6-2</a>). The Merging window is divided into three panes: two side-by-side panes, which display different versions of the file, and the merged result in the bottom pane. The top two panes are read-only; the bottom pane contains selected lines from either or both versions of the file and can be edited to produce a final merged version.</font>
+</p>
+
+
+<p>
+  <a name="5382"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Each delta in each of the top panes is shown in comparison to the common ancestor delta:</font>
+</p>
+
+<ul type=disc><a name="5383"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The child delta is displayed in the left pane labeled Child </font><a name="5384"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The parent delta is displayed in the right pane labeled Parent </font></ul>
+<p>
+  <a name="5385"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The common ancestor is the delta from which both the parent and child deltas are descended. This arrangement permits you to make a three-way comparison--each delta to the common ancestor and each delta to the other.</font>
+</p>
+
+
+<h2>
+  <a name="6907"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Resolving Conflicts in a Workspace</font>
+</h2>
+
+
+<p>
+  <a name="7840"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To resolve a conflict in a workspace:</font>
+</p>
+
+<p><blockquote>
+<a name="6908"> </a><b>	1.	 In Configuring, double-click the icon of a conflicted workspace. </b></blockquote>
+</p><dl>  <dl>
+     <dt> <a name="6909"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The Resolve tab of the Transaction dialog box opens with the names of its conflicted files displayed in the File List pane.</font>
+  </dl>
+</dl><p><blockquote>
+<a name="6910"> </a><b>	2.	 Click Merge Conflicts.</b></blockquote>
+</p><dl>  <dl>
+     <dt> <a name="6911"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Resolve starts Merging and begins to process the list of files in the File List pane. For each file in the list, Configuring extracts the parent delta, the child delta, and the common ancestor from the SCCS history file and passes their path names to Merging. The Merging window opens with the files loaded and ready for merging.</font>
+  </dl>
+</dl><p><blockquote>
+<a name="6912"> </a><b>	3.	 Use Merging to resolve the differences between the parent and child versions of the file.</b></blockquote>
+</p><dl>  <dl>
+     <dt> <a name="6913"> </a><font face="Verdana, Arial, Helvetica, sans-serif">See <a href="merge.html#5209" tppabs="http://docs.sun.com/source/806-3573/merge.html#5209">Resolving Differences</a> for details about using Merging.</font>
+  </dl>
+</dl><p><blockquote>
+<a name="6914"> </a><b>	4.	 Once you have resolved conflicts, save the file.</b></blockquote>
+</p><dl>  <dl>
+     <dt> <a name="6915"> </a><font face="Verdana, Arial, Helvetica, sans-serif">After you use Merging to resolve differences between the parent and child versions of the file, Configuring creates a new delta in the child SCCS history file. The new delta contains the merged result you created using Merging.</font>
+  </dl>
+</dl><p><blockquote>
+<a name="7740"> </a><b>	5.	 Repeat this process until all conflicts are resolved.</b></blockquote>
+</p>
+<a name="6898"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif">.<img src="Merge.gif" tppabs="http://docs.sun.com/source/806-3573/images/Merge.gif" height="636" width="808">
+<br></font>
+
+<a name="6924"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 6-2 	</b>&nbsp;&nbsp;Merging Window</font>
+<h3>
+  <a name="6867"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Reading Merging Glyphs</font>
+</h3>
+
+
+<p>
+  <a name="5394"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To help you find differences more easily, Merging highlights lines that differ with color and glyphs. Yellow shows an addition, red shows a change, green shows a deletion.</font>
+</p>
+
+
+<p>
+  <a name="5804"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The meaning of glyphs is different if you are comparing two versions with each other (two input files) or if you identify an ancestor for the two versions of the file (three input files). <a href="merge.html#6924" tppabs="http://docs.sun.com/source/806-3573/merge.html#6924">FIGURE&nbsp;6-2</a> shows the Merging window with glyphs indicating differences between two files.</font>
+</p>
+
+
+<h4>
+  <a name="7879"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Two Input Files</font>
+</h4>
+
+
+<p>
+  <a name="7880"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When only two files have been loaded into Merging, lines in each file are marked by glyphs to indicate when they differ from corresponding lines in the other file:</font>
+</p>
+
+<ul type=disc><a name="7881"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If two lines are identical, no glyph is displayed.</font><a name="7882"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If two lines are different, a vertical bar (|) is displayed next to the line in each input text pane, and the different characters are highlighted in yellow.</font><a name="7883"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line appears in one file but not in the other, a plus sign (+) is displayed next to the line in the file where it appears, and the different characters are highlighted in red.</font><a name="7884"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Resolved differences are marked by glyphs in outline font.</font></ul>
+<h4>
+  <a name="7885"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Three Input Files</font>
+</h4>
+
+
+<p>
+  <a name="7886"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When you load two files to be merged, you can also specify a third file, called the ancestor of the two files. An ancestor file is any earlier version of the two files. When you identify an ancestor file, it is used as a basis to compare the two files and automatic merging can be done. Merging marks all lines in the derived files or their descendants that differ from the ancestor and produces a merged file based on all three files.</font>
+</p>
+
+<dl>  <dl>
+     <dt> <a name="7887"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The lines in the files that are different from the ancestor file are marked with change bars and colors. Here's what each means:</font>
+  </dl>
+</dl><ul type=disc><a name="7888"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line is identical in all three files, no glyph is displayed.</font><a name="7889"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line is not in the ancestor but was added to one or both of the descendants, a plus sign (+) is displayed next to the line in the file where the line was added, and the different characters are highlighted in yellow.</font><a name="7891"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line is in the ancestor but has been changed in one or both of the descendants, a vertical bar (|) is displayed next to the line in the file where the line was changed, and the different characters are highlighted in red.</font><a name="7893"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line is present in the ancestor but was removed from one or both of the descendants, a minus sign (-) is displayed next to the line in the file from which the line was removed, and the different characters are highlighted in green and in strikethrough.</font><a name="7896"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Resolved differences are marked by glyphs in outline font.</font></ul>
+<h3>
+  <a name="6808"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Loading Files Into Merging</font>
+</h3>
+
+
+<p>
+  <a name="6809"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If files are not automatically loaded into Merging by Resolve, you can load files by choosing File <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Open or clicking the Open button. The Open Files dialog box is displayed (see <a href="merge.html#6819" tppabs="http://docs.sun.com/source/806-3573/merge.html#6819">FIGURE&nbsp;6-3</a>).</font>
+</p>
+
+
+<a name="6816"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="openfiles.gif" tppabs="http://docs.sun.com/source/806-3573/images/openfiles.gif" height="302" width="337">
+<br></font>
+
+<a name="6819"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 6-3 	</b>&nbsp;&nbsp;Merging: Open Files Dialog Box</font>
+<p>
+  <a name="6823"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><a href="merge.html#7986" tppabs="http://docs.sun.com/source/806-3573/merge.html#7986">TABLE&nbsp;6-1</a> describes the text boxes in the Open Files dialog box.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption ALIGN="left"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a name="7986"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>TABLE 6-1 	</b>&nbsp;&nbsp;Merging Open Files Dialog Box Text Boxes&nbsp;</font></font></b></caption>
+  <tr bgcolor="#CCCCCC"><div align="center">
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="7990"> </a>Text Box</font></th>
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="7992"> </a>Description</font></th>
+  </div></tr>
+  <tr>
+    <td>
+<a name="7995"> </a>Directory</td>
+    <td>
+<a name="7997"> </a>Shows the current working directory whenever you start Merging from Sun WorkShop or from the command line with no arguments. You can edit this field. Merging interprets the file names you specify in the window as relative to the current working directory. Therefore, you can use constructs such as <em>subdir/filename</em> to specify a file in a subdirectory and <em>../filename</em> to specify a file in a parent directory. Any file name you specify that begins with a "<code>/</code>" character is interpreted as an absolute path name, not as relative to the current working directory.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7999"> </a>Left File </td>
+    <td>
+<a name="8001"> </a>Lets you specify the file to appear in the left text pane, also considered the child pane.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="8003"> </a>Right File </td>
+    <td>
+<a name="8005"> </a>Lets you specify the file to appear in the right text pane, also considered the parent pane.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="8008"> </a>Ancestor File</td>
+    <td>
+<a name="8010"> </a>Lets you specify the name of an ancestor file. If you type a file name in this text box, Merging compares the file to the files to be merged and identifies lines in those files that differ from the ancestor. The automerged file is based on the ancestor file, but the ancestor file itself is not displayed in any Merging window. If you do not type an ancestor file name, Merging compares only the left and right files and derives the output file from them. Automerging is not possible without an ancestor file.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="8012"> </a>Output File</td>
+    <td>
+<a name="8014"> </a>Lets you specify the name for the merged output file. Merging uses the name <code>filemerge.out</code> unless you specify a different name, and stores the file in the current working directory.</td>
+  </tr>
+</table>
+
+
+</p>
+<br></font>
+</p>
+
+
+<p>
+  <a name="8016"> </a><font face="Verdana, Arial, Helvetica, sans-serif">In a loaded Merging window, the names of the left file, right file, and output file are displayed above the appropriate text panes. The name of the ancestor file (for a three-way diff only) is displayed in the window header.</font>
+</p>
+
+
+<h2>
+  <a name="5209"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Resolving Differences</font>
+</h2>
+
+
+<p>
+  <a name="5211"> </a><font face="Verdana, Arial, Helvetica, sans-serif">While focusing on a difference, you can accept a line from either of the original deltas, or you can edit the merged version by hand. When you indicate that you are satisfied with your changes by clicking on a control panel button, the current difference is said to be <em>resolved</em>. After a difference is resolved, Merging changes the glyphs that mark the difference to outline (hollow) font. Merging then automatically advances to the next difference (if the Auto Advance property is on), or moves to another difference of your choice.</font>
+</p>
+
+
+<p>
+  <a name="5418"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A difference is represented by a blank line in the merged (output) file in the lower text pane. To resolve a difference, you edit the line displayed by either:</font>
+</p>
+
+<ul type=disc><a name="5419"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Accepting the line displayed and incorporating it into the merged file by clicking either the Accept or Accept &amp; Next button over the pane you want to accept.</font><a name="5420"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Editing the line in the merged file by hand, and marking the difference as resolved by choosing Edit <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Mark Selected as Resolved.</font></ul>
+<p>
+  <a name="7747"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you want Merging to automatically put lines that are not in conflict (that is, the line has changed in one file but not in the other) into the merged file, you can select Options <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Auto Merge. Then when you start Merging, all the resolved lines are put in the merged file for you. For more information, see <a href="merge.html#4800" tppabs="http://docs.sun.com/source/806-3573/merge.html#4800">Using Automatic Merging</a>.</font>
+</p>
+
+
+<p>
+  <a name="5421"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To resolve differences between files:</font>
+</p>
+
+<p><blockquote>
+<a name="5083"> </a><b>	1.	 Determine which difference you are dealing with:</b></blockquote>
+</p><ul type=disc><a name="8038"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Read the Status Line on the upper left side of the Merging window.</font><a name="8039"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>See which glyph is highlighted.</font></ul>
+<p>
+  <a name="8041"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The difference on which Merging is focusing at any given time is called the <em>current difference</em>. The difference that appears immediately after in the file is called the <em>next difference</em>; the difference that appears immediately before in the file is called the <em>previous difference</em>.</font>
+</p>
+
+<p><blockquote>
+<a name="8054"> </a><b>	2.	 Choose a version and accept it:</b></blockquote>
+</p><ul type=disc><a name="5457"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>To accept the child version of the line, click the Accept button above the file on the left. </font><a name="8053"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>To accept the parent version of the conflicted line, click on the Accept button above the file on the right. </font></ul>
+<p>
+  <a name="8055"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The version you accept will appear in the merged file in the bottom pane.</font>
+</p>
+
+<p><blockquote>
+<a name="5084"> </a><b>	3.	 Click Next to go to the next conflict in the file. </b></blockquote>
+</p>
+<p>
+  <a name="5499"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To move between differences:</font>
+</p>
+
+<ul>  <ul>
+<br><li><a name="5495"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Click one of the Next buttons.</font>
+<br><li><a name="5496"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Use the Navigate menu.</font>
+<br><li><a name="5502"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Use the Diff Navigator (the up and down arrows above where the parent and child panes meet).</font>
+  </ul>
+</ul>
+<p>
+  <a name="5492"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you do not want your changes and you want to start over, click the Reload button. This ignores all the conflicts that you have resolved and reloads the files.</font>
+</p>
+
+<p><blockquote>
+<a name="5086"> </a><b>	4.	 Click Save when you have resolved all conflicts.</b></blockquote>
+</p>
+<h2>
+  <a name="4800"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Using Automatic Merging</font>
+</h2>
+
+
+<p>
+  <a name="4801"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you have loaded a common ancestor file, Merging is often able to resolve differences automatically, based on the following rules:</font>
+</p>
+
+<ul type=disc><a name="4803"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line has not been changed in either descendant (it is identical in all three files), it is placed in the merged file.</font><a name="4804"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line has been changed in only one of the descendants, the changed line is placed in the merged file. A change could be the addition or removal of an entire line, or an alteration to some part of a line.</font><a name="4805"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If identical changes have been made to a line in both descendants, the changed line is placed in the merged file. </font><a name="4806"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>If a line has been changed differently in both descendant files so that it is different in all three files, Merging places no line in the merged file. You must resolve the difference--either by using a line from the right or left file, or by editing the merged file by hand.</font><a name="6247"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Resolved differences are marked by glyphs in outline font.</font></ul>
+<h3>
+  <a name="6987"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Automerging Rules Summary</font>
+</h3>
+
+
+<p>
+  <a name="7017"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><a href="merge.html#7261" tppabs="http://docs.sun.com/source/806-3573/merge.html#7261">TABLE&nbsp;6-2</a> summarizes the automerging algorithm. </font>
+</p>
+
+<ul type=disc><a name="8075"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Ancestor is the version of a text line that is in the ancestor file</font><a name="8078"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Change 1 is a change to that line in one of the descendants</font><a name="8081"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Change 2 is another change, different from Change 1. </font><a name="8082"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>When a line is changed differently in the left and right descendants, automerging does not put either line in the merged file.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption ALIGN="left"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a name="7261"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>TABLE 6-2 	</b>&nbsp;&nbsp;Automerging Rules Summary</font></font></b></caption>
+  <tr bgcolor="#CCCCCC"><div align="center">
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="7267"> </a>Left Descendant</font></th>
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="7269"> </a>Right Descendant</font></th>
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="7271"> </a>Automerged Line</font></th>
+  </div></tr>
+  <tr>
+    <td>
+<a name="7273"> </a>Ancestor</td>
+    <td>
+<a name="7275"> </a>Ancestor</td>
+    <td>
+<a name="7277"> </a>Ancestor</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7279"> </a>Change 1</td>
+    <td>
+<a name="7281"> </a>Ancestor</td>
+    <td>
+<a name="7283"> </a>Change 1</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7285"> </a>Ancestor</td>
+    <td>
+<a name="7287"> </a>Change 2</td>
+    <td>
+<a name="7289"> </a>Change 2</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7291"> </a>Change 1</td>
+    <td>
+<a name="7293"> </a>Change 1</td>
+    <td>
+<a name="7295"> </a>Change 1</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7297"> </a>Change 1</td>
+    <td>
+<a name="7299"> </a>Change 2</td>
+    <td>
+<a name="7301"> </a>No Automerge</td>
+  </tr>
+</table>
+
+
+</p>
+<br></font></ul>
+<h2>
+  <a name="7416"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Undoing Changes</font>
+</h2>
+
+
+<p>
+  <a name="7773"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can undo changes with the Edit <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Undo command.</font>
+</p>
+
+
+<p>
+  <a name="7417"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can also use the Reload button on the Merging window tool bar to ignore all edits that have been performed on the two files and reload them from disk. Any nonconflicting differences will be displayed in the bottom pane if the Auto Merge option is selected.</font>
+</p>
+
+
+<h2>
+  <a name="7413"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Merging Options</font>
+</h2>
+
+
+<p>
+  <a name="5852"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can change the behavior of Resolve and Merging in two places:</font>
+</p>
+
+<ul type=disc><a name="4820"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Resolve Options in Configuring</font><a name="4993"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Display Options in Merging</font></ul>
+<h4>
+  <a name="8107"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Resolve Options</font>
+</h4>
+
+
+<p>
+  <a name="8109"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The Resolve tab of the Tool Properties window (<a href="merge.html#8159" tppabs="http://docs.sun.com/source/806-3573/merge.html#8159">FIGURE&nbsp;6-4</a>) lets you change the behavior of the Resolve pane of the Transactions window. The specific properties are described in <a href="merge.html#8167" tppabs="http://docs.sun.com/source/806-3573/merge.html#8167">TABLE&nbsp;6-3</a>.</font>
+</p>
+
+
+<p>
+  <a name="8131"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><img src="Resolve_options.gif" tppabs="http://docs.sun.com/source/806-3573/images/Resolve_options.gif" height="397" width="608">
+</font>
+</p>
+
+<a name="8159"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 6-4 	</b>&nbsp;&nbsp;Tool Properties Dialog Box: Resolve Tab</font>
+<p>
+  <a name="8160"> </a><font face="Verdana, Arial, Helvetica, sans-serif"></font>
+</p>
+
+
+<p>
+  <a name="8194"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption ALIGN="left"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a name="8167"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>TABLE 6-3 	</b>&nbsp;&nbsp;Tool Properties Dialog Box: Resolve Tab</font></font></b></caption>
+  <tr bgcolor="#CCCCCC"><div align="center">
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="8171"> </a>Property</font></th>
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="8173"> </a>Description</font></th>
+  </div></tr>
+  <tr>
+    <td>
+<a name="8175"> </a>Auto Start Merging Window</td>
+    <td>
+<a name="8177"> </a>Causes Merging to start automatically when you select the Resolve transaction pane. </td>
+  </tr>
+  <tr>
+    <td>
+<a name="8179"> </a>Auto Advance</td>
+    <td>
+<a name="8181"> </a>Causes the next file in the list to be automatically loaded into Merging after the current file is resolved. </td>
+  </tr>
+  <tr>
+    <td>
+<a name="8183"> </a>Prompt for Checkin Comments</td>
+    <td>
+<a name="8185"> </a>A default comment is automatically supplied during check-in after you resolve a file. This property causes you to be prompted for an additional comment that is appended to the standard comment.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="8187"> </a>Use Existing Merging Window</td>
+    <td>
+<a name="8189"> </a>If this property is set, a running Merging process is reused during subsequent resolve operations.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="8191"> </a>Auto Save (when no unresolved diffs)</td>
+    <td>
+<a name="8193"> </a>If this property is set, and all the changes in the file can be "automerged," the files will also be saved and checked in.</td>
+  </tr>
+</table>
+
+
+</p>
+<br></font>
+</p>
+
+
+<h4>
+  <a name="4991"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Display Options in Merging</font>
+</h4>
+
+
+<p>
+  <a name="5567"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The Options menu in the Merging window contains the following components. The first five options on this menu are toggles, that is, you can turn them on and off by selecting them. A small box appears to the left of an option when it is on.</font>
+</p>
+
+
+<p>
+  <a name="5989"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><a href="merge.html#5590" tppabs="http://docs.sun.com/source/806-3573/merge.html#5590">TABLE&nbsp;6-4</a> lists the Merging Display options.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption ALIGN="left"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a name="5590"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>TABLE 6-4 	</b>&nbsp;&nbsp;Merging: Display Options&nbsp;</font></font></b></caption>
+  <tr bgcolor="#CCCCCC"><div align="center">
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="5594"> </a>Property</font></th>
+    <th colspan=2 rowspan=1><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="5596"> </a>Description</font></th>
+  </div></tr>
+  <tr>
+    <td>
+<a name="5598"> </a>Auto Merge</td>
+    <td colspan=2 rowspan=1><a name="5600"> </a>Automatically resolves any nonconflicting differences and constructs a merged version in the Merged Result Pane. The default is on. </td>
+  </tr>
+  <tr>
+    <td>
+<a name="5602"> </a>Scroll Together</td>
+    <td colspan=2 rowspan=1><a name="5604"> </a>Lets you set the text panes so they scroll together (corresponding lines are always aligned in each window) or scroll separately. The default setting is Scroll Together. </td>
+  </tr>
+  <tr>
+    <td>
+<a name="5606"> </a>Show Line Numbers</td>
+    <td colspan=2 rowspan=1><a name="5608"> </a>Displays line numbers in the unmerged files.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="5610"> </a>Show Line Ends</td>
+    <td colspan=2 rowspan=1><a name="5612"> </a>Displays a small black box at the end of each line in the unmerged files.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="5614"> </a>Show Diff Navigator</td>
+    <td colspan=2 rowspan=1><a name="5616"> </a>Displays the Diff Navigator between the two unmerged files. The Diff Navigator displays differences between the two files as colored lines. Click the slide boxes on either side of the Diff Navigator to scroll through either file, or click the arrows on the top or bottom to move the same distance in both files.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="5699"> </a>Tab Display</td>
+    <td colspan=2 rowspan=1><a name="5701"> </a>Lets you customize tab stops. You can choose:</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7496"> </a><br></td>
+    <td>
+<a name="7498"> </a>Control Character (^I)</td>
+    <td>
+<a name="7510"> </a>Displays the ^I control character for each tab space. The default setting is on.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7490"> </a><br></td>
+    <td>
+<a name="7492"> </a>Spaces</td>
+    <td>
+<a name="7523"> </a>Allows you to set the number of spaces in each tab stop to 1, 2, 3, 4, 6, 8, 10, 12, or 16. The default is 8.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7484"> </a>Diff Options</td>
+    <td colspan=2 rowspan=1><a name="7543"> </a>Lets you customize diff behavior. You can choose:</td>
+  </tr>
+  <tr>
+    <td>
+<a name="5695"> </a><br></td>
+    <td>
+<a name="5759"> </a>Ignore trailing white space</td>
+    <td>
+<a name="7482"> </a>Ignores trailing white space when finding lines that differ. The default setting is off.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7555"> </a><br></td>
+    <td>
+<a name="7569"> </a>Ignore all white space</td>
+    <td>
+<a name="7559"> </a>Ignores embedded and trailing space when finding lines that differ. The default is off.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="7549"> </a><br></td>
+    <td>
+<a name="7581"> </a>Suppress case sensitivity</td>
+    <td>
+<a name="7553"> </a>Ignore letter case when finding lines that differ. The default is off.</td>
+  </tr>
+</table>
+
+
+</p>
+<br></font>
+</p>
+
+
+<h2>
+  <a name="4825"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Merging Example</font>
+</h2>
+
+
+<p>
+  <a name="4827"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This example merges two files that have a common ancestor. The files are <code>file_1</code> and <code>file_2</code>, and the ancestor file is named <code>matriarch</code>. The descendant files <code>file_1</code> and <code>file_2</code> were derived from <code>matriarch</code> by editing. The edits show all varieties of changes that could occur in the descendants: deleting lines, adding new lines, and changing lines.</font>
+</p>
+
+
+<p>
+  <a name="4828"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The content of each line in the example helps to identify whether or not it was changed, and how. The ancestor file contains only twelve lines and is shown in <a href="merge.html#4835" tppabs="http://docs.sun.com/source/806-3573/merge.html#4835">CODE&nbsp;EXAMPLE&nbsp;6-1</a>.</font>
+</p>
+
+
+<p>
+  <a name="4832"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Merging does not number lines in the files it loads; the numbers are part of the example text and were placed there for clarity.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0"><caption align="left"><a name="4835"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>CODE EXAMPLE 6-1 	</b>&nbsp;&nbsp;Ancestor File (<code>matriarch</code>)</font></caption><tr><td>
+<table border="0" 
+       cellpadding="5" cellspacing="0">  
+  <tr>
+    <td><font face="Courier"><a name="4837"> </a>
+<pre>
+</pre><a name="4838"> </a>
+<pre>1 This line is deleted in file_1
+</pre><a name="4839"> </a>
+<pre>2 This line is in all three files
+</pre><a name="4840"> </a>
+<pre>3 This line is deleted in file_2
+</pre><a name="4841"> </a>
+<pre>4 This line is in all three files
+</pre><a name="4842"> </a>
+<pre>5 This line is in all three files
+</pre><a name="4843"> </a>
+<pre>6 This line is changed in descendants
+</pre><a name="4844"> </a>
+<pre>7 This line is in all three files
+</pre><a name="4845"> </a>
+<pre>8 This line is changed in descendants
+</pre><a name="4846"> </a>
+<pre>9 This line is in all three files
+</pre><a name="4847"> </a>
+<pre>10 This line is changed in file_2
+</pre><a name="4848"> </a>
+<pre>11 This line is in all three files
+</pre><a name="4849"> </a>
+<pre>12 This line is in all three files
+</pre><a name="4850"> </a>
+<pre>
+</pre></font></td>
+  </tr>
+</table></td></tr>
+</table>
+</p></font>
+</p>
+
+
+<p>
+  <a name="4854"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><a href="merge.html#4861" tppabs="http://docs.sun.com/source/806-3573/merge.html#4861">CODE&nbsp;EXAMPLE&nbsp;6-2</a> shows the contents of <code>file_1</code>. This file is identical to <code>matriarch</code> with the following exceptions: </font>
+</p>
+
+<ul type=disc><a name="4855"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The line numbered 1 in the <code>matriarch</code> file was deleted in <code>file_1</code>.</font><a name="4856"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>A new line was added following the line numbered 4.</font><a name="4857"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The line numbered 6 was changed (a different change was made to this line in <code>file_2</code>).</font><a name="4858"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The line numbered 8 in the <code>matriarch</code> file was changed (an identical change was made to this line in <code>file_2</code>).<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0"><caption align="left"><a name="4861"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>CODE EXAMPLE 6-2 	</b>&nbsp;&nbsp;Descendant File (<code>file_1</code>)</font></caption><tr><td>
+<table border="0" 
+       cellpadding="5" cellspacing="0">  
+  <tr>
+    <td><font face="Courier"><a name="4863"> </a>
+<pre>
+</pre><a name="4864"> </a>
+<pre>2 This line is in all three files
+</pre><a name="4865"> </a>
+<pre>3 This line is deleted in file_2
+</pre><a name="4866"> </a>
+<pre>4 This line is in all three files
+</pre><a name="4867"> </a>
+<pre> &amp;&amp;&amp; Added to file_1 &amp;&amp;&amp;
+</pre><a name="4868"> </a>
+<pre>6 This line is modified in file_1 from matriarch
+</pre><a name="4869"> </a>
+<pre>5 This line is in all three files
+</pre><a name="4870"> </a>
+<pre>7 This line is in all three files
+</pre><a name="4871"> </a>
+<pre>8 #&amp;# Changed in file_1 and file_2 #&amp;#
+</pre><a name="4872"> </a>
+<pre>9 This line is in all three files
+</pre><a name="4873"> </a>
+<pre>10 This line is changed in file_2
+</pre><a name="4874"> </a>
+<pre>11 This line is in all three files
+</pre><a name="4875"> </a>
+<pre>12 This line is in all three files
+</pre><a name="4876"> </a>
+<pre>
+</pre></font></td>
+  </tr>
+</table></td></tr>
+</table>
+</p></font></ul>
+<p>
+  <a name="4880"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><a href="merge.html#4887" tppabs="http://docs.sun.com/source/806-3573/merge.html#4887">CODE&nbsp;EXAMPLE&nbsp;6-3</a> shows the contents of <code>file_2</code>. This file is identical to <code>matriarch</code> with the following exceptions: </font>
+</p>
+
+<ul type=disc><a name="4881"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The line numbered 3 in the <code>matriarch</code> file was deleted.</font><a name="4882"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The line numbered 6 was changed (a different change was made to this line in <code>file_1</code>).</font><a name="4883"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The line numbered 8 was changed (an identical change was made to this line in <code>file_1</code>).</font><a name="4884"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The line numbered 10 was changed (no change was made to this line in <code>file_1</code>).</font><a name="4903"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>A new line was added following the line numbered 11.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0"><caption align="left"><a name="4887"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>CODE EXAMPLE 6-3 	</b>&nbsp;&nbsp;Descendant File (<code>file_2)</code></font></caption><tr><td>
+<table border="0" 
+       cellpadding="5" cellspacing="0">  
+  <tr>
+    <td><font face="Courier"><a name="4889"> </a>
+<pre>
+</pre><a name="4890"> </a>
+<pre>1 This line is deleted in file_1
+</pre><a name="4891"> </a>
+<pre>2 This line is in all three files
+</pre><a name="4892"> </a>
+<pre>4 This line is in all three files
+</pre><a name="4893"> </a>
+<pre>5 This line is in all three files
+</pre><a name="4894"> </a>
+<pre>6 This line is altered in file_2 from matriarch
+</pre><a name="4895"> </a>
+<pre>7 This line is in all three files
+</pre><a name="4896"> </a>
+<pre>8 #&amp;# Changed in file_1 and file_2 #&amp;#
+</pre><a name="4897"> </a>
+<pre>9 This line is in all three files
+</pre><a name="4898"> </a>
+<pre>10 ### Changed in file_2 ###
+</pre><a name="4899"> </a>
+<pre>11 This line is in all three files
+</pre><a name="4900"> </a>
+<pre> ### Added to file_2 ###
+</pre><a name="4901"> </a>
+<pre>12 This line is in all three files
+</pre><a name="4902"> </a>
+<pre>
+</pre></font></td>
+  </tr>
+</table></td></tr>
+</table>
+</p></font></ul>
+<p>
+  <a name="4904"> </a><font face="Verdana, Arial, Helvetica, sans-serif">In the upper left of the Merging window, Merging has reported finding seven differences, of which only one remains unresolved (see <a href="merge.html#4919" tppabs="http://docs.sun.com/source/806-3573/merge.html#4919">FIGURE&nbsp;6-5</a>). Six differences were resolved by automerging and are marked by glyphs in outline font (see <a href="merge.html#4925" tppabs="http://docs.sun.com/source/806-3573/merge.html#4925">FIGURE&nbsp;6-6</a> and <a href="merge.html#4931" tppabs="http://docs.sun.com/source/806-3573/merge.html#4931">FIGURE&nbsp;6-7</a>).</font>
+</p>
+
+
+<a name="4917"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="MergeStatus.gif" tppabs="http://docs.sun.com/source/806-3573/images/MergeStatus.gif" height="47" width="533">
+<br></font>
+
+<a name="4919"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 6-5 	</b>&nbsp;&nbsp;Merging Status of <code>file_1</code> and <code>file_2</code> After Automerging</font>
+<a name="4923"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="file_1.gif" tppabs="http://docs.sun.com/source/806-3573/images/file_1.gif" height="261" width="537">
+<br></font>
+
+<a name="4925"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 6-6 	</b>&nbsp;&nbsp;<code>File_1</code> Displayed in Child Pane After Automerging</font>
+<a name="4929"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="file_2.gif" tppabs="http://docs.sun.com/source/806-3573/images/file_2.gif" height="250" width="537">
+<br></font>
+
+<a name="4931"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 6-7 	</b>&nbsp;&nbsp;<code>File_2</code> Displayed in Parent Pane After Automerging</font>
+<p>
+  <a name="4933"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The meaning of the glyphs is as follows: a vertical bar means a change in the marked line, a plus sign signifies a line added, a minus sign means a line was deleted. Unresolved states are marked by solid glyphs, unresolved by outline. These glyphs are highlighted in color except when the color map is full. The default significance is: red indicates a change, green indicates a deletion, yellow shows an addition.</font>
+</p>
+
+
+<p>
+  <a name="4934"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The unresolved difference (line 6) is marked by a vertical bar. </font>
+</p>
+
+
+<h3>
+  <a name="4936"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Examining Differences</font>
+</h3>
+
+
+<p>
+  <a name="4937"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Merging highlights the unresolved difference, which it identifies as the line numbered 6 in <code>file_1</code> and <code>file_2</code>. When differences are being resolved with Merging, the resulting Merging window (<code>filemerge</code>.<code>out</code>) shows the current state of the file with automatic merging. </font>
+</p>
+
+
+<p>
+  <a name="4938"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can proceed to the next unresolved difference by clicking the down arrow above the appropriate file or choosing Navigate <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif"> <font  size="1" face="Verdana, Arial, Helvetica, sans-serif"> </font>Next <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Difference. The next difference becomes the current difference.</font>
+</p>
+
+
+<p>
+  <a name="4939"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can proceed through the differences by clicking on the down arrow.</font>
+</p>
+
+
+<p>
+  <a name="4940"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Automerging preserves a change that was made to one file if no change was made in the other file. When a difference has not been resolved by automerging, as indicated by the solid highlighted glyph next to the lines involved in the difference, you need to resolve the difference by making a choice. The vertical line indicates that the line has been changed (as opposed to added or deleted). Automerging does not include either line in the merged file because the same line was changed differently in the two files. You will have to determine which change to accept.</font>
+</p>
+
+
+<h4>
+  <a name="4943"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Resolving a Difference</font>
+</h4>
+
+
+<p>
+  <a name="4944"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You could resolve this difference in one of the following ways:</font>
+</p>
+
+<ul type=disc><a name="4945"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Clicking the Accept or Accept &amp; Next button on the left to place the line from <code>file_1</code> into the output file</font><a name="4946"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Clicking the Accept or Accept &amp; Next button on the right to place the line from <code>file_2</code> into the output file</font><a name="4947"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Editing the output file by hand</font></ul>
+<h4>
+  <a name="4948"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Editing the Output File</font>
+</h4>
+
+
+<p>
+  <a name="4950"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To edit the output file:</font>
+</p>
+
+<p><blockquote>
+<a name="8257"> </a><b>	1.	 Move the pointer into the output file's text pane and place it in the line you want to change. </b></blockquote>
+</p><dl>  <dl>
+     <dt> <a name="8261"> </a><font face="Verdana, Arial, Helvetica, sans-serif">In this example, the following line was typed in:</font>
+  </dl>
+</dl>
+<p>
+  <a name="4951"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><code>&gt;&gt;&gt; This line edited by hand &lt;&lt;&lt;</code></font>
+</p>
+
+<p><blockquote>
+<a name="4952"> </a><b>	2.	 Choose Edit <img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif">  Mark Selected as Resolved. </b></blockquote>
+</p><dl>  <dl>
+     <dt> <a name="8264"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This menu item marks the difference as resolved. In this example there are no more unresolved differences, so the next difference remains the current one.</font>
+  </dl>
+</dl>
+<p>
+  <a name="4953"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The message in the upper left part of the window now indicates that all differences have been resolved. </font>
+</p>
+
+<p><blockquote>
+<a name="8265"> </a><b>	3.	 Verify the automerged differences.</b></blockquote>
+</p>
+<p>
+  <a name="4954"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Navigate through the differences by clicking the down arrow. </font>
+</p>
+
+
+<p>
+  <a name="4955"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The final difference results from a line that was added only to <code>file_2</code>. Merging would place the new line in the output file, just as it did when a new line was added to <code>file_1</code>, which resulted in the third difference.</font>
+</p>
+
+</blockquote>
+
+<hr>
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="6" cellspacing-"0" border="0">
+<tr>
+<td valign="top" align="left">
+<font size="2">
+<a href="javascript:if(confirm('http://www.sun.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/'" tppabs="http://www.sun.com/">Sun Microsystems, Inc.</a><br>
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/PRN.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/PRN.html'" tppabs="http://docs.sun.com/source/806-3573/PRN.html">Copyright information</a>. All rights reserved.<br>
+<a href="javascript:if(confirm('http://www.sun.com/cgi-bin/comment-form.pl  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/cgi-bin/comment-form.pl'" tppabs="http://www.sun.com/cgi-bin/comment-form.pl">Feedback</a><br>
+</font>
+</td>
+
+<td valign="top" align="right">
+<font face="helvetica,arial" size="2">
+<a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html">Library</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html">Contents</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="version.html" tppabs="http://docs.sun.com/source/806-3573/version.html">Previous</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="versionadv.html" tppabs="http://docs.sun.com/source/806-3573/versionadv.html">Next</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html">Index</a>
+</font>
+</td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Perforce and ClearCase: A Performance Comparison</title><!-- metadata -->
+
+
+
+
+
+
+
+<meta name="generator" content="vim">
+<meta name="version" content="P4CC 0.8">
+<meta name="presdate" content="20060209">
+<meta name="author" content="Steven R. Kroeker">
+<meta name="company" content="Parrus Technologies"><!-- configuration parameters -->
+
+<meta name="defaultView" content="slideshow">
+<meta name="controlVis" content="hidden"><!-- style sheet links -->
+
+<link rel="stylesheet" href="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/slides.css" type="text/css" media="screen" id="slideProj">
+<link rel="stylesheet" href="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/outline.css" type="text/css" media="screen" id="outlineStyle">
+<link rel="stylesheet" href="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/print.css" type="text/css" media="print" id="slidePrint">
+<link rel="stylesheet" href="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/opera.css" type="text/css" media="projection" id="operaFix"><!-- embedded styles -->
+
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style><!-- S5 JS -->
+
+<script src="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/slides.js" type="text/javascript"></script><style id="s5ss" media="screen, projection">body {font-size: 28px !important;}</style><script charset="utf-8" id="injection_graph_func" src="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/injection_graph_func.js"></script></head><body style="display: block;">
+
+<div class="layout">
+<div id="controls"><form action="#" id="controlForm" onmouseover="showHide('s');" onmouseout="showHide('h');"><div style="visibility: hidden;" class="hideme" id="navLinks"><a accesskey="t" id="toggle" href="javascript:toggle();">&#216;</a><a accesskey="z" id="prev" href="javascript:go(-1);">«</a><a accesskey="x" id="next" href="javascript:go(1);">»</a><div id="navList"><select id="jumplist" onchange="go('j');"><option value="0">0 : A Comparison of Perforce and ClearCase Performance issues</option><option value="1">1 : Presentation Overview</option><option value="2">2 : Performance Analysis Approach</option><option value="3">3 : Perforce Performance Model</option><option value="4">4 : ClearCase Performance Model</option><option value="5">5 : Selected operations from SDLC</option><option value="6">6 : Workspace Setup</option><option value="7">7 : Synchronize WorkSpace / Repository</option><option value="8">8 : Developer Activities</option><option value="9">9 : Commit change to project stream</option><option value="10">10 : Builds</option><option value="11">11 : Labels</option><option value="12">12 : Branches</option><option value="13">13 : Remote Development</option><option value="14">14 : In Summary</option><option value="15">15 : Questions</option><option value="16">16 : Closing</option></select></div></div></form></div>
+<div id="currentSlide"><!-- DO NOT EDIT --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Perforce / ClearCase Performance - a Comparison</h1>
+<h2>Copyright Parrus Technologies • 10 Feb 2006</h2>
+</div>
+</div>
+
+<div class="presentation">
+
+<div id="slide0" class="slide">
+<h1>A Comparison of Perforce and ClearCase Performance issues</h1>
+<h3>Steven R. Kroeker</h3>
+<h4><a href="http://www.parrus.com/">Parrus Technologies</a></h4>
+</div>
+
+
+<div id="slide1" class="slide">
+<h1>Presentation Overview</h1>
+<p>
+</p><ul>
+<li>An approach to perfomance analysis</li>
+<li>A review of Perforce and ClearCase models</li>
+<li>Selected operations from the Software Development Life Cycle</li>
+<li>Question and Answer Discussion</li>
+</ul>
+</div>
+
+
+<div id="slide2" class="slide">
+	<h1>Performance Analysis Approach</h1>
+<h4>Repeated Identification and Addressing the current Performance Bottleneck.</h4>
+<ul class="">
+<li class="">Identify current Performance Bottleneck</li>
+<ul class="">
+<li class="">Need to determine the measurement points based on architecture model</li>
+</ul>
+<li class="">Address Performance Bottleneck, directly or indirectly</li>
+<ul class="">
+<li class="">Sometimes "correct" fix is not available or too costly</li>
+</ul>
+<li class="">Repeat until Performance is acceptable</li>
+</ul>
+</div>
+
+
+<div id="slide3" class="slide">
+<h1>Perforce Performance Model</h1>
+<div style="text-align: center;">
+<img src="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/p4model.jpg" alt="" title="Perforce Model">
+</div>
+</div>
+
+
+<div id="slide4" class="slide">
+<h1>ClearCase Performance Model</h1>
+<div style="text-align: center;">
+<img src="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/CCover.jpg" alt="" title="ClearCase Model">
+</div>
+</div>
+
+
+<div id="slide5" class="slide">
+<h1>Selected operations from SDLC</h1>
+<table border="2" width="100%">
+<tbody><tr><th>Perforce</th><th>ClearCase</th></tr>
+<tr><td>P4 client</td><td>ct mkview dynamic or Join Project snapshot</td></tr>
+<tr><td>P4 sync</td><td>ct update and ct rebase</td></tr>
+<tr><td>Checkout</td><td>Checkout</td></tr>
+<tr><td>-</td><td>Checkin</td></tr>
+<tr><td>Merge</td><td>Merge</td></tr>
+<tr><td>P4 submit</td><td>ct deliver</td></tr>
+<tr><td>Build</td><td>Build</td></tr>
+<tr><td>Label</td><td>Label</td></tr>
+<tr><td colspan="2">Differences in an the approach to Branch operation</td></tr>
+<tr><td>Proxy</td><td>MultiSite</td></tr>
+</tbody></table>
+</div>
+
+
+<div id="slide6" class="slide">
+<h1>Workspace Setup</h1>
+<ul>
+<li>Perforce - client, sync</li>
+<ul>
+<li>Small I/O for Client Spec</li>
+<li>DB "Walk" and transfer of specified version contents to workspace</li>
+</ul>
+<li>ClearCase Dynamic - mkview, setcs</li>
+<ul>
+<li>Small VOB I/O to record view</li>
+<li>Moderate I/O to setup View DB and structure</li>
+</ul>
+<li>ClearCase Snapshot - mkview, setcs</li>
+<ul>
+<li>Small VOB I/O to record view</li>
+<li>Process of ConfigSpec Load rules against current View DB and VOB DB with transfer of versions to View workspace</li>
+</ul>
+</ul>
+</div>
+
+<div id="slide7" class="slide">
+<h1>Synchronize WorkSpace / Repository</h1>
+<ul>
+<li>Perforce - sync</li>
+<ul>
+<li>"Walk" the server DB for specified files, check to see if updated
+since last sync, transfer files to workspace if DB indicates file
+updated</li>
+<li>Can specify portion of workspace to sync</li>
+</ul>
+<li>ClearCase Dynamic - (per file access)</li>
+<ul>
+<li>For each file or directory access through MVFS a check is made to locate disk location to re-direct IO,</li>
+<li>Directory version information built on the fly</li>
+<li>File access may involve a VOB cache in cleartext from source</li>
+</ul>
+<li>ClearCase Snapshot - reload, rebase</li>
+<ul>
+<li>Compare View DB with VOB DB, according to config spec, transfer files to workspace as required</li>
+</ul>
+</ul>
+</div>
+
+<div id="slide8" class="slide">
+<h1>Developer Activities</h1>
+<h4>Checkout, checkin, merge</h4>
+<ul>
+<li>Checkout</li>
+<ul>
+<li>Update repository DB to indicate checkout state, change file in workspace to writeable</li>
+</ul>
+<li>Checkin</li>
+<ul>
+<li>For ClearCase, transfer file to VOB source and update DB with new version</li>
+</ul>
+<li>Merge of file</li>
+<ul>
+<li>Compare of file in workspace with file transferred from repository with results to workspace</li>
+</ul>
+</ul>
+</div>
+
+
+<div id="slide9" class="slide">
+<h1>Commit change to project stream</h1>
+<ul>
+<li>Perforce - submit</li>
+<ul>
+<li>For files in changelist (add, ckout, delete), transfer files to
+depot and update depot files, update DB in such a fashion that a single
+DB write indicate operation complete</li>
+<li>File merges may be required to complete transfer from workspace to depot</li>
+</ul>
+<li>ClearCase - deliver</li>
+<ul>
+<li>This a directory merge operation from change branch to integration branch</li>
+<li>For trivial case this is DB and and control communication between client and VOB server, no file transfer</li>
+<li>Non-trivial cases involve file or directory merges
+</li></ul>
+</ul>
+</div>
+
+
+<div id="slide10" class="slide">
+<h1>Builds</h1>
+<ul>
+<li>Perforce</li>
+<ul>
+<li>Only Client workspace IO</li>
+</ul>
+<li>ClearCase Dynamic</li>
+<ul>
+<li>MVFS based IO for each file</li>
+<li>Audited builds produce "Derived Object" recording each file version, addition control IO to View and VOB DB</li>
+</ul>
+<li>ClearCase Snapshot</li>
+<ul>
+<li>Only View workspace IO</li>
+</ul>
+</ul>
+</div>
+
+
+<div id="slide11" class="slide">
+<h1>Labels</h1>
+<ul>
+<li>Perforce</li>
+<ul>
+<li>Specification based definition</li>
+<li>The actual label operation causes a DB update for each file version which is labeled</li>
+</ul>
+<li>ClearCase</li>
+<ul>
+<li>Control I/O as label applied to file or directory version</li>
+<li>Additional I/O to determine version if recursive or ConfigRec based label</li>
+</ul>
+</ul>
+</div>
+
+
+<div id="slide12" class="slide">
+<h1>Branches</h1>
+<ul>
+<li>Perforce</li>
+<ul>
+<li>Specification based</li>
+<li>Selection from branch selects from branch "depot", if modified, otherwise selection is by branch specification</li>
+<li>A submit to a branch, forces a DB branch update to the file if needed prior to the commit of the submit operation</li> 
+</ul>
+<li>ClearCase</li>
+<ul>
+<li>Under control of local View config specification (or explicit command by file)</li>
+<li>Checkout causes branch of file prior to checkout activity</li>
+<li>branch is a DB update for file</li>
+</ul>
+</ul>
+</div>
+
+<div id="slide13" class="slide">
+<h1>Remote Development</h1>
+<ul>
+<li>Perforce Proxy</li>
+<ul>
+<li>File content is cached the 1st time referenced</li>
+<li>ALL control information is passed through to repository server</li>
+<li>Useful for decreasing file transfer IO from repository server</li>
+</ul>
+<li>ClearCase MultiSite</li>
+<ul>
+<li>Maintains ReadOnly copy of files and DB for remote sites</li>
+<li>Synchronization between sites a separate managed process</li>
+<li>This site may only update information assigned to this site</li>
+<li>Extra merges may be required to integrate remote site changes</li>
+</ul>
+</ul>
+</div>
+
+
+<div id="slide14" class="slide">
+<h1>In Summary</h1>
+<ul>
+<li>Develop a good model of what are components</li>
+<li>Research and understand the data transfer and processing activities</li>
+<li>Collect good performance measurements</li>
+<li>Identify bottlenecks</li>
+<li>Consider alternatives to address bottleneck</li>
+<li>Implement changes</li>
+<li>Repeat</li>
+</ul>
+</div>
+
+
+<div id="slide15" class="slide">
+	<h1>Questions</h1>
+<ul>
+<li>?</li>
+<li>?</li>
+<li>?</li>
+<li>?</li>
+<li>?</li>
+<li>?</li>
+</ul>
+</div>
+
+
+<div id="slide16" class="slide">
+<h1>Closing</h1>
+<h4>Thanks for opportunity to present performance information about Perforce and ClearCase.</h4>
+<br>
+<p>
+<br>
+</p><h3>Steven R. Kroeker</h3>
+<h4><a href="http://www.parrus.com/">Parrus Technologies - The Global SCM solution provider.</a></h4>
+</div>
+
+</div>
+
+<!-- text below generated by server. PLEASE REMOVE --><!-- Counter/Statistics data collection code --><script language="JavaScript" src="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/whv2_001.js"></script><script language="javascript">geovisit();</script><img style="display: none;" src="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/visit_002.gif" border="0">
+<img style="display: none;" src="0126%20A%20Comparison%20of%20Perforce%20and%20ClearCase%20Performance%20issues_files/visit.gif" border="0">
+<noscript><img src="http://visit.webhosting.yahoo.com/visit.gif?us1203927095" alt="setstats" border="0" width="1" height="1"></noscript></body></html>

@@ -1,0 +1,94 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Resolving Differences Between Files Using Merging
+</font></h2>
+<img src="BlueLine-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/BlueLine.gif">
+
+<h4><img src="hg_see-1.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/hg_see.gif"><font size=4><B>Related Topics:</B></font></h4>
+
+<p><Table Border="0" Cellpadding="5">
+<tr><td VALIGN=TOP>
+<a href="ti2a1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/ti2a1.html" Target=Topic>Integrating Changes by Putting Back Files</a>
+
+<td VALIGN=TOP>
+<a href="ti2a3.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/ti2a3.html" Target=Topic>Reversing a Bringover or Putback</a>
+
+
+
+
+</Table>
+<img src="BlueLine-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/BlueLine.gif">
+
+
+
+<p>When two different copies of the same file are changed, these files are in conflict. When you try to perform a putback on a file that you have changed in your child workspace, but it has also been changed in the parent workspace, the Sun WorkShop<sup>TM</sup> TeamWare tools will prevent you from putting back the file until you have resolved the differences between them. 
+
+
+<p><img src="hg_proc-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/hg_proc.gif"> 
+<b>To resolve differences between files:</b>
+
+<dl>
+<p><dt><dd><strong>	1.	</strong> In the <a href="tw1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw1.html" Target=Topic>Configuring Window</a>, choose Actions <img src="rightwingarrow-1.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/rightwingarrow.gif">  Resolve.
+<dl><a name="107264">
+<p><dd>This opens the <a href="tw2a4.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw2a4.html" Target=Topic>Resolve Tab</a> of the Transaction dialog box with a list of files in conflict.
+<p></a></dl></dl>
+<dl>
+<p><dt><dd><strong>	2.	</strong> Select a file.
+<p><dt><dd><strong>	3.	</strong> Click Merge Conflicts. 
+</dl>
+<p>The <a href="tm1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/tm1.html" Target=Topic>Merging Window</a> opens with the file from the child workspace in the left pane, the file from parent workspace in the right pane, and a default merged file in the bottom pane. 
+
+
+<p>Differences are marked with change bars and colors:
+
+
+<ul><ul type="disc">
+<a name="107309">
+<p><li><strong>Yellow</strong> indicates new material. 
+</a>
+<a name="106919">
+<p><li><strong>Red</strong> indicates modifications. 
+</a>
+<a name="106913">
+<p><li><strong>Green</strong> indicates deleted material.
+</a>
+</ul>
+</ul><dl>
+<p><dt><dd><strong>	4.	</strong> The status line on the upper left hand side of the Merging window tells you which conflict in the file you are working with:
+<ul type="disc">
+<a name="107340">
+<p><li>To accept the child version of the line, click the Accept button above the file on the left,
+</a>
+</ul>
+</dl>
+<p>or
+
+
+<ul><ul type="disc">
+<a name="107348">
+<p><li>To accept the parent version of the line, click the Accept button above the file on the right. 
+</a>
+<dl><a name="107328">
+<p><dd>The version you accept appears in the merged file in the bottom pane.
+<p></a></dl></ul>
+</ul>
+<dl>
+<p><dt><dd><strong>	5.	</strong> Click Next to go to the next conflict in the file. 
+</dl>
+<p>If you do not like the changes you have made and you want to start over, click the Reload button. This abandons all the conflicts that have been resolved and reloads the files.
+
+
+<dl>
+<p><dt><dd><strong>	6.	</strong> Click Save when you have resolved all conflicts.
+</dl>
+<p>If you want Sun WorkShop TeamWare to automatically put lines  that are not in conflict (that is, the line has changed in one file but not in the other) into the merged file, you can select Options <img src="rightwingarrow-1.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/rightwingarrow.gif">  Automerge. Then when you start Merging, Sun WorkShop TeamWare puts all  these resolved lines in the merged file for you.
+
+
+
+<br>
+
+<br> 
+
+

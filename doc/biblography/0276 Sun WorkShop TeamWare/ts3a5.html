@@ -1,0 +1,37 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Sample Validation Program
+</font></h2>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+<h4><img src="hg_see-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_see.gif"><font size=4><B>Related Topics:</B></font></h4>
+
+<p><Table Border="0" Cellpadding="5">
+<tr><td VALIGN=TOP>
+<a href="ts3a4.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/ts3a4.html" Target=Topic>Invoking Your Own Putback Validation Program</a>
+
+<td VALIGN=TOP>
+
+
+
+
+
+</Table>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+
+
+<p>This is a sample validation program that you can use to control putbacks to a specific workspace.  It can be any executable file (shell script or program) that accepts arguments that are passed by putback and returns non-zero exit status to deny putback.
+
+
+<p><kbd><PRE>## Start of sample validation program<br>#!/bin/sh<br>##<br>## Here is the list of users who can perform<br>## putbacks to the workspace<br>##<br>valid_users="nikm azv builder vvg aar"<br>##<br>## Here is the list of Integration Request IDs (IRIs) which<br>## are accepted<br>##<br>P1Bugs="1111111 2222222 1234567 bobs_bug"<br>##<br>## Here are the directories that cannot change<br>##<br>DirsReady="doc subdir/doc"<br>##<br>## Save arguments<br>##<br>User=$1<br>        shift<br>Parent=$1<br>        shift<br>Child=$1<br>        shift<br>IRI=$1<br>        shift<br>Files=`cat $1`<br>##<br>## Validate user<br>##<br>isValid="false"<br>for u in $valid_users<br>do<br>   if [ "$User" = "$u" ] ; then<br>      isValid="true"<br>      break<br>   fi<br>done<br>if [ "$isValid" = "false" ] ; then<br>   # invalid user<br>   echo ""<br>   echo "*** Validation failed: User $User is not allowed \<br>        to putback to $Parent"<br>   echo ""<br>   exit 1<br>fi<br>##<br>## Validate Integration Request ID (IRI)<br>##<br>isValid="false"<br>for u in $P1Bugs<br>do<br>  if [ "$IRI" = "$u" ] ; then<br>     isValid="true"<br>     break<br>  fi<br>done<br>if [ "$isValid" = "false" ] ; then<br>   # invalid IRI<br>   echo ""<br>   echo "*** Validation failed: Integration Request ID $IRI \<br>        is not valid"<br>   echo ""<br>   exit 1<br>fi<br>##<br>## Validate files<br>##<br>for u in $Files<br>do<br>   for uu in $DirsReady<br>   do<br>      x=`echo $u | grep $uu`<br>      if [ "$x" != "" ] ; then<br>         isValid="false"<br>         echo ""<br>               echo "*** Validation failed: File $u \<br>                    cannot be changed"<br>               echo ""<br>               exit 1<br>           fi<br>       done<br>done<br>##<br>## Exit 0 - putback is allowed<br>##<br>exit 0<br>## End of sample validation program</kbd>
+
+</PRE>
+
+<br>
+
+<br> 
+
+

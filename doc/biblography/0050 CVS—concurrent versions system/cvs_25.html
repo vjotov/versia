@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="Derek R. Price, email:derek AT ximbiot DOT com" />
+<title>CVS&mdash;Concurrent Versions System v1.11.22: Index: D -- I</title>
+<link rel="stylesheet" type="text/css"
+     href="reset-fonts-grids.css" tppabs="http://ximbiot.com/branding/yui/build/reset-fonts-grids/reset-fonts-grids.css" />
+<link rel="stylesheet" type="text/css"
+     href="container.css" tppabs="http://ximbiot.com/branding/yui/build/container/assets/skins/sam/container.css" />
+<link rel="stylesheet" type="text/css" href="style.css" tppabs="http://ximbiot.com/branding/style.css" />
+<link rel="alternate stylesheet" type="text/css" media="screen"
+    title="bare bones" href="/branding/friendly.css" />
+<link rel="icon" type="image/png" href="/branding/logo-16x16.png" />
+
+<script type='text/javascript'
+         src="yahoo-min.js" tppabs="http://ximbiot.com/branding/yui/build/yahoo/yahoo-min.js"></script>
+<script type='text/javascript'
+         src="yahoo-dom-event.js" tppabs="http://ximbiot.com/branding/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type='text/javascript'
+         src="container-min.js" tppabs="http://ximbiot.com/branding/yui/build/container/container-min.js"></script>
+<script type='text/javascript'
+         src="event-min.js" tppabs="http://ximbiot.com/branding/yui/build/event/event-min.js"></script>
+<script type='text/javascript'
+         src="element-beta-min.js" tppabs="http://ximbiot.com/branding/yui/build/element/element-beta-min.js"></script>
+<script type='text/javascript' src="cookies.js" tppabs="http://ximbiot.com/branding/cookies.js"></script>
+<script type='text/javascript' src="functions.js" tppabs="http://ximbiot.com/branding/functions.js"></script>
+</head>
+
+<body id="body" class=" yui-skin-sam">
+<div id="doc3" class="yui-t4">
+
+<div id="hd" class="banner">
+<div id="header-content">
+<div id="header-text">Your source for CVS &amp; Subversion support.</div>
+
+
+</div>
+</div><!-- hd -->
+
+<div id="bd">
+<div id="yui-main">
+<div class="yui-b">
+<div class="yui-g">
+
+<div class="google-search">
+<form method="get" action="http://www.google.com/custom" target="_top">
+<input type=hidden name="domains" value="ximbiot.com" />
+<table> 
+<td><input type="text" name="q" size="31" maxlength="255" value="" />
+<input type="submit" style="font-weight:bold"
+			 name="sa" value="Search" /></td>
+</tr><tr>
+<td nowrap="nowrap">
+<input type="radio" name="as_q" id="as_q1" value="site:ximbiot.com" />
+<label for="as_q1">ximbiot.com</label>
+<input type="radio" name="as_q" id="as_q2"
+      value="intitle:CVS intitle:v1.11.22 site:ximbiot.com"
+    checked="checked" />
+<label for="as_q2">this manual</label>
+</td>
+</tr>
+</table>
+<input type="hidden" name="client" value="pub-9647251212076433" />
+<input type="hidden" name="forid" value="1" />
+<input type="hidden" name="ie" value="ISO-8859-1" />
+<input type="hidden" name="oe" value="ISO-8859-1" />
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1;" />
+<input type="hidden" name="hl" value="en" />
+<!-- SiteSearch Google -->
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="content">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on June, 9 2006 by texi2html 1.77 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<head>
+<title>CVS&mdash;Concurrent Versions System v1.11.22: Index: D -- I</title>
+
+<meta name="description" content="CVS&mdash;Concurrent Versions System v1.11.22: Index: D -- I">
+<meta name="keywords" content="CVS&mdash;Concurrent Versions System v1.11.22: Index: D -- I">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.77">
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="INDEX0"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_26.html#INDEX1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_26.html#INDEX1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="unnumbered"> Index: D -- I </h1>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a href="cvs_24.html#SEC193_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_0" class="summary-letter"><b>!</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_1" class="summary-letter"><b>#</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_2" class="summary-letter"><b>&amp;</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_3" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_3" class="summary-letter"><b>-</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_4" class="summary-letter"><b>.</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_5" class="summary-letter"><b>/</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_6" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_6" class="summary-letter"><b>:</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_7" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_7" class="summary-letter"><b>&lt;</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_8" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_8" class="summary-letter"><b>=</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_9" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_9" class="summary-letter"><b>&gt;</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_10" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_10" class="summary-letter"><b>_</b></a>
+ &nbsp; 
+<br>
+<a href="cvs_24.html#SEC193_11" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_11" class="summary-letter"><b>A</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_12" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_12" class="summary-letter"><b>B</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_13" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_13" class="summary-letter"><b>C</b></a>
+ &nbsp; 
+<a href="#INDEX0_0" class="summary-letter"><b>D</b></a>
+ &nbsp; 
+<a href="#INDEX0_1" class="summary-letter"><b>E</b></a>
+ &nbsp; 
+<a href="#INDEX0_2" class="summary-letter"><b>F</b></a>
+ &nbsp; 
+<a href="#INDEX0_3" class="summary-letter"><b>G</b></a>
+ &nbsp; 
+<a href="#INDEX0_4" class="summary-letter"><b>H</b></a>
+ &nbsp; 
+<a href="#INDEX0_5" class="summary-letter"><b>I</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_0" class="summary-letter"><b>J</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_1" class="summary-letter"><b>K</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_2" class="summary-letter"><b>L</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_3" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_3" class="summary-letter"><b>M</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_4" class="summary-letter"><b>N</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_5" class="summary-letter"><b>O</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_6" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_6" class="summary-letter"><b>P</b></a>
+ &nbsp; 
+<a href="cvs_27.html#INDEX2_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_27.html#INDEX2_0" class="summary-letter"><b>R</b></a>
+ &nbsp; 
+<a href="cvs_27.html#INDEX2_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_27.html#INDEX2_1" class="summary-letter"><b>S</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_0" class="summary-letter"><b>T</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_1" class="summary-letter"><b>U</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_2" class="summary-letter"><b>V</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_3" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_3" class="summary-letter"><b>W</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_4" class="summary-letter"><b>X</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_5" class="summary-letter"><b>Z</b></a>
+ &nbsp; 
+</td></tr></table>
+<table border="0" class="index-cp">
+<tr><td></td><th align="left">Index Entry</th><th align="left"> Section</th></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="INDEX0_0">D</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_12.html#IDX182" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#IDX182">Date keyword</a></td><td valign="top"><a href="cvs_12.html#SEC98" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#SEC98">12.1 Keyword List</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX217" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX217">Dates</a></td><td valign="top"><a href="cvs_16.html#SEC117" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC117">A.5 Common command options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX30" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX30">Dead state</a></td><td valign="top"><a href="cvs_2.html#SEC15" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC15">2.2.4 The attic</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_4.html#SEC45" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#SEC45">Decimal revision number</a></td><td valign="top"><a href="cvs_4.html#SEC45" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#SEC45">4.1 Revision numbers</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX258" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX258">DEFAULT in commitinfo</a></td><td valign="top"><a href="cvs_18.html#SEC171" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC171">C.4.1 Commitinfo</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX265" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX265">DEFAULT in editinfo</a></td><td valign="top"><a href="cvs_18.html#SEC173" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC173">C.4.3 Editinfo</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX262" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX262">DEFAULT in <tt>`verifymsg'</tt></a></td><td valign="top"><a href="cvs_18.html#SEC172" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC172">C.4.2 Verifying log messages</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_3.html#SEC43" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC43">Defining a module</a></td><td valign="top"><a href="cvs_3.html#SEC43" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC43">3.2 Defining the module</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC20" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC20">Defining modules (intro)</a></td><td valign="top"><a href="cvs_2.html#SEC20" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC20">2.4 The administrative files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC159" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC159">Defining modules (reference manual)</a></td><td valign="top"><a href="cvs_18.html#SEC159" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC159">C.1 The modules file</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_4.html#IDX107" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#IDX107">Deleting branch tags</a></td><td valign="top"><a href="cvs_4.html#SEC51" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#SEC51">4.7 Deleting, moving, and renaming tags</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_7.html#SEC68" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC68">Deleting files</a></td><td valign="top"><a href="cvs_7.html#SEC68" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC68">7.2 Removing files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX234" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX234">Deleting revisions</a></td><td valign="top"><a href="cvs_16.html#SEC119" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC119">A.6.1 admin options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_4.html#IDX120" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#IDX120">Deleting sticky tags</a></td><td valign="top"><a href="cvs_4.html#SEC53" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#SEC53">4.9 Sticky tags</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_4.html#IDX106" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#IDX106">Deleting tags</a></td><td valign="top"><a href="cvs_4.html#SEC51" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#SEC51">4.7 Deleting, moving, and renaming tags</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_6.html#SEC65" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_6.html#SEC65">Descending directories</a></td><td valign="top"><a href="cvs_6.html#SEC65" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_6.html#SEC65">6. Recursive behavior</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_15.html#SEC111" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_15.html#SEC111">Device nodes</a></td><td valign="top"><a href="cvs_15.html#SEC111" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_15.html#SEC111">15. Special Files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#SEC8" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC8">Diff</a></td><td valign="top"><a href="cvs_1.html#SEC8" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC8">1.3.4 Viewing differences</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#SEC131" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC131">diff (subcommand)</a></td><td valign="top"><a href="cvs_16.html#SEC131" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC131">A.10 diff&mdash;Show differences between revisions</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_5.html#SEC62" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#SEC62">Differences, merging</a></td><td valign="top"><a href="cvs_5.html#SEC62" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#SEC62">5.8 Merging differences between any two revisions</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_7.html#SEC74" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC74">Directories, moving</a></td><td valign="top"><a href="cvs_7.html#SEC74" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC74">7.5 Moving and renaming directories</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_7.html#SEC69" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC69">Directories, removing</a></td><td valign="top"><a href="cvs_7.html#SEC69" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC69">7.3 Removing directories</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_6.html#SEC65" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_6.html#SEC65">Directory, descending</a></td><td valign="top"><a href="cvs_6.html#SEC65" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_6.html#SEC65">6. Recursive behavior</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC22" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC22">Disjoint repositories</a></td><td valign="top"><a href="cvs_2.html#SEC22" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC22">2.5 Multiple repositories</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC175" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC175">Distributing log messages</a></td><td valign="top"><a href="cvs_18.html#SEC175" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC175">C.4.4 Loginfo</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#SEC85" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC85">driver.c (merge example)</a></td><td valign="top"><a href="cvs_10.html#SEC85" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC85">10.3 Conflicts example</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="INDEX0_1">E</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#IDX172" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#IDX172">edit (subcommand)</a></td><td valign="top"><a href="cvs_10.html#SEC91" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC91">10.6.3 How to edit a file which is being watched</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC173" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC173">editinfo (admin file)</a></td><td valign="top"><a href="cvs_18.html#SEC173" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC173">C.4.3 Editinfo</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC21" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC21">Editing administrative files</a></td><td valign="top"><a href="cvs_2.html#SEC21" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC21">2.4.1 Editing administrative files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_3.html#SEC43" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC43">Editing the modules file</a></td><td valign="top"><a href="cvs_3.html#SEC43" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC43">3.2 Defining the module</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX223" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX223">Editor, avoiding invocation of</a></td><td valign="top"><a href="cvs_16.html#SEC117" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC117">A.5 Common command options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#IDX10" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#IDX10">EDITOR, environment variable</a></td><td valign="top"><a href="cvs_1.html#SEC6" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC6">1.3.2 Committing your changes</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_19.html#IDX291" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#IDX291">EDITOR, environment variable</a></td><td valign="top"><a href="cvs_19.html#SEC185" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#SEC185">D. All environment variables which affect CVS</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX271" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX271">EDITOR, internal variable</a></td><td valign="top"><a href="cvs_18.html#SEC183" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC183">C.10 Expansions in administrative files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX207" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX207">EDITOR, overriding</a></td><td valign="top"><a href="cvs_16.html#SEC116" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC116">A.4 Global options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC173" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC173">Editor, specifying per module</a></td><td valign="top"><a href="cvs_18.html#SEC173" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC173">C.4.3 Editinfo</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#IDX179" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#IDX179">editors (subcommand)</a></td><td valign="top"><a href="cvs_10.html#SEC92" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC92">10.6.4 Information about who is watching and editing</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#IDX155" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#IDX155">emerge</a></td><td valign="top"><a href="cvs_10.html#SEC85" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC85">10.3 Conflicts example</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX37" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX37">Emptydir, in CVSROOT directory</a></td><td valign="top"><a href="cvs_2.html#SEC19" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC19">2.3 How data is stored in the working directory</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX214" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX214">Encryption</a></td><td valign="top"><a href="cvs_16.html#SEC116" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC116">A.4 Global options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX39" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX39">Entries file, in CVS directory</a></td><td valign="top"><a href="cvs_2.html#SEC19" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC19">2.3 How data is stored in the working directory</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX43" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX43">Entries.Backup file, in CVS directory</a></td><td valign="top"><a href="cvs_2.html#SEC19" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC19">2.3 How data is stored in the working directory</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX41" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX41">Entries.Log file, in CVS directory</a></td><td valign="top"><a href="cvs_2.html#SEC19" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC19">2.3 How data is stored in the working directory</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX45" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX45">Entries.Static file, in CVS directory</a></td><td valign="top"><a href="cvs_2.html#SEC19" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC19">2.3 How data is stored in the working directory</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_19.html#SEC185" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#SEC185">Environment variables</a></td><td valign="top"><a href="cvs_19.html#SEC185" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#SEC185">D. All environment variables which affect CVS</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX275" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX275">environment variables, passed to administrative files</a></td><td valign="top"><a href="cvs_18.html#SEC183" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC183">C.10 Expansions in administrative files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_23.html#IDX316" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_23.html#IDX316">Errors, reporting</a></td><td valign="top"><a href="cvs_23.html#SEC192" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_23.html#SEC192">H. Dealing with bugs in CVS or this manual</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#SEC4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC4">Example of a work-session</a></td><td valign="top"><a href="cvs_1.html#SEC4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC4">1.3 A sample session</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#SEC85" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC85">Example of merge</a></td><td valign="top"><a href="cvs_10.html#SEC85" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC85">10.3 Conflicts example</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_5.html#IDX125" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#IDX125">Example, branch merge</a></td><td valign="top"><a href="cvs_5.html#SEC60" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#SEC60">5.6 Merging an entire branch</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC163" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC163">Excluding directories, in modules file</a></td><td valign="top"><a href="cvs_18.html#SEC163" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC163">C.1.4 Excluding directories</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX257" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX257">Exit status, of commitinfo</a></td><td valign="top"><a href="cvs_18.html#SEC171" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC171">C.4.1 Commitinfo</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#SEC114" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC114">Exit status, of CVS</a></td><td valign="top"><a href="cvs_16.html#SEC114" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC114">A.2 CVS's exit status</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_21.html#IDX310" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_21.html#IDX310">Exit status, of editor</a></td><td valign="top"><a href="cvs_21.html#SEC188" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_21.html#SEC188">F.1 Partial list of error messages</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX263" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX263">Exit status, of <tt>`verifymsg'</tt></a></td><td valign="top"><a href="cvs_18.html#SEC172" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC172">C.4.2 Verifying log messages</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#SEC136" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC136">export (subcommand)</a></td><td valign="top"><a href="cvs_16.html#SEC136" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC136">A.11 export&mdash;Export sources from CVS, similar to checkout</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX247" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX247">Export program</a></td><td valign="top"><a href="cvs_18.html#SEC164" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC164">C.1.5 Module options</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="INDEX0_2">F</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#SEC5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC5">Fetching source</a></td><td valign="top"><a href="cvs_1.html#SEC5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC5">1.3.1 Getting the source</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#IDX143" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#IDX143">File had conflicts on merge</a></td><td valign="top"><a href="cvs_10.html#SEC83" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC83">10.1 File status</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#SEC82" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC82">File locking</a></td><td valign="top"><a href="cvs_10.html#SEC82" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC82">10. Multiple developers</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC13" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC13">File permissions, general</a></td><td valign="top"><a href="cvs_2.html#SEC13" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC13">2.2.2 File permissions</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC14" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC14">File permissions, Windows-specific</a></td><td valign="top"><a href="cvs_2.html#SEC14" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC14">2.2.3 File Permission issues specific to Windows</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#SEC83" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC83">File status</a></td><td valign="top"><a href="cvs_10.html#SEC83" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC83">10.1 File status</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_7.html#SEC70" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC70">Files, moving</a></td><td valign="top"><a href="cvs_7.html#SEC70" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_7.html#SEC70">7.4 Moving and renaming files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC158" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC158">Files, reference manual</a></td><td valign="top"><a href="cvs_18.html#SEC158" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC158">C. Reference manual for Administrative files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX232" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX232">Fixing a log message</a></td><td valign="top"><a href="cvs_16.html#SEC119" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC119">A.6.1 admin options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX222" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX222">Forcing a tag match</a></td><td valign="top"><a href="cvs_16.html#SEC117" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC117">A.5 Common command options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC35" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC35">fork, access method</a></td><td valign="top"><a href="cvs_2.html#SEC35" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC35">2.9.6 Connecting with fork</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC178" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC178">Form for log message</a></td><td valign="top"><a href="cvs_18.html#SEC178" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC178">C.5 Rcsinfo</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#SEC113" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC113">Format of CVS commands</a></td><td valign="top"><a href="cvs_16.html#SEC113" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC113">A.1 Overall structure of CVS commands</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="INDEX0_3">G</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#SEC4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC4">Getting started</a></td><td valign="top"><a href="cvs_1.html#SEC4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC4">1.3 A sample session</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#SEC5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC5">Getting the source</a></td><td valign="top"><a href="cvs_1.html#SEC5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC5">1.3.1 Getting the source</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC180" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC180">Global cvsignore</a></td><td valign="top"><a href="cvs_18.html#SEC180" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC180">C.7 Ignoring files via cvsignore</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#SEC116" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC116">Global options</a></td><td valign="top"><a href="cvs_16.html#SEC116" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC116">A.4 Global options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC13" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC13">Group, UNIX file permissions, in repository</a></td><td valign="top"><a href="cvs_2.html#SEC13" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC13">2.2.2 File permissions</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC26" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC26">gserver (client/server connection method), port specification</a></td><td valign="top"><a href="cvs_2.html#SEC26" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC26">2.9 Remote repositories</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX78" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX78">gserver (client/server connection method), port specification</a></td><td valign="top"><a href="cvs_2.html#SEC30" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC30">2.9.3.1 Setting up the server for password authentication</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#SEC33" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC33">GSSAPI</a></td><td valign="top"><a href="cvs_2.html#SEC33" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC33">2.9.4 Direct connection with GSSAPI</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX216" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX216">Gzip</a></td><td valign="top"><a href="cvs_16.html#SEC116" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC116">A.4 Global options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_17.html#IDX244" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_17.html#IDX244">Gzip</a></td><td valign="top"><a href="cvs_17.html#SEC157" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_17.html#SEC157">B. Quick reference to CVS commands</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="INDEX0_4">H</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_15.html#SEC111" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_15.html#SEC111">Hard links</a></td><td valign="top"><a href="cvs_15.html#SEC111" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_15.html#SEC111">15. Special Files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_4.html#IDX100" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#IDX100">HEAD, as reserved tag name</a></td><td valign="top"><a href="cvs_4.html#SEC48" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_4.html#SEC48">4.4 Tags&ndash;Symbolic revisions</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#IDX225" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#IDX225">HEAD, special tag</a></td><td valign="top"><a href="cvs_16.html#SEC117" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC117">A.5 Common command options</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_12.html#IDX183" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#IDX183">Header keyword</a></td><td valign="top"><a href="cvs_12.html#SEC98" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#SEC98">12.1 Keyword List</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#SEC138" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC138">history (subcommand)</a></td><td valign="top"><a href="cvs_16.html#SEC138" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC138">A.12 history&mdash;Show status of files and users</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_8.html#SEC75" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_8.html#SEC75">History browsing</a></td><td valign="top"><a href="cvs_8.html#SEC75" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_8.html#SEC75">8. History browsing</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC182" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC182">History file</a></td><td valign="top"><a href="cvs_18.html#SEC182" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC182">C.9 The history file</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX20" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX20">History files</a></td><td valign="top"><a href="cvs_2.html#SEC12" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC12">2.2.1 Where files are stored within the repository</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#IDX1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#IDX1">History of CVS</a></td><td valign="top"><a href="cvs_1.html#SEC2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC2">1.1 What is CVS?</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_19.html#IDX294" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#IDX294">HOME, environment variable</a></td><td valign="top"><a href="cvs_19.html#SEC185" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#SEC185">D. All environment variables which affect CVS</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_19.html#IDX296" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#IDX296">HOMEDRIVE, environment variable</a></td><td valign="top"><a href="cvs_19.html#SEC185" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#SEC185">D. All environment variables which affect CVS</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_19.html#IDX295" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#IDX295">HOMEPATH, environment variable</a></td><td valign="top"><a href="cvs_19.html#SEC185" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_19.html#SEC185">D. All environment variables which affect CVS</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="INDEX0_5">I</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_12.html#IDX184" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#IDX184">Id keyword</a></td><td valign="top"><a href="cvs_12.html#SEC98" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#SEC98">12.1 Keyword List</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_12.html#IDX192" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#IDX192">Ident (shell command)</a></td><td valign="top"><a href="cvs_12.html#SEC99" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#SEC99">12.2 Using keywords</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_5.html#SEC57" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#SEC57">Identifying a branch</a></td><td valign="top"><a href="cvs_5.html#SEC57" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_5.html#SEC57">5.3 Accessing branches</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_12.html#SEC97" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#SEC97">Identifying files</a></td><td valign="top"><a href="cvs_12.html#SEC97" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_12.html#SEC97">12. Keyword substitution</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#IDX266" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#IDX266">Ignored files</a></td><td valign="top"><a href="cvs_18.html#SEC180" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC180">C.7 Ignoring files via cvsignore</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC180" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC180">Ignoring files</a></td><td valign="top"><a href="cvs_18.html#SEC180" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC180">C.7 Ignoring files via cvsignore</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_16.html#SEC140" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC140">import (subcommand)</a></td><td valign="top"><a href="cvs_16.html#SEC140" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_16.html#SEC140">A.13 import&mdash;Import sources into CVS, using vendor branches</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_3.html#SEC40" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC40">Importing files</a></td><td valign="top"><a href="cvs_3.html#SEC40" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC40">3.1.1 Creating a directory tree from a number of files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_3.html#SEC41" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC41">Importing files, from other version control systems</a></td><td valign="top"><a href="cvs_3.html#SEC41" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_3.html#SEC41">3.1.2 Creating Files From Other Version Control Systems</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_13.html#SEC104" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC104">Importing modules</a></td><td valign="top"><a href="cvs_13.html#SEC104" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_13.html#SEC104">13.1 Importing for the first time</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193">Index</a></td><td valign="top"><a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193">Index</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX82" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX82">inetd, configuring for pserver</a></td><td valign="top"><a href="cvs_2.html#SEC30" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC30">2.9.3.1 Setting up the server for password authentication</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC167" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC167">Info files</a></td><td valign="top"><a href="cvs_18.html#SEC167" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC167">C.3 The Trigger Scripts</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC168" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC168">Info files (syntax)</a></td><td valign="top"><a href="cvs_18.html#SEC168" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC168">C.3.1 The common syntax</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC169" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC169">Info files, security</a></td><td valign="top"><a href="cvs_18.html#SEC169" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC169">C.3.2 Security and the Trigger Scripts</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_10.html#SEC86" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC86">Informing others</a></td><td valign="top"><a href="cvs_10.html#SEC86" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_10.html#SEC86">10.4 Informing others about commits</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX63" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX63">init (subcommand)</a></td><td valign="top"><a href="cvs_2.html#SEC23" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC23">2.6 Creating a repository</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_2.html#IDX29" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#IDX29">Installed images (VMS)</a></td><td valign="top"><a href="cvs_2.html#SEC13" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_2.html#SEC13">2.2.2 File permissions</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_18.html#SEC183" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC183">Internal variables</a></td><td valign="top"><a href="cvs_18.html#SEC183" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_18.html#SEC183">C.10 Expansions in administrative files</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_1.html#SEC2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC2">Introduction to CVS</a></td><td valign="top"><a href="cvs_1.html#SEC2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_1.html#SEC2">1.1 What is CVS?</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_17.html#SEC157" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_17.html#SEC157">Invoking CVS</a></td><td valign="top"><a href="cvs_17.html#SEC157" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_17.html#SEC157">B. Quick reference to CVS commands</a></td></tr>
+<tr><td></td><td valign="top"><a href="cvs_8.html#SEC75" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_8.html#SEC75">Isolation</a></td><td valign="top"><a href="cvs_8.html#SEC75" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_8.html#SEC75">8. History browsing</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+</table>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a href="cvs_24.html#SEC193_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_0" class="summary-letter"><b>!</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_1" class="summary-letter"><b>#</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_2" class="summary-letter"><b>&amp;</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_3" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_3" class="summary-letter"><b>-</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_4" class="summary-letter"><b>.</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_5" class="summary-letter"><b>/</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_6" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_6" class="summary-letter"><b>:</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_7" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_7" class="summary-letter"><b>&lt;</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_8" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_8" class="summary-letter"><b>=</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_9" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_9" class="summary-letter"><b>&gt;</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_10" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_10" class="summary-letter"><b>_</b></a>
+ &nbsp; 
+<br>
+<a href="cvs_24.html#SEC193_11" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_11" class="summary-letter"><b>A</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_12" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_12" class="summary-letter"><b>B</b></a>
+ &nbsp; 
+<a href="cvs_24.html#SEC193_13" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193_13" class="summary-letter"><b>C</b></a>
+ &nbsp; 
+<a href="#INDEX0_0" class="summary-letter"><b>D</b></a>
+ &nbsp; 
+<a href="#INDEX0_1" class="summary-letter"><b>E</b></a>
+ &nbsp; 
+<a href="#INDEX0_2" class="summary-letter"><b>F</b></a>
+ &nbsp; 
+<a href="#INDEX0_3" class="summary-letter"><b>G</b></a>
+ &nbsp; 
+<a href="#INDEX0_4" class="summary-letter"><b>H</b></a>
+ &nbsp; 
+<a href="#INDEX0_5" class="summary-letter"><b>I</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_0" class="summary-letter"><b>J</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_1" class="summary-letter"><b>K</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_2" class="summary-letter"><b>L</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_3" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_3" class="summary-letter"><b>M</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_4" class="summary-letter"><b>N</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_5" class="summary-letter"><b>O</b></a>
+ &nbsp; 
+<a href="cvs_26.html#INDEX1_6" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1_6" class="summary-letter"><b>P</b></a>
+ &nbsp; 
+<a href="cvs_27.html#INDEX2_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_27.html#INDEX2_0" class="summary-letter"><b>R</b></a>
+ &nbsp; 
+<a href="cvs_27.html#INDEX2_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_27.html#INDEX2_1" class="summary-letter"><b>S</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_0" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_0" class="summary-letter"><b>T</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_1" class="summary-letter"><b>U</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_2" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_2" class="summary-letter"><b>V</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_3" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_3" class="summary-letter"><b>W</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_4" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_4" class="summary-letter"><b>X</b></a>
+ &nbsp; 
+<a href="cvs_28.html#INDEX3_5" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_28.html#INDEX3_5" class="summary-letter"><b>Z</b></a>
+ &nbsp; 
+</td></tr></table>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="cvs_26.html#INDEX1" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_26.html#INDEX1" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="cvs.html#SEC_Top" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs.html#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_toc.html#SEC_Contents" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_24.html#SEC193" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_24.html#SEC193" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="cvs_abt.html#SEC_About" tppabs="http://ximbiot.com/cvs/manual/cvs-1.11.22/cvs_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>Derek R. Price</em> on <em>June, 9 2006</em> using <a href="javascript:if(confirm('http://www.nongnu.org/texi2html/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.nongnu.org/texi2html/'" tppabs="http://www.nongnu.org/texi2html/"><em>texi2html 1.77</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>
+
+
+
+
+
+
+</div><!-- #content -->
+
+
+</div><!-- .yui-g -->
+</div><!-- .yui-b -->
+</div><!-- #yui-main -->
+
+<div class="yui-b">
+
+<p><a href="javascript:if(confirm('http://ximbiot.com/dereks-resume.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/dereks-resume.html'" tppabs="http://ximbiot.com/dereks-resume.html">Derek Price</a>, CVS developer and technical
+editor of 
+<a target='_blank'
+     href="javascript:if(confirm('http://www.amazon.com/gp/product/0596527039?ie=UTF8&tag=ximbiot-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527039  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.amazon.com/gp/product/0596527039?ie=UTF8&tag=ximbiot-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527039'" tppabs="http://www.amazon.com/gp/product/0596527039?ie=UTF8&tag=ximbiot-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527039">Essential
+CVS (Essentials line from O'Reilly Press)</a>
+<img src="ir-t=ximbiot-20&l=as2&o=1&a=0596527039" tppabs="http://www.assoc-amazon.com/e/ir?t=ximbiot-20&l=as2&o=1&a=0596527039"
+   width="1" height="1" border="0" alt=""
+   style="border:none !important; margin:0px !important;" />,
+and others offer <a href="javascript:if(confirm('http://ximbiot.com/services.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/services.html'" tppabs="http://ximbiot.com/services.html">consulting services</a> and
+<a href="javascript:if(confirm('http://ximbiot.com/training.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/training.html'" tppabs="http://ximbiot.com/training.html">training</a> through Ximbiot.</p>
+
+<p><iframe   src="cm-t=ximbiot-20&o=1&p=8&l=as1&asins=0596527039&fc1=000000&IS2=1&lt1=_blank&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" tppabs="http://rcm.amazon.com/e/cm?t=ximbiot-20&o=1&p=8&l=as1&asins=0596527039&fc1=000000&IS2=1&lt1=_blank&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr"
+        style="width:120px;height:240px;" scrolling="no" marginwidth="0"
+ marginheight="0" frameborder="0"></iframe></p>
+
+<p><script language="javascript" src="zpanel-zp=117573496727537514" tppabs="http://www.zazzle.com/api/zp/zpanel?zp=117573496727537514"></script></p>
+<p><a target="_blank" href="javascript:if(confirm('http://validator.w3.org/check?uri=referer  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://validator.w3.org/check?uri=referer'" tppabs="http://validator.w3.org/check?uri=referer">
+<img class="PoweredByLogo" src="w3c-valid-xhtml10-44x16.png" tppabs="http://ximbiot.com/branding/w3c-valid-xhtml10-44x16.png"
+       alt="[ Valid XHTML 1.0! ]" /></a>
+<a target="_blank" href="javascript:if(confirm('http://jigsaw.w3.org/css-validator/check/referer  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://jigsaw.w3.org/css-validator/check/referer'" tppabs="http://jigsaw.w3.org/css-validator/check/referer">
+<img class="PoweredByLogo" src="w3c-valid-css-44x16.png" tppabs="http://ximbiot.com/branding/w3c-valid-css-44x16.png"
+       alt="[ Valid CSS! ]" /></a></p>
+
+</div><!-- .yui-b -->
+</div><!-- #bd -->
+
+</div><!-- #bd -->
+
+<div id="ft" class="banner">
+<div class="horizontal-menu" id="siteindex"><ul class="menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/hosting.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/hosting.html'" tppabs="http://ximbiot.com/hosting.html">hosting</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/services.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/services.html'" tppabs="http://ximbiot.com/services.html">installation</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/SCM_support.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/SCM_support.html'" tppabs="http://ximbiot.com/SCM_support.html">support</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/training/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/training/'" tppabs="http://ximbiot.com/training/">training</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/privacy.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/privacy.html'" tppabs="http://ximbiot.com/privacy.html">privacy</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/use.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/use.html'" tppabs="http://ximbiot.com/use.html">use</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/contact_us.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/contact_us.html'" tppabs="http://ximbiot.com/contact_us.html">contact</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/'" tppabs="http://ximbiot.com/">about</a></li>
+</ul>
+</div>
+<div id="contact-info-right" class="contact-info">
+<br />
+<br />
+<a href="mailto:info@ximbiot.com">info@ximbiot.com</a><br />
+&nbsp;
+</div>
+<div id="contact-info-left" class="contact-info">
+Ximbiot LLC<br />
+695 E Square Lake Rd<br />
+Troy, MI&nbsp; 48085-3169
+</div>
+<div id="contact-info-center" class="contact-info">
+<br />
+(248) 835-1260<br />
+(248) 835-1263 Fax
+</div>
+
+</div><!-- #ft -->
+
+</div><!-- #doc3 -->
+
+<div id="sidebar-left" class="sidebar">
+
+<h1><a href="javascript:if(confirm('http://ximbiot.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/'" tppabs="http://ximbiot.com/">
+<img height="102" width="59" class="Logo"
+        src="logo-59x102.png" tppabs="http://ximbiot.com/branding/logo-59x102.png" alt="Ximbiot Logo" /><br />
+Ximbiot</a></h1>
+
+<p>Site navigation:</p>
+<ul class="menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/my/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/my/'" tppabs="http://ximbiot.com/my/">My Account</a></li>
+<li>
+<h2><a href="#" onclick="return kadabra('services-menu')">Ximbiot Services <span id="icon-services-menu">(+/-)</span></a></h2>
+<ul id="services-menu" class="collapsible-menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/hosting.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/hosting.html'" tppabs="http://ximbiot.com/hosting.html" title="Professional CVS and Subversion Hosting">Hosting</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/services.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/services.html'" tppabs="http://ximbiot.com/services.html" title="Professional CVS and Subversion Installation">Installation</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/SCM_support.html  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/SCM_support.html'" tppabs="http://ximbiot.com/SCM_support.html" title="Professional CVS and Subversion Support">Technical Support</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/training/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/training/'" tppabs="http://ximbiot.com/training/" title="Professional CVS and Subversion Training, On-site or Online">Training</a></li>
+</ul>
+<script type="text/javascript">setDefaultState ('services-menu', 'block');</script>
+</li>
+<li>
+<h2><a href="#" onclick="return kadabra('doc-menu')">Documentation <span id="icon-doc-menu">(+/-)</span></a></h2>
+<ul id="doc-menu" class="collapsible-menu">
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/'" tppabs="http://ximbiot.com/cvs/">About CVS</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/wiki/Main%20Page  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/wiki/Main%20Page#CVS_Downloads'" tppabs="http://ximbiot.com/cvs/wiki/Main%20Page#CVS_Downloads">CVS Downloads</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/wiki/CVS%20FAQ  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/wiki/CVS%20FAQ'" tppabs="http://ximbiot.com/cvs/wiki/CVS%20FAQ">CVS FAQ</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/manual/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/manual/'" tppabs="http://ximbiot.com/cvs/manual/">CVS Manuals</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/wiki/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/wiki/'" tppabs="http://ximbiot.com/cvs/wiki/">CVS Wiki</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/cvs/cvshome/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/cvs/cvshome/'" tppabs="http://ximbiot.com/cvs/cvshome/">cvshome.org Archive</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/texi2html/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/texi2html/'" tppabs="http://ximbiot.com/texi2html/">Texi2HTML</a></li>
+<li><a href="javascript:if(confirm('http://ximbiot.com/texi2html/manuals/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://ximbiot.com/texi2html/manuals/'" tppabs="http://ximbiot.com/texi2html/manuals/">Texi2HTML Manuals</a></li>
+</ul>
+<script type="text/javascript">setDefaultState ('doc-menu', 'block');</script>
+</li>
+</ul>
+
+
+</div>
+
+<script type='text/javascript'>
+var timer;
+var moveFt = function() {
+    var vph = YAHOO.util.Dom.getViewportHeight();
+    var dh = YAHOO.util.Dom.get ('bd').offsetHeight;
+    var ft = YAHOO.util.Dom.get ('ft');
+    if (vph > dh) {
+	/* The 10px/60px is a fudge factor below and I'm not sure where it is
+	 * coming from.  10px looks right in IE and 60px looks right in all
+	 * the other browsers I've tested.  This fudge only looks right with
+	 * our default font size and breaks, especially, with more accessible
+	 * (larger) fonts.
+	 *
+	 * If I assume that 10px is approximately the height of the bottom
+	 * scroll bar, then the other 50px may be due to what I can only call
+	 * a rendering error in Mozilla and Safari.  If I turn the
+	 * background-color red on #fd, then it is only 10px or so tall and
+	 * doesn't surround all its children.
+	 */
+	var newOffset = vph - dh - ft.offsetHeight
+			- (YAHOO.env.ua.ie ? 10 : YAHOO.env.ua.opera ? 80 : 60);
+	// As above, 20px is arbitrary - could maybe compute 1em in pixels.
+        if (newOffset < 20) {
+	    newOffset = '1em';
+	} else {
+	    newOffset += 'px';
+	}
+	YAHOO.util.Dom.setStyle (ft, 'margin-top', newOffset);
+    } else {
+	YAHOO.util.Dom.setStyle (ft, 'margin-top', '1em');
+    }
+};
+var startResizeTimer = function(el, o) {
+    if (timer) { timer.cancel(); }
+    timer = YAHOO.lang.later (250, window, moveFt, o);
+};
+
+/* And call the moveFt function on window render.
+ *
+ * Need to use a timer for IE - otherwise it generates a resize event every
+ * time we move the footer, which loops infinitely.
+ */
+YAHOO.util.Event.onDOMReady (moveFt);
+YAHOO.util.Event.addListener (window, 'load', moveFt);
+YAHOO.util.Event.addListener (window, 'resize', startResizeTimer);
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www./");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-130779-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

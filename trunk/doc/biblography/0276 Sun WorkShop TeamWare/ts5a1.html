@@ -1,0 +1,42 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Setting a Default Workspace
+</font></h2>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+<h4><img src="hg_see-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_see.gif"><font size=4><B>Related Topics:</B></font></h4>
+
+<p><Table Border="0" Cellpadding="5">
+<tr><td VALIGN=TOP>
+<a href="ts5a.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/ts5a.html" Target=Topic>Loading Workspaces by Default</a>
+
+<td VALIGN=TOP>
+
+
+
+
+
+</Table>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+
+
+<p>The <kbd>CODEMGR_WS</kbd> environment variable sets a workspace as the default workspace. A default workspace is loaded automatically when you start Configuring, Versioning, Merging and Freezepointing.
+
+
+<p><img src="hg_proc-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_proc.gif"> 
+<b> To set a default workspace:</b>
+
+<dl><a name="107093">
+<p><dd><kbd>setenv CODEMGR_WS /home/workspaces/myworkspace</kbd>
+<p></a></dl><p>This variable also makes the default workspace the default for command-line commands.When you use command-line commands (such as <kbd>bringover</kbd>, <kbd>putback</kbd>, <kbd>freezept</kbd>, or <kbd>extract</kbd>) the default workspace is automatically passed to the command (if you do not specify a workspace with the <kbd>-w</kbd> option).
+
+
+
+<br>
+
+<br> 
+
+

@@ -1,0 +1,248 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Bringover Update Tab
+</font></h2>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+<h4><img src="hg_see-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_see.gif"><font size=4><B>Related Topics:</B></font></h4>
+
+<p><Table Border="0" Cellpadding="5">
+<tr><td VALIGN=TOP>
+<a href="ti1d.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/ti1d.html" Target=Topic>Updating the Files in Your Workspace</a>
+
+<td VALIGN=TOP>
+<a href="ti2a1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/ti2a1.html" Target=Topic>Integrating Changes by Putting Back Files</a>
+
+
+<tr><td VALIGN=TOP>
+<a href="ti2a2.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/ti2a2.html" Target=Topic>Resolving Differences Between Files Using Merging</a>
+
+<td VALIGN=TOP>
+<a href="ti2a3.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Get/ti2a3.html" Target=Topic>Reversing a Bringover or Putback</a>
+
+
+
+
+</Table>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+
+
+<p>Use the Bringover Update tab in the <a href="tw1a4.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw1a4.html" Target=Topic>Transactions Dialog Box</a> to update existing workspaces.  To open the Bringover Update tab, from the <a href="tw1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw1.html" Target=Topic>Configuring Window</a>, choose Actions <img src="rightwingarrow-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/rightwingarrow.gif">  Bringover Update. You can also initiate a Bringover Update transaction by dragging and dropping a parent workspace icon over its child&#39;s icon.
+
+
+<p>In this tab are the following components:
+
+
+<h4><font size=4>File List Section<Table Cellpadding="5">
+<caption></caption>
+
+<tr valign="baseline"><td>
+Parent Workspace (From) Directory box
+
+<td colspan=2 rowspan=1>Contains the absolute path name of the parent 
+directory.
+
+<tr valign="baseline"><td>
+Child Workspace (To) Directory box
+
+<td colspan=2 rowspan=1>
+Contains the path name of the child directory.
+
+
+<tr valign="baseline"><td>
+Parent Files
+
+<td colspan=2 rowspan=1>
+Specifies which files and directories will be involved in the transaction:
+
+
+<tr valign="baseline"><td>
+
+
+<td>
+Directories and Files radio button
+
+<td>
+Lets you select the files and directories you want included in the bringover.
+
+
+<tr valign="baseline"><td>
+
+
+<td>
+File List Programs (FLPs) radio button
+
+<td>
+Lets you specify a FLP that generate lists of files for bringovers.
+
+
+<tr valign="baseline"><td>
+
+
+<td>
+Entire Workspace radio button
+
+<td>
+Uses all of the files and directories in the workspace.
+
+
+<tr valign="baseline"><td>
+List pane
+
+<td colspan=2 rowspan=1>
+Lists files and directories.
+
+
+
+</Table>
+ 
+
+
+</font></h4><h4><font size=4>Buttons<Table Cellpadding="5">
+<caption></caption>
+
+<tr valign="baseline"><td>
+Add
+
+<td>Opens the <a href="tw2b.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw2b.html" Target=Topic>Add Files Dialog Box</a>, where you can select 
+files to add to the List pane.
+
+<tr valign="baseline"><td>
+Load From args File
+
+<td>
+Reloads the default arguments file list from the workspace <kbd>args</kbd> file.
+
+
+<tr valign="baseline"><td>
+Save To  args File
+
+<td>
+Saves the current list as the new default in the workspace <kbd>args</kbd> file.
+
+
+<tr valign="baseline"><td>
+Select All
+
+<td>
+Selects all the files and directories listed in the List pane.
+
+
+<tr valign="baseline"><td>
+Deselect All
+
+<td>
+Selects all the files and directories listed in the List pane.
+
+
+
+</Table>
+ 
+
+
+</font></h4><h4><font size=4>Options Check Boxes<Table Cellpadding="5">
+<caption></caption>
+
+<tr valign="baseline"><td>
+Preview
+
+<td>Previews by running a bringover without actually 
+transferring files.
+
+<tr valign="baseline"><td>
+Verbose
+
+<td>
+Increases the information displayed in the Transaction Output dialog box. By default, a message is displayed for each created, updated, or conflicting file. The Verbose option causes Configuring to print a message for all files, including those that are not brought over.
+
+
+<tr valign="baseline"><td>
+Quiet
+
+<td>
+Suppresses the output of status messages to the Transaction Output dialog box.
+
+
+<tr valign="baseline"><td>
+Delta Comments
+
+<td>
+Provides additional information in the Transaction Output dialog box: delta number, owner and comments.
+
+
+<tr valign="baseline"><td>
+Skip SCCS <kbd>gets</kbd>
+
+<td>
+Inhibits the  invocation of the SCCS <kbd>get</kbd> program as part of the update. Normally, g-files are extracted after they are brought over. This option improves file transfer performance, although it shifts the responsibility to you to do the appropriate gets.
+
+
+<tr valign="baseline"><td>
+Force Conflicts
+
+<td>
+Causes all updates to be treated as conflicts.
+
+
+<tr valign="baseline"><td>
+Skip Backups
+
+<td>
+Skips the step of copying the existing files to the <kbd>Codemgr_wsdata/backup/files</kbd> directory in the destination workspace. This option reduces the disk space occupied by the child workspace and improves file transfer performance, but it removes the option of using Undo.
+
+
+
+</Table>
+ 
+
+
+</font></h4><h4><font size=4>Comments Pane
+</font></h4><p>Type your comments about the bringover here to have them stored in the workspace history log (<kbd>Codemgr_wsdata/history</kbd>) in the child workspace.
+
+
+<h4><font size=4>Buttons<Table Cellpadding="5">
+<caption></caption>
+
+<tr valign="baseline"><td>
+Bringover
+
+<td>Starts the bringover update.
+
+<tr valign="baseline"><td>
+Show Output
+
+<td>
+Opens the Transaction Output dialog box.
+
+
+<tr valign="baseline"><td>
+Close
+
+<td>
+Closes the Transaction dialog box.
+
+
+<tr valign="baseline"><td>
+Help
+
+<td>
+Displays online help for this tab.
+
+
+
+</Table>
+ 
+
+
+</font></h4><p>
+
+
+
+<br>
+
+<br> 
+
+

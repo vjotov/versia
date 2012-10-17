@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 3. ClearCase Meta-Data</title><meta name="generator" content="DocBook XSL Stylesheets V1.49"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.0"><link rel="home" href="index.html" title="CASEVision&#8482;/ClearCase
+Concepts Guide"><link rel="up" href="index.html" title="CASEVision&#8482;/ClearCase
+Concepts Guide"><link rel="previous" href="ch02.html" title="Chapter 2. Version Control - ClearCase VOBs"><link rel="next" href="ch04.html" title="Chapter 4. ClearCase Views"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. ClearCase Meta-Data</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch02.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch04.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch04.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5440153"></a>Chapter 3. <a name="id59167"></a>ClearCase Meta-Data</h2></div></div>
+<p>Each ClearCase VOB stores a variety of information related to, but distinct from, the contents of file system objects. This information is termed <a name="idch3meta2"></a><i>meta-data</i>.</p>
+<p>Operating systems also support certain kinds of meta-data. For example, a file's time-modified stamp is information <span class="emphasis"><i>pertaining to</i></span> the file that is not actually <span class="emphasis"><i>in</i></span> the file.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5440207"></a>Meta-Data: Records and Annotations</h2></div></div>
+<p>As users enter ClearCase commands, meta-data <a name="idch3meta3"></a><i>records</i> are created automatically. These records include &#8220;who, what, when, where, and why&#8221; information regarding such operations as:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>creation of new elements, and new versions of existing elements</p>
+</li>
+<li><p>creation of user-defined annotations</p>
+</li>
+<li><p>software builds</p>
+</li>
+</ul></div><p>In particular, the record of a software build &#8212; a <a name="idch3meta4"></a><i>configuration record</i> &#8212; includes a &#8220;bill of materials&#8221;, listing (along with other information) exactly which versions of source elements were used. This provides both complete build auditing and guaranteed rebuildability.</p>
+<p>Users can also create meta-data <i>annotations</i> explicitly, attaching them to file system objects. A user-defined annotation might indicate:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>... that a particular version of an element was used in Release 4.31</p>
+</li>
+<li><p>... that the benchmark score on a particular executable was 19.3</p>
+</li>
+<li><p>... that two elements in different directories need to be kept synchronized</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5440306"></a>Storage in the VOB Database</h3></div></div>
+<p>A VOB's meta-data is stored in its <a name="idch3meta5"></a><i>VOB database</i>, within the VOB storage directory. ClearCase includes commands for listing (and in some cases comparing) the contents of previously created meta-data records (<a href="ch03.html#id41240" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id41240">Figure 3-1</a>).</p>
+<p><div class="figure"><p><a name="id5440332"></a><b>Figure 3-1. <a name="id41240"></a>Meta-Data: ClearCase-Generated Records</b></p>
+<div class="mediaobject"><img src="Fig3-1.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig3-1.gif"></div></div><br>
+</p>
+<p>Users can access file system objects through their meta-data. This makes it possible (and easy) to define, reproduce, and maintain configurations of file system objects. For example, &#8220;all the versions labeled <a name="idch3meta6"></a><i>REL4.31</i>&#8221; might constitute the configuration of files that was used to build a particular product release.</p>
+<p>Meta-data also plays a fundamental role in ClearCase's tools for implementing development policies and procedures. For example, a project's source files might be partitioned into several classes using meta-data annotations. Then, different development policies might be applied to each class of source file.<a name="idch3meta7"></a></p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5440436"></a>User-Defined Meta-Data</h2></div></div>
+<p>ClearCase supports numerous kinds of user-defined meta-data, all of which share the same implementation scheme:</p>
+<div class="orderedlist"><ol type="1"><li><p>Some user (typically, an administrator or project leader) <a name="idch3meta8"></a><span class="emphasis"><i>defines</i></span> a meta-data item for use within a particular VOB, by creating a <i>type</i> object in that VOB.</p>
+</li>
+<li><p>Thereafter, users can create <i>instance</i>s of the type object. This is typically described as &#8220;attaching&#8221;, &#8220;assigning&#8221;, or &#8220;instancing&#8221; the meta-data; it creates a pointer in some VOB object, referencing the type object.</p>
+</li>
+</ol></div><p>For example, <a href="ch03.html#id86991" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id86991">Figure 3-2</a> illustrates the mechanism by which a version label is attached to a version object.</p>
+<p><div class="figure"><p><a name="id5440501"></a><b>Figure 3-2. <a name="id86991"></a><a name="idch3meta9"></a>Attaching Meta-Data to a VOB Object</b></p>
+<div class="mediaobject"><img src="Fig3-2.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig3-2.gif"></div></div><br>
+</p>
+<p>The following sections briefly describe the several kinds of user-defined meta-data. Included are cross-references to discussions, in other chapters, of how users and administrators employ these mechanisms.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5440528"></a>Version Labels / Label Types</h3></div></div>
+<p>A mnemonic identifier called a <a name="idch3meta10"></a><i>version label</i> can be attached to any version of an element. A version label (for example, <tt>REL3.1.5</tt>) can often be used instead of the system-assigned <i>version-ID</i> (for example, <tt>/main/12</tt>) to specify a particular version of an element.</p>
+<p>As <a href="ch03.html#id24683" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id24683">Figure 3-3</a> indicates, the same version label can be used in many elements. It is also true that multiple labels can be assigned to the same version; for example, the same version of a rarely-modified element might &#8220;accumulate&#8221; many labels: <i>REL3.0</i>, <i>REL3.1</i>, <i>REL3.1.5</i>, and so on.</p>
+<p>Like branches, version labels play a pivotal role in organizing and describing the development environment. A release engineer might assign version label <i>REL3.1.5</i> to the set of source versions used in the build of a particular release. At any subsequent point, this configuration of versions can be referenced in a variety of contexts as &#8220;all the versions labeled <i>REL3.1.5</i>&#8221; (the shaded versions in <a href="ch03.html#id24683" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id24683">Figure 3-3</a>).</p>
+<p><div class="figure"><p><a name="id5440670"></a><b>Figure 3-3. <a name="id24683"></a>Configuration of Versions Selected by Version Label</b></p>
+<div class="mediaobject"><img src="Fig3-3.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig3-3.gif"></div></div><br>
+</p>
+<p>As illustrated in <a href="ch03.html#id86991" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id86991">Figure 3-2</a>, a version label is an instance of a <i>label type</i> object.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5440704"></a>Attributes / Attribute Types</h3></div></div>
+<p>An <a name="idch3meta11"></a><i>attribute</i> is a user-defined annotation in the form of a name/value pair. Attributes can be attached to many kinds of objects (whereas version labels can be attached only to versions). Following are some examples of attributes:</p>
+<p><span class="bold"><b></b></span></p>
+<div class="informaltable"><table border="1"><colgroup><col><col><col></colgroup><tbody><tr valign="top"><td valign="top"><p><span class="bold"><b>Name</b></span></p>
+</td><td valign="top"><p><span class="bold"><b>Kind of Value </b></span></p>
+</td><td valign="top"><p><span class="bold"><b>Example</b></span></p>
+</td></tr><tr valign="top"><td valign="top"><p>QAed</p>
+</td><td valign="top"><p><i>string</i></p>
+</td><td valign="top"><p>&#8220;Yes&#8221;</p>
+</td></tr><tr valign="top"><td valign="top"><p>CodeQuality</p>
+</td><td valign="top"><p> </p>
+<p><i>integer</i></p>
+</td><td valign="top"><p>3</p>
+</td></tr><tr valign="top"><td valign="top"><p>QAedBy</p>
+</td><td valign="top"><p> </p>
+<p><i>string</i></p>
+</td><td valign="top"><p>&quot;george&quot;</p>
+</td></tr><tr valign="top"><td valign="top"><p>ECOnum</p>
+</td><td valign="top"><p> </p>
+<p><i>integer</i></p>
+</td><td valign="top"><p> </p>
+
+8987<p> </p>
+</td></tr><tr valign="top"><td valign="top"><p>Benchmark</p>
+</td><td valign="top"><p><i>real (floating point)</i></p>
+</td><td valign="top"><p>34.1</p>
+</td></tr><tr valign="top"><td valign="top"><p>LastQAed</p>
+</td><td valign="top"><p> </p>
+<p><i>time</i></p>
+</td><td valign="top"><p>4-Apr.08:45</p>
+</td></tr></tbody></table></div><p>Attributes have a multitude of applications, including:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a name="idch3meta12"></a><span class="bold"><b>Bug tracking</b></span> &#8212; Each version involved in the fix for Bug #8987 might be assigned the attribute BugNumber/8987.</p>
+</li>
+<li><p><a name="idch3meta13"></a><span class="bold"><b>Quality control</b></span> &#8212; Every version of a module might be assigned a CodeQuality attribute, with values between 1 (worst) and 10 (best). Every element might be assigned a TestProc attribute, whose value names a corresponding test procedure.</p>
+</li>
+<li><p><a name="idch3meta14"></a><span class="bold"><b>Requirements tracing</b></span> &#8212; Attributes can be attached to the hyperlinks that implement requirements tracing, to provide additional information about the relationship. (See <a href="ch03.html#id83970" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id83970">&#8220;Hyperlinks / Hyperlink Types&#8221;</a>.)</p>
+</li>
+</ul></div><p>An attribute is an instance of an <i>attribute type</i> object (<a href="ch03.html#id52351" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id52351">Figure 3-4</a>).</p>
+<p><div class="figure"><p><a name="id5441172"></a><b>Figure 3-4. <a name="id52351"></a>Attribute and Attribute Type</b></p>
+<div class="mediaobject"><img src="Fig3-4.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig3-4.gif"></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5441189"></a><a name="id83970"></a>Hyperlinks / Hyperlink Types</h3></div></div>
+<p>A <a name="idch3meta15"></a><i>hyperlink</i> is a user-defined logical arrow that connects two elements, branches, versions, or VOB symbolic links. The objects can be in the same VOB, or in different VOBs. Either end of a hyperlink can be annotated with a text string. <a href="ch03.html#id98709" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id98709">Figure 3-5</a> illustrates a common application of hyperlinks, <i>requirements tracing</i>.</p>
+<p><div class="figure"><p><a name="id5441225"></a><b>Figure 3-5. <a name="id98709"></a>Hyperlink for Requirements Tracing</b></p>
+<div class="mediaobject"><img src="Fig3-5.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig3-5.gif"></div></div><br>
+</p>
+<p>In this example, the version of a source module that implements a new algorithm is logically connected by a <i>DesignFor</i> hyperlink to the version of a design document that describes the algorithm. Subsequent versions of both elements implicitly <i>inherit</i> the connection between the versions that are linked explicitly.</p>
+<p>Some additional examples:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a name="idch3meta16"></a><span class="bold"><b>Informal dependencies</b></span> &#8212; A set of hyperlinks defines a &#8220;network&#8221; of elements that must be modified as a group, even though there are no source-code dependencies among them. A hyperlink connects a source file element that defines run-time error messages to a document file element that contains a user manual's &#8220;Error Messages Appendix&#8221;.</p>
+</li>
+<li><p><a name="idch3meta17"></a><span class="bold"><b>Merge arrows</b></span> &#8212; ClearCase itself uses a hyperlink to indicate that two versions of an element have had their contents merged.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5441329"></a>Hyperlinks as Objects</h4></div></div>
+<p>A hyperlink is an instance of a <a name="idch3meta18"></a><i>hyperlink type</i> object (<a href="ch03.html#id91341" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id91341">Figure 3-6</a>). Each hyperlink is also a VOB object in its own right, with a unique <a name="idch3meta19"></a><i>hyperlink-ID</i>; certain ClearCase commands accept names of hyperlinks in much the same way as they accept file system pathnames:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% cleartool describe util.c (describe file system object)
+version &quot;util.c@@/main/4&quot;
+created 10-Dec-93.18:29:11 by (jjp.users@phobos)
+element type: text_file
+predecessor version: /main/3
+Labels:
+REL3
+% cleartool describe Merge@277 <i>(describe hyperlink object)</i>
+hyperlink &quot;Merge@277@/usr/hw&quot;
+created 10-Dec-93.17:50:54 by akp.dvt@neptune
+Merge@277@/usr/hw
+/usr/hw/src/util.c@@/main/rel2_bugfix/1
+-&gt; /usr/hw/src/util.c@@/main/3
+</pre></td></tr></table><p><div class="figure"><p><a name="id5441421"></a><b>Figure 3-6. <a name="id91341"></a>Hyperlink, Hyperlink Type, and Hyperlink-ID</b></p>
+<div class="mediaobject"><img src="Fig3-6.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig3-6.gif"></div></div><br>
+</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5441440"></a>Triggers and Trigger Types</h3></div></div>
+<p>A <a name="idch3meta20"></a><i>trigger</i> is a &#8220;monitor&#8221; that tracks development work. When a user-specified ClearCase operation is performed, the trigger <i>fires</i> automatically, executing one or more user-specified <i>trigger actions</i>. Triggers can help document the development process, improve communications within the development group, and implement process-management policies. For example, a trigger might:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>send mail to a development manager and/or technical writer when a new version of file element <tt>cmd_parser.c</tt> is created</p>
+</li>
+<li><p>send mail to all users when any header (<tt>.h</tt>) file is modified</p>
+</li>
+<li><p>send mail to a project manager when a new branch is created in any element within directory tree <tt>/vobs/vega</tt></p>
+</li>
+<li><p>attach an attribute to a new version of any source file, indicating the ECO number of the project for which the change was made</p>
+</li>
+<li><p>perform a <tt>lint</tt>(1) check (and require that it succeed) before allowing <tt>checkin</tt> of a file of type <tt>c_source</tt></p>
+</li>
+<li><p>require that any new branch type created by a user include the user's <i>login</i> name</p>
+</li>
+</ul></div><p>A trigger is an instance of a <a name="idch3meta21"></a><i>trigger type</i> object. Triggers can be placed on several kinds of objects:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>Individual elements</b></span> &#8212; A trigger attached to an element fires each time a ClearCase command operates on the element.</p>
+</li>
+<li><p><a name="idch3meta22"></a><span class="bold"><b>All elements</b></span> &#8212; A <i>global trigger type</i> is implicitly attached to all the elements in a VOB, both current and future.</p>
+</li>
+<li><p><span class="bold"><b>Individual type objects</b></span> &#8212; A trigger attached to a <i>type object</i> fires whenever the object is used or modified. For example, attaching a version label to any version of any element would fire a trigger that is attached to the corresponding <i>label type</i>.</p>
+</li>
+</ul></div><p>A trigger can be fine-tuned, so that it fires only on certain ClearCase operations, or when certain kinds of meta-data are involved. For more on the design and use of triggers, see <a href="ch06.html#id37762" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id37762">Chapter 6, &#8220;ClearCase Process Control.&#8221;</a></p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5441660"></a><a name="id38962"></a>Elements, Branches, and Their Types</h3></div></div>
+<p>Elements and branches were introduced in the discussion of ClearCase version-control, in <a name="idch3meta23"></a><a href="ch03.html#id59167" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id59167">Chapter 3, &#8220;ClearCase Meta-Data.&#8221;</a> There, we stated that &#8220;each element has an element type&#8221;. Now, we can refine that statement:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+&#8220;each <i>element</i> is an instance of an <i>element type</i>&#8221;
+</pre></td></tr></table><p>That is, a (predefined or user-defined) element type object must first exist; then, users can create one or more element objects as instances of the type. Similarly, each <i>branch</i> is a VOB object, created as an instance of an existing <i>branch type</i> object.</p>
+<p>Thus, elements and branches are implemented in the VOB database as instances of<i> type</i> objects, in exactly the same way as version labels, attributes, hyperlinks, and triggers.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5441781"></a>ClearCase-Generated Meta-Data</h2></div></div>
+<p>Many ClearCase commands automatically chronicle their work by writing <a name="idch3meta24"></a><i>records</i> to one or more VOB databases. Users can examine these records to determine what development work has taken place. <i>clearmake</i>, the ClearCase build utility, implements a build-avoidance scheme that uses records created by previous builds.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5441806"></a>Event Records</h3></div></div>
+<p>Each ClearCase command that makes a change in a VOB creates an <a name="idch3meta25"></a><i>event record</i> that describes the change, including &#8220;who, what, when, and where&#8221; information. The event record is permanently stored in the VOB database, and is logically associated with the particular VOB object that was changed by the command.</p>
+<p>For example, when the <tt>checkin</tt> command creates a new version, it also writes a create version event record to the VOB-fmt database:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+27-Jul.15:11  akp  create version &quot;tb004.doc@@/main/45&quot; &quot;gordon's corrections&quot;
+</pre></td></tr></table><p>ClearCase includes a simple report-writing facility, which can be used to extract certain information from a selected set of event records. For example, the following report interleaves information drawn from the event records of a set of elements specified with a wildcard (cmd_*.c), using a custom format (-fmt option):<a name="idch3meta26"></a></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% cleartool lshistory -fmt &quot;%Sd  %e  %n\n&quot; cmd_*.c
+24-Mar-94  checkout version cmd_protect.c
+24-Mar-94  create version  cmd_utl.c@@/main/multisite_v1/5
+24-Mar-94  checkout version  cmd_list.c
+24-Mar-94  create version  cmd_list.c@@/main/ibm_port/0
+24-Mar-94  create branch  cmd_list.c@@/main/ibm_port
+23-Mar-94  destroy sub-branch &quot;david_work&quot; of branch  cmd_pool.c@@/main
+22-Mar-94  create version  cmd_registry.c@@/main/16
+22-Mar-94  create version  cmd_view.c@@/main/138
+22-Mar-94  create version  cmd_utl.c@@/main/multisite_v1/4
+22-Mar-94  create version  cmd_utl.c@@/main/112
+22-Mar-94  checkout version  cmd_utl.c
+21-Mar-94  create version  cmd_pool.c@@/main/30
+21-Mar-94  create version  cmd_annotate.c@@/main/17
+18-Mar-94  create version  cmd_utl.c@@/main/multisite_v1/3
+18-Mar-94  create version  cmd_utl.c@@/main/111
+17-Mar-94  create version  cmd_pool.c@@/main/29
+16-Mar-94  create version  cmd_view.c@@/main/137
+16-Mar-94  create version  cmd_findmerge.c@@/main/23
+16-Mar-94  create version  cmd_findmerge.c@@/main/22
+16-Mar-94  create version  cmd_find.c@@/main/38
+14-Mar-94  create version  cmd_registry.c@@/main/15
+14-Mar-94  create version  cmd_findmerge.c@@/main/21
+14-Mar-94  destroy sub-branch &quot;akp_tmp&quot; of branch  cmd_view.c@@/main
+14-Mar-94  create version  cmd_registry.c@@/main/akp_tmp/1
+11-Mar-94  create version  cmd_findmerge.c@@/main/20
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5441936"></a>Configuration Records</h3></div></div>
+<p>When the ClearCase build utility <a name="idch3meta27"></a><i>clearmake</i> executes a build script, it creates a <i>configuration record</i> (<i>CR</i>) &#8212; the &#8220;bill of materials&#8221; for that particular execution of the build script. Like an event record, a CR contains &#8220;who, what, when, and where&#8221; information. It also shows how the file was built, by listing versions of source elements used, build options, makefile macros, the build script, and more. The CR is logically associated with the file(s) created by the build script, which are termed <i>derived objects</i> (<i>DOs</i>).</p>
+<p>ClearCase includes tools for displaying and comparing CRs, through their associated DOs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% cleartool catcr hello.o
+Target hello.o built on host &quot;neptune&quot; by akp.user
+Reference Time 19-Nov-93.19:30:12,
+this audit started 19-Nov-93.19:30:13
+View was neptune:/home/akp/akp.vws
+Initial working directory was neptune:/usr/src
+----------------------------
+MFS objects:
+----------------------------
+/usr/src/hello.c@@/main/4 &lt;19-Nov-93.19:30:05&gt;
+/usr/src/hello.h@@/main/2 &lt;19-Nov-93.19:30:07&gt;
+/usr/src/hello.o@@19-Mov.19:30.364
+----------------------------
+Build Script:
+----------------------------
+ cc -c hello.c
+----------------------------
+</pre></td></tr></table><p>For a full description of configuration records and derived objects, see <a href="ch05.html#id82423" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch05.html#id82423">Chapter 5, &#8220;Building Software with ClearCase.&#8221;</a></p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5442052"></a><a name="id56493"></a>The ClearCase Query Language</h2></div></div>
+<p><a name="idch3meta28"></a><a href="ch02.html#id17474" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch02.html#id17474">Chapter 2, &#8220;Version Control - ClearCase VOBs&#8221;</a> introduced <a name="idch3meta29"></a><i>extended naming</i>, a method for accessing version-controlled data. ClearCase also has a more general <i>query</i> facility, which locates objects using their associated meta-data. Queries can be used in many different contexts to locate one or more elements, branches, or versions. For example:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>A view is typically configured in terms of particular <span class="emphasis"><i>branch names</i></span> and <span class="emphasis"><i>version labels</i></span>.</p>
+</li>
+<li><p>A quality-assurance engineer might use queries to track source versions that have achieved a particular level of coding excellence, as indicated by the value of their <tt>CodeQuality </tt>attribute.</p>
+</li>
+<li><p>A user might use a query on <tt>CoordinateWith</tt> hyperlinks to determine which elements in the current source tree must be kept synchronized with elements in another tree.</p>
+</li>
+</ul></div><p>Following are some examples of ClearCase queries. Note that queries can involve both ClearCase-generated and user-defined meta-data:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+created_by(akp)
+</pre></td></tr></table><p>locates versions that were created by user <tt>akp</tt></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+created_by(drp) &amp;&amp; created_since(yesterday)
+</pre></td></tr></table><p>locates versions that were created recently by user <tt>drp</tt></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+lbtype(REL1) || lbtype(REL1.01)
+</pre></td></tr></table><p>locates versions that have been labeled either <tt>REL1</tt> or <tt>REL1.01</tt></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+merge(REL3, /main/rel2_bugfix)
+</pre></td></tr></table><p>locates elements for which a merge has been performed, incorporating data from the version labeled <tt>REL3</tt> into a version on the <tt>rel2_bugfix</tt> branch. This operation is recorded in the VOB database by a hyperlink of type <i>Merge</i>.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+BenchMk&lt;45 &amp;&amp; (! trtype(bench_trigger))
+</pre></td></tr></table><p>locates versions to which the <tt>BenchMk </tt>attribute has been attached with a value less than 45, and to which a trigger named <tt>bench_trigger</tt> has not been attached.</p>
+</div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch04.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 2. Version Control - ClearCase VOBs </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 4. ClearCase Views </td></tr></table></div></body></html>

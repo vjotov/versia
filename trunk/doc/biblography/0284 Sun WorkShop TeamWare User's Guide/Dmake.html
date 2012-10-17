@@ -1,0 +1,823 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher 5.0.4">
+<meta name="TEMPLATEBASE" content="SunLook1.0">
+<meta name="LASTUPDATED" content="Fri Mar 31 17:01:17 2000">
+<title>Using the dmake Utility</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr bgcolor="cccccc">
+
+<td align="left">
+&nbsp;&nbsp;<font face="helvetica,arial" size="2">Sun WorkShop TeamWare User's Guide</font>
+</td>
+
+<td valign="top" align="right"><a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html"><IMG SRC="home01.gif" tppabs="http://docs.sun.com/source/806-3573/images/home01.gif" ALT="Home" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html"><IMG SRC="toc01.gif" tppabs="http://docs.sun.com/source/806-3573/images/toc01.gif" ALT="Contents" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="building.html" tppabs="http://docs.sun.com/source/806-3573/building.html"><IMG SRC="prev01.gif" tppabs="http://docs.sun.com/source/806-3573/images/prev01.gif" ALT="Previous" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="cli.html" tppabs="http://docs.sun.com/source/806-3573/cli.html"><IMG SRC="next01.gif" tppabs="http://docs.sun.com/source/806-3573/images/next01.gif" ALT="Next" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html"><IMG SRC="index01.gif" tppabs="http://docs.sun.com/source/806-3573/images/index01.gif" ALT="Index" WIDTH="30" HEIGHT="26" BORDER="0" VSPACE="0"></a></td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+<br clear="all">
+
+<hr>
+
+<blockquote>
+
+<div align="center">
+<h1 align="left">
+  <a name="107663"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Chapter 10 </font>
+</h1>
+</div>
+
+<h1 align="left">
+  <a name="105823"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Using the <code>dmake</code> Utility</font>
+</h1>
+
+
+<p>
+  <a name="106173"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This chapter describes the way the distributed make (<code>dmake</code>) utility distributes builds over several hosts to build programs concurrently over a number of workstations or multiple CPUs. </font>
+</p>
+
+<ul type=disc><a name="105829"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="Dmake.html#105856" tppabs="http://docs.sun.com/source/806-3573/Dmake.html#105856">Basic Concepts</a></font><a name="105839"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="Dmake.html#105950" tppabs="http://docs.sun.com/source/806-3573/Dmake.html#105950">Understanding the dmake Utility</a></font><a name="107590"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="Dmake.html#107182" tppabs="http://docs.sun.com/source/806-3573/Dmake.html#107182">Impact of the dmake Utility on Makefiles</a></font><a name="105849"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="Dmake.html#106083" tppabs="http://docs.sun.com/source/806-3573/Dmake.html#106083">Using the dmake Utility</a></font></ul>
+<h2>
+  <a name="105856"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Basic Concepts</font>
+</h2>
+
+
+<p>
+  <a name="105858"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Distributed make (<code>dmake</code>) allows you to concurrently distribute the process of building large projects, consisting of many programs, over a number of workstations and, in the case of multiprocessor systems, over multiple CPUs. The <code>dmake</code> utility parses your makefiles and:</font>
+</p>
+
+<ul type=disc><a name="105859"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Determines which targets can be built concurrently</font><a name="105860"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Distributes the build of those targets over a number of hosts</font></ul>
+<p>
+  <a name="105861"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The <code>dmake</code> utility is a superset of the <code>make</code> utility.</font>
+</p>
+
+
+<p>
+  <a name="105862"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To understand <code>dmake</code>, you should know about:</font>
+</p>
+
+<ul type=disc><a name="105863"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Configuration files (runtime and build server)</font><a name="105866"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The dmake host</font><a name="105867"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The build server</font></ul>
+<h3>
+  <a name="105868"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Configuration Files</font>
+</h3>
+
+
+<p>
+  <a name="105869"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The <code>dmake</code> utility consults two files to determine to which build servers jobs are distributed and how many jobs can be distributed to each.</font>
+</p>
+
+
+<h4>
+  <a name="105871"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Runtime Configuration File</font>
+</h4>
+
+
+<p>
+  <a name="105872"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The <code>dmake</code> utility searches for a runtime configuration file on the <code>dmake</code> host to know where to distribute jobs. Generally, this file is in your home directory on the <code>dmake</code> host and is named <code>.dmakerc</code>. It consists of a list of build servers and the number of jobs to be distributed to each build server. See "The <font  face="Verdana, Arial, Helvetica, sans-serif">dmake</font> Host" section for more information.</font>
+</p>
+
+
+<h4>
+  <a name="105877"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Build Server Configuration File</font>
+</h4>
+
+
+<p>
+  <a name="107107"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Each build server that you want to participate in a distributed build must have a      <code>/etc/opt/SPROdmake/dmake.conf</code> file. This file specifies the maximum total number of dmake jobs that can be distributed to this build server by all dmake users. In addition, it may specify the "nice" priority under which all dmake jobs should run.</font>
+</p>
+
+
+<p>
+  <a name="105878"> </a><font face="Verdana, Arial, Helvetica, sans-serif">See <a href="Dmake.html#105943" tppabs="http://docs.sun.com/source/806-3573/Dmake.html#105943">The Build Server</a> for more information.</font>
+</p>
+
+
+<h3>
+  <a name="113218"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">The <code>dmake</code> Host</font>
+</h3>
+
+
+<p>
+  <a name="113219"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The <font  face="Verdana, Arial, Helvetica, sans-serif">dmake</font> host is defined as the machine on which the <font  face="Verdana, Arial, Helvetica, sans-serif">dmake</font> command is initially invoked. The <code>dmake</code> utility searches for a runtime configuration file to determine where to distribute jobs. Generally, this file must be in your home directory on the dmake host and is named <code>.dmakerc</code>. The <code>dmake</code> utility searches for the runtime configuration file in these locations and in the following order:</font>
+</p>
+
+<ol type="1">
+<p><li value="1"><a name="105885"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The path name you specify on the command line using the <code>-c</code> option</font>
+</p><p><li value="2"><a name="105886"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The path name you specify using the <code>DMAKE_RCFILE</code> makefile macro</font>
+</p><p><li value="3"><a name="105887"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The path name you specify using the <code>DMAKE_RCFILE</code> environment variable</font>
+</p><p><li value="4"><a name="105888"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><code>$(HOME)/.dmakerc</code> </font>
+</p></ol>
+
+<p>
+  <a name="105889"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If a runtime configuration file is not found, the <code>dmake</code> utility distributes two jobs to the dmake host. </font>
+</p>
+
+
+<p>
+  <a name="107123"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The runtime configuration file allows you to specify a list of build servers and the number of jobs you want distributed to each build server. The following is an example of a <code>.dmakerc</code> file:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="105892"> </a>
+<pre># My machine. This entry causes dmake to distribute to it.
+</pre><a name="111600"> </a>
+<pre>falcon	 	 	 { jobs = 1 }
+</pre><a name="111605"> </a>
+<pre>hawk
+</pre><a name="111610"> </a>
+<pre>eagle	 	 	 { jobs = 3 }
+</pre><a name="111615"> </a>
+<pre># Manager's machine. She's usually at meetings
+</pre><a name="111620"> </a>
+<pre>heron	 	 	 { jobs = 4 }
+</pre><a name="111625"> </a>
+<pre>avocet
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+<a name="105899"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>CODE EXAMPLE 10-1 	</b>&nbsp;&nbsp;<font  face="Verdana, Arial, Helvetica, sans-serif">dmakerc</font> file</font><ul type=disc><a name="113352"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The entries: <code>falcon</code>, <code>hawk</code>, <code>eagle</code>, <code>heron</code>, and <code>avocet</code> are listed build servers. </font><a name="105900"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>You can specify the number of jobs you want distributed to each build server. The default number of jobs is two.</font><a name="105901"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Any line that begins with the # character is interpreted as a comment. </font>
+<p><hr noshade size="1">
+  <a name="105902"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><b>Note &#150; </b>In the code example above, list of build servers includes <code>falcon</code> which is also the dmake host. The dmake host can also be specified as a build server. If you do not include it in the runtime configuration file, no dmake jobs are distributed to it.</font>
+<hr noshade size="1"></p>
+
+</ul>
+<p>
+  <a name="113360"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can also construct groups of build servers in the runtime configuration file. <font  face="Verdana, Arial, Helvetica, sans-serif">dmake</font> provides you with the flexibility of easily switching between different groups of build servers as circumstances warrant. For instance, you may define groups of build servers for builds under different operating systems, or you may define groups of build servers that have special software installed on them. </font>
+</p>
+
+
+<p>
+  <a name="105904"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The following is an example of a runtime configuration file that contains groups of build servers:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="111691"> </a>
+<pre>earth	 	 	 { jobs = 2 }
+</pre><a name="111700"> </a>
+<pre>mars	 	 	 { jobs = 3 }
+</pre><a name="111709"> </a>
+<pre>
+</pre><a name="111718"> </a>
+<pre>group lab1 {
+</pre><a name="111727"> </a>
+<pre>	 	 	 host falcon	 { jobs = 3 }
+</pre><a name="111736"> </a>
+<pre>	 	 	 host hawk
+</pre><a name="111745"> </a>
+<pre>	 	 	 host eagle 	 { jobs = 3 }
+</pre><a name="111754"> </a>
+<pre>}
+</pre><a name="111763"> </a>
+<pre>	 	 	  
+</pre><a name="111772"> </a>
+<pre>group lab2 {
+</pre><a name="111777"> </a>
+<pre>	 	 	 host heron
+</pre><a name="111859"> </a>
+<pre>	 	 	 host avocet   	 { jobs = 3 }
+</pre><a name="111864"> </a>
+<pre>	 	 	 host stilt   	 { jobs = 2 }
+</pre><a name="111869"> </a>
+<pre>}
+</pre><a name="111874"> </a>
+<pre>	 	 	  
+</pre><a name="111879"> </a>
+<pre>group labs {
+</pre><a name="111884"> </a>
+<pre>	 	 	 group lab1
+</pre><a name="111889"> </a>
+<pre>	 	 	 group lab2
+</pre><a name="111894"> </a>
+<pre>}
+</pre><a name="111899"> </a>
+<pre>
+</pre><a name="111904"> </a>
+<pre>group sunos5.x {
+</pre><a name="111909"> </a>
+<pre>	 	 	 group labs
+</pre><a name="111914"> </a>
+<pre>	 	 	 host jupiter
+</pre><a name="111919"> </a>
+<pre>	 	 	 host venus	 { jobs = 2 }
+</pre><a name="111924"> </a>
+<pre>	 	 	 host pluto 	 { jobs = 3 }
+</pre><a name="111929"> </a>
+<pre>}
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+<ul type=disc><a name="105933"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Formal groups are specified by the <code>group</code> keyword and lists of their members are delimited by braces ({}).</font><a name="105934"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Build servers that are members of groups are specified by the optional <code>host</code> directive.</font><a name="105935"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Groups can be members of other groups.</font><a name="105936"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Individual build servers can be listed in runtime configuration files that also contain groups of build servers; in this case, <code>dmake</code> treats these build servers as members of the <em>unnamed</em> group.</font></ul>
+<p>
+  <a name="105937"> </a><font face="Verdana, Arial, Helvetica, sans-serif">In order of precedence, the <code>dmake</code> utility distributes jobs to the following:</font>
+</p>
+
+<ol type="1">
+<p><li value="1"><a name="105938"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The formal group specified on the command-line as an argument to the <code>-g</code> option</font>
+</p><p><li value="2"><a name="105939"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The formal group specified by the <code>DMAKE_GROUP</code> makefile macro</font>
+</p><p><li value="3"><a name="105940"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The formal group specified by the <code>DMAKE_GROUP</code> environment variable</font>
+</p><p><li value="4"><a name="105941"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The first group specified in the runtime configuration file</font>
+</p></ol>
+
+<p>
+  <a name="107056"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The <code>dmake</code> utility allows you to specify a different execution path for each build server. By default <code>dmake</code> looks for the dmake support binaries on the build server in the same logical path as on the dmake host. You can specify alternate paths for build servers as a host attribute in the <code>.dmakerc</code> file. For example:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="107059"> </a>
+<pre>group lab1 {
+</pre><a name="111938"> </a>
+<pre>	 	 	 host falcon	 { jobs = 10 , path = "/set/dist/sparc-S2/bin" }
+</pre><a name="111943"> </a>
+<pre>	 	 	 host hawk	 { path = "/opt/SUNWspro/bin"                  }
+</pre><a name="111948"> </a>
+<pre>}
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="107063"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can use double quotation marks to enclose the names of groups and hosts in the <code>.dmakerc</code> file. This allows you more flexibility in the characters that you can use in group names. Digits are allowed, as well as alphabetic characters. Names that start with digits should be enclosed in double quotes. For example:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="107066"> </a>
+<pre>group "123_lab" {
+</pre><a name="111957"> </a>
+<pre>	 	 	 host "456_hawk"	 { path = "/opt/SUNWspro/bin"          }
+</pre><a name="111962"> </a>
+<pre>}
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<h3>
+  <a name="105943"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">The Build Server</font>
+</h3>
+
+
+<p>
+  <a name="105944"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The <code>/etc/opt/SPROdmake/dmake.conf</code> file is in the file system of build servers. Use this file to limit the maximum number of dmake jobs (from all users) that can run concurrently on a build server and to specify the "nice" priority under which all dmake jobs should run. The following is an example of an <code>/etc/opt/SPROdmake/dmake.conf</code> file. This file sets the maximum number of dmake jobs permitted to run on a build server (from all <code>dmake</code> users) to be eight.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="105947"> </a>
+<pre>max_jobs: 8
+</pre><a name="111971"> </a>
+<pre>nice_prio: 5
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p><hr noshade size="1">
+  <a name="105948"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><b>Note &#150; </b>If the <code>/etc/opt/SPROdmake/dmake.conf</code> file does not exist on a build server, no dmake jobs will be allowed to run on that server.</font>
+<hr noshade size="1"></p>
+
+
+<h2>
+  <a name="105950"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Understanding the <code>dmake</code> Utility</font>
+</h2>
+
+
+<p>
+  <a name="111534"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To run a distributed make, use the executable file <code>dmake</code> in place of the standard <code>make</code> utility. You should understand the Solaris <code>make</code> utility before you use <code>dmake</code>. If you need to read more about the <code>make</code> utility, see the Solaris <em>Programming Utilities Guide</em>. If you use the <code>make</code> utility, the transition to <code>dmake</code> requires little if any alteration.</font>
+</p>
+
+
+<h2>
+  <a name="107182"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Impact of the <code>dmake</code> Utility on Makefiles</font>
+</h2>
+
+
+<p>
+  <a name="107183"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The methods and examples in this section show the kinds of problems that <font  face="Verdana, Arial, Helvetica, sans-serif">dmake</font> can help solve. As procedures become more complicated, so do the makefiles that implement them. You must know which approach will yield a reasonable makefile that works. The examples in this section illustrate common code-development predicaments and some straightforward methods to simplify them using <code>dmake</code>.</font>
+</p>
+
+
+<h3>
+  <a name="113390"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Using Makefile Templates</font>
+</h3>
+
+
+<p>
+  <a name="105963"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you use a makefile template from the outset of your project, custom makefiles that evolve from the makefile templates will be:</font>
+</p>
+
+<ul type=disc><a name="105964"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>More familiar</font><a name="105965"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Easier to understand</font><a name="105966"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Easier to integrate</font><a name="105967"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Easier to maintain</font><a name="105968"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Easier to reuse</font></ul>
+<p>
+  <a name="105969"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The less time you spend editing makefiles, the more time you have to develop your program or project. </font>
+</p>
+
+
+<h3>
+  <a name="105970"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Building Targets Concurrently </font>
+</h3>
+
+
+<p>
+  <a name="105971"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Large software projects typically consist of multiple independent modules that can be built concurrently. The <code>dmake</code> utility supports concurrent processing of targets on multiple machines over a network. This concurrency can markedly reduce the time required to build a large project. </font>
+</p>
+
+
+<p>
+  <a name="105972"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When given a target to build, <code>dmake</code> checks the dependencies associated with that target and builds those that are out of date. Building those dependencies may, in turn, entail building some of their dependencies. When distributing jobs, <code>dmake</code> starts every target that it can. As these targets complete, <code>dmake</code> starts other targets. Nested invocations of <code>dmake</code> are not run concurrently by default, but this can be changed (see <a href="Dmake.html#106057" tppabs="http://docs.sun.com/source/806-3573/Dmake.html#106057">Restricting Parallelism</a> for more information). </font>
+</p>
+
+
+<p>
+  <a name="105976"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Since <code>dmake</code> builds multiple targets concurrently, the output of each build is produced simultaneously. To avoid intermixing the output of various commands, <code>dmake</code> collects output from each build separately. The <code>dmake</code> utility displays the commands before they are executed. If an executed command generates any output, warnings, or errors, <code>dmake</code> displays the entire output for that command. Since commands started later may finish earlier, this output may be displayed in an unexpected order.</font>
+</p>
+
+
+<h3>
+  <a name="105981"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Limitations on Makefiles   </font>
+</h3>
+
+
+<p>
+  <a name="105982"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Concurrent building of multiple targets places some restrictions on makefiles. Makefiles that depend on the implicit ordering of dependencies may fail when built concurrently. Targets in makefiles that modify the same files may fail if those files are modified concurrently by two different targets. Some examples of possible problems are discussed in this section. </font>
+</p>
+
+
+<h4>
+  <a name="105984"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Dependency Lists </font>
+</h4>
+
+
+<p>
+  <a name="105985"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When building targets concurrently, it is important that dependency lists be accurate. For example, if two executables use the same object file but only one specifies the dependency, then the build may cause errors when done concurrently. For example, consider the following makefile fragment: <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="105988"> </a>
+<pre>all: prog1 prog2 
+</pre><a name="111980"> </a>
+<pre>prog1: prog1.o aux.o 
+</pre><a name="111985"> </a>
+<pre>	 $(LINK.c) prog1.o aux.o -o prog1 
+</pre><a name="111990"> </a>
+<pre>prog2: prog2.o 
+</pre><a name="111995"> </a>
+<pre>	 $(LINK.c) prog2.o aux.o -o prog2 
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="105993"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When built serially, the target <code>aux.o</code> is built as a dependent of <code>prog1</code> and is up-to-date for the build of <code>prog2</code>. If built in parallel, the link of <code>prog2</code> may begin before aux.o is built, and is therefore incorrect. The <code>.KEEP_STATE</code> feature of <code>make</code> detects some dependencies, but not the one shown above. </font>
+</p>
+
+
+<h4>
+  <a name="105995"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Explicit Ordering of Dependency Lists </font>
+</h4>
+
+
+<p>
+  <a name="105996"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Other examples of implicit ordering dependencies are more difficult to fix. For example, if all of the headers for a system must be constructed before anything else is built, then everything must be dependent on this construction. This causes the makefile to be more complex and increases the potential for error when new targets are added to the makefile. The user can specify the special target <code>.WAIT</code> in a makefile to indicate this implicit ordering of dependents. When <code>dmake</code> encounters the <code>.WAIT</code> target in a dependency list, it finishes processing all prior dependents before proceeding with the following dependents. More than one <code>.WAIT</code> target can be used in a dependency list. The following example shows how to use <code>.WAIT</code> to indicate that the headers must be constructed before anything else. <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106001"> </a>
+<pre>all: hdrs .WAIT libs functions 
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="106002"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can add an empty rule for the <code>.WAIT</code> target to the makefile so that the makefile is compatible with the <font  face="Verdana, Arial, Helvetica, sans-serif">make</font> utility. </font>
+</p>
+
+
+<h3>
+  <a name="106005"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Concurrent File Modification </font>
+</h3>
+
+
+<p>
+  <a name="106006"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You must make sure that targets built concurrently do not attempt to modify the same files at the same time. This can happen in a variety of ways. If a new suffix rule is defined that must use a temporary file, the temporary file name must be different for each target. You can accomplish this by using the dynamic macros <code>$@</code> or <code>$*</code>. For example, a <code>.c.o</code> rule that performs some modification of the .c file before compiling it might be defined as: <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="112234"> </a>
+<pre>.c.o:
+</pre><a name="112301"> </a>
+<pre>	 awk -f modify.awk $*.c &gt; $*.mod.c 
+</pre><a name="112306"> </a>
+<pre>	 $(COMPILE.c) $*.mod.c -o $*.o 
+</pre><a name="112311"> </a>
+<pre>	 $(RM) $*.mod.c 
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<h3>
+  <a name="106016"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Concurrent Library Update </font>
+</h3>
+
+
+<p>
+  <a name="106017"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Another potential concurrency problem is the default rule for creating libraries that also modifies a fixed file, that is, the library. The inappropriate <code>.c.a</code> rule causes <code>dmake</code> to build each object file and then archive that object file. When <code>dmake</code> archives two object files in parallel, the concurrent updates will corrupt the archive file. <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106020"> </a>
+<pre>.c.a:
+</pre><a name="112374"> </a>
+<pre>	 $(COMPILE.c) -o $% $&lt; 
+</pre><a name="112379"> </a>
+<pre>	 $(AR) $(ARFLAGS) $@ $% 
+</pre><a name="112384"> </a>
+<pre>	 $(RM) $% 
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="106024"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A better method is to build each object file and then archive all the object files after completion of the builds. An appropriate suffix rule and the corresponding library rule are: <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106027"> </a>
+<pre>.c.a:
+</pre><a name="112494"> </a>
+<pre>	 $(COMPILE.c) -o $% $&lt; 
+</pre><a name="112499"> </a>
+<pre>	 $(COMPILE.c) -o $% $&lt; 
+</pre><a name="112504"> </a>
+<pre>lib.a: lib.a($(OBJECTS)) 
+</pre><a name="112509"> </a>
+<pre>	 $(AR) $(ARFLAGS) $(OBJECTS) 
+</pre><a name="112514"> </a>
+<pre>	 $(RM) $(OBJECTS) 
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<h3>
+  <a name="106035"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Multiple Targets </font>
+</h3>
+
+
+<p>
+  <a name="106036"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Another form of concurrent file update occurs when the same rule is defined for multiple targets. An example is a <code>yacc</code>(1) program that builds both a program and a header for use with <code>lex</code>(1). When a rule builds several target files, it is important to specify them as a group using the + notation. This is especially so in the case of a parallel build. <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106039"> </a>
+<pre>y.tab.c y.tab.h: parser.y 
+</pre><a name="112553"> </a>
+<pre>	 $(YACC.y) parser.y 
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="106047"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This rule is actually equivalent to the two rules:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106043"> </a>
+<pre>y.tab.c: parser.y
+</pre><a name="112062"> </a>
+<pre>	 $(YACC.y) parser.y
+</pre><a name="112067"> </a>
+<pre>y.tab.h: parser.y
+</pre><a name="112072"> </a>
+<pre>	 $(YACC.y) parser.y
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="106048"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The serial version of <code>make</code> builds the first rule to produce <code>y.tab.c</code> and then determines that <code>y.tab.h</code> is up-to-date and need not be built. When building in parallel, <code>dmake</code> checks <code>y.tab.h</code> before <code>yacc</code> has finished building <code>y.tab.c</code> and notices that <code>y.tab.h</code> <em>does</em> need to be built, it then starts another <code>yacc</code> in parallel with the first one. Since both <code>yacc</code> invocations are writing to the same files (<code>y.tab.c</code> and <code>y.tab.h</code>), these files are apt to be corrupted and incorrect. The correct rule uses the <code>+</code> construct to indicate that both targets are built simultaneously by the same rule. For example:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106051"> </a>
+<pre>y.tab.c + y.tab.h: parser.y
+</pre><a name="112562"> </a>
+<pre>	 $(YACC.y) parser.y
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<h3>
+  <a name="106057"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Restricting Parallelism</font>
+</h3>
+
+
+<p>
+  <a name="106058"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Sometimes file collisions cannot be avoided in a makefile. An example is <code>xstr</code>(1), which extracts strings from a C program to implement shared strings. The <code>xstr</code> command writes the modified C program to the fixed file <code>x.c</code> and appends the strings to the fixed file <code>strings</code>. Since <code>xstr</code> must be run over each C file, the following new <code>.c.o</code> rule is commonly defined: <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106061"> </a>
+<pre>.c.o:
+</pre><a name="112571"> </a>
+<pre>	 $(CC) $(CPPFLAGS) -E $*.c | xstr -c - 
+</pre><a name="112576"> </a>
+<pre>	 $(CC) $(CFLAGS) $(TARGET_ARCH) -c x.c
+</pre><a name="112581"> </a>
+<pre>	 mv x.o $*.o
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="106065"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The <code>dmake</code> utility cannot concurrently build targets using this rule since the build of each target writes to the same <code>x.c</code> and <code>strings</code> files. Nor is it possible to change the files used. You can use the special target <code>.NO_PARALLEL</code>: to tell <code>dmake</code> not to build these targets concurrently. For example, if the objects being built using the <code>.c.o</code> rule were defined by the <code>OBJECTS</code> macro, the following entry would force <code>dmake</code> to build those targets serially: <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106070"> </a>
+<pre>.NO_PARALLEL: $(OBJECTS)
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="106071"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If most of the objects must be built serially, it is easier and safer to force all objects to default to serial processing by including the <code>.NO_PARALLEL</code>: target without any dependents. Any targets that can be built in parallel can be listed as dependencies of the <code>.PARALLEL</code>: target: <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106076"> </a>
+<pre>.NO_PARALLEL:
+</pre><a name="112594"> </a>
+<pre>.PARALLEL: $(LIB_OBJECT)
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<h3>
+  <a name="106078"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Nested Invocations of Distributed Make </font>
+</h3>
+
+
+<p>
+  <a name="106079"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When <code>dmake</code> encounters a target that invokes another <code>dmake</code> command, it builds that target serially, rather than concurrently. This prevents problems where two different <code>dmake</code> invocations attempt to build the same targets in the same directory. Such a problem might occur when two different programs are built concurrently, and each must access the same library. The only way for each <code>dmake</code> invocation to be sure that the library is up-to-date is for each to invoke <code>dmake</code> recursively to build that library. The <code>dmake</code> utility recognizes a nested invocation only when the <code>$(MAKE)</code> macro is used in the command line. </font>
+</p>
+
+
+<p>
+  <a name="106080"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you nest commands that you know will not collide, you can force them to be done in parallel by using the <code>.PARALLEL:</code> construct. </font>
+</p>
+
+
+<p>
+  <a name="106081"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When a makefile contains many nested commands that run concurrently, the load-balancing algorithm may force too many builds to be assigned to the local machine. This may cause high loads and possibly other problems, such as running out of swap space. If such problems occur, allow the nested commands to run serially. </font>
+</p>
+
+
+<h2>
+  <a name="106083"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Using the <code>dmake</code> Utility</font>
+</h2>
+
+
+<p>
+  <a name="106086"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You execute <code>dmake</code> on a <em>dmake host</em> and distribute jobs to <em>build servers</em>. You can also distribute jobs to the dmake host, in which case it is also considered to be a build server. The <code>dmake</code> utility distributes jobs based on makefile targets that <code>dmake</code> determines (based on your makefiles) can be built concurrently. You can use a machine as a build server if it meets the following requirements:</font>
+</p>
+
+<ul type=disc><a name="106087"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>From the dmake host (the machine you are using) you must be able to use <code>rsh</code>, without being prompted for a password, to remotely execute commands on the build server. See the <code>rsh</code>(1) man page for more information about the <code>rsh</code> command. For example:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="106090"> </a>
+<pre>demo% <code><b>rsh</b></code> <font face="Arial,Helvetica"><em>build_server</em></font> <code><b>which dmake
+</b></code></pre><a name="112606"> </a>
+<pre>/opt/SUNWspro/bin/dmake
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+ </font><a name="106092"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The <code>bin</code> directory in which the <code>dmake</code> software is installed must be accessible from the build server. It is common practice to have all build servers share a common dmake installation directory. See the <code>share</code>(1M) and <code>mount</code>(1M) man pages or the system AnswerBook documentation for more information about creating shared filesystems.</font><a name="112777"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>By default, <code>dmake</code> assumes that the logical path to the dmake executables on the build server is the same as on the dmake host. You can override this assumption by specifying a path name as an attribute of the host entry in the runtime configuration file. For example:<code><p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="113119"> </a>
+<pre><code>group sparc-cluster {
+</code></pre><a name="113131"> </a>
+<pre>   host wren   { jobs = 10 , path = "/export/SUNWspro/bin"}
+</pre><a name="113137"> </a>
+<pre>   host stimpy { path = "/opt/SUNWspro/bin"             }
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</code></font><a name="106098"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The source hierarchy you are building must be:</font>  <ul>
+<br><li><a name="106099"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Accessible from the build server</font>
+<br><li><a name="106100"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Mounted under the same name</font>
+  </ul>
+</ul>
+<p>
+  <a name="106101"> </a><font face="Verdana, Arial, Helvetica, sans-serif">From the dmake host you can control which build servers are used and how many dmake jobs are allotted to each build server. The number of dmake jobs that can run on a given build server can also be limited on that server.</font>
+</p>
+
+
+<p>
+  <a name="106103"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you specify the <code>-m</code> option with the <code>parallel</code> argument, or set the <code>DMAKE_MODE</code> variable or macro to the value <code>parallel</code>, <code>dmake</code> does not scan your runtime configuration file. Therefore, you must specify the number of jobs using the <code>-j</code> option or the <code>DMAKE_MAX_JOBS</code> variable or macro. If you do not specify a value this way, a default of two jobs is used. </font>
+</p>
+
+
+<p>
+  <a name="106104"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you modify the maximum number of jobs using the <code>-j</code> option, or the <code>DMAKE_MAX_JOBS</code> variable or macro when using <code>dmake</code> in distributed mode, the value you specify overrides the values listed in the runtime configuration file. The value you specify is used as the total number of jobs that can be distributed to all build servers.</font>
+</p>
+
+
+<p>
+  <a name="106113"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If you access <code>dmake</code> from the Building window, use the online help to see how to specify your build servers and jobs. If you access <code>dmake</code> from the command line, see the <code>dmake</code> man page (<code>dmake.1</code>).</font>
+</p>
+
+</blockquote>
+
+<hr>
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="6" cellspacing-"0" border="0">
+<tr>
+<td valign="top" align="left">
+<font size="2">
+<a href="javascript:if(confirm('http://www.sun.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/'" tppabs="http://www.sun.com/">Sun Microsystems, Inc.</a><br>
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/PRN.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/PRN.html'" tppabs="http://docs.sun.com/source/806-3573/PRN.html">Copyright information</a>. All rights reserved.<br>
+<a href="javascript:if(confirm('http://www.sun.com/cgi-bin/comment-form.pl  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/cgi-bin/comment-form.pl'" tppabs="http://www.sun.com/cgi-bin/comment-form.pl">Feedback</a><br>
+</font>
+</td>
+
+<td valign="top" align="right">
+<font face="helvetica,arial" size="2">
+<a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html">Library</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html">Contents</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="building.html" tppabs="http://docs.sun.com/source/806-3573/building.html">Previous</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="cli.html" tppabs="http://docs.sun.com/source/806-3573/cli.html">Next</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html">Index</a>
+</font>
+</td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+</body>
+</html>

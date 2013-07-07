@@ -1,1 +1,0 @@
-new Image().src = "http://counter.rambler.ru/top100.scn?1552794&rn="+Math.random()+"&rf="+escape(document.referrer);

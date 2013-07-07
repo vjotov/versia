@@ -1,0 +1,142 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Access Control Tab
+</font></h2>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+<h4><img src="hg_see-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_see.gif"><font size=4><B>Related Topics:</B></font></h4>
+
+<p><Table Border="0" Cellpadding="5">
+<tr><td VALIGN=TOP>
+<a href="ts3a1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/ts3a1.html" Target=Topic>Setting Global Permissions</a>
+
+<td VALIGN=TOP>
+<a href="ts3a2.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/ts3a2.html" Target=Topic>Setting Individual or Group Permissions</a>
+
+
+
+
+</Table>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+
+
+<p>Use the Access Control tab to add, delete, and change access control permissions for the specified workspace. To open the Access Control tab, in the <a href="tw1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw1.html" Target=Topic>Configuring Window</a>, choose Workspace <img src="rightwingarrow-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/rightwingarrow.gif">  Properties and select the Access Control tab. 
+
+
+<p>This tab contains the following items:
+
+
+<h4><font size=4>Access Control Pane
+</font></h4><p>Displays the current access control permissions for each operation performed on the specified workspace. You can grant or deny permission for the following Sun WorkShop<sup>TM</sup> TeamWare transactions::<Table Cellpadding="5">
+<caption></caption>
+
+<tr valign="baseline"><td>
+bringover-from
+
+<td>Bring over files from this workspace.
+
+<tr valign="baseline"><td>
+bringover-to
+
+<td>
+Bring over files to this workspace.
+
+
+<tr valign="baseline"><td>
+putback-from
+
+<td>
+Put back files from this workspace.
+
+
+<tr valign="baseline"><td>
+putback-to
+
+<td>
+Put back files to this workspace.
+
+
+<tr valign="baseline"><td>
+undo
+
+<td>
+Undo commands executed in this workspace.
+
+
+<tr valign="baseline"><td>
+workspace-delete
+
+<td>
+Delete this workspace.
+
+
+<tr valign="baseline"><td>
+workspace-move
+
+<td>
+Move this workspace.
+
+
+<tr valign="baseline"><td>
+workspace-reparent
+
+<td>
+Reparent this workspace.
+
+
+<tr valign="baseline"><td>
+workspace-reparent-to
+
+<td>
+Reparent other workspaces to this workspace.
+
+
+
+</Table>
+ 
+
+
+
+
+<p>This is how to determine the current access control settings. Transactions are listed in the left column, and permissions are listed in the right column.
+
+
+<ul><p><li>If the right column is blank, all users have permission to execute that transaction.</li>
+
+<p><li>If there is a minus sign on the line (-), then no users have permission to execute that transaction.</li>
+
+<p><li>A person&#39;s login name in the right column indicates they have permission to perform the operation. If their name has a minus sign in front of it (-jdoe), then they are denied permission to perform that operation. An at-sign (@) before a name indicates it is a group.</li>
+
+</ul><a name="106652">
+<blockquote><hr noshade size="1"><b>Note - </b>The order in which a user appears on the list can effect permissions. If a user is listed as having been both granted and denied permission, Sun WorkShop<sup>TM</sup> TeamWare tools only use the first reference. This can occur when you grant access to an individual and deny access to a group that the individual belongs to. (In this instance, if the individual is listed first, they will have access, if the group is listed first, the individual does not have access.) 
+<hr noshade size="1"></blockquote>
+</a><h4><font size=4>Buttons<Table Cellpadding="5">
+<caption></caption>
+
+<tr valign="baseline"><td>
+Load
+
+<td>Reloads the information in the Access Control list.
+
+<tr valign="baseline"><td>
+Edit
+
+<td>Opens the Access Control dialog box, where you can set 
+new permissions.
+
+
+</Table>
+ 
+
+
+</font></h4><dl>
+<dt><dd></dl>
+
+<br>
+
+<br> 
+
+

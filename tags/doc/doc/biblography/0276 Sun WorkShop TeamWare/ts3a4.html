@@ -1,0 +1,51 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Invoking Your Own Putback Validation Program
+</font></h2>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+<p>If a validation program is set for a workspace, then any putback operation to this workspace invokes the program that you indicate. If the program fails, then the putback is canceled.
+
+
+<a name="107090">
+<blockquote><hr noshade size="1"><b>Note - </b>The validation program is not a part of Sun WorkShop<sup>TM</sup> TeamWare. You must provide it if you want putback to perform validation. The validation program can be any executable file (shell script or program) that accepts arguments that are passed by putback and returns non-zero exit status to deny putback. See <a href="ts3a5.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/ts3a5.html" Target=Topic>Sample Validation Program</a>. 
+<hr noshade size="1"></blockquote>
+</a><p>The user who wants to do a putback is prompted for a Integration Request ID and then the validation program is invoked with the following arguments: 
+
+
+<ul><p><li>User ID of the user doing the putback ($1)</li>
+
+<p><li>"from" workspace full pathname ($2)</li>
+
+<p><li>"to" workspace full pathname ($3)</li>
+
+<p><li>Integration Request ID ($4)</li>
+
+<p><li>Name of the file that contains the list of files to be modified ($5)</li>
+
+</ul><p>To invoke your validation program:
+
+
+<dl>
+<p><dt><dd><strong>	1.	</strong> In the <a href="tw1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw1.html" Target=Topic>Configuring Window</a>, load the workspace by choosing File <img src="rightwingarrow-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/rightwingarrow.gif">  Load Workspaces.
+</dl>
+<dl>
+<p><dt><dd><strong>	2.	</strong> Select the workspace by clicking on it.
+<p><dt><dd><strong>	3.	</strong> Choose Workspace <img src="rightwingarrow-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/rightwingarrow.gif">  Workspace Properties. 
+<p><dt><dd><strong>	4.	</strong> Select the <a href="tw3a2.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw3a2.html" Target=Topic>Putback Validation Tab</a> in the <a href="tw3a.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw3a.html" Target=Topic>Workspace Properties Dialog Box</a>.
+<p><dt><dd><strong>	5.	</strong> Click Putback Validation: On.
+<p><dt><dd><strong>	6.	</strong> Click Putback Approval: Approved by Validation Program.
+<p><dt><dd><strong>	7.	</strong> Type the path to your validation program in the Validation Program text box.
+<p><dt><dd><strong>	8.	</strong> Click OK.
+</dl>
+<a name="107182">
+<blockquote><hr noshade size="1"><b>Note - </b>It is more secure to include the full path to your validation program, rather than just the program name. If you don&#39;t include the full path, a user could substitute their own program in place of your validation program. 
+<hr noshade size="1"></blockquote>
+</a>
+<br>
+
+<br> 
+
+

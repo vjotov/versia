@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 6. ClearCase Process Control</title><meta name="generator" content="DocBook XSL Stylesheets V1.49"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.0"><link rel="home" href="index.html" title="CASEVision&#8482;/ClearCase
+Concepts Guide"><link rel="up" href="index.html" title="CASEVision&#8482;/ClearCase
+Concepts Guide"><link rel="previous" href="ch05.html" title="Chapter 5. Building Software with ClearCase"><link rel="next" href="go01.html" title="Glossary"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 6. ClearCase Process Control</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch05.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="go01.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/go01.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5447734"></a>Chapter 6. <a name="id37762"></a>ClearCase Process Control</h2></div></div>
+<p>Software development policies and procedures differ widely from organization to organization, but share a common goal: improving the quality and time-to-market of the software under development. This chapter discusses ClearCase's process and policy control mechanisms, which are useful in activities that parallel the development process, such as quality assurance and ECO (&#8220;engineering change order&#8221;) administration.<a name="idch6policy1"></a><a name="idch6policy2"></a></p>
+<p>ClearCase process control tools enable:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>monitoring of the entire development process</p>
+</li>
+<li><p>enforcement of development policies &#8212; controlling who can make changes; controlling how and where changes can be made</p>
+</li>
+<li><p>automated communications, targeted as required at individual users, development groups, and managers</p>
+</li>
+<li><p>organization and cross-referencing of all development data: source code, memos, design proposals, technical manuals, and so on</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5447811"></a>Information Capture and Retrieval</h2></div></div>
+<p>Reliable logging of information concerning development activities plays a fundamental role in any process-control scheme. ClearCase provides both automatic and user-controlled facilities for capturing such information. It also provides simple commands for retrieving the information, along with extensions for creating sophisticated reports (<a name="idch6policy3"></a><a name="idch6policy4"></a><a href="ch06.html#id29963" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id29963">Figure 6-1</a>).</p>
+<p><div class="figure"><p><a name="id5447903"></a><b>Figure 6-1. <a name="id29963"></a>Information Capture and Retrieval</b></p>
+<div class="mediaobject"><img src="Fig6-1.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig6-1.gif"></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5447923"></a><a name="id91772"></a>Automatic Information Capture</h3></div></div>
+<p>When ClearCase client programs make changes to the development environment, they automatically store <a name="idch6policy5"></a><a name="idch6policy6"></a><i>records</i> in VOB databases. For example:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>When a user checks out a file element in order to edit it (and ultimately, create a new version of it), <a name="idch6policy7"></a><i>cleartool</i> automatically stores a<tt> checkout version </tt>event record in the element's VOB. This event record is accessible to all users (and managers), through the &#8220;list checkouts&#8221; or &#8220;list history&#8221; command.</p>
+</li>
+<li><p>When a release engineer revises a source configuration by moving the version label <i>R1.3_FINAL</i> from one version of an element to another, two event records are automatically stored, and can be viewed with the &#8220;list history&#8221; command:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+27-Oct.11:30   drp       remove label &quot;R1.3_FINAL&quot; from version &quot;f2@@/main/1&quot;
+&quot;Moved label &quot;R1.3_FINAL&quot; to version &quot;/main/34&quot;.&quot;
+27-Oct.11:30   drp       make label &quot;R1.3_FINAL&quot; on version &quot;f2@@/main/2&quot;
+&quot;Moved label &quot;R1.3_FINAL&quot; from version &quot;/main/33&quot;.&quot;
+</pre></td></tr></table><br></li>
+<li><p>The ClearCase build utility, <a name="idch6policy8"></a><a name="idch6policy9"></a><i>clearmake</i>, automatically creates <i>configuration records</i> (<i>CRs</i>) that document software builds, as described in <a href="ch05.html#id82423" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch05.html#id82423">Chapter 5, &#8220;Building Software with ClearCase.&#8221;</a> The &#8220;show configuration record&#8221; command retrieves and lists a CR; it has many filtering and selection options to enable precise information retrieval. For example, a command can list the versions of all header files used in the compilation of object module <tt>util.o</tt> in a particular build of executable <tt>hello</tt>.</p>
+</li>
+<li><p>
+
+
+Management of parallel development environments is made possible by the automatic recording of <a name="idch6policy10"></a><a name="idch6policy11"></a><i>merges</i>. Whenever a user integrates the work stored on a subbranch of an element back into the <i>main</i> branch (or performs a merge from the <i>main</i> branch &#8220;outward&#8221;), a <i>merge arrow</i> is created in the element's VOB database, logically connecting the merged versions. The presence (or absence) of merge arrows enables a project leader to determine exactly what work is required to integrate all of a project's branch-resident work back into the main line of development.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5448165"></a>User-Controlled Information Capture</h3></div></div>
+<p>The meta-data annotations introduced in <a name="idch6policy12"></a><a href="ch03.html#id59167" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch03.html#id59167">Chapter 3, &#8220;ClearCase Meta-Data&#8221;</a> can be used to record process-control information in VOB databases. Annotations can be attached to objects manually, with commands such as &#8220;make attribute&#8221;. Alternatively, scripts that include such commands can be invoked automatically when certain ClearCase operations take place. For more on automatically-invoked procedures, see <a href="ch06.html#id36995" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id36995">&#8220;Triggers&#8221;</a>.</p>
+<p>Meta-data annotations include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a name="idch6policy13"></a><span class="bold"><b>Version labels</b></span> &#8212; Version labels record development milestones: baselevels, major releases, and so on. In addition to playing a pivotal role in organizing development activities, version labels make it easy to answer fundamental process-control questions, such as &#8220;What version of that file went into the last release?&#8221;.<a name="idch6policy14"></a></p>
+</li>
+<li><p><a name="idch6policy15"></a><span class="bold"><b>Attributes</b></span> &#8212; Attributes (<a name="idch6policy16"></a><a name="idch6policy17"></a><span class="emphasis"><i>name/value</i></span> pairs) can be applied to elements, branches, and versions. Attributes can record process-control metrics commonly applied to source code modules, such as code quality and comment density.</p>
+</li>
+</ul></div><p>Attributes can also be used to define groups of versions involved in the same task. For example, ClearCase's integrations with third-party bug-tracking systems place attributes on versions created to fix bugs; the attribute's value indicates the associated bug report.<a name="idch6policy18"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a name="idch6policy19"></a><span class="bold"><b>Hyperlinks</b></span> &#8212; Objects can be connected with hyperlinks to implement <i>requirements tracing</i>. For a relatively loose implementation, an element containing source code might be hyperlinked to the element containing its functional specification document (<a href="ch06.html#id11409" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id11409">Figure 6-2</a>).</p>
+</li>
+</ul></div><p>For a tighter implementation, individual versions of the source module might be hyperlinked to the corresponding versions of the functional specification, as they both evolve. <a name="idch6policy20"></a><i>Hyperlink inheritance</i> makes this a practical alternative to establishing links at the element level: as one or both elements evolve, the newly-created versions effectively &#8220;inherit&#8221; the closest hyperlink involving their direct ancestors (<a href="ch06.html#id11409" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id11409">Figure 6-2</a>).</p>
+<p><div class="figure"><p><a name="id5448415"></a><b>Figure 6-2. <a name="id11409"></a>Hyperlinks / Hyperlink Inheritance</b></p>
+<div class="mediaobject"><img src="Fig6-2.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig6-2.gif"></div></div><br>
+</p>
+<p>(Merge arrows, discussed in <a name="idch6policy21"></a><a href="ch06.html#id91772" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id91772">&#8220;Automatic Information Capture&#8221;</a>, are implemented as version-to-version hyperlinks.)</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5448456"></a>Information Retrieval</h3></div></div>
+<p>The preceding sections have mentioned ClearCase commands that retrieve event records and configuration records information from VOB databases. There is also a <a name="idch6policy22"></a><a name="idch6policy23"></a><tt>describe</tt> command, which lists the version labels, attributes, and/or hyperlinks attached to a particular object. For example, this command reveals inherited hyperlinks of a particular version:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% cleartool describe -ihlink DesignDoc hello.c@@/main/2
+hello.c@@/main/2
+Inherited hyperlinks: DesignDoc@366@/usr/hw
+/usr/hw/src/hello.c@@/main/1 -&gt;
+/usr/hw/src/hello_dsn.doc@@/main/1
+</pre></td></tr></table><p>ClearCase also includes a <a name="idch6policy24"></a><i>query language</i>, which locates objects using their meta-data. Following are some applications of the query facility to process control:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>A quality-assurance engineer uses a query on the <a name="idch6policy25"></a><tt>CodeQuality </tt>attribute to determine which source versions fail to achieve a desired level.</p>
+</li>
+<li><p>A development project leader determines which elements have already had their <i>gopher_port</i> version merged into the <i>rel2_bugfix</i> branch.</p>
+</li>
+<li><p>A group leader generates a list of all versions created by user <tt>akp,</tt> or perhaps all versions created by <tt>akp</tt> in the last month.</p>
+</li>
+</ul></div><p>The <tt>query_language</tt> manual page provides a complete description of this facility.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5448635"></a>Access Control</h2></div></div>
+<p>Any process-control scheme requires an <a name="idch6policy26"></a><i>access control</i> component: limiting the use of individual data objects to particular users or groups, and restricting the use of specific commands to authorized individuals. This section discusses ClearCase mechanisms for controlling users' access to file system data and to configuration-management data structures (<a href="ch06.html#id31815" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id31815">Figure 6-3</a>). See <a href="ch06.html#id36995" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id36995">&#8220;Triggers&#8221;</a> for a discussion of the mechanisms that restrict command usage.</p>
+<p><div class="figure"><p><a name="id5448676"></a><b>Figure 6-3. <a name="id31815"></a>Access Control Schemes</b></p>
+<div class="mediaobject"><img src="Fig6-3.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig6-3.gif"></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5448716"></a>Access Permissions</h3></div></div>
+<p>Access to file system objects is governed by a scheme that closely resembles the standard UNIX <a name="idch6policy27"></a><a name="idch6policy28"></a><i>user/group/others</i> permissions model. Administrators can design development environments that are both secure and flexible. For example, a VOB can be &#8220;opened up&#8221; to users in several groups, without having to grant access rights to the &#8220;entire world&#8221; (<i>others</i>).</p>
+<p>All file system objects managed by ClearCase have access permissions, which can be listed with a standard operating system command:<a name="idch6policy29"></a></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% ls -l util.c
+-r--r--r--   1 drp      dvt          511 Feb 28 12:28 util.c
+</pre></td></tr></table><p>The standard UNIX meanings of these permissions apply: the object is owned by a particular <i>user</i>, and belongs to a particular <i>group</i>; three kinds of access (&#8220;read&#8221;, &#8220;write&#8221;, and &#8220;execute&#8221;) are either granted or denied to the user/owner, to members of the object's group; and to all others. An element, its branches, and all its versions have the same access permissions.</p>
+<p>ClearCase uses an object's permissions to control certain operations at the configuration management level &#8212; for example, to determine who can <tt>checkout</tt> an element.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5448837"></a>Access to Physical VOB Storage</h4></div></div>
+<p>Given a VOB's role as a component of the permanent data repository, access to physical VOB data storage is strictly controlled:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Standard commands and programs cannot modify VOB storage. Users must enter ClearCase commands to modify VOBs.</p>
+</li>
+<li><p>Physical storage for a VOB is protected against &#8220;back-door&#8221; access. For example, all files in a VOB's storage pools belong to a privileged user, the <i>VOB owner</i>, and are maintained in a read-only state.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5448879"></a>Locks on VOB Objects</h3></div></div>
+<p>Configuration management data structures are implemented by various <a name="idch6policy30"></a><a name="idch6policy31"></a><a name="idch6policy32"></a><a name="idch6policy33"></a><i>objects</i> stored in VOB databases. Whereas <a name="idch6policy34"></a><i>access permissions</i> work primarily at the file-system level, <i>locks</i> protect all kinds of objects at the VOB-database level &#8212; elements, branches, branch types, even entire VOBs. A lock on an individual VOB objects renders that object unchangeable by any user (except those included on an optional <i>exception list</i>). </p>
+<p>The effect of a lock can be small or large. For example, one lock might prevent any new development on a particular branch of a particular element; another lock might apply throughout a VOB, preventing creation of any new element of type <a name="idch6policy35"></a><i>compressed_file</i>, or usage of the version label <i>RLS_1.3</i>.</p>
+<p>Locks are useful for implementing temporary restrictions. For example, during an integration period, a lock on a single object &#8212; the <a name="idch6policy36"></a><a name="idch6policy37"></a><i>main</i> branch type &#8212; prevents all users who are not on the integration team from making any changes.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5449002"></a>Obsolete Objects</h3></div></div>
+<p>Locks can also be used to &#8220;retire&#8221; old names and data structures that are no longer used. For this purpose, the locked objects can be tagged as <a name="idch6policy38"></a><i>obsolete</i>, effectively making them invisible to most commands.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5449067"></a><a name="id36995"></a>Triggers</h2></div></div>
+<p>Automated user-defined procedures play an important role in process control. Such procedures can increase the degree to which development activities are guided, monitored, and/or controlled. For example, automated procedures can:<a name="idch6policy39"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>disallow an operation, in order to enforce an organization's development policies (&#8220;all checkins must have a comment of at least 50 characters&#8221;)</p>
+</li>
+<li><p>notify users and/or managers of significant changes in the development environment</p>
+</li>
+<li><p>supplement the information automatically captured by ClearCase commands with additional data, storing it as attributes</p>
+</li>
+</ul></div><p>Automated procedures are implemented by <a name="idch6policy40"></a><i>triggers</i>, which monitor ClearCase operations. (Access permissions and locks &#8220;guard&#8221; objects; triggers &#8220;guard&#8221; operations.) Performing a certain ClearCase-level operation on a certain object causes a trigger to <i>fire</i>, executing one or more user-defined procedures. The context in which a trigger fires can be defined either broadly or narrowly, in terms of certain elements, meta-data, and ClearCase operations. For example, the following are very broad and very narrow contexts, respectively:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>... whenever <span class="emphasis"><i>any</i></span> element in a VOB is modified in <span class="emphasis"><i>any</i></span> way</p>
+</li>
+<li><p>... when a <span class="emphasis"><i>particular</i></span> attribute is used on a <span class="emphasis"><i>particular</i></span> branch of a <span class="emphasis"><i>particular</i></span> element</p>
+</li>
+</ul></div><p>The trigger procedure is typically a script. It can perform any analysis or test, based on file system data, on meta-data, on other factors (such as the user's identity), or on any combination thereof.<a name="idch6policy41"></a></p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5449224"></a>Pre-Operation and Post-Operation Triggers</h3></div></div>
+<p>Perhaps the most important aspect of a trigger definition is whether it is to fire before the ClearCase operation takes place, or after. <a name="idch6policy42"></a><i>Pre-operation</i> triggers control ClearCase processing; <i>post-operation</i> triggers supplement it (<a href="ch06.html#id10169" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id10169">Figure 6-4</a>).</p>
+<p><div class="figure"><p><a name="id5449278"></a><b>Figure 6-4. <a name="id10169"></a>Pre-Operation and Post-Operation Triggers</b></p>
+<div class="mediaobject"><img src="Fig6-4.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig6-4.gif"></div></div><br>
+</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5449302"></a><a name="id58702"></a>Policy Enforcement - An Example</h2></div></div>
+<p>The mechanisms described in the preceding sections constitute a powerful &#8220;toolset&#8221;, which administrators and project leaders can use to implement their organization's policies. To illustrate how the mechanisms work together, we present an example of implementing a &#8220;state transition&#8221; process model.<a name="idch6policy43"></a></p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5449331"></a>Scenario</h3></div></div>
+<p>A &#8220;final integration&#8221; task for a product release is to progress from the <a name="idch6policy44"></a><span class="emphasis"><i>active </i></span>state to the <span class="emphasis"><i>frozen</i></span> state to the <span class="emphasis"><i>released</i></span> state:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>During the initial <a name="idch6policy45"></a><span class="emphasis"><i>active </i></span>state, all users will be able to modify elements, but only on branches named <i>rls2_integ</i>.</p>
+</li>
+<li><p>After an element enters the <span class="emphasis"><i>frozen</i></span> state, only &#8220;priority 1&#8221; bugfixes will be permitted, and only users <i>david</i> and <i>sakai</i> will be permitted to make the fixes.</p>
+</li>
+<li><p>When the task is finished, it will enter the <span class="emphasis"><i>released</i></span> state. To record the final source configuration, the version label <i>RLS2</i> will be applied to the entire source tree. To prevent possible confusion, all further work on <i>rls2_integ</i> branches will be forbidden, as will further activity involving the <i>RLS2</i> label.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5449479"></a>Implementation</h3></div></div>
+<p>ClearCase triggers, attributes, and locks all play a role in defining the state transition model (<a name="idch6policy46"></a><a name="idch6policy47"></a><a href="ch06.html#id17644" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch06.html#id17644">Figure 6-5</a>). The three states are modeled as the permitted values of a string-valued attribute, <i>IntegStatus</i>, which is applied to each <i>rls2_integ</i> branch created during the final integration task.</p>
+<p><div class="figure"><p><a name="id5449518"></a><b>Figure 6-5. <a name="id17644"></a>State Transition Model</b></p>
+<div class="mediaobject"><img src="Fig6-5.gif" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/figures/Fig6-5.gif"></div></div><br>
+</p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/ch05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="go01.html" tppabs="http://techpubs.sgi.com/library/dynaweb_docs/0620/SGI_Developer/books/ClrC_CG/sgi_html/go01.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 5. Building Software with ClearCase </td><td width="20%" align="center"> </td><td width="40%" align="right">Glossary </td></tr></table></div></body></html>

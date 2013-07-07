@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+
+	<!-- A persistence unit is a set of listed persistent entities as well the 
+		configuration of an EntityManagerFactory. We configure each example in a 
+		separate persistence-unit. -->
+	<persistence-unit name="versia_er3">
+		<!-- The default provider can be OpenJPA, or some other product. This element 
+			is optional if OpenJPA is the only JPA provider in the current classloading 
+			environment, but can be specified in cases where there are multiple JPA implementations 
+			available. -->
+		<provider>
+			org.apache.openjpa.persistence.PersistenceProviderImpl
+        </provider>
+
+		<!-- We must enumerate each entity in the persistence unit -->
+		<class>com.jotov.versia.orm.Actions</class>
+		<class>com.jotov.versia.orm.Cause</class>
+		<class>com.jotov.versia.orm.VComposer</class> 
+		<class>com.jotov.versia.orm.Permitions</class>
+		<class>com.jotov.versia.orm.Product</class>
+		<class>com.jotov.versia.orm.Release</class>
+		<class>com.jotov.versia.orm.ReleaseArc</class>
+		<class>com.jotov.versia.orm.UserProfile</class>
+		<class>com.jotov.versia.orm.WSpace</class>
+		<class>com.jotov.versia.orm.VObject</class>
+		<class>com.jotov.versia.orm.VObjectVersion</class>
+		<class>com.jotov.versia.orm.WorkItemAttachement</class>
+		<class>com.jotov.versia.orm.VersionArc</class> 
+		
+			
+
+
+		<properties>
+			<!-- We can configure the default OpenJPA properties here. They happen 
+				to be commented out here since the provided examples all specify the values 
+				via System properties. -->
+			<!--property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@localhost:1521:xe" /-->
+			<property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@192.168.1.14:1521:xe" />
+			<property name="openjpa.ConnectionDriverName" value="oracle.jdbc.OracleDriver" />
+			<!-- property name="openjpa.ConnectionURL" value="jdbc:derby:openjpa-database;create=true"/ -->
+			<!-- property name="openjpa.ConnectionDriverName" value="oracle.jdbc.OracleDriver"/ -->
+			<property name="openjpa.ConnectionUserName" value="versia" />
+			<property name="openjpa.ConnectionPassword" value="versia" />
+
+			<!-- Tell OpenJPA to automatically create tables in the database for entities. 
+				Note that this should be disabled when running against a production database, 
+				since you probably don't want to be altering the schema at runtime. -->
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema" />
+		</properties>
+	</persistence-unit>
+</persistence>

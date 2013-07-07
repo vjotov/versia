@@ -1,0 +1,788 @@
+<html><head>
+
+<meta name="KeyWords" content="Информационные технологии,scm,clearcase,управление,текст,исходиник,файл,объединение,команды,разработка">
+<meta name="Robots" content="all">
+<meta name="Description" content="http://www.citforum.ru, ClearCase - система конфигурационного и версионного контроля">
+<meta name="Document-state" content="Static"><title>ClearCase - система конфигурационного и версионного контроля</title>
+
+
+
+<link rel="stylesheet" href="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/citforum.css">
+<style>
+
+</style>
+
+<meta http-equiv="content-type" content="text/html; charset=Windows-1251">
+<style><!--
+table.u {font-size:8pt}
+table.u a {color:grey;text-decoration:none}
+--></style><script charset="utf-8" id="injection_graph_func" src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/injection_graph_func.js"></script></head><body topmargin="0" alink="#800000" bgcolor="#ffffff" link="#006890" marginheight="0" text="#000000" vlink="#003860">
+<a name="top"></a>
+
+
+
+
+<!-- counters -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><!--TopList COUNTER--><script language="JavaScript"><!--
+d=document;js=10;a=';r='+escape(d.referrer)
+//--></script><script language="JavaScript1.1"><!--
+js=11;a+=';j='+navigator.javaEnabled()
+//--></script><script language="JavaScript1.2"><!--
+js=12;s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=26978;js='+js+a+'" alt="" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/counter" alt="" height="1" width="1"><!-- <img src="ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/counter.gif" alt="" height="1" width="1"><!-- <noscript><img
+src="http://top.list.ru/counter?js=na;id=26978"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')
+//--><!--TopList COUNTER--></td>
+<td><!--LiveInternet counter--><script language="JavaScript"><!--
+document.write('<img src="http://counter.yadro.ru/hit?r'+
+escape(document.referrer)+((typeof(screen)=='undefined')?'':
+';s'+screen.width+'*'+screen.height+'*'+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+';u'+escape(document.URL)+
+';i'+escape('Жж'+document.title)+';'+Math.random()+
+'" width=1 height=1 alt="">')//--></script><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/hit" alt="" height="1" width="1"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/hit.gif" alt="" height="1" width="1"><!--/LiveInternet--></td>
+<td><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/top100.gif" alt="" border="0" height="1" width="1"></td>
+</tr></tbody></table>
+<!-- end of counters -->
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<!--
+<tr>
+  <td colspan=3><img width=931 height=1><br></td>
+</tr>
+-->
+<tbody><tr valign="top">
+  <td rowspan="6"><a href="http://www.citforum.ru/"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/citlogo8.gif" alt="Logo" border="0" height="44" width="140"></a></td>
+  <td rowspan="6">&nbsp;&nbsp;&nbsp;</td>
+  <td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="1"></td>
+</tr>
+<tr>
+  <td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td>
+</tr>
+<tr>
+  <td bgcolor="#008080">
+    <table border="0" cellpadding="1" cellspacing="1" width="100%">
+    <tbody><tr>
+      <td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://citcity.ru/">Деловая газета CitCity.ru</a></font></td>
+      <td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://citkit.ru/">CITKIT.ru - все об Open Source</a></font></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://forum.citforum.ru/">Форумы</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://www.citforum.ru/news.shtml">Все публикации</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://www.citmgu.ru/">Учебный центр</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://smoking-room.ru/">Курилка</a></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+<tr>
+  <td><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td>
+</tr>
+<tr>
+  <td width="100%">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tbody><tr>
+      <td align="left" width="21"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/cd1.gif" alt="CitForum" border="0" height="21" width="21"></td>
+      <td align="left"><font size="2">&nbsp;&nbsp;&nbsp;<a href="http://www.citforum.ru/cdrom.shtml"><b><nobr>CITForum на CD</nobr></b></a></font></td>
+	  <td align="center"><font size="2">&nbsp;&nbsp;&nbsp;<nobr><a href="http://www.citforum.ru/subscribe.shtml"><b>Подписка на новости портала</b></a></nobr></font></td>
+      <td align="right"><font size="2"><b><nobr>Море(!) аналитической информации!</nobr></b> :: <a href="http://www.citforum.ru/">CITFORUM.RU</a></font></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+</tbody></table>
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody><tr><td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="931"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/consulting/">IT-консалтинг</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/SE/">Software Engineering</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/programming/">Программирование</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/database/">СУБД</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/security/">Безопасность</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/internet/">Internet</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/nets/">Сети</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/operating_systems/">Операционные системы</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/hardware/">Hardware</a></font></td>
+<!--
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/faq/>FAQ (ЧаВО)</a></font></td>
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/howto/>HOWTO</a></font></td>
+--> 
+</tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table>
+
+</td></tr>
+<tr><td>
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody><tr valign="top">
+
+
+<td valign="top" width="200">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<!--date-->
+<tbody><tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<table border="0" cellpadding="0" cellspacing="1" width="100%">
+<tbody><tr><td bgcolor="#f4f9f3">
+<p class="topic1" align="center"><b>21.08.2007</b>
+</p></td></tr>
+</tbody></table>
+</td></tr>
+<!--/date-->
+
+
+<tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080"><table border="0" cellpadding="1" cellspacing="1" width="100%"><tbody><tr><td align="center" bgcolor="#ffffff">
+<form method="get" action="http://www.google.ru/custom">
+<table border="0" cellpadding="1" cellspacing="0">
+  <tbody><tr valign="bottom">
+    <td><a href="http://www.google.ru/search"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/google_75x32.gif" alt="Google" align="middle" border="0" height="32" width="75"></a></td>
+    <td><input name="sa" value="Поиск" type="submit"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><input name="q" size="25" maxlength="255" value="" type="text"></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input name="sitesearch" value="" type="radio">WWW
+      <input name="sitesearch" value="citforum.ru" checked="checked" type="radio">CITForum.ru
+    </td>
+  </tr>
+</tbody></table>
+<input name="cof" value="LW:140;ALC:#800000;L:http://www.citforum.ru/pictures/logos/citlogo8.gif;LC:#006890;LH:44;AH:left;VLC:#003860;S:http://www.citforum.ru/;AWFID:a524ad3720194500;" type="hidden">
+<input name="domains" value="citforum.ru" type="hidden">
+</form>
+</td></tr></tbody></table>
+</td></tr>
+
+
+
+<tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<table border="0" cellpadding="8" cellspacing="1" width="100%">
+<tbody><tr><td align="center" bgcolor="white">
+<iframe src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/citforum_left.htm" framespacing="0" frameborder="no" height="420" scrolling="no" width="180"></iframe></td></tr>
+<tr><td bgcolor="#ffffff">
+<font size="2">
+</font><p><font size="2"><b>Новости мира IT:</b>
+</font></p><ul class="column">
+
+<font size="2"><li>20.08 - <a href="http://citcity.ru/16650/">Недельный отчет Panda Security о вирусах и вторжениях</a></li><li>20.08 - <a href="http://citcity.ru/16649/">American Airlines подала в суд на Google</a></li><li>20.08 - <a href="http://citcity.ru/16648/">Cisco® модернизировала операционную систему Cisco IOS</a></li><li>20.08 - <a href="http://citcity.ru/16647/">Microsoft открыла для сторонних разработчиков технологию Live ID</a></li><li>20.08 - <a href="http://citcity.ru/16646/">Skype ожил окончательно</a></li><li>20.08 - <a href="http://citcity.ru/16644/">3Com делает ставку на Open Source</a></li><li>20.08 - <a href="http://citcity.ru/16645/">Рамблер представляет новый проект - Путешествия</a></li><li>20.08 - <a href="http://citcity.ru/16643/">Вышла обновленная версия Opera </a></li><li>20.08 - <a href="http://citcity.ru/16642/">Вышла новая версия операционной системы IBM z/OS</a></li><li>20.08 - <a href="http://citcity.ru/16641/">Yahoo опередил Google в рейтинге лояльности потребителей</a></li><li>17.08 - <a href="http://citcity.ru/16639/">Компакт-диску исполнилось 25 лет</a></li><li>17.08 - <a href="http://citcity.ru/16640/">Microsoft и Linux-компания Xandros расширяют сотрудничество </a></li><li>17.08 - <a href="http://citcity.ru/16637/">IBM будет поддерживать Solaris</a></li><li>17.08 - <a href="http://citcity.ru/16638/">VIA представила 1-ваттный процессор Eden</a></li><li>17.08 - <a href="http://citcity.ru/16636/">В Москве состоится первая профессиональная конференция интернет-СМИ </a></li><li>17.08 - <a href="http://citcity.ru/16635/">Китай купил суперкомпьютер для наблюдения за погодой во время Олимпийских Игр-2008</a></li><li>17.08 - <a href="http://citcity.ru/16633/">Немецкие физики нашли способ передавать данные быстрее скорости света</a></li><li>17.08 - <a href="http://citcity.ru/16632/">Президент Oracle объявляет об открытии представительства компании в Санкт-Петербурге</a></li><li>17.08 - <a href="http://citcity.ru/16631/">Citrix покупает Open Source-компанию XenSource, разработчика Xen </a></li><li>17.08 - <a href="http://citcity.ru/16634/">Миллионы пользователей во всем мире лишились Skype</a></li><li>16.08 - <a href="http://citcity.ru/16629/">Novell не намерена следовать примеру SCO</a></li><li>16.08 - <a href="http://citcity.ru/16628/">В пейджере Yahoo Messenger найдена очередная брешь</a></li><li>16.08 - <a href="http://citcity.ru/16627/">Вышла тестовая версия сервис-пака для Exchange Server 2007</a></li><li>16.08 - <a href="http://citcity.ru/16626/">Sun и IBM заключат соглашение о сотрудничестве</a></li><li>16.08 - <a href="http://citcity.ru/16625/">Фонд дикой природы открыл представительство в Second Life</a></li><li>16.08 - <a href="http://citcity.ru/16624/">Microsoft увеличила объем почтовых ящиков Hotmail до 5 Гб</a></li><li>16.08 - <a href="http://citcity.ru/16622/">Sony переходит на IP-телефонию</a></li><li>16.08 - <a href="http://citcity.ru/16623/">Dell и SAP объявили о создании альянса в области розничной торговли</a></li><li>16.08 - <a href="http://citcity.ru/16621/">В Second Life выступит  Королевский филармонический оркестр </a></li><li>16.08 - <a href="http://citcity.ru/16620/">В Россию впервые прибыл президент Oracle</a>
+</li></font></ul>
+<p><font size="2"><a target="_blank" href="http://citcity.ru/"><b>Все новости на CitCity.ru</b></a>
+</font>
+</p><p align="right"><a href="http://citcity.ru/rss/citforum.xml"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/xml_rss.gif" border="0" height="14" width="36"></a>
+</p></td></tr>
+</tbody></table>
+</td></tr>
+
+
+</tbody></table>
+</td>
+
+
+<td width="98%">
+
+
+<div style="border: 1px solid rgb(0, 128, 128); margin: 0pt auto; padding: 0px; display: table;"><script language="JavaScript"><!--
+document.write('<table cellpadding=1><tr valign=middle><td align=center><a class=plain href="http://citforum.ru/redir/hcse_citforum" target=_blank><img src="/a/hcse2.gif" width=60 height=70 border=0><br><div align=center><b><nobr>ВКШ "Эксперт"</nobr></b></div></a></td><td align=center style="font-size:.7em"><a class=plain href="http://citforum.ru/redir/hcse_citforum" target=_blank><b style=color:red>Уникальное образование <nobr>в сфере ИТ!</nobr></b><br>Как стать супер-профессионалом? ВКШ&nbsp;«Эксперт» &mdash; повышение квалификации для сисадминов, разработчиков, специалистов по безопасности! Диплом МГУ и сертификаты ведущих вендоров! Зарезервируйте себе место в группе сегодня!</a></td></tr></table>');
+//--></script><table cellpadding="1"><tbody><tr valign="middle"><td align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><img src="/a/hcse2.gif" border="0" height="70" width="60"><br><div align="center"><b><nobr>ВКШ "Эксперт"</nobr></b></div></a></td><td style="font-size: 0.7em;" align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><b style="color: red;">Уникальное образование <nobr>в сфере ИТ!</nobr></b><br>Как
+стать супер-профессионалом? ВКШ&nbsp;«Эксперт» — повышение квалификации
+для сисадминов, разработчиков, специалистов по безопасности! Диплом МГУ
+и сертификаты ведущих вендоров! Зарезервируйте себе место в группе
+сегодня!</a></td></tr></tbody></table><table cellpadding="1"><tbody><tr valign="middle"><td align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/hcse2.gif" border="0" height="70" width="60"><br><div align="center"><b><nobr>ВКШ "Эксперт"</nobr></b></div></a></td><td style="font-size: 0.7em;" align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><b style="color: red;">Уникальное образование <nobr>в сфере ИТ!</nobr></b><br>Как
+стать супер-профессионалом? ВКШ&nbsp;«Эксперт» — повышение квалификации
+для сисадминов, разработчиков, специалистов по безопасности! Диплом МГУ
+и сертификаты ведущих вендоров! Зарезервируйте себе место в группе
+сегодня!</a></td></tr></tbody></table>
+</div>
+
+
+
+
+<div align="right"><i>2000 г</i></div>
+<!-- start -->
+<h3 align="center">ClearCase - система конфигурационного и версионного контроля</h3>
+<p align="center">Обзорная статья<br>
+</p><p align="center"><i>Новичков Александр<br>
+<a href="http://www.interface.ru/">http://www.interface.ru</a>, <a href="http://www.compress.ru/">http://www.compress.ru</a></i>
+</p><p align="center">Более подробно о ClearCase: <a href="http://www.interface.ru/admail.asp?Url=/rational/ratline.htm">www.interface.ru/admail.asp?Url=/rational/ratline.htm</a>
+
+</p><p align="justify"><i>Аннотация: Представлено описание предметной
+области SCM (Source Code Management), дано общее введение в продукт
+ClearCase. Рассмотрены основные функциональные возможности и области
+применения. Приведены рекомендации по использованию.</i>
+
+</p><h4>I. Введение</h4>
+<p align="justify">Компания Rational является лидирующей компанией в
+области создания методологий и программных решений, ориентированных на
+программистов, аналитиков, тестировщиков. Спектр выпускаемого
+обеспечения целиком покрывает потребность всех участников проекта: от
+аналитиков до разработчиков и внедренцев. Все
+программно-методологические решения - плод многолетнего труда
+аналитиков и разработчиков как самой Rational, так и ее партнеров. В
+итоге, все решения были собраны воедино. Так появился RUP - Rational
+Unified Process - методологическая энциклопедия, в которой описаны все
+шаги, необходимые для создания качественного программного продукта.
+Пользуясь подобной энциклопедией и применяя соответствующие
+инструменты, рекомендуемые Rational, команда будет создавать
+обеспечение качественно и в срок. "Строй быстрей и качественней!" - вот
+лозунг, выдвигаемый Rational.
+</p><p align="justify">Особое место в RUP занимает Source Code
+Management - управление исходным текстом. SCM описывает способ контроля
+и сопровождения информации и текущем состоянии каждого файла,
+составляющего программный проект. SCM - это методология, которую
+всецело поддерживает продукт ClearCase, чьей обязанностью и является
+отслеживание и детальное протоколирование всего, что связанно с
+разработкой проекта. В командной разработке регламентируется
+использование SCM отдельными участниками команды. Но если подойти к
+делу неформально, то рекомендация по использованию данного продукта и
+методологии может выглядеть так: ClearCase рекомендуется всем
+участникам проекта, кто должен обмениваться информацией с другими, и
+точно знать кто и когда из коллег внес изменения. Ведь в современных
+условиях скоростногой разработки кода большими командами просто
+необходимо иметь надежное и мощное средство по отслеживанию изменений и
+позволяющее всем участникам команды видеть текущее положение дел в
+разработке проекта.
+</p><h4>II. Описание возможностей</h4>
+<p align="justify">Рекомендованный как средство контроля для командной
+разработки ClearCase превосходно справляется с возложенной на него
+задачей. Являясь, по сути, высоко масштабируемым приложением
+клиент-сервер ClearCase объединяет всех участников проекта единой
+средой, хранящей всю возможную информацию, относящуюся к проекту,
+позволяя получать последние версии, редактируемых файлов.
+</p><p align="justify">Продукт совмещает полный SCM, включая контроль
+над версиями, управление рабочим пространством, с помощью уникального
+инвариантного подхода. Посредством ClearCase команда разработчиков
+может ускорить циклы разработки, убедиться в точности релизов, создавая
+новые, надежные в эксплуатации продукты, а также дорабатывать и
+поддерживать ранее реализованные продукты, организовывать эффективный
+процесс разработки - и все это без изменения среды, инструментальных
+средств и подхода к работе.
+</p><p>Продукт обеспечивает продвинутое управление версиями исходных
+текстов, библиотек и исходников на протяжении всего жизненного цикла
+проекта, позволяя тем самым разработчику вернуться к любой версии
+редактируемого файла и откорректировать его, создав новую версию.
+</p><p align="justify"> Каждый участник проекта может иметь доступ как
+ко всем файлам проекта, так и к только определенной его части. Для
+достижения подобного эффекта ClearCase использует мощную систему
+настраиваемых фильтров, скрывающих ненужную информацию. Система видов
+разительно отличает ClearCase от продуктов конкурирующих фирм,
+поскольку позволяет осуществить параллельную разработку, а также
+позволяет отдельному участнику проекта выходить из общего состава
+разработки, забирая работу "на дом", а после всех внесенных изменений
+вернуть версии снова в проект. При этом ClearCase осуществит
+автоматическое слияние версий.
+</p><p align="justify">В дополнение к описанным возможностям,
+ClearCase позволяет объединять географически удаленные команды
+разработчиков посредством MultiSite - специального модуля,
+осуществляющего репликацию (передачу) текущего состояния проекта на
+указанный сайт.
+</p><p align="justify">В условиях бурно развивающейся и подверженной
+изменениям, IT индустрии, ставится все сложнее и сложнее давать оценку
+программному продукту как чему-то независимому, вырванному его из
+общего контекста разработки. Поэтому принимается во внимание степень
+поддержки данного продукта теми или иными средствами компаний,
+создающими средства разработки. В частности, продукт версионного
+контроля не может быть функционально полным без определенных механизмов
+интеграции со средствами разработки, с различными дополнительными
+генераторами отчетов, и пр.
+</p><p>ClearCase обеспечивает наиболее тесную интеграцию как с
+продуктами самой Rational (Rose, SoDA, ClearQuest, Requisite PRO) так и
+с продукцией компании Microsoft (Visual C++, Visual Basic).
+</p><h4>III. На чем основана программа</h4>
+<p align="justify">Для реализации полного контроля над версиями в
+специальную базу данных - VOB - Version Object Base - заносятся все
+изменения над всеми данными. Для проекта на сервере создается один или
+несколько VOB, куда, в процессе работы, заносятся все промежуточные
+данные. Каждый элемент VOB'а имеет свою уникальную версию. При создании
+VOB получает определенный набор характеристик, по которым в дальнейшем
+можно определить, при наличии соответствующих полномочий, историю его
+создания. То есть, возможно получение справочной информации. Все
+данные, помещаемые в VOB, автоматически сжимаются.
+</p><p align="center"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/clearcase_01.gif" border="0" height="317" width="272">
+
+</p><p align="justify">Для выполнения всех операций, связанных с
+контролем версий применяется механизм настраиваемых видов (VIEW).
+Технологически вид является только средством фильтрации, находящейся в
+VOB, преобразуя все это множество информации в вид, понятный не только
+машине, но и человеку. Такой подход позволяет разработчику или
+техническому писателю видеть не все файлы, составляющие проект, а
+только те которые необходимы для решения конкретной задачи. Тем самым
+программа позволяет достаточно легко абстрагироваться от текущего
+состояния, переводя все внимание на определенную часть проекта.
+</p><p align="justify">Только через систему видов возможны все
+операции, присущие не только ClearCase, но и любой другой программе
+версионного контроля, это такие операции как: постановка файлов под
+контроль, при котором для каждого элемента создается дерево версий,
+операции "Check-in" и "Check-out", позволяющие производить
+редактирование отдельного файла, создавая увесистое дерево версий, на
+котором отражена полная история развития отдельного элемента.
+</p><p align="justify">Виды в программе представлены двумя типами:
+"Dynamic" и "Snapshot", имеющими свои достоинства и недостатки, но при
+совместном использовании, способные открыть новые возможности в
+контроле над файлами. Специфика вида "Dynamic" заключается в том, что
+данный вид полностью использует все возможности операционных систем NT
+и UNIX, создавая виртуальную файловую систему, на которой размещаются
+все подконтрольные данные. Сама файловая система размещается также на
+виртуальном диске, физически размещаясь на сервере. Данный способ
+позволяет вести контроль над файлами в реальном масштабе времени, но
+пользователь с локальной станции имеет дело не с физическими объектами.
+"Snapshot" - оправдывает свое название - фотография - делая снимок
+текущего состояния проекта на локальной машине. Разработчик получает на
+своем диске точную копию либо всего проекта, либо только необходимой
+части: файла, группы файлов: Важным моментом при такой работе является
+синхронизация локальных данных с общим проектам, которая в данном
+случае выполняется не автоматически, а по команде пользователя, что
+делает возможным удаленную работу над проектом, позволяя любому
+разработчику взять материал "на дом", после чего вернуть новые версии
+файлов в проект. "Snapshot" - не зависит от типа операционной системы и
+от производительности интранет, поскольку не нагружает так локальную
+сеть, как "Dynamic View".
+</p><p align="justify">Имея мощный набор инструментов, настраивающих
+вид можно добиться поразительных эффектов, таких, которые недоступны
+для других программ версионного контроля. Неоценимой возможностью можно
+считать возможность параллельной разработки, когда программа допускает
+правку одного и того же файла несколькими разработчиками, создавая
+ответвление на дереве версий - одно или несколько - в зависимости от
+числа использующих один и тот же файл.
+</p><p align="justify">Как говорилось ранее: для каждого файла
+создается дерево версий. Дерево состоит из основной ветви - корня, и
+остальных "листьев" - версионных ответвлений - бренчей, здесь следует
+отметить две разновидности ответвлений: простое ответвление (Branch) -
+создаваемое для отдельного файла и в любых количествах, и главное
+ответвление (Private Branch) - ответвление для всего проекта, когда
+создается новая ветвь для всех файлов, составляющих проект, но ветвь
+может быть только одной.
+</p><p>Последняя возможность позволяет создавать новую версию для всех
+файлов, с последующим обязательным возвращением в основное русло
+разрабатываемого проекта.
+</p><p align="justify">Для объединения версий в ClearCase
+предусмотрена специальная утилита - MergeManager - менеджер слияний,
+который, в под контролем менеджера проекта, собирает из двух
+предоставленных файлов - один. Сборка осуществляется либо автоматически
+(тривиальная сборка), когда файлы не сильно отличаются, либо менеджер
+сам выбирает строки кода для слияния (нетривиальная сборка). По
+окончании слияния на дереве создается новая версия, которую далее также
+можно править, сливать и делать ответвления.
+</p><p>Слияние файлов можно производить как из GUI, так и из командной строки.  Допускается слияние только текстовых файлов.
+</p><p align="justify">Еще одной из продвинутых возможностей ClearCase
+можно назвать возможность создания видов на базе профилей, что может
+слегка усложнить и дерево версий и понимание самой программы, зато
+позволяет особым образом настраивать систему видов для каждого
+участника проекта в отдельности: для разработчиков - одно, для
+тестировщиков - другое.
+</p><p align="justify">Программа обладает развитым интерфейсом и
+полностью использует возможности современных операционных систем. В
+наследство от старых версий и для обеспечения максимальной
+производительности ClearCase, помимо графического интерфейса обладает
+богатым набором команд для работы из командной строки. Так или иначе,
+все ресурсы программы доступны как из GUI, так и из командной строки,
+что дает определенную волю участникам проекта, и открывает новые
+возможности в скорости и мобильности управления проектом.
+</p><p align="justify">Особо хочется отметить возможность сборки
+проекта. При помощи утилиты "OMake" возможна сборка проекта в
+исполняемый модуль. Утилита работает из командной строки и не зависит
+от типа используемого компилятора, главное чтобы его можно было вызвать
+из командной строки. При этом сценарий сборки базируется на обычных
+"make"-файлах.
+</p><h4>IV. Интеграция.</h4>
+<p align="justify"> ClearCase относится к той группе инструментов,
+которые при очень богатых собственных возможностях, все же неспособны
+полностью раскрыть собственные функциональные возможности без
+интеграции со средствами разработки. ClearCase позволяет
+интегрироваться с таким популярным средством разработки как Visual
+Studio.
+</p><p align="justify">При совместном использовании двух продуктов
+появляется дополнительная возможность по управлению версиями не выходя
+из среды разработки. ClearCase встраивается в рабочее пространство
+VisualStudio, дополняя своими функциями меню программы.
+</p><p align="justify">Таким же образом интеграция происходит с
+Microsoft Word и Microsoft Front Page. В последних двух случаях
+появляется возможность слияния не только текстовых файлов, но и файлов
+с расширением DOC, XML, HTML.
+</p><p>В этих пакетах встраивание выглядит также как и в Visual Studio  - все функции контроля версий доступны через верхнее меню.
+
+</p><h4>V. Дополнительные возможности.</h4>
+<p align="justify">Компания Rational посредством RUP регламентирует все
+этапы разработки программного обеспечения, воплощая в себе все знания и
+опыт. Для каждого, из приведенных в RUP этапов, той же Rational создано
+специальное ПО - в частности ClearCase. Дополнив его еще некоторыми
+программными продуктами или дополнительными модулями, можно открыть
+абсолютно новые возможности.
+</p><p>Рассмотрим продукты и модули, которые можно использовать совместно с ClearCase:
+</p><p align="justify">MultiSite. Специальный модуль, позволяющий вести
+разработку между регионально удаленными группами разработчиков. Работа
+производится посредством передачи (репликации) текущего состояния
+проекта на указанный сайт (через Интернет). Обмен данными может
+осуществляться как между двумя сайтами, так и между любым количеством.
+Синхронизация проекта при использовании MultiSite осуществляется как
+вручную так и автоматически - по усмотрению администратора. Важным
+преимуществом модуля является возможность реплицирования проекта не
+только на указанный IP-адрес, но и в простой файл, который также можно
+перенести на любую машину любым традиционным способом.
+</p><p align="justify">SoDA. Система автоматизирования генерации
+проектной документации. Данная программа генерирует определенный набор
+шаблонов, выбирая все нужные данные из VOB или из отдельных файлов.
+Программа встраивается в Word, где создает шаблон, основанный на
+определенных данных. Использования программы значительно упрощает
+ведение проектной документации, давая техническому писателю или
+менеджеру проекта все необходимые данные в стандартном виде на основе
+выбранного шаблона. Пользователю останется только дополнить нужными
+комментариями сгенерированный документ.
+</p><p>ClearQuest. Позволит создать специальную базу данных, куда
+будут вноситься все изменения, которые были внесены в проект за
+указанный промежуток времени.
+</p><p>Отличительные черты ClearCase
+</p><ul>
+<li>Высокопроизводительное средство клиент-сервер масштаба предприятия
+</li><li>Ведет полный учет всего относящегося к проекту
+</li><li>Создает дерево версий для каждого элемента проекта
+</li><li>Позволяет проводить параллельную работу над одним файлом нескольким участникам команды
+</li><li>Позволяет каждому участнику проекта настраивать собственное рабочее пространство и видимый круг подконтрольных элементов
+</li><li>Позволяет разработчику на время выходить из общего русла проекта
+</li><li>При наличии MultiSite объединяет регионально удаленные команды разработчиков
+</li><li>Хранит весь проект включая: исходные файлы, двоичные файлы, библиотеки, документацию, WEB приложения, модели и директории
+</li><li>Имеет WEB интерфейс для удаленного доступа
+</li><li>Конвертирует данные из PVCS в собственный формат
+</li><li>Имеет  дружественный интерфейс
+</li></ul>
+
+<h4>VI. Спецификации</h4>
+<p><b>Требования для клиента:</b><br>
+Минимум: 64MB ОЗУ, 35MB Дискового пространства
+</p><p><b>Требования для сервера:</b><br>
+Минимум: 128MB ОЗУ, 70MB Дискового пространства
+</p><p><b>Поддерживаемые Web-броузеры</b><br>
+Microsoft Internet Explorer<br>
+Netscape
+</p><p><b>Поддерживаемые Web Серверы</b>
+</p><ul>
+<li>Apache
+</li><li>Microsoft IIS
+</li><li>Netscape
+</li></ul>
+<p><b>Поддерживаемые операционные системы</b><br>
+Windows 2000, Windows NT,Windows 95/98 (client only)<br>
+Compaq Tru64 UNIX<br>
+Hewlett-Packard HP-UX<br>
+IBM, AIX, NCR MP-RAS<br>
+Red Hat Linux<br>
+SCO UnixWare<br>
+Siemens Reliant UNIX<br>
+Silicon Graphics IRIX<br>
+Sun Solaris SPARC<br>
+Solaris Intel<br>
+</p><p><b>Интеграция:</b><br>
+IBM VisualAge for Java<br>
+Microsoft Visual Studio<br>
+Visual Basic<br>
+Visual C++<br>
+Visual J++<br>
+Visual InterDev<br>
+Adobe FrameMaker<br>
+Sybase PowerBuilder<br>
+IBM WebSphere Studio<br>
+Microsoft FrontPage<br>
+Microsoft Word<br>
+All SCC-compliant tools
+
+</p><h4>VII. Заключение</h4>
+<p align="justify">ClearCase на сегодняшний день является самой
+продвинутой системой версионного и конфигурационного управления,
+снабженной самыми последними достижениями в области SCM. Поскольку
+ClearCase является системой корпоративного уровня, то рекомендовать ее
+можно всем предприятиям, число разработчиков в которых более 5. Все
+свои мощные возможности программа раскрывает при использовании ее на
+крупных предприятиях с большим количеством разработчиков. ClearCase
+становится незаменимым продуктом когда речь заходит об объединении
+регионально удаленных команд разработчиков.
+</p><p>По обучению и продаже обращайтесь в компанию "Интерфейс"<br>
+Тел: (095) 795-3186, 135-5500, 135-2519
+</p><p><a href="http://www.interface.ru/" -="" case,="" olap,="" erp="" &="" client-server="" technology="">http://www.interface.ru - CASE, OLAP, ERP &amp; Client-Server Technology</a><br>
+<a href="http://www.olap.ru/" -="" olap="" and="" decision="" support="" systems="">http://www.olap.ru - OLAP and Decision Support Systems</a><br>
+<a href="http://www.job.com.ru/" -="" international="" job="" agency="" for="" it-specialists="">http://www.job.com.ru - International Job Agency for IT-specialists</a><br>
+<a href="http://www.shop.org.ru/" -="" on-line="" catalog="" of="" instrumental="" software="">http://www.shop.org.ru - On-line Catalog of Instrumental Software</a><br>
+<a href="http://www.paybot.com/" -="" secure="" internet="" payment="" system="">http://www.paybot.com - Secure Internet Payment System</a><br>
+<a href="http://subscribe.ru/catalog/comp.soft.others.itnews/" -="" it="" news="">http://subscribe.ru/catalog/comp.soft.others.itnews/ - IT News</a>
+
+</p><p>&nbsp;
+
+<!-- end -->
+</p><p>&nbsp;
+
+</p><center>
+<hr width="25%">
+<iframe src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/citforum_bottom.htm" framespacing="0" frameborder="no" height="600" scrolling="no" width="500"></iframe>
+
+
+
+</center>
+<p align="right"><small>Размещение рекламы - pr@citforum.ru, ICQ 232284597</small>
+
+
+</p></td>
+
+
+<td>
+
+<table align="right" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" border="0" height="1" width="1"></td>
+<td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" border="0" height="1" width="2"></td>
+<td>
+
+<table border="0" cellpadding="0" cellspacing="0" width="240">
+
+<tbody><tr><td align="center"></td></tr><tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<!--subscribe small-->
+   <table border="0" cellpadding="1" cellspacing="1" width="100%">
+   <form action="http://citforum.ru/anketa/subscribe.php" method="post"></form>
+   <tbody><tr><td bgcolor="#ffffff">
+    <center>
+     <table border="0" cellpadding="1" cellspacing="0">
+     <tbody><tr><td align="center">
+      <font size="2"></font><p><font size="2"><b>Подписка на новости IT-портала CITForum.ru</b><br>
+<i>(<a href="http://citforum.ru/">библиотека</a>, <a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>, <a target="_blank" href="http://citcity.ru/">CitCity</a>)</i></font></p><p>
+<font size="2">      <input name="e_mail" size="15" value="e@mail" type="text"><input value="OK" type="submit">
+     </font></p></td></tr>
+     </tbody></table>
+    </center>
+   </td></tr>
+   
+   </tbody></table>
+<!--/subscribe small-->
+</td></tr>
+
+<tr><td style="padding-left: 5px;">
+<font size="2">
+</font><p><font size="2"><b>Новые публикации:</b>
+
+</font></p><p><font size="2"><b>15 августа</b>
+<li><a href="http://www.citforum.ru/database/oracle/microseconds/">Когда счет идет на микросекунды<br>
+</a></li><li><a href="http://www.citforum.ru/database/oracle/time/">Тип данных TIME</a> <br>
+</li><li><a href="http://www.citforum.ru/database/oracle/oracle11g/">Новая версия СУБД Oracle - Oracle 11g</a> <br>
+</li><li><a href="http://www.citforum.ru/hardware/data/intel_turbo_memory/">Закись азота для ПК: Intel Turbo Memory</a>
+</li><li><a href="http://www.citforum.ru/hardware/articles/net_printers/">Доступные сетевые принтеры</a>
+
+<p><b>8 августа</b>
+</p></li><li><a href="http://www.citforum.ru/hardware/arch/servers_in_russia/">Серверы в масштабе российского предприятия</a>
+</li><li><a href="http://www.citforum.ru/hardware/data/data_storage/">Хранение данных: задачи, решения, перспективы</a>
+</li><li><a href="http://www.citforum.ru/nets/hard/terminals/">И снова терминалы</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/456/">Debian vs Ubuntu: еще один великолепный миф?</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/455/">Сказ про TeXmacs, или как прикручивали шрифты TeX к графическому режиму, и что из этого получилось</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/454/">Мультизагрузочный CD с использованием GRUB</a>
+
+<p><b>1 августа</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/16501/">Информационная безопасность ERP-систем</a>
+</li><li><a target="_blank" href="http://citcity.ru/16502/">Корнями - в древность, кроной - в современный бизнес</a> 
+(о рынке информационной безопасности)
+<p>Обзор журнала Computer:
+</p></li><li><a href="http://www.citforum.ru/computer/2007-06/">Open Source и проприетарная архитектурная революция</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/449/">hwreport: 1 к 84-м в пользу "source based"</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/450/">Начал ли звонить колокол?</a> (дискуссия <a target="_blank" href="http://citkit.ru/articles/windows_vs_linux/">Windows vs Linux</a>)
+
+
+<p><b>25 июля</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/16453/"><b>Беседа Марго Зельцер с Майклом Стоунбрейкером.</b>
+Перевод: Сергей Кузнецов</a>
+</li><li><a target="_blank" href="http://citcity.ru/16456/">SideShow: Windows с изнанки</a>
+</li><li><a target="_blank" href="http://citcity.ru/16455/">Перспективы развития стандартов третьего поколения в России и в мире</a>
+</li><li><a target="_blank" href="http://citcity.ru/16458/">От SMB к Enterprise. Плох тот солдат, который не хочет стать генералом</a>
+</li><li><a target="_blank" href="http://citcity.ru/16457/">Лучше выпить, чем говорить по телефону?</a>
+
+<p><b>18 июля</b>
+</p><p></p></li><li><b><a href="http://www.citforum.ru/SE/middleware/history/">Влияние исследований на технологию промежуточного программного обеспечения</a></b>
+<p></p></li><li><a href="http://www.citforum.ru/SE/project/reconciliation/">Семантическая реконсиляция прикладных данных на основе моделей</a>
+<p></p></li><li><a href="http://www.citforum.ru/programming/unix/daemons/">Демоны</a> (из серии "<a href="http://www.citforum.ru/programming/unix/borovsky/"><b>Программирование для Linux</b></a>")
+
+<p><b>11 июля</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/database/articles/grigoriev/">Почему формальную реляционную модель данных можно рассматривать как основу безимпедансных систем</a>
+</li><li><a href="http://www.citforum.ru/consulting/BI/karpov/">Адаптивное управление по прецедентам, основанное на классификации состояний управляемых объектов</a>
+</li><li><a href="http://www.citforum.ru/SE/project/volkova/">Методы композиции и декомпозиции исполняемых UML моделей</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/447/">Windows. Господа критикисты, стыдитесь!</a>
+
+<p><b>4 июля</b>
+</p><p>Лекции из курса А.Марченко "Введение в программирование на C# 2.0":
+</p></li><li><a href="http://www.citforum.ru/programming/csharp/gdi_plus/">GDI+</a>
+</li><li><a href="http://www.citforum.ru/programming/csharp/ado_dot_net/">Основы ADO .NET</a>
+<p></p></li><li>К статье <a href="http://www.citforum.ru/consulting/articles/ofsa/">OFSA. Основные принципы</a> добавлена
+</li><li><a href="http://www.citforum.ru/consulting/articles/ofsa/ofsa_5.shtml">Часть 5. FDM как хранилище данных финансовой информации</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/445/">Чем удобна Вынь-да?</a>
+
+<p><b>28 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/testing/schnitman/">Особенности применения технологии UniTESK для тестирования функций мобильности в протоколе IPv6</a>
+</li><li><a href="http://www.citforum.ru/operating_systems/rubanov/">Разработка ОС реального времени для цифрового сигнального процессора</a>
+<p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/16252/">Карьера! Как много в этом слове...
+О планировании карьеры, плане профессионального развития и не только...</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/442/">Памятка начинающему снобу</a>
+
+<p><b>26 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/programming/windows/machine_code/">Win32 в машинных кодах</a>
+<p></p></li><li><a href="http://www.citforum.ru/SE/testing/zelenov/">Верификация компиляторов - систематический подход</a>
+</li><li><a href="http://www.citforum.ru/SE/testing/kamkin/">Использование контрактных спецификаций для автоматизации функционального тестирования моделей аппаратного обеспечения</a>
+</li><li><a href="http://www.citforum.ru/SE/testing/gingina/">Тестирование трансляторов: проблема построения оракула для генератора</a>
+
+<p><b>21 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/testing/mutilin/">Тестирование компонентов, взаимодействующих посредством удаленного вызова методов</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><b><a target="_blank" href="http://citkit.ru/articles/434/">Открытые стандарты и новые формы международного сотрудничества</a></b>
+</li><li><a target="_blank" href="http://citkit.ru/articles/435/">Zenwalk: хроника последнего обновления</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/437/">Заметки сноба, или Беру свои слова обратно</a> (дискуссия про анонимусов)
+
+<p><b>19 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/testing/silakov/">Текущее состояние и перспективы развития инфраструктуры LSB</a>
+<p></p></li><li><a href="http://www.citforum.ru/SE/testing/kichigin/">Об одном методе сокращения набора тестов</a>
+<p></p></li><li><a href="http://www.citforum.ru/SE/testing/vlasov/">Методика автоматизированной проверки возвращаемых кодов ошибок при тестировании программных интерфейсов</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/431/">Zenwalk: управление пакетами</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/430/">Linux - должен?</a> (дискуссионный клуб)
+
+<p><b>14 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/project/distributed_team/">Пересекая границы: специфика разработки ПО распределенной командой</a>
+</li><li><a href="http://www.citforum.ru/SE/project/terehov/">Групповая разработка и организация коллектива</a>. Лекция из курса "Введение в технологию программирования"
+</li><li><a href="http://www.citforum.ru/computer/2007-05/">Компьютерные технологии на благо каждого человека</a>. Обзор майского номера журнала Computer
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/426/">5 лет спустя</a> (дискуссия Windows vs Linux)
+
+<p align="right"><b><a href="http://www.citforum.ru/news.shtml">Все публикации</a> &gt;&gt;&gt;</b>
+
+
+</p><hr size="1">
+
+</li></font></p></td></tr>
+<tr><td align="center"><iframe src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/citforum_right.htm" framespacing="0" frameborder="no" height="600" scrolling="no" width="220"></iframe></td></tr>
+<tr><td style="padding-left: 5px;">
+
+</td></tr><tr><td style="padding-left: 5px;">
+<img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" height="10" width="234"><br> 
+<!--<a target=_blank href="http://smoking-room.ru"><img src="/pictures/kurilka234x60.gif" border="1"></a><br>  
+-->
+<a target="_blank" href="http://smoking-room.ru/"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/clocs.gif" border="0"></a><br>  
+
+
+
+</td></tr>
+</tbody></table>
+
+</td>
+</tr></tbody></table>
+
+</td>
+ <!--no_right-->
+
+</tr>
+</tbody></table>
+</td>
+
+</tr></tbody></table>
+
+
+
+
+
+
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="931"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/consulting/">IT-консалтинг</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/SE/">Software Engineering</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/programming/">Программирование</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/database/">СУБД</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/security/">Безопасность</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/internet/">Internet</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/nets/">Сети</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/operating_systems/">Операционные системы</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/hardware/">Hardware</a></font></td>
+<!--
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/faq/>FAQ (ЧаВО)</a></font></td>
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/howto/>HOWTO</a></font></td>
+--> 
+</tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table>
+
+</p><p>
+
+<table width="100%">
+<tbody><tr><td>
+<a href="http://www.citforum.ru/about/"><font size="2">Информация для рекламодателей</font></a> 
+</td><td><font size="2">PR-акции, размещение рекламы - <a href="mailto:pr@citforum.ru">pr@citforum.ru</a>, тел. +7 495 4119920, ICQ 232284597</font>
+</td><td align="right"><font size="2">Пресс-релизы - <a href="mailto:pr@citcity.ru">pr@citcity.ru</a></font>
+</td></tr></tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="5" width="1"></td></tr>
+<tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr></tbody></table>
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%"><tbody><tr>
+<td><font size="2">
+<a href="http://www.citforum.ru/feedback.php?page=/programming/rational/clearcase.shtml&amp;server=www.citforum.ru">Послать комментарий</a><br>
+<a href="http://www.citforum.ru/how.shtml">Информация для авторов</a>
+</font></td>
+<td><a href="http://top100.rambler.ru/cgi-bin/stats_top100.cgi?13078"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/banner-88x31-rambler-darkblue2.gif" alt="Rambler's Top100" border="0" height="31" width="88"></a></td>
+<td><!--TopList LOGO--><a target="_top" href="http://top.list.ru/jump?from=26978"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/counter_002.gif" alt="TopList" border="0" height="31" width="88"></a><!--TopList LOGO--></td>
+<td>
+<!--LiveInternet logo--><a href="http://www.liveinternet.ru/click" target="_blank"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/logo.gif" alt="liveinternet.ru: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" border="0" height="31" width="88"></a><!--/LiveInternet-->
+</td>
+<td align="right" valign="bottom"><font face="Arial, sans-serif" size="1">This Web server launched on February 24, 1997<br>
+Copyright © 1997-2000 CIT, © 2001-2007 <a href="http://www.citforum.ru/info.shtml">CIT Forum</a></font></td>
+</tr></tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td bgcolor="#daecd7"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr><tr><td bgcolor="#008080"><img src="0090%20ClearCase%20-%20%F1%E8%F1%F2%E5%EC%E0%20%EA%EE%ED%F4%E8%E3%F3%F0%E0%F6%E8%EE%ED%ED%EE%E3%EE%20%E8%20%E2%E5%F0%F1%E8%EE%ED%ED%EE%E3%EE%20%EA%EE%ED%F2%F0%EE%EB%FF_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center"><font face="Arial, sans-serif" size="1"><b>Внимание!</b>
+Любой из материалов, опубликованных на этом сервере, не может быть
+воспроизведен в какой бы то ни было форме и какими бы то ни было
+средствами без письменного разрешения владельцев авторских прав. <a href="http://www.citforum.ru/copyright.shtml">Подробнее...</a></font></td></tr></tbody></table>
+
+</p><hr>
+
+<table class="u" width="100%"><tbody><tr><td>
+
+
+
+</td></tr></tbody></table>
+
+
+
+</body></html>

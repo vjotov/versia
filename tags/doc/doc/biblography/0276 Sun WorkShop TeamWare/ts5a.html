@@ -1,0 +1,77 @@
+<html><head><meta http-equiv=Content-Type content='text/html; charset=UTF-8'></head>
+<html>
+<body bgcolor=#ffffff>
+ 
+<h2><font size=6> Loading Workspaces by Default
+</font></h2>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+<h4><img src="hg_see-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_see.gif"><font size=4><B>Related Topics:</B></font></h4>
+
+<p><Table Border="0" Cellpadding="5">
+<tr><td VALIGN=TOP>
+<a href="ts5a1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/ts5a1.html" Target=Topic>Setting a Default Workspace</a>
+
+<td VALIGN=TOP>
+
+
+
+
+
+</Table>
+<img src="BlueLine-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/BlueLine.gif">
+
+
+
+<p>You can use either environment variables or Tools Properties to load workspaces  automatically. 
+
+
+<h4><font size=4>Environment Variables
+</font></h4><p><img src="hg_proc-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_proc.gif"> 
+<b>To load  a workspace  load automatically when Sun WorkShop<sup>TM</sup> TeamWare starts:</b>
+
+<table cellspacing="3">
+<tr valign="baseline" align="left">
+<td>&#160;&#160;<img src="diamond.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/diamond.gif">
+<td>Set the <kbd>CODEMGR_WSPATH</kbd> workspace environment variable to the location of the 
+workspace. For example:
+
+</table><dl><a name="106834">
+<p><dd><kbd>setenv CODEMGR_WSPATH /home/ws/myworkspace</kbd>
+<p></a></dl><p><img src="hg_proc-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_proc.gif"> 
+<b>To load more than one workspace:</b>
+
+<table cellspacing="3">
+<tr valign="baseline" align="left">
+<td>&#160;&#160;<img src="diamond.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/diamond.gif">
+<td>Put the list of workspaces inside double quotation marks. For example:
+
+</table><dl><a name="107134">
+<p><dd><kbd>setenv CODEMGR_WSPATH &#34;/home/ws/myworkspace /home/ws2/anotherws&#34;</kbd>
+<p></a></dl><p><img src="hg_proc-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_proc.gif"> 
+<b>To load all the workspaces in one directory:</b>
+
+<table cellspacing="3">
+<tr valign="baseline" align="left">
+<td>&#160;&#160;<img src="diamond.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/diamond.gif">
+<td>Set the variable to a directory that contains multiple workspaces. For example:
+
+</table><dl><a name="106932">
+<p><dd><kbd>setenv CODEMGR_WSPATH /home/workspaces/myworkspaces</kbd>
+<p></a></dl><h4><font size=4>Tools Properties
+</font></h4><p><img src="hg_proc-3.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/hg_proc.gif"> 
+<b>To load parent and child workspaces  automatically:</b>
+
+<dl>
+<p><dt><dd><strong>	1.	</strong> In the <a href="tw1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw1.html" Target=Topic>Configuring Window</a>, choose Options <img src="rightwingarrow-2.gif" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/rightwingarrow.gif">  Configuring.
+</dl>
+<dl>
+<p><dt><dd><strong>	2.	</strong> Select the <a href="tw4a1.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw4a1.html" Target=Topic>Codemanager Options Tab</a> in the <a href="tw4a.html" tppabs="http://caligari.dartmouth.edu/doc/solaris-forte/tw-help/Start/tw4a.html" Target=Topic>Tools Properties Dialog Box</a>.
+<p><dt><dd><strong>	3.	</strong> Click the Load Workspaces with Parent and Children check box.
+</dl>
+
+<br>
+
+<br> 
+
+

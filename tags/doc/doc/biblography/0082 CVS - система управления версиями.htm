@@ -1,0 +1,789 @@
+<html><head><title>CVS - система управления версиями</title>
+
+
+<link rel="stylesheet" href="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/citforum.css">
+<style>
+
+</style>
+
+<meta http-equiv="content-type" content="text/html; charset=Windows-1251">
+<style><!--
+table.u {font-size:8pt}
+table.u a {color:grey;text-decoration:none}
+--></style><script charset="utf-8" id="injection_graph_func" src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/injection_graph_func.js"></script></head><body topmargin="0" alink="#800000" bgcolor="#ffffff" link="#006890" marginheight="0" text="#000000" vlink="#003860">
+<a name="top"></a>
+
+
+
+
+<!-- counters -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><!--TopList COUNTER--><script language="JavaScript"><!--
+d=document;js=10;a=';r='+escape(d.referrer)
+//--></script><script language="JavaScript1.1"><!--
+js=11;a+=';j='+navigator.javaEnabled()
+//--></script><script language="JavaScript1.2"><!--
+js=12;s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=26978;js='+js+a+'" alt="" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/counter" alt="" height="1" width="1"><!-- <img src="CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/counter.gif" alt="" height="1" width="1"><!-- <noscript><img
+src="http://top.list.ru/counter?js=na;id=26978"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')
+//--><!--TopList COUNTER--></td>
+<td><!--LiveInternet counter--><script language="JavaScript"><!--
+document.write('<img src="http://counter.yadro.ru/hit?r'+
+escape(document.referrer)+((typeof(screen)=='undefined')?'':
+';s'+screen.width+'*'+screen.height+'*'+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+';u'+escape(document.URL)+
+';i'+escape('Жж'+document.title)+';'+Math.random()+
+'" width=1 height=1 alt="">')//--></script><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/hit" alt="" height="1" width="1"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/hit.gif" alt="" height="1" width="1"><!--/LiveInternet--></td>
+<td><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/top100.gif" alt="" border="0" height="1" width="1"></td>
+</tr></tbody></table>
+<!-- end of counters -->
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<!--
+<tr>
+  <td colspan=3><img width=931 height=1><br></td>
+</tr>
+-->
+<tbody><tr valign="top">
+  <td rowspan="6"><a href="http://www.citforum.ru/"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/citlogo8.gif" alt="Logo" border="0" height="44" width="140"></a></td>
+  <td rowspan="6">&nbsp;&nbsp;&nbsp;</td>
+  <td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="1"></td>
+</tr>
+<tr>
+  <td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td>
+</tr>
+<tr>
+  <td bgcolor="#008080">
+    <table border="0" cellpadding="1" cellspacing="1" width="100%">
+    <tbody><tr>
+      <td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://citcity.ru/">Деловая газета CitCity.ru</a></font></td>
+      <td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://citkit.ru/">CITKIT.ru - все об Open Source</a></font></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://forum.citforum.ru/">Форумы</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://www.citforum.ru/news.shtml">Все публикации</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://www.citmgu.ru/">Учебный центр</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://smoking-room.ru/">Курилка</a></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+<tr>
+  <td><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td>
+</tr>
+<tr>
+  <td width="100%">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tbody><tr>
+      <td align="left" width="21"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/cd1.gif" alt="CitForum" border="0" height="21" width="21"></td>
+      <td align="left"><font size="2">&nbsp;&nbsp;&nbsp;<a href="http://www.citforum.ru/cdrom.shtml"><b><nobr>CITForum на CD</nobr></b></a></font></td>
+	  <td align="center"><font size="2">&nbsp;&nbsp;&nbsp;<nobr><a href="http://www.citforum.ru/subscribe.shtml"><b>Подписка на новости портала</b></a></nobr></font></td>
+      <td align="right"><font size="2"><b><nobr>Море(!) аналитической информации!</nobr></b> :: <a href="http://www.citforum.ru/">CITFORUM.RU</a></font></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+</tbody></table>
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody><tr><td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="931"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/consulting/">IT-консалтинг</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/SE/">Software Engineering</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/programming/">Программирование</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/database/">СУБД</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/security/">Безопасность</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/internet/">Internet</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/nets/">Сети</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/operating_systems/">Операционные системы</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/hardware/">Hardware</a></font></td>
+<!--
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/faq/>FAQ (ЧаВО)</a></font></td>
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/howto/>HOWTO</a></font></td>
+--> 
+</tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table>
+
+</td></tr>
+<tr><td>
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody><tr valign="top">
+
+
+<td valign="top" width="200">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<!--date-->
+<tbody><tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<table border="0" cellpadding="0" cellspacing="1" width="100%">
+<tbody><tr><td bgcolor="#f4f9f3">
+<p class="topic1" align="center"><b>21.08.2007</b>
+</p></td></tr>
+</tbody></table>
+</td></tr>
+<!--/date-->
+
+
+<tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080"><table border="0" cellpadding="1" cellspacing="1" width="100%"><tbody><tr><td align="center" bgcolor="#ffffff">
+<form method="get" action="http://www.google.ru/custom">
+<table border="0" cellpadding="1" cellspacing="0">
+  <tbody><tr valign="bottom">
+    <td><a href="http://www.google.ru/search"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/google_75x32.gif" alt="Google" align="middle" border="0" height="32" width="75"></a></td>
+    <td><input name="sa" value="Поиск" type="submit"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><input name="q" size="25" maxlength="255" value="" type="text"></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input name="sitesearch" value="" type="radio">WWW
+      <input name="sitesearch" value="citforum.ru" checked="checked" type="radio">CITForum.ru
+    </td>
+  </tr>
+</tbody></table>
+<input name="cof" value="LW:140;ALC:#800000;L:http://www.citforum.ru/pictures/logos/citlogo8.gif;LC:#006890;LH:44;AH:left;VLC:#003860;S:http://www.citforum.ru/;AWFID:a524ad3720194500;" type="hidden">
+<input name="domains" value="citforum.ru" type="hidden">
+</form>
+</td></tr></tbody></table>
+</td></tr>
+
+
+
+<tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<table border="0" cellpadding="8" cellspacing="1" width="100%">
+<tbody><tr><td align="center" bgcolor="white">
+<iframe src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/citforum_left.htm" framespacing="0" frameborder="no" height="420" scrolling="no" width="180"></iframe></td></tr>
+<tr><td bgcolor="#ffffff">
+<font size="2">
+</font><p><font size="2"><b>Новости мира IT:</b>
+</font></p><ul class="column">
+
+<font size="2"><li>20.08 - <a href="http://citcity.ru/16650/">Недельный отчет Panda Security о вирусах и вторжениях</a></li><li>20.08 - <a href="http://citcity.ru/16649/">American Airlines подала в суд на Google</a></li><li>20.08 - <a href="http://citcity.ru/16648/">Cisco® модернизировала операционную систему Cisco IOS</a></li><li>20.08 - <a href="http://citcity.ru/16647/">Microsoft открыла для сторонних разработчиков технологию Live ID</a></li><li>20.08 - <a href="http://citcity.ru/16646/">Skype ожил окончательно</a></li><li>20.08 - <a href="http://citcity.ru/16644/">3Com делает ставку на Open Source</a></li><li>20.08 - <a href="http://citcity.ru/16645/">Рамблер представляет новый проект - Путешествия</a></li><li>20.08 - <a href="http://citcity.ru/16643/">Вышла обновленная версия Opera </a></li><li>20.08 - <a href="http://citcity.ru/16642/">Вышла новая версия операционной системы IBM z/OS</a></li><li>20.08 - <a href="http://citcity.ru/16641/">Yahoo опередил Google в рейтинге лояльности потребителей</a></li><li>17.08 - <a href="http://citcity.ru/16639/">Компакт-диску исполнилось 25 лет</a></li><li>17.08 - <a href="http://citcity.ru/16640/">Microsoft и Linux-компания Xandros расширяют сотрудничество </a></li><li>17.08 - <a href="http://citcity.ru/16637/">IBM будет поддерживать Solaris</a></li><li>17.08 - <a href="http://citcity.ru/16638/">VIA представила 1-ваттный процессор Eden</a></li><li>17.08 - <a href="http://citcity.ru/16636/">В Москве состоится первая профессиональная конференция интернет-СМИ </a></li><li>17.08 - <a href="http://citcity.ru/16635/">Китай купил суперкомпьютер для наблюдения за погодой во время Олимпийских Игр-2008</a></li><li>17.08 - <a href="http://citcity.ru/16633/">Немецкие физики нашли способ передавать данные быстрее скорости света</a></li><li>17.08 - <a href="http://citcity.ru/16632/">Президент Oracle объявляет об открытии представительства компании в Санкт-Петербурге</a></li><li>17.08 - <a href="http://citcity.ru/16631/">Citrix покупает Open Source-компанию XenSource, разработчика Xen </a></li><li>17.08 - <a href="http://citcity.ru/16634/">Миллионы пользователей во всем мире лишились Skype</a></li><li>16.08 - <a href="http://citcity.ru/16629/">Novell не намерена следовать примеру SCO</a></li><li>16.08 - <a href="http://citcity.ru/16628/">В пейджере Yahoo Messenger найдена очередная брешь</a></li><li>16.08 - <a href="http://citcity.ru/16627/">Вышла тестовая версия сервис-пака для Exchange Server 2007</a></li><li>16.08 - <a href="http://citcity.ru/16626/">Sun и IBM заключат соглашение о сотрудничестве</a></li><li>16.08 - <a href="http://citcity.ru/16625/">Фонд дикой природы открыл представительство в Second Life</a></li><li>16.08 - <a href="http://citcity.ru/16624/">Microsoft увеличила объем почтовых ящиков Hotmail до 5 Гб</a></li><li>16.08 - <a href="http://citcity.ru/16622/">Sony переходит на IP-телефонию</a></li><li>16.08 - <a href="http://citcity.ru/16623/">Dell и SAP объявили о создании альянса в области розничной торговли</a></li><li>16.08 - <a href="http://citcity.ru/16621/">В Second Life выступит  Королевский филармонический оркестр </a></li><li>16.08 - <a href="http://citcity.ru/16620/">В Россию впервые прибыл президент Oracle</a>
+</li></font></ul>
+<p><font size="2"><a target="_blank" href="http://citcity.ru/"><b>Все новости на CitCity.ru</b></a>
+</font>
+</p><p align="right"><a href="http://citcity.ru/rss/citforum.xml"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/xml_rss.gif" border="0" height="14" width="36"></a>
+</p></td></tr>
+</tbody></table>
+</td></tr>
+
+
+</tbody></table>
+</td>
+
+
+<td width="98%">
+
+
+<div style="border: 1px solid rgb(0, 128, 128); margin: 0pt auto; padding: 0px; display: table;"><script language="JavaScript"><!--
+document.write('<table cellpadding=1><tr valign=middle><td align=center><a class=plain href="http://citforum.ru/redir/hcse_citforum" target=_blank><img src="/a/hcse2.gif" width=60 height=70 border=0><br><div align=center><b><nobr>ВКШ "Эксперт"</nobr></b></div></a></td><td align=center style="font-size:.7em"><a class=plain href="http://citforum.ru/redir/hcse_citforum" target=_blank><b style=color:red>Уникальное образование <nobr>в сфере ИТ!</nobr></b><br>Как стать супер-профессионалом? ВКШ&nbsp;«Эксперт» &mdash; повышение квалификации для сисадминов, разработчиков, специалистов по безопасности! Диплом МГУ и сертификаты ведущих вендоров! Зарезервируйте себе место в группе сегодня!</a></td></tr></table>');
+//--></script><table cellpadding="1"><tbody><tr valign="middle"><td align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><img src="/a/hcse2.gif" border="0" height="70" width="60"><br><div align="center"><b><nobr>ВКШ "Эксперт"</nobr></b></div></a></td><td style="font-size: 0.7em;" align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><b style="color: red;">Уникальное образование <nobr>в сфере ИТ!</nobr></b><br>Как
+стать супер-профессионалом? ВКШ&nbsp;«Эксперт» — повышение квалификации
+для сисадминов, разработчиков, специалистов по безопасности! Диплом МГУ
+и сертификаты ведущих вендоров! Зарезервируйте себе место в группе
+сегодня!</a></td></tr></tbody></table><table cellpadding="1"><tbody><tr valign="middle"><td align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/hcse2.gif" border="0" height="70" width="60"><br><div align="center"><b><nobr>ВКШ "Эксперт"</nobr></b></div></a></td><td style="font-size: 0.7em;" align="center"><a class="plain" href="http://citforum.ru/redir/hcse_citforum" target="_blank"><b style="color: red;">Уникальное образование <nobr>в сфере ИТ!</nobr></b><br>Как
+стать супер-профессионалом? ВКШ&nbsp;«Эксперт» — повышение квалификации
+для сисадминов, разработчиков, специалистов по безопасности! Диплом МГУ
+и сертификаты ведущих вендоров! Зарезервируйте себе место в группе
+сегодня!</a></td></tr></tbody></table>
+</div>
+
+
+
+
+<div align="right"><em>2004 г.</em></div> 
+<h3>CVS - система управления версиями</h3> 
+<p><i>Алексей Махоткин, <a target="_blank" href="http://squadette.ru/">squadette.ru</a>
+
+
+</i></p><p><i>Эта статья была впервые опубликована в журнале "Программист", номер 2 за 2001 год.
+
+</i></p><p><i>Запрещается перепечатка этой статьи без письменного разрешения автора.
+</i>
+
+</p><p><b>Внимание: в целом статья устарела.  Новые инсталляции CVS делать не следует, нужно использовать как минимум Subversion, или <a target="_blank" href="http://www.versioncontrolblog.com/">другие альтернативы</a>.</b>
+
+
+</p><p><small>&lt;epigraph&gt;<br>
+<tt>From: luke@jet.msk.su</tt><br>
+<tt>Message-ID: &lt;huuwvr9t1rz.fsf@jet.msk.su&gt;</tt><br>
+
+</small></p>
+
+<p><small>
+Практика показывает, что 99% программистов под ОС Уиндоуз ведут
+разработку программ очень странными способами -- про version control
+они даже не догадываются, правят по живому, раз и навсегда.  На
+просьбу вернуться к предыдущей версии хлопают глазами и говорят "а мы
+уже всё переправили!".  В общем, культура программирования там в массе
+своей на уровне африканской деревни.<br>
+&lt;/epigraph&gt;</small></p>
+
+
+
+
+<h4>Введение </h4>
+<p align="justify">Системы управления версиями - класс программных
+продуктов, нацеленных на решение ряда задач, с которыми повседневно
+сталкивается каждый программист. С помощью систем управления версиями
+вы следите за изменениями кода вашего программного продукта в ходе его
+разработки, и можете управлять различными его состояниями: новая
+версия, работа над которой идет прямо сейчас; старая версия, которую
+придется поддерживать еще некоторое время; или же старая версия,
+интересная только историкам.</p>
+<p align="justify">Программисты, чьи исходники контролируются системой
+управления версиями, чем-то неуловимо отличаются от остальных
+программистов. Они в каждый момент рабочего дня точно знают, что именно
+было сделано за день, а после исправления ошибки могут точно сказать, в
+каком именно месте кода была ошибка. Они не подвержены синдрому
+"работает - не трогай", потому что могут совершенно безболезненно
+ударяться в самые сложные эксперименты со своей программой. Они твердо
+знают, что в любой момент могут вернуться к "исходникам, которые
+работали", сколько бы экспериментов с новым кодом не было проведено.
+Более того, если пользователь вдруг захочет небольшое, крошечное
+изменение, когда программа находится в многообещающем, но совершенно
+нерабочем состоянии, то все, что для этого потребуется -- переключиться
+на стабильную ветку, исправить там, что надо и отдать пользователю,
+затем переключиться обратно на ствол разработки.</p>
+<p align="justify">В этой статье речь пойдет о CVS (Concurrent Versions
+System) – одной из систем управления версиями, существующих на рынке. Я
+впервые начал использовать CVS около трех лет назад, программируя на
+Delphi, но имея довольно плотный опыт работы под Linux. С тех пор я
+сменил область деятельности на программирование для Web, участвовал в
+проектах с несколькими разработчиками, и использовал CVS в каждом своем
+проекте, сколь бы невелик он был, и даже сколь мало он ни был бы связан
+с собственно программированием. Признаться, сейчас я вообще не
+представляю себе, как можно программировать, если не контролируешь
+собственные исходники: даже этот небольшой текстовый файл со статьей
+уже имеет ревизию 1.1.</p>
+<p align="justify">В лучших традициях UNIX CVS занимается относительно
+небольшим, четко определенным кругом задач, и делает это хорошо. Когда
+вы начнете использовать CVS, то заметите, что она совершенно не
+"настаивает" практически ни на чем, включая сам факт своего
+использования. Все, что вы обнаружите -- один служебный подкаталог в
+каждом каталоге вашего проекта, и куча преимуществ и услуг, которые
+предоставит CVS, если дать ему эту возможность.</p>
+<h4>Повседневное использование</h4>
+<p align="justify">Если ваша операционная система - Linux, то, скорее
+всего, CVS уже установлена на вашей машине или же может быть
+установлена в мгновение ока с помощью менеджера пакетов. Если вы
+используете Windows, то сходите на <a href="http://www.cvsgui.org/" target="_blank">http://www.cvsgui.org/</a>,
+и скачайте там клиента и графическую оболочку к нему (если хотите).
+Создайте репозиторий, руководствуясь инструкциями из обширной
+документации к CVS.</p>
+<p align="justify">Теперь начнем создавать где-нибудь в отдельном
+каталоге (не каталоге с репозиторием!) рабочую копию. Создадим каталог
+для нашего проекта:</p>
+<p><b>$ cvs co -l . </b><br>
+<b>$ mkdir hello </b></p>
+<p> и поместим его в репозиторий:</p>
+<p><b>$ cvs add hello</b>
+<br>Directory /home/cvsroot/hello added to the repository </p>
+<p> Создадим внутри этого каталога файл с нашей программой:</p>
+<p><b>=== hello.c === <br>
+#include </b></p>
+<p> <b>int main() { </b><br>
+<b>printf("hello world\n"); </b><br>
+<b>} </b> <br>
+<b>=== hello.c === </b></p>
+<p>и поместим этот файл под контроль версий: </p>
+<p><b>$ cvs add hello.c </b> <br>
+<b>cvs add: scheduling file `hello.c' for addition </b> <br>
+<b>cvs add: use 'cvs commit' to add this file permanently</b></p>
+<p align="justify"> Проверим, что программа компилируется и
+выполняется. У нас появилась первая ревизия, вполне пригодная к
+помещению в репозиторий. Сделаем же это: </p>
+<p><b>$ cvs commit -m "First revision" hello.c </b> <br>
+<b>RCS file: /home/cvsroot/myproject/hello.c,v </b> <br>
+<b>done </b> <br>
+<b>Checking in hello.c; </b> <br>
+<b>/home/cvsroot/myproject/hello.c,v &lt;-- hello.c </b> <br>
+<b>initial revision: 1.1 </b> <br> 
+<b>done </b></p>
+<p align="justify">Отлично. Теперь притворимся, что мы долго и трудно работали, исправляя
+грамматику сообщения, которое выводит на экран наша программа, и в результате наш исходник
+начинает выглядеть так: </p> 
+<p><b>=== hello.c === </b> <br> 
+<b>#include </b> <br> 
+<b>int main() { </b> <br> 
+<b>printf("Hello, world!\n"); </b> <br> 
+<b>} </b> <br> 
+<b>=== hello.c === </b></p> 
+<p>Что же изменилось? Спросим у CVS: </p> 
+<p><b>$ cvs diff -u hello.c </b><br> 
+<b>Index: hello.c </b><br> 
+=============================================== <br> 
+<b>RCS file: /home/cvsroot/myproject/hello.c,v </b> <br> 
+<b>retrieving revision 1.1 </b> <br> 
+<b>diff -u -r1.1 hello.c </b> <br> 
+<b>--- hello.c 2001/01/23 22:16:35 1.1 </b> <br> 
+<b>+++ hello.c 2001/01/23 22:19:08 </b> <br> 
+<b>@@ -1,5 +1,5 @@</b><br> 
+<b>#include </b> </p> 
+<p> <b>int main() { </b> <br> 
+<b>- printf("hello world\n"); </b> <br> 
+<b>+ printf("Hello, world!\n"); </b> <br> 
+<b>} </b></p> 
+<p align="justify"> Вот в таком вот формате ("унифицированном
+diff-формате") CVS показывает нам изменения, произошедшие с файлом с
+того момента, когда он последний раз "фиксировался" в репозиторий.
+Легко видеть, что одна строка в файле была изменена: мы видим ее старое
+и новое состояния. Теперь, когда приветствием, выводимым программой,
+будет доволен любой корректор, можно зафиксировать и это изменение с
+помощью все той же команды: </p>
+<p><b>$ cvs commit -m "Improved greeting" hello.c </b></p>
+<p align="justify">Описание команд CVS выходит за рамки этой небольшой
+статьи, но в конце ее приведены ссылки на материалы, в которых эта тема
+обсуждается с недостижимой здесь полнотой. Я же вернусь к более
+абстрактному описанию сосуществования с системой контроля версий.
+Первое время, довольно продолжительное, можно безболезненно работать с
+буквально полудесятком команд CVS: </p>
+<ul> 
+<li>добавление файла в проект (cvs add);
+</li><li>удаление его из проекта при помощи команды cvs remove (заметьте, что вся история изменений
+в этом файле будет сохранена!);
+</li><li>просмотр изменений (cvs diff);
+</li><li>фиксация изменений в репозитории (cvs commit);
+</li><li>на должность пятой команды в данном случае претендуют почти все остальные команды
+в зависимости от личных предпочтений. </li> 
+</ul> 
+<p align="justify">Для получения максимального эффекта от использования
+CVS следует соблюдать определенную дисциплину. Фиксирование изменений
+должно происходить каждый раз, когда наличествует это самое изменение,
+четко определенное и завершенное. </p>
+<p align="justify">Например, самый распространенный случай: исправлена
+ошибка. Следует просмотреть изменения (в этот момент вас могут
+поджидать самые любопытные сюрпризы, например, после многочасовой
+отладки вдруг может выясниться, что все изменение свелось к двум
+строкам в двух разных файлах, хоть вы и редактировали десяток этих
+файлов в поисках ошибки). Теперь нужно зафиксировать изменение, причем
+обязательно документировать его: CVS запустит для вас редактор и
+предложит ввести журнальное сообщение. Если вы вдобавок пользуетесь
+системами отслеживания ошибок (а это тема для отдельной статьи), то
+журнальное сообщение – отличное место, куда можно вписать номер
+исправленной ошибки или, например, ссылку на письмо, в котором
+пользователь сообщил об исправленной ошибке. </p>
+<p align="justify">Старайтесь не фиксировать несколько ошибок
+одновременно (еще хуже в качестве журнального сообщения писать
+"Исправлено несколько ошибок" или "Куча исправлений"). В то же самое
+время есть еще одна часто встречающаяся ситуация: предположим, что вы
+несколько часов писали новый довольно большой модуль, он в основном
+работает, и осталось внести буквально несколько изменений (или,
+например, уже поздно и пора идти домой). В этом случае можно смело
+фиксировать недоделанный файл, а в качестве комментария ставить "почти
+работает". Оставшиеся доделки чрезвычайно удобно будет внести уже в
+новую ревизию, используя команду просмотра изменений относительно
+"почти работающей версии". По крайней мере, к ней всегда можно будет
+вернуться. </p>
+<h4>Несколько ветвей разработки </h4>
+<p align="justify">Через несколько месяцев, когда вы более-менее
+освоитесь с повседневным
+использованием CVS, вам все чаще станут вспоминаться виденные когда-то
+в документации
+и в речи старших товарищей словосочетания "стабильная ветка", "сольем
+изменения на ствол", "поддержка старых версий". Это означает, что вы
+уже готовы программировать одновременно две версии своей программы.
+Одна - стабильная, которая уже работает у заказчика, но время от
+времени требует небольших исправлений или доработок. Вторая - та,
+разработку которой вы продолжаете, которая будет называться версией
+2.0, содержит новые возможности или вообще почти полностью переписана.
+На помощь приходит CVS, которая с самого начала разрабатывалась для
+поддержки нескольких ветвей разработки программы. </p>
+<p align="justify">В какой-то момент вы объявляете, что выпущена Hello
+Version 1.0. Дистрибутив программы отправлен пользователю, а вам самое
+время приготовиться к дальнейшей разработке. Пометьте текущее состояние
+исходников: </p>
+<p><b>$ cvs rtag HELLO-1-0-RELEASE hello </b></p>
+<p>Во-первых, теперь вы всегда сможете вернуться к состоянию программы на момент релиза
+с помощью команды </p>
+<p><b>$ cvs co -r HELLO-1-0-RELEASE hello </b></p> 
+<p>Во-вторых, что важнее, теперь вы сможете создать ветку разработки, в которой будете
+вести поддержку программы (выпуская версии 1.01, 1.02 и т. д.). Для этого используется
+команда cvs rtag с ключом -b: </p>
+<p><b>$ cvs rtag -b -r HELLO-1-0-RELEASE HELLO-1-0 hello </b></p> 
+<p>Теперь в вашей текущей рабочей копии можно продолжать активную
+разработку Hello Version
+2. Одновременно с этим от пользователя начнут поступать запросы на
+исправление ошибок, небольшие доработки etc. Создайте себе еще одну
+рабочую копию в каталоге hello-support: </p>
+<p> <b>$ cvs co -r HELLO-1-0 -d hello-support hello </b></p> 
+<p align="justify">Эта рабочая копия "помнит" о том, что при ее
+извлечении использовался
+идентификатор ветки (HELLO-1-0), и теперь все исправления, которые вы
+сделаете и зафиксируете, окажутся именно на ветке, не затрагивая
+основной ствол разработки. И наоборот, изменения, вносимые в вашу
+основную рабочую копию, не окажут влияния на ветки, которые существуют
+в репозитории. </p>
+<h4>Несколько разработчиков </h4>
+<p align="justify">CVS изначально разрабатывалась с учетом возможности
+работы над проектом нескольких разработчиков. Дело в том, что вы можете
+извлечь из одного репозитория несколько рабочих копий -- по одной на
+каждого программиста. Очевидно, что в большинстве случаев разные
+программисты будут работать над разными частями проекта. Каждый из них
+будет фиксировать изменения в своей части проекта, и они не станут
+натыкаться друг на друга в репозитории. Для того чтобы получить
+изменения, сделанные другими, нужно специально вызвать команду </p>
+<p><b>$ cvs update </b></p> 
+<p align="justify">Если вдруг случайно Петя и Вася бросятся исправлять
+один и тот же кусок кода, и сделают это по-разному (сама по себе эта
+ситуация указывает на недостаток общения Пети и Васи друг с другом), то
+CVS обработает и эту ситуацию. Когда Петя зафиксирует свое исправление,
+CVS позволит ему сделать это. Когда Вася попытается зафиксировать свой
+вариант исправления, CVS обнаружит, что эти исправления перекрываются,
+и предложит ему обновить рабочую копию с помощью cvs update. Эта
+команда покажет, что в исправляемом файле произошел так называемый
+"конфликт" и пометит место конфликта в рабочей копии этого файла.
+Предположим, Петя решил, что важнее исправить синтаксис выводимого
+сообщения, а Вася -- что нужно использовать более простую функцию
+puts(). Конфликт будет выглядеть примерно так: </p>
+<p> &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; <br> 
+<b>printf("Hello, world!\n"); </b><br> 
+========= <br> 
+<b>puts("hello world!"); </b><br> 
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; </p> 
+<p align="justify">Васе следует обсудить с Петей причину конфликта,
+договориться, какое из изменений важнее (или просто объединить их),
+затем убрать индикаторы конфликта (строчки из символов "больше",
+"меньше" и "равно"), оставить лучший из двух вариантов и, если нужно,
+зафиксировать окончательное изменение. </p>
+<p align="justify">Многие пугаются, услышав о полуавтоматической
+обработке конфликтов. На самом деле практика показывает, что при
+совместной работе с использованием CVS конфликтов практически не
+возникает (я говорю на основании опыта двухмесячной работы трех
+программистов над одним проектом). За эти два месяца я наблюдал, ну
+может быть, три или четыре конфликта. Все они были простейшими и
+исправлялись за три минуты. Никаких проблем, связанных с совместной
+работой, замечено не было. </p>
+<h4>Заключительная часть </h4> 
+<p align="justify">CVS необычайно широко применяется при разработке
+подавляющего большинства современных проектов с открытым исходным
+текстом. Среди огромного списка операционных систем и программ:
+FreeBSD, XEmacs, XFree86, OpenSSL, выделяется, пожалуй, лишь ядро
+Linux, главный разработчик которой, Линус Торвальдс, в силу
+особенностей личности отказывается использовать какую бы то ни было
+систему управления версиями, кроме собственного мозга. Да и то, почти
+все остальные участники разработки держат свой собственный
+CVS-репозиторий, которым активно пользуются при разработке (здесь им
+помогает интересная возможность CVS: т. н. "ветки поставщика" (vendor
+branches)). Проект <a href="http://sourceforge.net/" target="_blank">http://sourceforge.net/</a>,
+обеспечивающий свободно доступную инфраструктуру для разработчиков
+свободного программного обеспечения, в качестве стандартной возможности
+предоставляет использование своего CVS-сервера. Вообще, количество
+инсталляций и пользователей -- одно из значительных преимуществ CVS. </p>
+<h4>Альтернативы </h4> 
+<p align="justify">На рынке свободно распространяемых программ CVS
+практически нет конкурентов. Однако из-за почтенного возраста (первые
+версии CVS появились в 1986 г.) появилась небольшая, но ясно видная
+ниша для конкурирующих продуктов. Дело в том, что CVS не поддерживает
+несколько удобных (некоторые даже считают их критичными) возможностей,
+например, версионность каталогов - отслеживание истории файлов с учетом
+их переименования, а также поддержку "наборов изменений" (changesets).
+Кроме того, разработка CVS в последнее время несколько приостановилась,
+в нем давно не появляется новых крупных возможностей (впрочем, это не
+означает, что существующих возможностей не хватает). Есть несколько
+коммерческих продуктов, поддерживающих примерно тот же набор
+возможностей, что и CVS. Два, на мой взгляд, самых известных - это
+Perforce (<a href="http://www.perforce.com/" target="_blank">http://www.perforce.com/</a>) и Rational ClearCase (<a href="http://www.rational.com/" target="_blank">http://www.rational.com/</a>). В конце статьи приведена ссылка на каталог, содержащий ссылки на большое количество систем  управления версиями. </p>
+<p align="justify">В настоящий момент активно ведется разработка того, что когда-нибудь
+придет на смену CVS: <a href="http://subversion.tigris.org/" target="_blank">http://subversion.tigris.org/</a>.
+Этот проект, Subversion, разрабатывается с учетом положительных сторон
+CVS, у него новое, не страдающее от "старческих болезней", дерево
+исходников, некоторые из его разработчиков в прошлом участвовали в
+разработке CVS. Конечно же, Subversion будет распространяться с
+исходными текстами и по свободной лицензии. Я очень надеюсь, что этому
+проекту будет сопутствовать успех! Но в любом случае CVS будет
+использоваться еще очень и очень долго. </p>
+<h4>Ссылки на дополнительную информацию </h4>
+<p>Домашняя страница CVS: <a href="http://www.cvshome.org/" target="_blank">http://www.cvshome.org/</a></p> 
+<p>Основной ресурс по CVS на Open Directory: <br> 
+<a href="http://dmoz.org/Computers/Software/Configuration_Management/Tools/Concurrent_Versions_System/" target="_blank">http://dmoz.org / Computers / Software / Configuration_Management / Tools / Concurrent Versions System /</a></p> 
+<p>Крупнейший ресурс по CVS на русском языке (документация, статьи, список рассылки): <br> 
+<a href="http://alexm.here.ru/cvs-ru/" target="_blank">http://alexm.here.ru/cvs-ru/</a></p>
+<p>Графический (а также обычный текстовый) CVS-клиент под Win32: <br> 
+<a href="http://www.cvsgui.org/" target="_blank">http://www.cvsgui.org/</a></p> 
+<p>CVS-сервер под Win32: <br> 
+<a href="http://www.cvsnt.org/" target="_blank">http://www.cvsnt.org/</a></p> 
+<p>Ссылки на другие системы управления версиями: <br> 
+<a href="http://dmoz.org/Computers/Software/Configuration_Management/Tools/" target="_blank">http:// dmoz.org / Computers / Software / Configuration_Management / Tools/</a></p> 
+<p>  
+
+</p><p>&nbsp;
+
+</p><center>
+<hr width="25%">
+<iframe src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/citforum_bottom.htm" framespacing="0" frameborder="no" height="600" scrolling="no" width="500"></iframe>
+
+
+
+</center>
+<p align="right"><small>Размещение рекламы - pr@citforum.ru, ICQ 232284597</small>
+
+
+</p></td>
+
+
+<td>
+
+<table align="right" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" border="0" height="1" width="1"></td>
+<td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" border="0" height="1" width="2"></td>
+<td>
+
+<table border="0" cellpadding="0" cellspacing="0" width="240">
+
+<tbody><tr><td align="center"></td></tr><tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<!--subscribe small-->
+   <table border="0" cellpadding="1" cellspacing="1" width="100%">
+   <form action="http://citforum.ru/anketa/subscribe.php" method="post"></form>
+   <tbody><tr><td bgcolor="#ffffff">
+    <center>
+     <table border="0" cellpadding="1" cellspacing="0">
+     <tbody><tr><td align="center">
+      <font size="2"></font><p><font size="2"><b>Подписка на новости IT-портала CITForum.ru</b><br>
+<i>(<a href="http://citforum.ru/">библиотека</a>, <a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>, <a target="_blank" href="http://citcity.ru/">CitCity</a>)</i></font></p><p>
+<font size="2">      <input name="e_mail" size="15" value="e@mail" type="text"><input value="OK" type="submit">
+     </font></p></td></tr>
+     </tbody></table>
+    </center>
+   </td></tr>
+   
+   </tbody></table>
+<!--/subscribe small-->
+</td></tr>
+
+<tr><td style="padding-left: 5px;">
+<font size="2">
+</font><p><font size="2"><b>Новые публикации:</b>
+
+</font></p><p><font size="2"><b>15 августа</b>
+<li><a href="http://www.citforum.ru/database/oracle/microseconds/">Когда счет идет на микросекунды<br>
+</a></li><li><a href="http://www.citforum.ru/database/oracle/time/">Тип данных TIME</a> <br>
+</li><li><a href="http://www.citforum.ru/database/oracle/oracle11g/">Новая версия СУБД Oracle - Oracle 11g</a> <br>
+</li><li><a href="http://www.citforum.ru/hardware/data/intel_turbo_memory/">Закись азота для ПК: Intel Turbo Memory</a>
+</li><li><a href="http://www.citforum.ru/hardware/articles/net_printers/">Доступные сетевые принтеры</a>
+
+<p><b>8 августа</b>
+</p></li><li><a href="http://www.citforum.ru/hardware/arch/servers_in_russia/">Серверы в масштабе российского предприятия</a>
+</li><li><a href="http://www.citforum.ru/hardware/data/data_storage/">Хранение данных: задачи, решения, перспективы</a>
+</li><li><a href="http://www.citforum.ru/nets/hard/terminals/">И снова терминалы</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/456/">Debian vs Ubuntu: еще один великолепный миф?</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/455/">Сказ про TeXmacs, или как прикручивали шрифты TeX к графическому режиму, и что из этого получилось</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/454/">Мультизагрузочный CD с использованием GRUB</a>
+
+<p><b>1 августа</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/16501/">Информационная безопасность ERP-систем</a>
+</li><li><a target="_blank" href="http://citcity.ru/16502/">Корнями - в древность, кроной - в современный бизнес</a> 
+(о рынке информационной безопасности)
+<p>Обзор журнала Computer:
+</p></li><li><a href="http://www.citforum.ru/computer/2007-06/">Open Source и проприетарная архитектурная революция</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/449/">hwreport: 1 к 84-м в пользу "source based"</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/450/">Начал ли звонить колокол?</a> (дискуссия <a target="_blank" href="http://citkit.ru/articles/windows_vs_linux/">Windows vs Linux</a>)
+
+
+<p><b>25 июля</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/16453/"><b>Беседа Марго Зельцер с Майклом Стоунбрейкером.</b>
+Перевод: Сергей Кузнецов</a>
+</li><li><a target="_blank" href="http://citcity.ru/16456/">SideShow: Windows с изнанки</a>
+</li><li><a target="_blank" href="http://citcity.ru/16455/">Перспективы развития стандартов третьего поколения в России и в мире</a>
+</li><li><a target="_blank" href="http://citcity.ru/16458/">От SMB к Enterprise. Плох тот солдат, который не хочет стать генералом</a>
+</li><li><a target="_blank" href="http://citcity.ru/16457/">Лучше выпить, чем говорить по телефону?</a>
+
+<p><b>18 июля</b>
+</p><p></p></li><li><b><a href="http://www.citforum.ru/SE/middleware/history/">Влияние исследований на технологию промежуточного программного обеспечения</a></b>
+<p></p></li><li><a href="http://www.citforum.ru/SE/project/reconciliation/">Семантическая реконсиляция прикладных данных на основе моделей</a>
+<p></p></li><li><a href="http://www.citforum.ru/programming/unix/daemons/">Демоны</a> (из серии "<a href="http://www.citforum.ru/programming/unix/borovsky/"><b>Программирование для Linux</b></a>")
+
+<p><b>11 июля</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/database/articles/grigoriev/">Почему формальную реляционную модель данных можно рассматривать как основу безимпедансных систем</a>
+</li><li><a href="http://www.citforum.ru/consulting/BI/karpov/">Адаптивное управление по прецедентам, основанное на классификации состояний управляемых объектов</a>
+</li><li><a href="http://www.citforum.ru/SE/project/volkova/">Методы композиции и декомпозиции исполняемых UML моделей</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/447/">Windows. Господа критикисты, стыдитесь!</a>
+
+<p><b>4 июля</b>
+</p><p>Лекции из курса А.Марченко "Введение в программирование на C# 2.0":
+</p></li><li><a href="http://www.citforum.ru/programming/csharp/gdi_plus/">GDI+</a>
+</li><li><a href="http://www.citforum.ru/programming/csharp/ado_dot_net/">Основы ADO .NET</a>
+<p></p></li><li>К статье <a href="http://www.citforum.ru/consulting/articles/ofsa/">OFSA. Основные принципы</a> добавлена
+</li><li><a href="http://www.citforum.ru/consulting/articles/ofsa/ofsa_5.shtml">Часть 5. FDM как хранилище данных финансовой информации</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/445/">Чем удобна Вынь-да?</a>
+
+<p><b>28 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/testing/schnitman/">Особенности применения технологии UniTESK для тестирования функций мобильности в протоколе IPv6</a>
+</li><li><a href="http://www.citforum.ru/operating_systems/rubanov/">Разработка ОС реального времени для цифрового сигнального процессора</a>
+<p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/16252/">Карьера! Как много в этом слове...
+О планировании карьеры, плане профессионального развития и не только...</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/442/">Памятка начинающему снобу</a>
+
+<p><b>26 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/programming/windows/machine_code/">Win32 в машинных кодах</a>
+<p></p></li><li><a href="http://www.citforum.ru/SE/testing/zelenov/">Верификация компиляторов - систематический подход</a>
+</li><li><a href="http://www.citforum.ru/SE/testing/kamkin/">Использование контрактных спецификаций для автоматизации функционального тестирования моделей аппаратного обеспечения</a>
+</li><li><a href="http://www.citforum.ru/SE/testing/gingina/">Тестирование трансляторов: проблема построения оракула для генератора</a>
+
+<p><b>21 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/testing/mutilin/">Тестирование компонентов, взаимодействующих посредством удаленного вызова методов</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><b><a target="_blank" href="http://citkit.ru/articles/434/">Открытые стандарты и новые формы международного сотрудничества</a></b>
+</li><li><a target="_blank" href="http://citkit.ru/articles/435/">Zenwalk: хроника последнего обновления</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/437/">Заметки сноба, или Беру свои слова обратно</a> (дискуссия про анонимусов)
+
+<p><b>19 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/testing/silakov/">Текущее состояние и перспективы развития инфраструктуры LSB</a>
+<p></p></li><li><a href="http://www.citforum.ru/SE/testing/kichigin/">Об одном методе сокращения набора тестов</a>
+<p></p></li><li><a href="http://www.citforum.ru/SE/testing/vlasov/">Методика автоматизированной проверки возвращаемых кодов ошибок при тестировании программных интерфейсов</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/431/">Zenwalk: управление пакетами</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/430/">Linux - должен?</a> (дискуссионный клуб)
+
+<p><b>14 июня</b>
+</p><p></p></li><li><a href="http://www.citforum.ru/SE/project/distributed_team/">Пересекая границы: специфика разработки ПО распределенной командой</a>
+</li><li><a href="http://www.citforum.ru/SE/project/terehov/">Групповая разработка и организация коллектива</a>. Лекция из курса "Введение в технологию программирования"
+</li><li><a href="http://www.citforum.ru/computer/2007-05/">Компьютерные технологии на благо каждого человека</a>. Обзор майского номера журнала Computer
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/426/">5 лет спустя</a> (дискуссия Windows vs Linux)
+
+<p align="right"><b><a href="http://www.citforum.ru/news.shtml">Все публикации</a> &gt;&gt;&gt;</b>
+
+
+</p><hr size="1">
+
+</li></font></p></td></tr>
+<tr><td align="center"><iframe src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/citforum_right.htm" framespacing="0" frameborder="no" height="600" scrolling="no" width="220"></iframe></td></tr>
+<tr><td style="padding-left: 5px;">
+
+</td></tr><tr><td style="padding-left: 5px;">
+<img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" height="10" width="234"><br> 
+<!--<a target=_blank href="http://smoking-room.ru"><img src="/pictures/kurilka234x60.gif" border="1"></a><br>  
+-->
+<a target="_blank" href="http://smoking-room.ru/"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/clocs.gif" border="0"></a><br>  
+
+
+
+</td></tr>
+</tbody></table>
+
+</td>
+</tr></tbody></table>
+
+</td>
+ <!--no_right-->
+
+</tr>
+</tbody></table>
+</td>
+
+</tr></tbody></table>
+
+
+
+
+
+
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="931"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/consulting/">IT-консалтинг</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/SE/">Software Engineering</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/programming/">Программирование</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/database/">СУБД</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/security/">Безопасность</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/internet/">Internet</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/nets/">Сети</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/operating_systems/">Операционные системы</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/hardware/">Hardware</a></font></td>
+<!--
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/faq/>FAQ (ЧаВО)</a></font></td>
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/howto/>HOWTO</a></font></td>
+--> 
+</tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table>
+
+</p><p>
+
+<table width="100%">
+<tbody><tr><td>
+<a href="http://www.citforum.ru/about/"><font size="2">Информация для рекламодателей</font></a> 
+</td><td><font size="2">PR-акции, размещение рекламы - <a href="mailto:pr@citforum.ru">pr@citforum.ru</a>, тел. +7 495 4119920, ICQ 232284597</font>
+</td><td align="right"><font size="2">Пресс-релизы - <a href="mailto:pr@citcity.ru">pr@citcity.ru</a></font>
+</td></tr></tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="5" width="1"></td></tr>
+<tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr></tbody></table>
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%"><tbody><tr>
+<td><font size="2">
+<a href="http://www.citforum.ru/feedback.php?page=/programming/application/cvs/&amp;server=www.citforum.ru">Послать комментарий</a><br>
+<a href="http://www.citforum.ru/how.shtml">Информация для авторов</a>
+</font></td>
+<td><a href="http://top100.rambler.ru/cgi-bin/stats_top100.cgi?13078"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/banner-88x31-rambler-darkblue2.gif" alt="Rambler's Top100" border="0" height="31" width="88"></a></td>
+<td><!--TopList LOGO--><a target="_top" href="http://top.list.ru/jump?from=26978"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/counter_002.gif" alt="TopList" border="0" height="31" width="88"></a><!--TopList LOGO--></td>
+<td>
+<!--LiveInternet logo--><a href="http://www.liveinternet.ru/click" target="_blank"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/logo.gif" alt="liveinternet.ru: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" border="0" height="31" width="88"></a><!--/LiveInternet-->
+</td>
+<td align="right" valign="bottom"><font face="Arial, sans-serif" size="1">This Web server launched on February 24, 1997<br>
+Copyright © 1997-2000 CIT, © 2001-2007 <a href="http://www.citforum.ru/info.shtml">CIT Forum</a></font></td>
+</tr></tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td bgcolor="#daecd7"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr><tr><td bgcolor="#008080"><img src="0082%20CVS%20-%20%F1%E8%F1%F2%E5%EC%E0%20%F3%EF%F0%E0%E2%EB%E5%ED%E8%FF%20%E2%E5%F0%F1%E8%FF%EC%E8_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center"><font face="Arial, sans-serif" size="1"><b>Внимание!</b>
+Любой из материалов, опубликованных на этом сервере, не может быть
+воспроизведен в какой бы то ни было форме и какими бы то ни было
+средствами без письменного разрешения владельцев авторских прав. <a href="http://www.citforum.ru/copyright.shtml">Подробнее...</a></font></td></tr></tbody></table>
+
+</p><hr>
+
+<table class="u" width="100%"><tbody><tr><td>
+
+
+
+</td></tr></tbody></table>
+
+
+
+</body></html>

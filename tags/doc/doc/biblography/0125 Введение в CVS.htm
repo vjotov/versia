@@ -1,0 +1,1288 @@
+<html><head>
+
+<meta name="KeyWords" content="Информационные технологии,cvs,дерево каталогов,репозиторий,настройка,рабочий каталог,файл,редактирование,hunk,конфликт">
+<meta name="Robots" content="all">
+<meta name="Description" content="http://www.citforum.ru, Введение в CVS">
+<meta name="Document-state" content="Static"><title>Введение в CVS</title>
+
+
+
+<link rel="stylesheet" href="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/citforum.css">
+<style>
+
+</style>
+
+<meta http-equiv="content-type" content="text/html; charset=Windows-1251">
+<style><!--
+.d {color:grey;font-size:10px}
+.d a {text-decoration:none}
+--></style><script charset="utf-8" id="injection_graph_func" src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/injection_graph_func.js"></script></head><body topmargin="0" alink="#800000" bgcolor="#ffffff" link="#006890" marginheight="0" text="#000000" vlink="#003860">
+<a name="top"></a>
+
+
+
+
+<!-- counters -->
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><!--TopList COUNTER--><script language="JavaScript"><!--
+d=document;js=10;a=';r='+escape(d.referrer)
+//--></script><script language="JavaScript1.1"><!--
+js=11;a+=';j='+navigator.javaEnabled()
+//--></script><script language="JavaScript1.2"><!--
+js=12;s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=26978;js='+js+a+'" alt="" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/counter" alt="" height="1" width="1"><!-- <img src="%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/counter_002.gif" alt="" height="1" width="1"><!-- <noscript><img
+src="http://top.list.ru/counter?js=na;id=26978"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')
+//--><!--TopList COUNTER--></td>
+<td><!--LiveInternet counter--><script language="JavaScript"><!--
+document.write('<img src="http://counter.yadro.ru/hit?r'+
+escape(document.referrer)+((typeof(screen)=='undefined')?'':
+';s'+screen.width+'*'+screen.height+'*'+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+';u'+escape(document.URL)+
+';i'+escape('Жж'+document.title)+';'+Math.random()+
+'" width=1 height=1 alt="">')//--></script><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/hit" alt="" height="1" width="1"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/hit.gif" alt="" height="1" width="1"><!--/LiveInternet--></td>
+<td><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/top100.gif" alt="" border="0" height="1" width="1"></td>
+</tr></tbody></table>
+<!-- end of counters -->
+
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<!--
+<tr>
+  <td colspan=3><img width=931 height=1><br></td>
+</tr>
+-->
+<tbody><tr valign="top">
+  <td rowspan="6"><a href="http://www.citforum.ru/"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/citlogo8.gif" alt="Logo" border="0" height="44" width="140"></a></td>
+  <td rowspan="6">&nbsp;&nbsp;&nbsp;</td>
+  <td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="1"></td>
+</tr>
+<tr>
+  <td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td>
+</tr>
+<tr>
+  <td bgcolor="#008080">
+    <table border="0" cellpadding="1" cellspacing="1" width="100%">
+    <tbody><tr>
+      <td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://citcity.ru/">Деловая газета CitCity.ru</a></font></td>
+      <td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://citkit.ru/">CITKIT.ru - все об Open Source</a></font></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://forum.citforum.ru/">Форумы</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://www.citforum.ru/news.shtml">Все публикации</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://www.citmgu.ru/">Учебный центр</a></td>
+      <td align="center" bgcolor="#f4f9f3"><a class="head" href="http://smoking-room.ru/">Курилка</a></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+<tr>
+  <td><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td>
+</tr>
+<tr>
+  <td width="100%">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tbody><tr>
+      <td align="left" width="21"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/cd1.gif" alt="CitForum" border="0" height="21" width="21"></td>
+      <td align="left"><font size="2">&nbsp;&nbsp;&nbsp;<a href="http://www.citforum.ru/cdrom.shtml"><b><nobr>CITForum на CD</nobr></b></a></font></td>
+	  <td align="center"><font size="2">&nbsp;&nbsp;&nbsp;<nobr><a href="http://www.citforum.ru/subscribe.shtml"><b>Подписка на новости портала</b></a></nobr></font></td>
+      <td align="right"><font size="2"><b><nobr>Море(!) аналитической информации!</nobr></b> :: <a href="http://www.citforum.ru/">CITFORUM.RU</a></font></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+</tbody></table>
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody><tr><td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="931"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/consulting/">IT-консалтинг</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/SE/">Software Engineering</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/programming/">Программирование</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/database/">СУБД</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/security/">Безопасность</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/internet/">Internet</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/nets/">Сети</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/operating_systems/">Операционные системы</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/hardware/">Hardware</a></font></td>
+<!--
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/faq/>FAQ (ЧаВО)</a></font></td>
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/howto/>HOWTO</a></font></td>
+--> 
+</tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table>
+
+</td></tr>
+<tr><td>
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody><tr valign="top">
+
+
+<td valign="top" width="200">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<!--date-->
+<tbody><tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<table border="0" cellpadding="0" cellspacing="1" width="100%">
+<tbody><tr><td bgcolor="#f4f9f3">
+<p class="topic1" align="center"><b>25.02.2008</b>
+</p></td></tr>
+</tbody></table>
+</td></tr>
+<!--/date-->
+
+ 
+<tr><td align="center"><iframe src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/2008-02-25_citforum_200x350.htm" marginwidth="0" marginheight="0" frameborder="0" height="350" scrolling="no" width="200"></iframe></td></tr>
+
+<tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080"><table border="0" cellpadding="1" cellspacing="1" width="100%"><tbody><tr><td align="center" bgcolor="#ffffff">
+<form method="get" action="http://www.google.ru/custom">
+<table border="0" cellpadding="1" cellspacing="0">
+  <tbody><tr valign="bottom">
+    <td><a href="http://www.google.ru/search"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/google_75x32.gif" alt="Google" align="middle" border="0" height="32" width="75"></a></td>
+    <td><input name="sa" value="Поиск" type="submit"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><input name="q" size="25" maxlength="255" value="" type="text"></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input name="sitesearch" value="" type="radio">WWW
+      <input name="sitesearch" value="citforum.ru" checked="checked" type="radio">CITForum.ru
+    </td>
+  </tr>
+</tbody></table>
+<input name="cof" value="LW:140;ALC:#800000;L:http://www.citforum.ru/pictures/logos/citlogo8.gif;LC:#006890;LH:44;AH:left;VLC:#003860;S:http://www.citforum.ru/;AWFID:a524ad3720194500;" type="hidden">
+<input name="domains" value="citforum.ru" type="hidden">
+</form>
+</td></tr></tbody></table>
+</td></tr>
+
+
+
+<tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<table border="0" cellpadding="8" cellspacing="1" width="100%">
+ 
+<tbody><tr><td align="center" bgcolor="white"><iframe src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/citforum_left.htm" framespacing="0" frameborder="no" height="420" scrolling="no" width="180"></iframe></td></tr>
+
+<tr><td bgcolor="#ffffff">
+<font size="2">
+</font><p><font size="2"><b>Новости мира IT:</b>
+</font></p><ul class="column">
+<ul class="column">
+<font size="2"><li><b><a href="http://citcity.ru/18022/">IT-аутсорсинг 2008 — 13&nbsp;марта, Москва</a></b>
+</li><li><b><a href="http://citcity.ru/17966/" target="_blank">Sun Tech Days 2008. Конференция для разработчиков.</a></b>
+</li></font></ul>
+<hr>
+
+<font size="2"><li>22.02 - <a href="http://citcity.ru/18069/">Доменами будут торговать на бирже </a></li><li>22.02 - <a href="http://citcity.ru/18068/">Разработчики Mozilla со всей Европы соберутся в Брюсселе для принятия участия в FOSDEM 2008</a></li><li>22.02 - <a href="http://citcity.ru/18067/">AOL прекращает поддержку браузера Netscape 1 марта</a></li><li>22.02 - <a href="http://citcity.ru/18066/">Microsoft завершила тестирование сервиса Live SkyDrive</a></li><li>22.02 - <a href="http://citcity.ru/18065/">МГТС перенаправялет "Стрим" из меди в оптику </a></li><li>22.02 - <a href="http://citcity.ru/18064/">Nvidia выпустила видеокарту девятого поколения</a></li><li>22.02 - <a href="http://citcity.ru/18063/">Производительность системы индексации Yahoo выросла на треть</a></li><li>22.02 - <a href="http://citcity.ru/18062/">Google начинает тестирования веб-сервиса медицинской направленности</a></li><li>22.02 - <a href="http://citcity.ru/18061/">GDC 2008: Сформирован альянс по продвижению игр для ПК</a></li><li>21.02 - <a href="http://citcity.ru/18060/">Сотовая связь дотянется до Луны </a></li><li>21.02 - <a href="http://citcity.ru/18059/">Paramount Pictures последней из крупных киностудий перешла на Blu-ray</a></li><li>21.02 - <a href="http://citcity.ru/18058/">Самая крупная в мире беспроводная сеть 802.11n строится в университете Дьюка (США)</a></li><li>21.02 - <a href="http://citcity.ru/18057/">GDC 2008: Microsoft рассказывает о новых играх для Xbox 360</a></li><li>21.02 - <a href="http://citcity.ru/18056/">Корейские разработчики представили  компьютерную мышь необычной формы</a></li><li>21.02 - <a href="http://citcity.ru/18055/">Эксплуатация свободного ПО на базе Linux в школах 3-х пилотных регионов начнется 1 сентября</a></li><li>21.02 - <a href="http://citcity.ru/18054/">Apple изобрела сенсорный копипейст</a></li><li>21.02 - <a href="http://citcity.ru/18053/">Регистрацию доменов в зоне .asia разрешили всем желающим</a></li><li>21.02 - <a href="http://citcity.ru/18052/">GDC-2008: Анонсирована "онлайновая вселенная" на базе CryEngine 2</a></li><li>20.02 - <a href="http://citcity.ru/18051/">GDC-2008: Показан компьютерный шлем, управляемый "силой мысли"</a></li><li>20.02 - <a href="http://citcity.ru/18050/">В Сан-Франциско проходит конференция для разработчиков игр GDC 2008</a></li><li>20.02 - <a href="http://citcity.ru/18049/">В Вашингтоне проходит конференция Black Hat</a></li><li>20.02 - <a href="http://citcity.ru/18048/">Intel представляет экстремальную платформу с восемью вычислительными ядрами для энтузиастов</a></li><li>20.02 - <a href="http://citcity.ru/18047/">Apple представила новый iPod shuffle</a></li><li>20.02 - <a href="http://citcity.ru/18046/">Российская компания выпустит мобильники с двумя SIM-картами </a></li><li>20.02 - <a href="http://citcity.ru/18045/">Алкснис и Поносов создадут общественную организацию для поддерждки свободного ПО</a></li><li>20.02 - <a href="http://citcity.ru/18044/">Новое ПО упростит перенос медиафайлов между различными устройствами</a></li><li>20.02 - <a href="http://citcity.ru/18043/">Google начал размещать контекстную видеорекламу</a></li><li>19.02 - <a href="http://citcity.ru/18042/">В Mozilla сформировано новое подразделение по разработке Thunderbird</a></li><li>19.02 - <a href="http://citcity.ru/18041/">Toshiba официально отказалась от HD DVD</a></li><li>19.02 - <a href="http://citcity.ru/18040/">На сайте Microsoft выложены спецификации MS-офисных форматов файлов</a>
+</li></font></ul>
+<p><font size="2"><a target="_blank" href="http://citcity.ru/"><b>Все новости на CitCity.ru</b></a>
+</font>
+</p><p align="right"><a href="http://citcity.ru/rss/citforum.xml"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/xml_rss.gif" border="0" height="14" width="36"></a>
+</p></td></tr>
+</tbody></table>
+</td></tr>
+
+
+</tbody></table>
+</td>
+
+
+<td width="98%">
+ 
+<div style="border-top: 1px solid rgb(90, 90, 90); border-bottom: 1px solid rgb(90, 90, 90); margin: 0pt auto 3px; padding: 0pt; display: table; text-align: center;"><script type="text/javascript" language="JavaScript"><!--
+var cache_rnd = Math.round(Math.random() * 1000000000);
+document.write('<span style="font-family:arial,sans-serif;font-size:12pt"><a class=plain href=http://body.imho.ru/click.ng/impt=imp&place=citforum_text_pixel&id=11090750&transactionID='+cache_rnd+' target=_blank><img src=/a/microsoft_100x15.jpg width=100 height=15 border=0 align=bottom> Windows Server обгоняет&nbsp;Linux. Наличие мощных средств оптимизации и настройки дает Windows&nbsp;Server&nbsp;2003 очевидные <nobr>преимущества в сравнении с Linux</nobr>.<br><b>Подробности на http://www.microsoft.com/rus/getthefacts</b></a></span><img src=http://body.imho.ru/image.ng/impt=imp&place=citforum_text_pixel&id=11090750&transactionID='+cache_rnd+' border=0 width=1 height=1>');
+//--></script><span style="font-family: arial,sans-serif; font-size: 12pt;"><a class="plain" href="http://body.imho.ru/click.ng/impt=imp&amp;place=citforum_text_pixel&amp;id=11090750&amp;transactionID=36539255" target="_blank"><img src="/a/microsoft_100x15.jpg" align="bottom" border="0" height="15" width="100">
+Windows Server обгоняет&nbsp;Linux. Наличие мощных средств оптимизации
+и настройки дает Windows&nbsp;Server&nbsp;2003 очевидные <nobr>преимущества в сравнении с Linux</nobr>.<br><b>Подробности на http://www.microsoft.com/rus/getthefacts</b></a></span><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/imptimpplacecitforum_text_pixelid11090750transactionID36539255" border="0" height="1" width="1"><span style="font-family: arial,sans-serif; font-size: 12pt;"><a class="plain" href="http://body.imho.ru/click.ng/impt=imp&amp;place=citforum_text_pixel&amp;id=11090750&amp;transactionID=876590387" target="_blank"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/microsoft_100x15.jpg" align="bottom" border="0" height="15" width="100">
+Windows Server обгоняет&nbsp;Linux. Наличие мощных средств оптимизации
+и настройки дает Windows&nbsp;Server&nbsp;2003 очевидные <nobr>преимущества в сравнении с Linux</nobr>.<br><b>Подробности на http://www.microsoft.com/rus/getthefacts</b></a></span><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/imptimpplacecitforum_text_pixelid11090750transactionID876590.htm" border="0" height="1" width="1"></div>
+
+
+
+
+
+<div align="right"><i>2000 г</i></div>
+<!-- start -->
+<h3 align="center">Введение в CVS<br>
+Конспект первого дня двухдневного курса по CVS</h3>
+<p align="center"><i>Jim Blandy<br>
+Перевод на русский язык: Алексей Махоткин<br>
+<a href="mailto:alexm@hsys.msk.ru">alexm@hsys.msk.ru</a>, <a href="http://alexm.here.ru/">http://alexm.here.ru</a></i>
+
+</p><h4>Table of Contents</h4>
+<ul>
+<li><a href="#1">Для чего нужен CVS?</a></li>
+<li><a href="#2">Как использовать CVS -- первый набросок</a></li>
+<ul>
+<li><a href="#3">Настройка вашего репозитория</a></li>
+<li><a href="#4">Извлечение рабочего каталога</a></li>
+<li><a href="#5">Редактирование файлов</a></li>
+<li><a href="#6">Объединение изменений</a></li>
+<li><a href="#7">Фиксирование изменений</a></li>
+<li><a href="#8">Отслеживание изменений</a></li>
+<li><a href="#9">Добавление и удаление файлов</a></li>
+<li><a href="#10">Написание хороших журнальных записей</a></li>
+<li><a href="#11">Обработка конфликтов</a></li>
+</ul></ul>
+
+<a name="1"></a>
+<h4>Для чего нужен CVS?</h4>
+<p align="justify">CVS поддерживает историю дерева каталогов с исходным
+кодом, работая с последовательностью изменений. CVS маркирует каждое
+изменение моментом времени, когда оно было сделано, и именем
+пользователя, совершившим изменение. Обычно человек, совершивший
+изменение, также предоставляет текстовое описание причины, по которой
+произошло изменение. Вооружившись всей этой информацией, CVS может
+отвечать на такие вопросы, как
+</p><ul>
+<li>Кто совершил данное изменение?</li>
+<li>Когда они его совершили?</li>
+<li>Зачем они это сделали?</li>
+<li>Какие еще изменения произошли в то же самое время?</li>
+</ul>
+
+<a name="2"></a>
+<h4>Как использовать CVS -- первый набросок</h4>
+<p>Перед обсуждением множества разнобразных терминов и идей, давайте взглянем на основные команды CVS.
+
+<a name="3"></a>
+</p><h4>Настройка вашего репозитория</h4>
+<p align="justify">CVS хранит все изменения в данном проекте в дереве
+каталогов, называемом "репозиторием" (repository). Перед тем, как
+начать использовать CVS, вам необходимо настроить переменную среды
+CVSROOT так, чтобы она указывала на каталог репозитория. Тот, кто
+ответственен за управление конфигурацией вашего проекта, вероятно,
+знает, что именно должна содержать в себе эта переменная; возможно
+даже, что переменная CVSROOT уже установлена глобально.
+</p><p align="justify">В любом случае, на нашей системе репозиторий находится в `/usr/src/master'. В этом случае вам следует ввести команды
+</p><pre>` setenv CVSROOT /usr/src/master '</pre>
+<p>если ваш командный интерпретатор -- csh или порожден от него, или
+</p><pre>` CVSROOT=/usr/src/master export CVSROOT </pre>
+<p>если это Bash или какой-либой другой вариант Bourne shell.
+</p><p>Если вы забудете сделать это, CVS пожалуется, если вы попытаетесь запустить его:
+</p><pre>$ cvs checkout httpc
+cvs checkout: No CVSROOT specified! Please use the `-d' option
+cvs [checkout aborted]: or set the CVSROOT environment variable.
+$</pre>
+
+<a name="4"></a>
+<h4>Извлечение рабочего каталога</h4>
+<p align="justify">CVS не может работать в обычном дереве каталогов;
+наоборот, вы должны работать в каталоге, который CVS создаст для вас.
+Точно так же, как вы выписываете книгу из библиотеки перед тем, как
+забрать ее с собой, вам следует использовать команду `cvs checkout',
+чтобы получить от CVS рабочее дерево каталогов. Предположим, например,
+что вы работаете над проектом, называемым `httpc', тривиальным HTTP
+клиентом:
+</p><pre>$ cd
+$ cvs checkout httpc
+U httpc/.cvsignore
+U httpc/Makefile
+U httpc/httpc.c
+U httpc/poll-server
+$</pre>
+<p align="justify">Команда `cvs checkout httpc' означает "Извлечь
+дерево исходных текстов с именем `httpc' из репозитория, указанного в
+переменной окружения `CVSROOT'."
+</p><p>CVS помещает дерево в подкаталог `httpc':
+</p><pre>$ cd httpc
+$ ls -l
+total 8
+drwxr-xr-x      2 jimb          512 Oct 31  11:04 CVS
+-rw-r--r--      1 jimb           89 Oct 31  10:42 Makefile
+-rw-r--r--      1 jimb         4432 Oct 31  10:45 httpc.c
+-rwxr-xr-x      1 jimb          460 Oct 30  10:21 poll-server</pre>
+<p align="justify">Большинство этих файлов -- рабочие копии исходных
+текстов `httpc'. Однако, подкаталог с именем `CVS' (самый первый) имеет
+другое назначение. CVS использует его для хранения дополнительной
+информации о каждом файле в этом каталоге, чтобы определять, какие
+изменения вы внесли в них с тех пор, как извлекли их из репозитория.
+<a name="5"></a>
+</p><h4>Редактирование файлов</h4>
+<p align="justify">После того, как CVS создал рабочее дерево каталогов,
+вы можете обычным образом редактировать, компилировать и проверять
+находящиеся в нем файлы -- это просто файлы.
+</p><p>Например, предположим, что мы хотим скомпилировать проект, который мы только что извлекли:
+</p><pre>$ make
+gcc -g -Wall -lnsl -lsocket httpc.c  -o httpc
+httpc.c: In function `tcp_connection':
+httpc.c:48: warning: passing arg 2 of `connect' from incompatible
+pointer type
+$</pre>
+<p align="justify">Кажется, `httpc.c' еще не был перенесен на эту
+операционную систему. Нам нужно сделать приведение типов для одного из
+аргументов функции connect. Чтобы сделать это, надо изменить строку 48,
+заменив
+</p><pre>if (connect (sock, &amp;name, sizeof (name)) &gt;=  0)</pre>
+<p>на
+</p><pre>if (connect (sock, (struct sockaddr *) &amp;name, sizeof (name)) &gt;= 0)</pre>
+<p.Теперь компиляция="" должна="" пройти="" успешно:=""></p.Теперь><pre>$ make
+gcc -g -Wall -lnsl -lsocket httpc.c  -o httpc
+$ httpc GET http://www.cyclic.com</pre>
+<p><i>...здесь находится текст HTML с домашней страницы Cyclic Software ...</i>
+</p><p>$
+
+<a name="6"></a>
+</p><h4>Объединение изменений</h4>
+<p align="justify">Так как каждый разработчик использует свой
+собственный рабочий каталог, изменения, которые вы делаете в своем
+каталоги, не становятся автоматически видимыми всем остальным в вашей
+команде. CVS не публикует изменений, пока они не закончены. Когда вы
+протестируете изменения, вы должны "зафиксировать" (commit) их в
+репозитории и сделать их доступными остальным. Мы опишем команду cvs
+commit далее.
+</p><p align="justify">Однако, что если другой разработчик изменил тот
+же файл, что и вы, и, может быть, даже изменил те же самые строки? Чьи
+изменения будет использованы? Обычно ответить на этот вопрос
+автоматически невозможно, и CVS совершенно точно некомпетентен, чтобы
+принимать такие решения.
+</p><p align="justify">Поэтому перед тем, как фиксировать ваши
+изменения, CVS требует, чтобы исходные тексты были синхронизированы со
+всеми изменениями, которые сделали остальные члены группы. Команда cvs
+update позаботится об этом:
+</p><pre>$ cvs update
+cvs update: Updating .
+U Makefile
+RCS file: /u/src/master/httpc/httpc.c,v
+retrieving revision 1.6
+retrieving revision 1.7
+Merging differences between 1.6 and 1.7 into httpc.c
+M httpc.c
+$</pre>
+<p>Рассмотрим пример строка за строкой:
+</p><pre>`U Makefile'</pre>
+<p align="justify">Строка вида `U файл' означает, что файл просто был
+обновлен; кто-то еще внес в этот файл изменения, и CVS скопировал
+измененный файл в ваш рабочий каталог.
+</p><pre>`RCS file:...
+retrieving revision 1.6
+retrieving revision 1.7
+Merging differences between 1.6 and 1.7 into httpc.c'</pre>
+<p align="justify">Это сообщение означает, что кто-то еще изменил
+`httpc.c'; CVS объединила их изменения с вашими и не обнаружила
+текстуальных конфликтов. Цифры `1.6' и `1.7' -- это номера редакции
+(revision numbers), используемые для обозначения определенных точек
+истории файла. Заметьте, что CVS объединяет изменения только в вашей
+рабочей копии; репозиторий и рабочие каталоги других разработчиков
+остаются нетронутыми. От вас требуется протестировать объединенный
+текст и убедиться, что он верен.
+</p><pre>`M httpc.c'</pre>
+<p align="justify">Строка вида `M файл' означает, что файл был
+модифицирован вами и содержит изменения, которые еще не стали видны
+другим разработчикам. Это -- изменения, которые вам следует
+зафиксировать.
+</p><p>Так как CVS объединила чьи-то еще изменения с вашими исходными текстами, следует убедиться, что они все еще работают:
+</p><pre>$ make
+gcc -g -Wall -lnsl -lsocket httpc.c  -o httpc
+$ httpc GET http://www.cyclic.com
+...HTML text for Cyclic Software's home page follows...
+$</pre>
+
+
+<a name="7"></a>
+<h4>Фиксирование изменений</h4>
+<p align="justify">Теперь, когда вы синхронизировали свои исходники с
+коллегами и протестировали их, вы готовы поместить свои изменения в
+репозиторий и сделать их видимыми остальным разработчикам. Единственный
+файл, который вы изменили -- это `httpc.c', но в любом случае можно без
+опаски запустить cvs update, чтобы получить от CVS список
+модифицированных файлов:
+</p><pre>$ cvs update
+cvs update: Updating .
+M httpc.c
+$</pre>
+<p align="justify">Как и ожидалось, единственный файл, который
+упоминает CVS -- это `httpc.c'; CVS говорит, что этот файл содержит
+изменения, которые еще не были зафиксированы. Вы можете зафиксировать
+их так:
+</p><pre>$cvs commit httpc.c</pre>
+<p align="justify">В этом месте CVS запустит ваш любимый текстовый
+редактори попросит вас ввести описание изменений. После того, как вы
+выйдете из редактора, CVS зафиксирует ваши изменения:
+</p><pre>Checking in httpc.c;
+/u/src/master/httpc/httpc.c,v  &lt;-- httpc.c
+new revision: 1.8; previous revision: 1.7
+$</pre>
+<p align="justify">Заметьте, что теперь вы зафиксировали ваши изменения
+и они видны всем остальным членам группы. Когда другой разработчик
+исполняет cvs update, CVS внесет ваши изменения в файлы в его рабочем
+каталоге.
+<a name="8"></a>
+</p><h4>Отслеживание изменений</h4>
+<p align="justify">Теперь вы, возможно, захотите узнать, какие именно
+изменения внес другой разработчик в файл `httpc.c'. Чтобы увидеть
+журнальные записи для данного файла, можно использовать команду cvs
+log:
+</p><pre>$ cvs log httpc.c
+
+RCS file: /usr/src/master/httpc/httpc.c,v
+Working file: httpc.c
+head: 1.8
+branch:
+locks: strict
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 8; selected revisions: 8
+description:
+The one and only source file for trivial HTTP client
+----------------------------
+revision 1.8
+date: 1996/10/31 20:11:14;  author: jimb;  state: Exp;  lines: +1 -1
+(tcp_connection): Cast address stucture when calling connect.
+----------------------------
+revision 1.7
+date: 1996/10/31 19:18:45;  author: fred;  state: Exp;  lines: +6 -2
+(match_header): Make this test case-insensitive.
+----------------------------
+revision 1.6
+date: 1996/10/31 19:15:23;  author: jimb;  state: Exp;  lines: +2 -6
+...
+$</pre>
+<p align="justify">Большую часть текста здесь вы можете игнорировать;
+следует только обратить внимание на серию журнальных записей после
+первой строки черточек. Журнальные записи выводятся на экран в обратном
+хронологическом порядке, исходя из предположения, что недавние
+изменения обычно более интересны. Каждая запись описывает одно
+изменение в файле, и может быть разобрано на составные части так:
+</p><pre>`revision 1.8'</pre>
+<p>Каждая версия файла имеет уникальный "номер редакции". Номера
+ревизии выглядят как `1.1', `1.2', `1.3.2.2' или даже `1.3.2.2.4.5'. По
+умолчанию номер 1.1 -- это первая редакция файла. Каждое следующее
+редактирование увеличивает последнюю цифру на единицу.
+</p><pre>`date: 1996/10/31 20:11:14; author: jimb; ...'</pre>
+<p>В этой строке находится дата изменения и имя пользователя, зафиксировавшего это изменение; остаток строки не очень интересен.
+</p><pre>`(tcp_connection: Cast...'</pre>
+<p>Это, очевидно, описание изменения.
+</p><p>Команда cvs log может выбирать журнальные записи по дате или по номеру редакции; за описанием деталей обращайтесь к руководству.
+</p><p align="justify">Если вы хотите взглянуть на соответствующее
+изменение, то можете использовать команду cvs diff. Например, если вы
+хотите увидеть, какие изменения Фред зафиксировал в качестве редакции
+1.7, используйте такую команду:
+</p><pre>$ cvs diff -c -r 1.6 -r 1.7 httpc.c</pre>
+<p>Перед рассмотрением того, что нам выдала эта команда, опишем, что означает каждая ее часть.
+<table border="0" cellpadding="3" cellspacing="0">
+<tbody><tr><td valign="top">-c</td><td> Задает использование удобочитаемого формата выдачи изменений. (Интересно, почему это не так по умолчанию). <a name="l1"></a><a href="#l11">(1)</a>
+</td></tr><tr><td valign="top">-r 1.6 -r 1.7</td><td> Указывает CVS,
+что необходимо выдать изменения, необходимые, чтобы превратить редакцию
+1.6 в редакцию 1.7. Вы можете запросить более широкий диапазон
+изменений; например, -r 1.6 -r 1.8 отобразит изменение, сделанные
+Фредом, и изменения, сделанные вами чуть позже. (Вы также можете
+заказать выдачу изменений в обратном порядке -- как будто бы они были
+отменены -- указав номера редакций в обратном порядке: -r 1.7 -r 1.6.
+Это звучит странно, но иногда полезно.)
+</td></tr><tr><td valign="top">httpc.c</td><td>  Имя файла для обработки. Если вы не укажете его, CVS выдаст отчет обо всем каталоге.
+</td></tr></tbody></table>
+</p><p>Вот что выдаст эта команда:
+</p><pre>Index: httpc.c
+=================================================================
+RCS file: /u/src/master/httpc/httcp.c,v
+retrieving revision 1.6
+retrieving revision 1.7
+diff -c -r1.6 -r1.7
+*** httpc.c     1996/10/31 19:15:23     1.6
+--- httpc.c     1996/10/31 19:18:45     1.7
+***************
+*** 62,68 ****
+  }
+
+! /* Return non-zero iff HEADER is a prefix of TEXT.  HEADER should be
+     null-terminated; LEN is the length of TEXT.  */
+  static int
+  match_header (char *header, char *text, size_t len)
+--- 62,69 ----
+  }
+
+! /* Return non-zero iff HEADER is a prefix of TEXT, ignoring
+!    differences in case.  HEADER should be lower-case, and
+     null-terminated; LEN is the length of TEXT.  */
+  static int
+  match_header (char *header, char *text, size_t len)
+***************
+*** 76,81 ****
+--- 77,84 ----
+    for (i = 0; i &lt; header_len; i++)
+      {
+        char t = text[i];
++       if ('A' &lt;= t &amp;&amp; t &lt;= 'Z')
++         t += 'a' - 'A';
+        if (header[i] != t)
+          return 0;
+      }
+$</pre>
+<p>Требуются некоторые усилия, чтобы привыкнуть к такой подаче информации, но это определенно стоит того.<a name="l2"></a><a href="#l22">(2)</a>
+</p><p align="justify">Интересная часть информации начинается с первых
+двух строк, начинающихся с *** и ---; они описывают старый и новый
+файлы, подлежащие сравнению. Остальное состоит из двух "ломтей" (hunk),
+каждый из которых начинается со строки из звездочек. Вот первый
+"ломоть":
+</p><pre>***************
+*** 62,68 ****
+  }
+! /* Return non-zero iff HEADER is a prefix of TEXT.  HEADER should be
+     null-terminated; LEN is the length of TEXT.  */
+  static int
+  match_header (char *header, char *text, size_t len)
+--- 62,69 ----
+  }
+! /* Return non-zero iff HEADER is a prefix of TEXT, ignoring
+!    differences in case.  HEADER should be lower-case, and
+     null-terminated; LEN is the length of TEXT.  */
+  static int
+  match_header (char *header, char *text, size_t len)</pre>
+<p align="justify">Текст из более старой редакции находится после
+строки *** 62,68 ***; текст новой редакции находится после строки ---
+62,69 ---. Пара цифр означает показанный промежуток строк. CVS
+показывает контекст вокруг изменений и отмечает измененные строки
+символами `!'. Таким образом вы видите, что одна строка из верхней
+половины была заменена на две строки из нижней.
+</p><p>Вот второй "ломоть":
+</p><pre>***************
+*** 76,81 ****
+--- 77,84 ----
+    for (i = 0; i &lt; header_len; i++)
+      {
+        char t = text[i];
++       if ('A' &lt;= t &amp;&amp; t &lt;= 'Z')
++         t += 'a' - 'A';
+        if (header[i] != t)
+          return 0;
+      }</pre>
+<p align="justify">Здесь описывается добавление двух строк, что
+обозначается символами `+'. CVS не выводит старый текст -- это было бы
+избыточно. Для описания удаленных строк используется подобный формат.
+</p><p align="justify">Как и выход команды diff, выход команды cvs
+diff обычно называется "заплатой" (patch), потому что разработчики
+традиционно использовали этот формат для распространения исправлений и
+небольших новый возможностей. Достаточно читабельна, заплата содержит
+достаточно информации, чтобы применить изменения, которые она содержит,
+к текстовому файлу. В действительности, команда patch в среде UNIX
+делает с заплатами именно это.
+<a name="9"></a>
+</p><h4>Добавление и удаление файлов</h4>
+<p align="justify">CVS обращается с добавлением и удалением файлов так
+же, как и с прочими изменениями, записывая такие события в истории
+файлов. Можно смотреть на это так, как будто CVS сохраняет историю
+каталогов вместе с историей файлов.
+</p><p align="justify">CVS не считает, что созданные файлы должны
+оказаться под его контролем; это не так во многих случаях. Например, не
+требуется записывать историю изменений объектных и выполняемых файлов,
+потому что их содержимое всегда может быть воссоздано из исходных
+файлов (надо надеяться). Вместо этого, когда вы создадите новый файл,
+cvs update маркирует этот файл флагом `?', пока вы не скажете CVS, что
+именно вы намереваетесь сделать с этим файлом.
+</p><p align="justify">Чтобы добавить файл в проект, сначала вы должны
+создать его, затем использовать команду cvs add, чтобы маркировать его
+как добавленный. Затем при следующем выполнении команды cvs commit CVS
+добавит этот файл в репозиторий. Например, вот так можно добавить файл
+README в проект httpc:
+</p><pre>$ ls
+CVS     Makefile        httpc.c         poll-server
+$ vi README
+...введите описание httpc...
+$ ls
+CVS     Makefile        README          httpc.c         poll-server
+$ cvs update
+cvs update: Updating .
+? README --- CVS еще не знает об этом файле
+$ cvs add README
+cvs add: scheduling file `README' for addition
+cvs add: use 'cvs commit' to add this file permanently
+$ cvs update --- что же теперь думает CVS?
+cvs update: Updating .
+A README --- Файл помечен как добавленный
+$ cvs commit README
+... CVS просит вас ввести журнальную запись...
+RCS file: /u/jimb/cvs-class/rep/httpc/README,v
+done
+Checking in README;
+/u/src/master/httpc/README,v  &lt;-- README
+initial revision: 1.1
+done
+$</pre>
+<p align="justify">CVS обращается с удаленными файлами почти так же.
+Если вы удалите файл и выполните `cvs update', CVS не считает, что вы
+намереваетесь удалить файл из проекта. Вместо этого он поступает
+милосерднее -- он восстанавливает последнюю сохраненную в репозитории
+версию файла и маркирует его флагом U, точно так же, как и любой другое
+обновление. (Это означает, что если вы хотите отменить изменения файла
+в рабочем каталоге, вы можете просто удалить его и позволить команде
+`cvs update' создать его заново.)
+</p><p align="justify">Чтобы удалить файл из проекта, вы должны
+сначала удалить его,а потом использовать команду `cvs rm', чтобы
+пометить его для удаления. При следующем запуске команда `cvs commit'
+удалит файл из репозитория.
+</p><p align="justify">Фиксирование файла, маркированного с помощью
+`cvs rm' не уничтожает историю этого файла -- к ней просто добавляется
+еще одна редакция --- "не существует". В репозитории по прежнему
+хранятся все записи об этом файле, и к ним можно обращаться по желанию
+-- например, с помощью `cvs diff' или `cvs log'.
+</p><p align="justify">Для переименования файла существует несколько
+стратегий; самая простая --- переименовать файл в рабочем каталоге,
+затем выполнить `cvs rm' со старым именем и `cvs add' с новым.
+Недостаток этого подхода в том, что журнальные записи о содержимом
+старого файла не переносятся в новый файл. Другие стратегии позволяют
+избежать этого, но зато доставляют другие, более странные проблемы.
+</p><p>Вы можете добавлять каталоги точно также, как и обычные файлы.
+
+<a name="10"></a>
+</p><h4>Написание хороших журнальных записей</h4>
+<p align="justify">Если можно использовать `cvs diff', чтобы получить
+точное содержание любого изменения, то зачем тогда придумывать еще
+журнальную запись о нем? Очевидно, что журнальные записи короче, чем
+тексты изменений, и позволяют читателю получить общее понимание
+изменения без необходимости углубляться в детали.
+</p><p align="justify">Однако же, хорошая запись в журнале описывает
+причину, по которой было сделано изменение. Например, плохая журнальная
+запись для редакции 1.7 может звучать как "Преобразовать `t' к нижнему
+регистру". Это правильно, но бесполезно -- `cvs diff' предоставляет
+точно ту же информацию, и гораздо яснее. Гораздо лучшей журнальной
+записью было бы "Сделать эту проверку независящей от регистра", потому
+что это гораздо яснее описывает причину любому, кто понимает, что
+происходит в коде --- клиенты HTTP должны игнорировать регистр букв при
+анализе заголовков ответа от сервера.
+<a name="11"></a>
+</p><h4>Обработка конфликтов</h4>
+<p align="justify">Как уже упоминалось, команда `cvs update' объединяет
+изменения, сделанные другими разработчиками, с исходными текстами в
+вашем рабочем каталоге. Если вы отредактировали файл одновременно с
+кем-то другим, CVS объединит ваши изменения.
+</p><p align="justify">Довольно легко представить себе, как работает
+объединение, если изменения были совершены в разных участках файла, но
+что если вы оба изменили одну и ту же строку? CVS называет эту ситуацию
+конфликт и предоставляет вам самому разобраться с ним.
+</p><p align="justify">Например, предположим, что вы добавили некую
+проверку на ошибки в код, определяющий адрес сервера. Перед
+фиксированием изменений вы должны запустить `cvs update', чтобы
+синхронизировать ваш рабочий каталог с репозиторием:
+</p><pre>$ cvs update
+cvs update: Updating .
+RCS file: /u/src/master/httpc/httpc.c,v
+retrieving revision 1.8
+retrieving revision 1.9
+Merging differences between 1.8 and 1.9 into httpc.c
+rcsmerge: warning: conflicts during merge
+cvs update: conflicts found in httpc.c
+C httpc.c
+$</pre>
+<p align="justify">В этом случае другой разработчик изменил тот же
+участок файла, что и вы, поэтому CVS жалуется на конфликт. Вместо того,
+чтобы напечатать M httpc.c, как это обычно происходит, CVS печатает C
+httpc.c, что означает наличие конфликта в этом файле.
+</p><p>Чтобы справиться с конфликтом, откройте этот файл в редакторе. CVS обозначает конфликтующий текст так:
+</p><pre>  /* Look up the IP address of the host. */
+  host_info = gethostbyname (hostname);
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; httpc.c
+  if (! host_info)
+    {
+      fprintf(stderr, "%s: host not found: %s\n", progname, hostname);
+      exit(1);
+    }
+=======
+  if (! host_info)
+    {
+      printf("httpc: no host");
+      exit(1);
+    }
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 1.9
+  sock = socket (PF_INET, SOCK_STREAM, 0);</pre>
+<p align="justify">Текст вашего рабочего файла появляется сверху, после
+символов &lt;&lt;&lt;. Внизу находится конфликтующий код другого
+разработчика. Номер редакции 1.9 указывает, что конфликтующее изменение
+было внесено в версии 1.9 этого файла, упрощая проверку журнальных
+записей или просто выяснение изменений с помощью `cvs diff'.
+</p><p align="justify">Когда вы решите, как именно справиться с
+конфликтом, уберите маркеры из кода и отредактируйте его. В этом
+случае, так как ваша обработка ошибок определенно лучше, то просто
+отбросьте чужой вариант, оставив такой код:
+</p><pre>  /* Look up the IP address of the host. */
+  host_info = gethostbyname (hostname);
+  if (! host_info)
+    {
+      fprintf(stderr, "%s: host not found: %s\n", progname, hostname);
+      exit(1);
+    }
+  sock = socket (PF_INET, SOCK_STREAM, 0);</pre>
+<p>Теперь протестируйте изменения и зафиксируйте их:
+</p><pre>$ make
+gcc -g -Wall -Wmissing-prototypes -lnsl -lsocket  httpc.c  -o httpc
+$ httpc GET http://www.cyclic.com
+HTTP/1.0 200 Document follows
+Date: Thu, 31 Oct 1996 23:04:06 GMT
+...
+$ httpc GET http://www.frobnitz.com
+httpc: host not found: www.frobnitz.com
+$ cvs commit httpc.c</pre>
+<p align="justify">Важно понимать, что именно CVS считает конфликтом.
+CVS не понимает семантики вашей программы, он обращается с исходным
+кодом просто как с деревом текстовых файлов. Если один разработчик
+добавляет новый аргумент в функцию и исправляет все ее вызовы, пока
+другой разработчик одновременно добавляет новый вызов этой функции, и
+не передает ей этот новый аргумент, что определенно является конфликтом
+-- два изменения несовместимы -- но CVS не сообщит об этом. Его
+понимание конфликтов строго текстуально.
+</p><p align="justify">На практике, однако, конфликты случаются редко.
+Обычно они происходят потому, что два человека пытаются справиться с
+одной и той же проблемой, от недостатка взаимодействия между
+разработчиками, или от разногласий по поводу архитектуры программы.
+Правильной распределение задач между разработчиками уменьшает
+вероятность конфликтов.
+</p><p align="justify">Многие системы контроля версий позволяют
+разработчику блокировать файл, предотвращая внесение в него изменений
+до тех пор, пока его собственные изменения не будут зафиксированы.
+Несмотря на то, что блокировки уместны в некоторых ситуациях, это не
+всегда подход лучше, чем подход CVS. Изменения обычно объединяются без
+проблем, а разработчики иногда забывают убрать блокировку, в обоих
+случаях явное блокирование приводит к ненужным задержкам. Более того,
+блокировки предотвращают только текстуальные конфликты -- они ничего не
+могут поделать с семантическими конфликтами типа вышеописанного --
+когда два разработчика редактируют разные файлы.
+</p><p>Footnotes
+<a name="l11"></a></p><p><a href="#l1">(1)</a> Интересно, почему это вообще не -u? Прим. перев.
+<a name="l22"></a></p><p><a href="#l2">(2)</a> Все же лучше использовать -u. Прим. перев.
+
+</p><p>&nbsp;
+<!-- end -->
+</p><p>&nbsp;
+
+</p><div style="border: 1px solid rgb(0, 128, 128); margin: 10px auto; padding: 5px; display: table;"><b>Редакция рекомендует:</b><ul class="column"><li><a href="http://www.citforum.ru/programming/unix/borovsky/">Программирование для Linux</a></li><li><a href="http://www.citforum.ru/internet/perl/regexp/">Регулярные выражения в Perl</a></li><li><a href="http://www.citforum.ru/operating_systems/microkernel_tanenbaum/">Можем ли мы сделать операционные системы надежными и безопасными</a></li><li><a href="http://www.citforum.ru/internet/html40/cover.html">Спецификация HTML 4.0</a></li></ul></div>
+<center>
+
+<iframe src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/citforum_bottom.htm" framespacing="0" frameborder="no" height="600" scrolling="no" width="500"></iframe>\
+
+
+
+</center>
+<p align="right"><small>Размещение рекламы - pr@citforum.ru, ICQ 232284597</small>
+
+
+</p></td>
+
+
+<td>
+
+<table align="right" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr>
+<td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" border="0" height="1" width="1"></td>
+<td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" border="0" height="1" width="2"></td>
+<td>
+
+<table border="0" cellpadding="0" cellspacing="0">
+ 
+<tbody><tr><td align="center"><a target="_blank" href="http://www.ahconferences.com/conferences/?conf=329"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/outsourcing_2008_240x100.gif" border="0" height="100" width="240"></a></td></tr>
+
+
+<tr><td align="center"></td></tr><tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+<!--subscribe small-->
+   <table border="0" cellpadding="1" cellspacing="1" width="100%">
+   <form action="http://citforum.ru/anketa/subscribe.php" method="post"></form>
+   <tbody><tr><td bgcolor="#ffffff">
+    <center>
+     <table border="0" cellpadding="1" cellspacing="0">
+     <tbody><tr><td align="center">
+      <font size="2"></font><p><font size="2"><b>Подписка на новости IT-портала CITForum.ru</b><br>
+<i>(<a href="http://citforum.ru/">библиотека</a>, <a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>, <a target="_blank" href="http://citcity.ru/">CitCity</a>)</i></font></p><p>
+<font size="2">      <input name="e_mail" size="15" value="e@mail" type="text"><input value="OK" type="submit">
+     </font></p></td></tr>
+     </tbody></table>
+    </center>
+   </td></tr>
+   
+   </tbody></table>
+<!--/subscribe small-->
+</td></tr>
+
+<tr><td style="padding-left: 5px;">
+<font size="2">
+</font><p><font size="2"><b>Новые публикации:</b>
+
+</font></p><p><font size="2"><b>20 февраля</b>
+</font></p><p><font size="2"><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</font></p><p><font size="2">Новые <a target="_blank" href="http://citkit.ru/articles/blognotes/">Блогометки</a>:
+
+<li><a target="_blank" href="http://citkit.ru/articles/656/">Кое-что о приложениях KDE 4</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/662/">Инструкция по установке KDE 4 в Ubuntu</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/657/">Настоящие мужчины ставят KDE из SVN!</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/655/">Начат переход Amarok на Qt 4.4</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/654/">Marble</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/658/">Dillo - сверхбыстрый браузер</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/661/">Создаем резервные копии настроек программ и важных файлов в Ubuntu LInux</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/664/">NTP: всегда вовремя</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/659/">VYM - простое средство зарисовки мыслей и планирования</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/663/">KBibTeX: простой и гибкий редактор библиографий для KDE</a>
+
+<p>Дискуссия <a target="_blank" href="http://citkit.ru/articles/windows_vs_linux/">Windows vs Linux</a>:
+
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/660/">Жил-был Мальчик, или Сказочка о Том, Откуда Берутся "КУЛХАЦКЕРЫ", ненавидящие Линукс и Юникс</a>
+
+<p><b>13 февраля</b>
+</p><p></p></li><li><b><a href="http://www.citforum.ru/nets/wireless/wi-fi_glossary/">Терминологический словарь Wi-Fi</a></b>
+</li><li><a href="http://www.citforum.ru/database/articles/umarov/">Задача проектирования базы данных методом нормализации</a>
+<p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/18007/">Лучшие смартфоны начала 2008 года</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><b><a target="_blank" href="http://citkit.ru/articles/651/">Первый взгляд на Firefox 3.0</a></b>
+</li><li><a target="_blank" href="http://citkit.ru/articles/648/">Open Source на Белгородщине: семинар в Старом Осколе</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/650/">Что такое KDE?</a>
+<p><b>Цикл о <a target="_blank" href="http://citkit.ru/articles/slackware/">Slackware</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/646/">Русский в консоли</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/647/">Быстрая настройка Иксов</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/649/">xorgconfig - консольный подход</a>
+
+<p><b>6 февраля</b>
+</p><p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p><p></p></li><li><b><a target="_blank" href="http://citkit.ru/articles/642/">Мобильный Linux – вчера, сегодня, завтра</a></b>
+<p></p></li><li><a target="_blank" href="http://citkit.ru/articles/632/">Чем записать диски в Linux? Попробуй Brasero!</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/640/">Консольные команды</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/615/">Рецепты. Кое-что о программе mplayer</a>
+</li><li><b><a target="_blank" href="http://citkit.ru/articles/slackware/">Slackware</a>:</b><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/638/">Что такое Slackware?</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/633/">Установка Slackware - Загрузка</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/639/">Категории программного обеспечения</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/637/">Структура файловой системы</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/634/">Система инициализации Slackware Linux</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/636/">Скрипты инициализации уровня запуска</a></li></ul>
+
+<p><b>30 января</b>
+
+</p><p></p></li><li><b><a href="http://www.citforum.ru/consulting/BI/molap_overview/">Обзор алгоритмов MOLAP</a></b>
+
+<p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17908/">BI-технологии 2007. Итоги года</a>
+</li><li><a target="_blank" href="http://citcity.ru/17906/">Рынок СУБД для Хранилищ данных 2007. Итоги года, тенденции</a>
+</li><li><a target="_blank" href="http://citcity.ru/17905/">Обзор рынка BI (по результатам исследований IDC, OLAP Report, Gartner)</a>
+</li><li><a target="_blank" href="http://citcity.ru/17903/">Модель зрелости BI</a>
+
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/627/">Владимир Попов: За что я люблю Linux</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/630/">Священные войны</a>
+
+<p><b>23 января</b>
+
+</p></li><li><a href="http://www.citforum.ru/database/oracle/data_mining_solutions/">Data Mining от Oracle: настоящее и будущее</a>
+</li><li><a href="http://www.citforum.ru/database/oracle/dmsol_comment/">Комментарии к статье Ч.Бергера
+«Data Mining от Oracle:
+настоящее и будущее»</a>
+</li><li><a href="http://www.citforum.ru/database/oracle/bayes/">Байесовский классификатор и регрессионная модель в ORTD: практический пример</a>
+
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p><p>Дискуссия <a target="_blank" href="http://citkit.ru/articles/windows_vs_linux/">Windows vs Linux</a>:
+
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/621/">Программисты и фирмы: кто кого</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/614/">О "чистых пользователях"</a>
+<p>Новые <a target="_blank" href="http://citkit.ru/articles/blognotes/">Блогометки</a>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/623/">Почему Jabber, а не ICQ?</a>
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/620/">Archlinux install quick</a>
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/619/">Arch на IBM Z60m</a>
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/624/">Arch + IBM R50e</a>
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/618/">OpenBSD - сборка E17-cvs (или ещe одна маленькая победа разума)</a> 
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/617/">OpenBSD - всe для Человека и ради Человека...</a> 
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/622/">PekWM</a>
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/616/">E17 и "прозрачность"</a> 
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/613/">E17 - приятные мелочи (multimedia)</a>
+
+</li><li><a target="_blank" href="http://citkit.ru/articles/612/">SuSE + Enlightenment = угробил целый день</a>
+</li></ul>
+
+<p><b>16 января</b>
+
+</p></li><li><b><a href="http://www.citforum.ru/database/articles/vietnam/">Вьетнам компьютерной науки</a></b> (пересказ - С.Кузнецов)
+</li><li><a href="http://www.citforum.ru/database/oracle/asm_intro/">Пример построения автоматизированного управления дисками (ASM)</a> (В. Пржиялковский)
+
+<p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17773/">2008 год: антипрогноз</a>
+
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p><p>Новые <a target="_blank" href="http://citkit.ru/articles/blognotes/">Блогометки</a>:
+</p><p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/net/">Сети и Интернет</a></b>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/608/">Mozilla firefox. Шрифты в меню</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/609/"> Screen tips</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/605/">Liferea: программа чтения RSS для GNOME</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/604/">HTTrack: скачивание и зеркалирование сайтов</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/602/">Clusterssh: работа с несколькими сеансами SSH через общий интерфейс</a>
+</li></ul>
+<p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/desktop/">Десктопы</a></b>:</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/600/">Fluxbox &amp; xinitrc. Some new tips</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/601/">Как я конфигурировал xdm</a>
+</li></ul>
+<p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/system/">Системы</a></b>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/610/">SuSE 10.2: zypper - еще один способ установки пакетов</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/606/">cpipe: определите пропускную способность конвейера команд</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/603/">gddrescue: средство восстановления данных с поврежденных носителей</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/599/">VirtualBox: ваш виртуальный ПК</a>
+</li></ul>
+<p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/apps/">Приложения</a></b>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/607/">MyTop: top для MySQL</a>
+</li></ul>
+
+<p><b>10 января</b>
+</p><p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p><p><a target="_blank" href="http://citkit.ru/articles/discussion/">Дискуссионный клуб</a>:
+
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/586/">Краткое руководство по общению с никсофилами
+(Интенсификация Малаховна Сергина-Гейтс)</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/580/">О троллях</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/582/">Пещера горного короля: заметки о троллинге</a>
+
+<p>Новые <a target="_blank" href="http://citkit.ru/articles/blognotes/">Блогометки</a>:
+</p><p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/net/">Сети и Интернет</a></b>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/591/">Делаем блог на Drupal</a>
+</li>
+
+<li><a target="_blank" href="http://citkit.ru/articles/588/">Использование lftp</a>
+</li>
+
+<li><a target="_blank" href="http://citkit.ru/articles/594/">Устанавливаем FTP сервер ProFTPd с TLS шифрованием</a>
+</li>
+
+<li><a target="_blank" href="http://citkit.ru/articles/593/">Управляем файлами на FTP сервере с помощью FileZilla</a>
+</li>
+</ul>
+<p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/desktop/">Десктопы</a></b>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/589/">fluxbox.autorun</a>
+</li>
+
+<li><a target="_blank" href="http://citkit.ru/articles/587/">15 человек на сундук мертвеца! (или песнь о зарытых сокровищах) </a>
+</li>
+</ul>
+<p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/system/">Системы</a></b>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/585/">Живой Debian или рабочее место в кармане</a>
+</li>
+
+<li><a target="_blank" href="http://citkit.ru/articles/579/">Разбивка hdd</a>
+</li>
+</ul>
+
+<p><b><a target="_blank" href="http://citkit.ru/articles/blognotes/apps/">Приложения</a></b>:
+</p><ul>
+<li><a target="_blank" href="http://citkit.ru/articles/578/">Cat Excel files </a>
+</li>
+<li><a target="_blank" href="http://citkit.ru/articles/577/">Vim: меню выбора кодировок</a>
+</li> 
+</ul>
+
+<p><b>26 декабря</b>
+</p><p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li>В <a target="_blank" href="http://citkit.ru/articles/blognotes/">Блогометках</a> открыты разделы:<ul>
+<b></b><li><b><a target="_blank" href="http://citkit.ru/articles/blognotes/ossforwin/">Софт для Windows</a>
+</b></li><li><b><a target="_blank" href="http://citkit.ru/articles/blognotes/net/">Сети и Интернет</a></b></li></ul>
+</li><li><a target="_blank" href="http://citkit.ru/articles/560/">dwm. От статики к динамике</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/561/">Установил Solaris</a>
+<p></p></li><li>Новая <a target="_blank" href="http://citkit.ru/articles/discussion/">Дискуссия</a>:
+<ul><b></b><li><b><a target="_blank" href="http://citkit.ru/articles/ruslinux/">Нужен ли русский Linux?</a></b></li></ul>
+
+<p><b>19 декабря</b>
+</p></li><li><a href="http://www.citforum.ru/database/sybase/sql_anywhere/">SQL Anywhere: встраиваемая СУБД</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li>В разделе <a target="_blank" href="http://citkit.ru/articles/blognotes/">Блогометки</a> появились рубрики:<ul>
+<b></b><li><b><a target="_blank" href="http://citkit.ru/articles/blognotes/desktop/">Десктопы</a>
+</b></li><li><b><a target="_blank" href="http://citkit.ru/articles/blognotes/apps/">Приложения</a>
+</b></li><li><b><a target="_blank" href="http://citkit.ru/articles/blognotes/system/">Системы</a></b></li></ul>
+</li><li>Подробно о разделе: <a target="_blank" href="http://citkit.ru/articles/543/">Блоги и блогометки: открываем сезон промывки</a>
+
+<p><b>13 декабря</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17600/">Microsoft и Барселона: сюрреализм?</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li>Открыт новый раздел <a target="_blank" href="http://citkit.ru/articles/blognotes/">Блогометки</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/526/">ZFS в подробностях. 1. Былое и ныне</a>
+
+<p><b>5 декабря</b>
+</p></li><li><a href="http://www.citforum.ru/consulting/articles/enterprise_arch/">Архитектура предприятия: основные определения</a>
+</li><li><a href="http://www.citforum.ru/consulting/articles/government_arch/">Архитектуры для государственных ведомств. Примеры</a>
+<p>Обзор журнала Computer:
+</p></li><li><a href="http://www.citforum.ru/computer/2007-10/">Высокопроизводительные встроенные системы</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p><p></p></li><li>Продолжение цикла <b><a target="_blank" href="http://citkit.ru/articles/513/">Linux для начинающих</a></b>:<ul>
+<li><a target="_blank" href="http://citkit.ru/articles/520/">Пользовательские интерфейсы</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/521/">Файлы</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/522/">Системы настройки</a></li></ul>
+
+
+<p><b>29 ноября</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17521/">На пути к динамической IT-инфраструктуре предприятия: Платформа 2008</a>
+</li><li><a target="_blank" href="http://citcity.ru/17523/">Трио "двенашек": Fujitsu Siemens AMILO Pro V3205, Lenovo 3000 V100 и RoverBook Navigator V211</a>
+</li><li><a target="_blank" href="http://citcity.ru/17524/">От мала до велика: обзор четырех ноутбуков с диагональю 12, 13 и 14 дюймов</a>
+</li><li><a target="_blank" href="http://citcity.ru/17522/">Мобильная зарядка... Или подзарядочный F.A.Q.</a>
+
+<p><b>21 ноября</b>
+</p></li><li><b><a href="http://www.citforum.ru/security/articles/risk_management/">Управление рисками: обзор употребительных подходов</a></b>
+</li><li><a href="http://www.citforum.ru/security/cryptography/certificate_authority/">Практическое руководство по созданию центра сертификации</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/518/">Возможности симбиоза</a>
+
+<p><b>13 ноября</b>
+</p><p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/504/">Краткая справка по командам для работы с ZFS</a>
+<p></p></li><li><b><a target="_blank" href="http://citkit.ru/articles/513/">Linux для начинающих</a></b>:<ol>
+<li><a target="_blank" href="http://citkit.ru/articles/505/">Дистрибутивы системы</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/506/">Разделы и каталоги</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/507/">Установка приложений</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/508/">Завершение установки</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/509/">Использование консоли</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/510/">Консольные приложения</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/511/">Загрузчики системы</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/512/">Графическая подсистема</a></li></ol>
+
+<p><b>8 ноября</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17319/">Российский старт Oracle 11g</a>
+</li><li><a target="_blank" href="http://citcity.ru/17360/">Майкл Стоунбрейкер: вопросы, ответы и комментарии</a>
+</li><li><a target="_blank" href="http://citcity.ru/17361/">Роль поставщиков BI-услуг. Требования к выбору консультантов и внедренцев</a>
+</li><li><a target="_blank" href="http://citcity.ru/17362/">Тенденции в области BI. Мнение отраслевых экспертов</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/502/">FreeBSD 7.0: доводим до ума</a>
+
+<p><b>1 ноября</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17311/">Глобализация мира технологий</a>
+</li><li><a target="_blank" href="http://citcity.ru/17312/">Шаг леопарда</a>
+</li><li><a target="_blank" href="http://citcity.ru/17313/">Куда ведут окна</a>
+<p><b>CITForum:</b>
+</p></li><li><a href="http://www.citforum.ru/nets/articles/dmr/">DMR - новый стандарт радиосвязи</a>
+<p>Обзор журнала Computer:
+</p></li><li><a href="http://www.citforum.ru/computer/2007-09/">Планшетные ПК на службе образования</a>
+
+<p><b>30 октября</b>
+</p></li><li><a href="http://www.citforum.ru/database/articles/time_to_break_stones/"><b>Универсальность и специализация: время разбивать камни?</b></a>
+</li><li><a href="http://www.citforum.ru/database/articles/end_of_arch_era/">Конец архитектурной эпохи, или Наступило время полностью переписывать системы управления данными</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/499/">FreeBSD 7.0 и ZFS</a>
+
+<p><b>25 октября</b>
+</p></li><li><a href="http://www.citforum.ru/SE/project/antipatterns/"><b>Антипаттерны руководства командами разработки ПО</b></a>
+</li><li><a href="http://www.citforum.ru/operating_systems/freebsd/monitoring/">Мониторинг загрузки канала интернет-шлюза на FreeBSD</a>
+</li><li><a href="http://www.citforum.ru/programming/digest/scheme/">Преобразование программ на языке Scheme для облегчения компиляции в язык C</a>
+<p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17256/">ИнфоКом-2007 и аналогичный ИнфоЛинукс</a>
+
+<p><b>23 октября</b>
+</p><p><b><a target="_blank" href="http://citcity.ru/">CitCity</a>:</b>
+</p></li><li><a target="_blank" href="http://citcity.ru/17230/"><b>Третья сенсация осени</b></a>
+</li><li><a target="_blank" href="http://citcity.ru/17229/">Тайны Linux-скандала: суды, кражи и самоубийства</a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/490/">Ubuntu 7.10 Gutsy Gibbon: родословная Бесстрашного Гиббона</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/491/">Блеск и нищета Ajax</a>
+
+<p><b>18 октября</b>
+</p></li><li><a href="http://www.citforum.ru/database/postgres/pgsql83/"><b>PostgreSQL 8.3</b></a>
+<p><b><a target="_blank" href="http://citkit.ru/">CITKIT.ru</a>:</b>
+</p></li><li><a target="_blank" href="http://citkit.ru/articles/486/">И снова о массовом Linux'е</a>
+</li><li><a target="_blank" href="http://citkit.ru/articles/487/">ОСТОРОЖНО: ВИНДОФИЛИЯ!</a>
+
+<p align="right"><b><a href="http://www.citforum.ru/news.shtml">Все публикации</a> &gt;&gt;&gt;</b>
+
+
+</p><hr size="1">
+
+</li></font></p></td></tr>
+
+<tr><td align="center"><iframe src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/citforum_right.htm" framespacing="0" frameborder="no" height="600" scrolling="no" width="220"></iframe></td></tr>
+
+
+<tr><td style="padding-left: 5px;">
+<img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" height="10" width="234"><br> 
+<!--<a target=_blank href="http://smoking-room.ru"><img src="/pictures/kurilka234x60.gif" border="1"></a><br>  
+-->
+<a target="_blank" href="http://smoking-room.ru/"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/clocs.gif" border="0"></a><br>  
+
+
+</td></tr>
+
+</tbody></table>
+
+</td>
+</tr></tbody></table>
+
+</td>
+ <!--no_right-->
+
+</tr>
+</tbody></table>
+</td>
+
+</tr></tbody></table>
+
+
+
+
+
+
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="931"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr>
+<tr><td bgcolor="#008080">
+
+<table border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/consulting/">IT-консалтинг</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/SE/">Software Engineering</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/programming/">Программирование</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/database/">СУБД</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/security/">Безопасность</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/internet/">Internet</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/nets/">Сети</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/operating_systems/">Операционные системы</a></font></td>
+<td align="center" bgcolor="#f4f9f3"><font size="-1"><a class="head" href="http://www.citforum.ru/hardware/">Hardware</a></font></td>
+<!--
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/faq/>FAQ (ЧаВО)</a></font></td>
+<td bgcolor=#F4F9F3 align=center><font size=-1><a class=head href=/howto/>HOWTO</a></font></td>
+--> 
+</tr>
+</tbody></table>
+
+</td></tr>
+</tbody></table>
+
+</p><p>
+
+<table width="100%">
+<tbody><tr><td>
+<a href="http://www.citforum.ru/about/"><font size="2">Информация для рекламодателей</font></a> 
+</td><td><font size="2">PR-акции, размещение рекламы - <a href="mailto:pr@citforum.ru">pr@citforum.ru</a>, тел. +7 495 4119920, ICQ 232284597</font>
+</td><td align="right"><font size="2">Пресс-релизы - <a href="mailto:pr@citcity.ru">pr@citcity.ru</a></font>
+</td></tr></tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="5" width="1"></td></tr>
+<tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr>
+<tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr></tbody></table>
+
+<table border="0" cellpadding="4" cellspacing="0" width="100%"><tbody><tr>
+<td><font size="2">
+<a href="http://www.citforum.ru/feedback.php?page=/programming/digest/cvsintrorus.shtml&amp;server=www.citforum.ru">Послать комментарий</a><br>
+<a href="http://www.citforum.ru/how.shtml">Информация для авторов</a>
+</font></td>
+<td><a href="http://top100.rambler.ru/cgi-bin/stats_top100.cgi?13078"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/banner-88x31-rambler-darkblue2.gif" alt="Rambler's Top100" border="0" height="31" width="88"></a></td>
+<td><!--TopList LOGO--><a target="_top" href="http://top.list.ru/jump?from=26978"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/counter.gif" alt="TopList" border="0" height="31" width="88"></a><!--TopList LOGO--></td>
+<td>
+<!--LiveInternet logo--><a href="http://www.liveinternet.ru/click" target="_blank"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/logo.gif" alt="liveinternet.ru: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" border="0" height="31" width="88"></a><!--/LiveInternet-->
+</td>
+<td><!-- hosted by .masterhost -->
+<a href="http://masterhost.ru/?masterpart=client&amp;masterlink=88x31" target="_blank">
+<img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/a08_rus.gif" alt="хостинг от .masterhost" align="texttop" border="0" height="31" width="88">
+</a>
+<!-- end -->
+</td>
+<td align="right" valign="bottom"><font face="Arial, sans-serif" size="1">This Web server launched on February 24, 1997<br>
+Copyright © 1997-2000 CIT, © 2001-2007 <a href="http://www.citforum.ru/info.shtml">CIT Forum</a></font></td>
+</tr></tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td bgcolor="#daecd7"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="3" width="1"></td></tr><tr><td bgcolor="#008080"><img src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/1x1.gif" alt="" border="0" height="1" width="1"></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center"><font face="Arial, sans-serif" size="1"><b>Внимание!</b>
+Любой из материалов, опубликованных на этом сервере, не может быть
+воспроизведен в какой бы то ни было форме и какими бы то ни было
+средствами без письменного разрешения владельцев авторских прав. <a href="http://www.citforum.ru/copyright.shtml">Подробнее...</a></font></td></tr></tbody></table>
+
+</p><hr>
+
+<table class="d" width="100%">
+<tbody><tr><td>
+
+
+
+</td></tr>
+</tbody></table>
+
+
+<script language="JavaScript"> 
+
+if ( typeof( globalseed ) == "undefined") {
+	var globalseed  = Math.round(Math.random()*65535); 
+}
+
+var haveFlash49250010010 = false;
+
+function CAWBrowser(){
+
+	var ua = navigator.userAgent;
+	this.msie = (ua && ( parseFloat( navigator.appVersion )  >=4 ) && ( ua.indexOf("Opera") < 0 ) && ( ua.indexOf("MSIE 4") < 0 ) && ( ua.indexOf( "MSIE" ) >=0) );
+	this.win = (ua && ((ua.indexOf( "Windows 95" ) >=0) || (ua.indexOf("Windows NT") >=0 ) || (ua.indexOf("Windows 98") >=0) ) );
+	this.mac = (navigator.platform && (navigator.platform.indexOf('Mac')!=-1));
+	this.opera7 = ((ua.indexOf('Opera') != -1) && window.opera && document.readyState) ? 1 : 0;
+	this.gecko   = (ua.toLowerCase().indexOf('gecko') != -1) && (ua.indexOf('safari') == -1);
+
+	haveFlash49250010010 = (navigator.mimeTypes && navigator.mimeTypes["application/x-shockwave-flash"]) ? navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin : 0;
+
+	if( haveFlash49250010010 ){
+		haveFlash49250010010 = (parseInt(haveFlash49250010010.description.substring(haveFlash49250010010.description.indexOf(".")-1))>=6);
+	}else if ( this.msie && this.win && !this.mac){
+		awcr = unescape('%0d%0a');
+		awcav = unescape('%22');
+        	document.write ('<SCR' + 'IPT LANGUAGE=VBScript>' + awcr  
+			+ ' on error resume next ' + awcr  
+			+ ' haveFlash49250010010 = (IsObject(CreateObject('+ awcav
+			+ 'ShockwaveFlash.ShockwaveFlash.6' + awcav + ')))' + awcr  
+			+ '</SCR' + 'IPT> ' + awcr   );
+	}
+	
+	this.other = !( (this.gecko || this.msie) && this.win && !this.mac);
+	this.desc =  this.msie ? "msie " : this.gecko ? "gecko " : this.opera7 ? "opera7(other) " : this.other? "other" : "ukn";
+	this.flash = haveFlash49250010010 ? 6 : 0;	
+}
+
+var aw_br = new CAWBrowser();
+var jssrc = "http://engine.awaps.net/8/4925/001001.?"	+ globalseed + 
+	"-0-" + globalseed  + "-0-la:0p:31087&swfcode=6&awcode=55&subsection=0&flash=" + aw_br.flash;
+
+var jssrc_code = '<sc'+'ript src="' + jssrc +'"></sc'+'ript>';
+
+document.write(jssrc_code);
+
+
+</script><script src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/001001"></script><script src="0125%20%C2%E2%E5%E4%E5%ED%E8%E5%20%E2%20CVS_files/001001.htm"></script>
+<noscript> <a href=http://engine.awaps.net/1/4925/001001.gif
+target=_blank ><img
+src=http://engine.awaps.net/0/4925/001001.gif?0-0-0-0-la:0p:31087&subsection=0
+width=1 height=1 border=0></a>
+</noscript>
+
+
+
+</body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<f:loadBundle basename="resources" var="msg" />
+<ui:composition template="/templates/common.xhtml">
+	<ui:define name="pageSubHeader">#{msg.rlsSubTitle1}#{userSessionBean.product.toString()}#{msg.rlsSubTitle2}</ui:define>
+	<ui:define name="menuBar">
+		<h:form id="menu_form">
+			<rich:toolBar>
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="#{msg.menuManageDone}" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="#{msg.menuItemManageDone}" submitMode="ajax"
+						action="#{navBean.doneManage}" />
+				</rich:dropDownMenu>
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<!--h:graphicImage value="/images/icons/copy.gif" styleClass="pic" /-->
+							<h:outputText value="#{msg.menuHelp}" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="#{msg.menuAbout}"
+						action="#{userSessionBean.doHelpAbout}" />
+				</rich:dropDownMenu>
+			</rich:toolBar>
+		</h:form>
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<rich:dataGrid id="releaseGrid" value="#{releaseBean.releases}"
+				var="release" columns="1" elements="10" rowKeyVar="rowIndex">
+				<rich:panel bodyClass="pbody">
+					<f:facet name="header">
+						<h:outputText value="#{msg.panelRelease}" />
+					</f:facet>
+					<h:panelGrid columns="7" id="release_data">
+						<h:outputText value="#{msg.rlsID}" styleClass="label" />
+						<h:outputText value="#{release.releaseId} #" />
+						<h:outputText value="#{msg.rlsName}" styleClass="label" />
+						<h:inputText value="#{release.releaseName}" />
+						<a4j:commandButton value="#{msg.rlsSave}"
+							action="#{releaseBean.updateRelease}" reRender="releaseGrid">
+							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
+								assignTo="#{releaseBean.selectedRow}" />
+						</a4j:commandButton>
+						<a4j:commandButton value="#{msg.rlsCreateNew}"
+							action="#{releaseBean.createRelease}" reRender="releaseGrid">
+							<a4j:actionparam name="rowIndex" value="#{rowIndex}"
+								assignTo="#{releaseBean.selectedRow}" />
+						</a4j:commandButton>
+
+					</h:panelGrid>
+				</rich:panel>
+				<f:facet name="footer">
+					<rich:datascroller></rich:datascroller>
+				</f:facet>
+			</rich:dataGrid>
+			<h:panelGrid columns="1" id="release_data">
+				<a4j:commandButton value="#{msg.rlsCreateNewRelease}"
+					action="#{releaseBean.createNewRelease}" reRender="releaseGrid">
+					<a4j:actionparam name="rowIndex" value="#{rowIndex}"
+						assignTo="#{releaseBean.selectedRow}" />
+				</a4j:commandButton>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

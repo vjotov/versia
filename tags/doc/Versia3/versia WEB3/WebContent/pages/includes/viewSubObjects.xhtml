@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<rich:modalPanel xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" id="viewSubObjects"
+	autosized="false" keepVisualState="false" width="315" height="250">
+	<f:facet name="header">
+		<h:outputText value="View SubObject" />
+	</f:facet>
+	<f:facet name="controls">
+		<span style="cursor: pointer"
+			onclick="javascript:Richfaces.hideModalPanel('viewSubObjects')">X</span>
+	</f:facet>
+	<a4j:form>
+		<rich:scrollableDataTable id="subObjectsTable"
+			value="#{listVobjectsBean.subobjects}" var="item" rows="8"
+			width="300" height="170">
+			<rich:column width="60">
+				<f:facet name="header">
+					<h:outputText styleClasss="headerText" value="Object ID" />
+				</f:facet>
+				<h:outputText value="#{item.voID}" />
+			</rich:column>
+			<rich:column width="60">
+				<f:facet name="header">
+					<h:outputText styleClass="headerText" value="Object Ver." />
+				</f:facet>
+				<h:outputText value="#{item.verionNumber}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText styleClass="headerText" value="Object Name" />
+				</f:facet>
+				<h:outputText value="#{item.voName}" />
+			</rich:column>
+		</rich:scrollableDataTable>
+		<h:commandButton value="Close"
+			onclick="javascript:Richfaces.hideModalPanel('viewSubObjects')" />
+	</a4j:form>
+</rich:modalPanel>

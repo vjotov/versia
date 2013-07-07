@@ -1,0 +1,781 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher 5.0.4">
+<meta name="TEMPLATEBASE" content="SunLook1.0">
+<meta name="LASTUPDATED" content="Tue Apr 04 10:24:35 2000">
+<title>Sun WorkShop TeamWare Architecture</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr bgcolor="cccccc">
+
+<td align="left">
+&nbsp;&nbsp;<font face="helvetica,arial" size="2">Sun WorkShop TeamWare User's Guide</font>
+</td>
+
+<td valign="top" align="right"><a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html"><IMG SRC="home01.gif" tppabs="http://docs.sun.com/source/806-3573/images/home01.gif" ALT="Home" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html"><IMG SRC="toc01.gif" tppabs="http://docs.sun.com/source/806-3573/images/toc01.gif" ALT="Contents" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="cli.html" tppabs="http://docs.sun.com/source/806-3573/cli.html"><IMG SRC="prev01.gif" tppabs="http://docs.sun.com/source/806-3573/images/prev01.gif" ALT="Previous" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="errormsgs.html" tppabs="http://docs.sun.com/source/806-3573/errormsgs.html"><IMG SRC="next01.gif" tppabs="http://docs.sun.com/source/806-3573/images/next01.gif" ALT="Next" WIDTH="30" HEIGHT="26" BORDER="0" 
+VSPACE="0"></a><a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html"><IMG SRC="index01.gif" tppabs="http://docs.sun.com/source/806-3573/images/index01.gif" ALT="Index" WIDTH="30" HEIGHT="26" BORDER="0" VSPACE="0"></a></td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+<br clear="all">
+
+<hr>
+
+<blockquote>
+
+<div align="center">
+<h1 align="left">
+  <a name="9797"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Chapter 12 </font>
+</h1>
+</div>
+
+<h1 align="left">
+  <a name="9799"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Sun WorkShop TeamWare Architecture</font>
+</h1>
+
+
+<p>
+  <a name="9802"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This chapter describes the underlying files that Sun WorkShop TeamWare uses to track workspaces and files. It also describes the ways Configuring manipulates SCCS history files when you copy files between workspaces and resolve conflicts.</font>
+</p>
+
+
+<p>
+  <a name="10492"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This chapter discusses the following topics:</font>
+</p>
+
+<ul type=disc><a name="9790"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="underhood.html#9814" tppabs="http://docs.sun.com/source/806-3573/underhood.html#9814">Workspace Metadata Directory</a></font><a name="10066"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="underhood.html#10069" tppabs="http://docs.sun.com/source/806-3573/underhood.html#10069">Configuring Defaults Files</a></font><a name="2824"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="underhood.html#10315" tppabs="http://docs.sun.com/source/806-3573/underhood.html#10315">How Configuring Merges Files</a></font><a name="2828"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li><a href="underhood.html#9944" tppabs="http://docs.sun.com/source/806-3573/underhood.html#9944">About SCCS Mergeable IDs</a></font></ul>
+<h2>
+  <a name="9814"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Workspace Metadata Directory </font>
+</h2>
+
+
+<p>
+  <a name="9816"> </a><font face="Verdana, Arial, Helvetica, sans-serif">A Configuring workspace is a directory hierarchy that contains a directory named <code>Codemgr_wsdata</code> in its root directory. The Configuring program stores data (metadata) about that workspace in <code>Codemgr_wsdata</code>. Configuring commands use the presence or absence of this directory to determine whether a directory is a workspace.</font>
+</p>
+
+
+<p>
+  <a name="9818"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Configuring provides the tools necessary to maintain the information kept in the <code>Codemgr_wsdata</code> directory. Although not recommended, it might be necessary to modify certain files manually; however, you must be very careful to preserve the format of each file you edit. <a href="underhood.html#9828" tppabs="http://docs.sun.com/source/806-3573/underhood.html#9828">TABLE&nbsp;12-1</a> briefly describes each of the files and directories contained in the <code>Codemgr_wsdata</code> directory. Information regarding the format of these files is available in the <code>man(4)</code> page for each file. <p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption ALIGN="left"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a name="9828"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>TABLE 12-1 	</b>&nbsp;&nbsp;Contents of the <code>Codemgr_wsdata</code> Metadata Directory&nbsp;</font></font></b></caption>
+  <tr bgcolor="#CCCCCC"><div align="center">
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="9832"> </a>File/Dir Name</font></th>
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="9834"> </a>Description</font></th>
+  </div></tr>
+  <tr>
+    <td>
+<a name="9837"> </a><code>access_control</code></td>
+    <td>
+<a name="9839"> </a>Contains information that controls which users are allowed to execute Configuring transactions and commands for a given workspace. When workspaces are created, a default access control file is also created. See <a href="access.html#8903" tppabs="http://docs.sun.com/source/806-3573/access.html#8903">Chapter 4</a> and <a href="underhood.html#10317" tppabs="http://docs.sun.com/source/806-3573/underhood.html#10317">The access_control File</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9845"> </a><code>args</code></td>
+    <td>
+<a name="9847"> </a>Contains a list of file, directory, and FLP arguments and is maintained by the Configuring, Bringover, and Putback transaction commands. Initially, the <code>args</code> file contains the arguments specified when the workspace was created. If you explicitly specify arguments during subsequent Bringover or Putback transactions, the commands determine if the new arguments are more encompassing than the arguments already in the <code>args</code> file; if they are, the new arguments replace the old. See <a href="config_adv.html#1007229" tppabs="http://docs.sun.com/source/806-3573/config_adv.html#1007229">Creating Customized Bringover/Putback File Lists</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9850"> </a><code>backup/</code></td>
+    <td>
+<a name="9852"> </a>Stores information that Configuring uses to "undo" a Bringover or Putback transaction. See <a href="config.html#1004161" tppabs="http://docs.sun.com/source/806-3573/config.html#1004161">Undoing Changes to a Workspace</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9858"> </a><code>children</code></td>
+    <td>
+<a name="9860"> </a>Contains a list of the workspace's child workspaces. The names of child workspaces are entered into the workspace's <code>children</code> file during the Bringover Create transaction. Configuring consults this file to obtain the list of child workspaces. When you delete, move, or reparent a workspace, Configuring updates the <code>children</code> file in its parent.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9863"> </a><code>conflicts</code></td>
+    <td>
+<a name="9865"> </a>Contains a list of files in that workspace that are currently in conflict. See <a href="merge.html#7618" tppabs="http://docs.sun.com/source/806-3573/merge.html#7618">Chapter 6</a> for more information about conflicts and how to resolve them.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9922"> </a><code>description</code></td>
+    <td>
+<a name="9926"> </a>Contains a descriptive name and detailed description of a TeamWare workspace created by the user. See <a href="config_adv.html#1005701" tppabs="http://docs.sun.com/source/806-3573/config_adv.html#1005701">Giving a Workspace a Descriptive Name</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10048"> </a><code>Freezepoints/</code></td>
+    <td>
+<a name="10050"> </a>Created when you set up auto-freezepoints. See <a href="freezepoint.html#10183" tppabs="http://docs.sun.com/source/806-3573/freezepoint.html#10183">Automatically Generating Freezepoints</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9871"> </a><code>history</code></td>
+    <td>
+<a name="9873"> </a>An historical log of transactions and updated files that affect a workspace. See <a href="config.html#1003651" tppabs="http://docs.sun.com/source/806-3573/config.html#1003651">Viewing Workspace History</a> for more information.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9879"> </a><code>locks</code></td>
+    <td>
+<a name="9881"> </a>To assure consistency, Configuring locks workspaces during Bringover, Putback, and Undo transactions. Locks are recorded in the <code>locks</code> file in each workspace; Configuring checks that file before acting in a workspace. See <a href="access.html#8017" tppabs="http://docs.sun.com/source/806-3573/access.html#8017">Removing Workspace Locks</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9887"> </a><code>nametable</code></td>
+    <td>
+<a name="9889"> </a>Contains a table of SCCS file names (path names relative to that workspace) and a unique number represented as four 32-bit hexadecimal words. Each entry in the table is terminated by a newline character. The <code>nametable</code> file is used by Configuring during bringover and putback to accelerate the processing of files that have been renamed. If this file is not available, Configuring rebuilds it automatically during the next Putback or Bringover transaction. See <a href="versionadv.html#7770" tppabs="http://docs.sun.com/source/806-3573/versionadv.html#7770">Renaming, Moving, or Deleting Files</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9895"> </a><code>notification</code></td>
+    <td>
+<a name="9897"> </a>Permits Configuring to detect events that involve that workspace and to send email in response to the event. See <a href="config_adv.html#1007302" tppabs="http://docs.sun.com/source/806-3573/config_adv.html#1007302">Notifying Users of Transactions</a>.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9903"> </a><code>parent</code></td>
+    <td>
+<a name="9905"> </a>The <code>parent</code> file contains the path name of the workspace's parent workspace and is created by the Bringover Create transaction, or by the <code>reparent</code> command if the workspace was originally created with the <code>create workspace</code> command (and thus had no parent). Configuring consults this file to determine a workspace's parent. When you delete, move, or reparent a workspace, Configuring updates the <code>parent</code> file in its children.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="9908"> </a><code>putback.cmt</code></td>
+    <td>
+<a name="9910"> </a>A cache of the text of the comment from the last <em>blocked</em> Putback transaction. Configuring caches the comment in <code>putback.cmt</code> so that you can retrieve the original text when you re-execute the transaction.</td>
+  </tr>
+</table>
+
+
+</p>
+<br></font>
+</p>
+
+
+<h2>
+  <a name="10069"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Configuring Defaults Files</font>
+</h2>
+
+
+<p>
+  <a name="10070"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When you change Configuring behavior using the Tool Properties window, click the Apply button to preserve the changes in runtime configuration files in your home directory. The runtime configuration files are consulted by Configuring when it starts; your changes are used as the default values. </font>
+</p>
+
+
+<p>
+  <a name="10072"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Changes made in the Configuring and Bringover/Putback panes of the Tool Properties window are written to the file <code>~/.codemgrtoolrc</code>. This file is an XWindows resource file.</font>
+</p>
+
+
+<p>
+  <a name="10074"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Changes made in the Resolve pane of the Tool Properties window are written to the runtime configuration file <code>~/.codemgr_resrc</code>.</font>
+</p>
+
+
+<p>
+  <a name="10079"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can also control which workspaces are loaded by default using environment variables (see <a href="config_adv.html#1007875" tppabs="http://docs.sun.com/source/806-3573/config_adv.html#1007875">Configuring Environment Variables</a>). You can save a default list of files to bringover/putback (see <a href="config_adv.html#1007230" tppabs="http://docs.sun.com/source/806-3573/config_adv.html#1007230">Generating a Customized List of Files</a>).</font>
+</p>
+
+
+<h2>
+  <a name="10317"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">The <code>access_control</code> File</font>
+</h2>
+
+
+<p>
+  <a name="10370"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><a href="access.html#8903" tppabs="http://docs.sun.com/source/806-3573/access.html#8903">Chapter 4</a> introduces the concept of controlling who can perform which transactions on a workspace. When you set permissions in the Access Control tab (under Workspace<strong> </strong><img src="Chevron.gif" tppabs="http://docs.sun.com/source/806-3573/chars/zd/Chevron.gif"> <strong> </strong>Properties)<strong>, </strong>TeamWare writes the permission in the <code>access_control</code> file. <a href="underhood.html#10327" tppabs="http://docs.sun.com/source/806-3573/underhood.html#10327">TABLE&nbsp;12-2</a> shows the default contents of <code>access_control </code>after you create a workspace.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption ALIGN="left"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a name="10327"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>TABLE 12-2 	</b>&nbsp;&nbsp;Default Access Control Permissions</font></font></b></caption>
+  <tr bgcolor="#CCCCCC"><div align="center">
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="10331"> </a>Operation</font></th>
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="10333"> </a>Default Permission</font></th>
+  </div></tr>
+  <tr>
+    <td>
+<a name="10335"> </a>bringover-from</td>
+    <td>
+<a name="10337"> </a>all users</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10339"> </a>bringover-to</td>
+    <td>
+<a name="10341"> </a>creator</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10343"> </a>putback-from</td>
+    <td>
+<a name="10345"> </a>all users</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10347"> </a>putback-to</td>
+    <td>
+<a name="10349"> </a>all users</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10351"> </a>undo</td>
+    <td>
+<a name="10353"> </a>all users</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10355"> </a>workspace-delete</td>
+    <td>
+<a name="10357"> </a>creator</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10359"> </a>workspace-move</td>
+    <td>
+<a name="10361"> </a>creator</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10363"> </a>workspace-reparent</td>
+    <td>
+<a name="10365"> </a>creator</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10367"> </a>workspace-reparent-to</td>
+    <td>
+<a name="10369"> </a>all users</td>
+  </tr>
+</table>
+
+
+</p>
+<br></font>
+</p>
+
+
+<p>
+  <a name="10372"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can manually edit the <code>access_control</code> file to control which users have access to a workspace. <a href="underhood.html#10384" tppabs="http://docs.sun.com/source/806-3573/underhood.html#10384">TABLE&nbsp;12-3</a> shows all of the value types you can specify to control access to your workspaces and what the entries mean.<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption ALIGN="left"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a name="10384"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>TABLE 12-3 	</b>&nbsp;&nbsp;Workspace Access Control Values&nbsp;</font></font></b></caption>
+  <tr bgcolor="#CCCCCC"><div align="center">
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="10388"> </a>Value</font></th>
+    <th><font face="Verdana, Arial, Helvetica, sans-serif" color="#003366"><a name="10390"> </a>Meaning</font></th>
+  </div></tr>
+  <tr>
+    <td>
+<a name="10392"> </a>@engineering</td>
+    <td>
+<a name="10394"> </a>All users in the net group named<code> engineering</code> can execute this operation.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10396"> </a>-@engineering</td>
+    <td>
+<a name="10398"> </a>No users from the net group named <code>engineering</code> can execute this operation. "<code>-</code>" denotes negation.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10400"> </a>@special -user2 @engineering</td>
+    <td>
+<a name="10402"> </a>All users in the net groups <code>special</code> and <code>engineering</code> can execute the operation; user2 cannot (unless <code>user2</code> is in the <code>special</code> netgroup). "<code>-</code>" denotes negation. </td>
+  </tr>
+  <tr>
+    <td>
+<a name="10404"> </a>user1 user2</td>
+    <td>
+<a name="10406"> </a>The users <code>user1</code> and <code>user2</code> can execute the operation.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10408"> </a>"-"</td>
+    <td>
+<a name="10410"> </a>No user can execute the operation.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10412"> </a>creator</td>
+    <td>
+<a name="10414"> </a>Only the user who created the workspace can execute the operation. Note that the creator's login name actually appears.</td>
+  </tr>
+  <tr>
+    <td>
+<a name="10416"> </a>(<em>no entry</em>)</td>
+    <td>
+<a name="10418"> </a>Any user can execute the operation.</td>
+  </tr>
+</table>
+
+
+</p>
+<br></font>
+</p>
+
+
+<h2>
+  <a name="10315"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">How Configuring Merges Files</font>
+</h2>
+
+
+<p>
+  <a name="168"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This discussion assumes that you are familiar with SCCS, including the concept of branching. Branching is defined in <a href="versionadv.html#7646" tppabs="http://docs.sun.com/source/806-3573/versionadv.html#7646">How To Read a File's History: Deltas, Branches and Versions</a>. SCCS is described in detail in the Solaris <em>Programming Utilities </em>manual.</font>
+</p>
+
+
+<p>
+  <a name="169"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When considering Bringover and Putback transactions, remember that source files are derived from SCCS deltas and are identified by SCCS delta IDs (SIDs). When a file is copied by either a Putback or Bringover transaction, the Configuring program must manipulate the file's SCCS history file (also known as the "s-dot-file").</font>
+</p>
+
+
+<p>
+  <a name="173"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When a file is copied (using a Bringover or Putback transaction) from a source workspace to a destination workspace, it appears that a single file has been transferred. In fact, all of the SCCS information for that file (deltas, comments, and so on) must be merged into the destination SCCS history file. By merging the information from the source into the destination history file, the current version (delta) can be derived, and the file's entire delta and comment history are available. The exception is when the file does not exist in the destination workspace. In this case, the entire history file is copied from the source workspace to the destination workspace.</font>
+</p>
+
+
+<h3>
+  <a name="176"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Merging Files That Do Not Conflict</font>
+</h3>
+
+
+<p>
+  <a name="177"> </a><font face="Verdana, Arial, Helvetica, sans-serif">If the file in the destination workspace is being updated (the file has changed in the source of a Bringover or Putback transaction and has not changed in the destination), the new deltas from the destination are added to the history file in the destination. SCCS history files are merged in this case (rather than the source history file being copied over the destination history file) to prevent administrative information (for example, flags and access lists) stored in the destination history file from being overwritten.</font>
+</p>
+
+
+<p>
+  <a name="182"> </a><font face="Verdana, Arial, Helvetica, sans-serif">To accomplish the merger, the Configuring program determines where the delta histories diverge and adds (to the destination workspace) only the deltas that were created in the source workspace since they diverged. To determine where the histories diverge, the Configuring program compares the delta tables in both the parent and child history files; information used in this comparison includes comments and data, such as who created the delta and when. </font>
+</p>
+
+
+<p>
+  <a name="10603"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><a href="underhood.html#207" tppabs="http://docs.sun.com/source/806-3573/underhood.html#207">FIGURE&nbsp;12-1</a> contains an example of a Putback transaction where the Configuring program adds deltas 1.3 and 1.4 from the child workspace to the SCCS history file in the parent.</font>
+</p>
+
+
+<a name="206"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood4.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood4.gif" height="347" width="599">
+<br></font>
+
+<a name="207"> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><b>FIGURE 12-1 	</b>&nbsp;&nbsp;Updating a File in the Destination Workspace That Has Not Changed</font>
+<h3>
+  <a name="208"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Merging Files That Conflict</font>
+</h3>
+
+
+<p>
+  <a name="2158"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When you propagate files between parent and child workspaces, both the version of the file from the parent and the version in your child often change since they were last updated. When that is the case, the parent and child versions of the file are in conflict. </font>
+</p>
+
+
+<p>
+  <a name="10277"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When file contents conflict, Configuring helps you to resolve the potentially conflicting changes that were made to the file and preserves the file's delta, administrative, and comment history. Configuring merges the SCCS deltas from the parent into the history file in the child. Configuring's Resolve transaction is then used to resolve the conflict in the child. For details on resolving conflicts, see <a href="merge.html#5209" tppabs="http://docs.sun.com/source/806-3573/merge.html#5209">Resolving Differences</a>.</font>
+</p>
+
+
+<h3>
+  <a name="10283"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">How Merging Tracks Deltas</font>
+</h3>
+
+
+<p>
+  <a name="212"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This merge example involves an integration workspace and two child workspaces owned by different developers, Ian and Ramona. The developers bring over copies of the same file from the integration workspace, and independently change the file. The illustrations show how the SCCS history file is manipulated when conflicts occur and when they are resolved. Some notes regarding the following figures:</font>
+</p>
+
+<ul type=disc><a name="215"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The default delta (the point at which the next delta is added to the SCCS delta tree) is identified by an unattached descending line. </font><a name="216"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>You can use Versioning to graphically display SCCS delta trees in much the same way they are depicted here. </font></ul>
+<p>
+  <a name="2326"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Both Ian and Ramona copy the same file from the integration workspace with the Bringover transaction. The file is new in both workspaces, so the SCCS history file is copied to both. Integration Workspace represents the parent workspace that both Ian and Ramona use.</font>
+</p>
+
+
+<a name="10843"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood6.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood6.gif" height="354" width="558">
+<br></font>
+
+
+<p>
+  <a name="7960"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Ramona makes changes to the file, creating two new deltas: 1.3 and 1.4, and then puts the file back into the integration workspace (with the Putback transaction). Configuring appends the two new deltas to the parent SCCS delta tree.</font>
+</p>
+
+
+<p>
+  <a name="7970"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Rather than replacing the destination workspace version of the SCCS history file with the source's version, the new deltas are added to the destination SCCS history file to preserve administrative information such as access lists.</font>
+</p>
+
+
+<a name="10846"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood9.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood9.gif" height="368" width="600">
+<br></font>
+
+
+<p>
+  <a name="8070"> </a><font face="Verdana, Arial, Helvetica, sans-serif">In the meantime, Ian also changes the file (creating three new deltas: 1.3, 1.4, and 1.5) and now attempts to put back the file into the integration workspace.</font>
+</p>
+
+
+<p>
+  <a name="8080"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Configuring blocks the Ian's Putback transaction of because the files are in conflict. Ramona's changes that she put back would be overwritten. Ian must first incorporate the changes made by Ramona into his work.</font>
+</p>
+
+
+<a name="10847"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood3.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood3.gif" height="360" width="541">
+<br></font>
+
+
+<p>
+  <a name="10653"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Ian brings over the file that now contains the changes made by Ramona into his workspace from the integration workspace. The deltas that Ramona created are added into the child SCCS history file by Configuring.</font>
+</p>
+
+
+<p>
+  <a name="11482"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The delta tree brought down from the parent is unchanged in the child. The new deltas created in the child are attached as an SCCS branch to the last delta that the child and parent had in common; the deltas from the child are assigned new SIDs accordingly. The deltas are renumbered using the SCCS branch-numbering algorithm that derives the SID from the point at which it branches. In this case, the branch is attached to SID 1.2; the first delta is renumbered to 1.2.1.1. The last delta created in the child (1.2.1.3, formerly 1.5) is still the default delta. Therefore, any new deltas that Ian creates in the child before the conflict is resolved are added to the child line of work, and not the trunk (the parent line of work).</font>
+</p>
+
+
+<a name="11610"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood10.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood10.gif" height="354" width="600">
+<br></font>
+
+
+<p>
+  <a name="11613"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Ian resolves the conflict in his workspace using the Resolve transaction (see <a href="merge.html#5209" tppabs="http://docs.sun.com/source/806-3573/merge.html#5209">Resolving Differences</a> for details regarding conflict resolution). Ian uses the Resolve transaction to help him decide how to merge the versions of the file represented by SIDs 1.2.1.3 and 1.4. When he commits the changes, the Resolve transaction places the newly merged contents into a new delta 1.5:</font>
+</p>
+
+<ul type=disc><a name="11627"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The new delta, 1.5, is contained in a circle because Ian created it.</font><a name="11628"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The newly created delta is now the default location for any new work Ian creates.</font></ul>
+<a name="11473"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood5.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood5.gif" height="352" width="583">
+<br></font>
+
+
+<p>
+  <a name="10852"> </a><font face="Verdana, Arial, Helvetica, sans-serif">With the conflict resolved, Ian puts back the file into the integration workspace. The branch and the newly created delta are added to the SCCS history file in the integration workspace.</font>
+</p>
+
+
+<a name="11651"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="wspaces.gif" tppabs="http://docs.sun.com/source/806-3573/images/wspaces.gif">
+<br></font>
+
+
+<p>
+  <a name="11124"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Ramona makes another change to the file in her workspace, creating delta 1.5. She attempts to put back the new work to the integration workspace, but the Putback transaction is blocked because it conflicts with the newly merged delta 1.5 that Ian had put back.</font>
+</p>
+
+
+<a name="11652"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhooda.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhooda.gif" height="388" width="599">
+<br></font>
+
+
+<p>
+  <a name="11958"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Ramona brings over the changed file into her workspace where its deltas are added into the child SCCS history file and renumbered by Configuring.</font>
+</p>
+
+
+<a name="11954"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood7.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood7.gif" height="378" width="600">
+<br></font>
+
+
+<p>
+  <a name="9041"> </a><font face="Verdana, Arial, Helvetica, sans-serif">As in the previous case, Configuring appends the delta that Ramona created to the last common delta on the delta tree trunk as a branch and renumbers it appropriately. 1.5 becomes 1.4.1.1. 1.4.1.1 remains the default delta. Any new deltas created in the child before the conflict is resolved will be added to the branch.</font>
+</p>
+
+
+<a name="11977"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood11.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood11.gif" height="216" width="600">
+<br></font>
+
+
+<p>
+  <a name="9114"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Using the Resolve transaction, Ramona resolves the conflict merging the differences between 1.5 and 1.4.1.1 to create the new delta 1.6: </font>
+</p>
+
+<ul type=disc><a name="9130"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The newly created merged contents are added as a new delta to the parent delta 1.6.</font><a name="9141"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The new delta is owned by Ramona, who owns the workspace.</font><a name="9148"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>The new delta becomes the default delta; therefore, new work in the child will now be added beneath it.</font></ul>
+<a name="11978"> </a><font  size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="underhood2.gif" tppabs="http://docs.sun.com/source/806-3573/images/underhood2.gif" height="215" width="566">
+<br></font>
+
+
+<p>
+  <a name="12093"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This merge example has shown what happens when you have an integration workspace and two child workspaces owned by different developers. The developers bring over copies of the same file from the integration workspace and independently change the file. When they attempt to put their changes back, conflicts occur. Configuring manages deltas to ensure that no one's changes are overwritten and manipulates the SCCS history file so that the file history is accurate and complete.</font>
+</p>
+
+
+<h2>
+  <a name="9944"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">About SCCS Mergeable IDs</font>
+</h2>
+
+
+<p>
+  <a name="9945"> </a><font face="Verdana, Arial, Helvetica, sans-serif">This section explains why SCCS Mergeable IDs (SMIDs) are necessary, how to translate SCCS delta IDS (SIDs) to SMIDs, and how to translate SMIDs to SIDs. </font>
+</p>
+
+
+<p>
+  <a name="10057"> </a><font face="Verdana, Arial, Helvetica, sans-serif">The use of SMIDs ensures that every delta is uniquely identifiable, even if its SID is changed. A SMID is a number generated using the Xerox Secure Hash Function. When you use Freezepointing to create a freezepoint file, it calculates the SMID for both the current delta and the root delta in the SCCS history file. Using both of these values, Freezepointing can identify a delta in a file even if its SID has been changed.</font>
+</p>
+
+
+<h3>
+  <a name="9959"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Why SMIDs are Necessary</font>
+</h3>
+
+
+<p>
+  <a name="9964"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When Configuring encounters a file conflict during a Bringover Update transaction (file is changed in both the parent and child workspaces), it merges the new deltas from the parent workspace into the SCCS history file in the child. When this merge occurs, the deltas that were created in the child are moved to an SCCS branch off of the delta that both deltas have in common (common ancestor).</font>
+</p>
+
+
+<p>
+  <a name="9965"> </a><font face="Verdana, Arial, Helvetica, sans-serif">When Configuring relocates the child deltas to a branch, it changes their SID. If SIDS were used in freezepoint files to identify deltas, this relocation would invalidate the information contained in the freezepoint file. For that reason, SIDs cannot be used to identify deltas after conflicting SCCS histories have been merged.</font>
+</p>
+
+
+<h3>
+  <a name="9968"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">SMID/SID Translation</font>
+</h3>
+
+
+<p>
+  <a name="9969"> </a><font face="Verdana, Arial, Helvetica, sans-serif">You can translate SMIDs into SIDs and SIDs into SMIDs using the <code>freezept</code> <code>sid</code> and <code>freezept smid</code> commands. This is useful if you want to write your own scripts or programs to track deltas.</font>
+</p>
+
+
+<h4>
+  <a name="9972"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Translating SIDs to SMIDs</font>
+</h4>
+
+
+<p>
+  <a name="9973"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Use the <code>freezept</code> <code>smid</code> command to translate SIDs to SMIDs. The syntax is:<p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="11423"> </a>
+<pre><code><b>freezept smid</b></code> [<code><b>-w </b></code><font face="Arial,Helvetica"><em>workspace</em></font>] [<code><b>-r</b></code> <font face="Arial,Helvetica"><em>SID</em></font>] [<code><b>-a</b></code>] <font face="Arial,Helvetica"><em>file
+</em></font></pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+<ul type=disc><a name="9975"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Use the <code>-r</code> option to specify the SID (in file <font face="Arial,Helvetica"><em>file</em></font>) for which you want to calculate a SMID.</font><a name="9976"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Use the <code>-a</code> option to calculate a SMID for all of the SIDS in <font face="Arial,Helvetica"><em>file</em></font>.</font><a name="11453"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>For convenience, you can use the <code>-s</code> option to specify a directory from which <font face="Arial,Helvetica"><em>file</em></font> is relative.</font></ul>
+<h5>
+  <a name="11454"> </a><i><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Examples</font></i>
+</h5>
+
+
+<p>
+  <a name="11459"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="11457"> </a>
+<pre>example% <code><b>freezept smid -r 1.38 module.c
+</b></code></pre><a name="11458"> </a>
+<pre>SID 1.38 = SMID "f5b67794 705f0768 a89b1f4 588de104"
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="9996"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="9986"> </a>
+<pre>example%<code><b> freezept</b></code> <code><b>smid</b></code> <code><b>-a</b></code> <code><b>bringover.1
+</b></code></pre><a name="9987"> </a>
+<pre>SID 1.1 = SMID "b05b0a2f 1db5246e 1a466014 707e38f5"
+</pre><a name="9988"> </a>
+<pre>SID 1.2 = SMID "d6a5c61f 5634f0ef 9847a080 d0d7b212"
+</pre><a name="9989"> </a>
+<pre>SID 1.2 = SMID "e31acdd5 6c1232e2 9e81c287 1edb2f41"
+</pre><a name="9990"> </a>
+<pre>SID 1.3 = SMID "c34c91b4 a818622a 2457356a 489b2728"
+</pre><a name="9991"> </a>
+<pre>SID 1.4 = SMID "98c0fd8d 889563fb cf722c2b 6afc9636"
+</pre><a name="9992"> </a>
+<pre>SID 1.5 = SMID "b1e24be3 752fec3e df2d2717 a9b3f1fa"
+</pre><a name="9993"> </a>
+<pre>SID 1.6 = SMID "2b93d39 1ea2f6ba 9814320c bc609acb"
+</pre><a name="9994"> </a>
+<pre>SID 1.7 = SMID "1db7d640 42b0f009 35c60d7b b230bd85"
+</pre><a name="9995"> </a>
+<pre>SID 1.8 = SMID "906dfe9a ca7e2d6c a64da5be 4baef254"
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<h4>
+  <a name="9998"> </a><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Translating SMIDS to SIDS</font>
+</h4>
+
+
+<p>
+  <a name="11427"> </a><font face="Verdana, Arial, Helvetica, sans-serif">Use the <code>freezept</code> <code>sid</code> command to translate SMIDs to SIDs. The syntax is:<code><p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="11445"> </a>
+<pre><code><b>freezept sid</b></code> [<code><b>-w</b></code> <font face="Arial,Helvetica"><em>workspace</em></font>] [<code><b>-m </b></code>"<font face="Arial,Helvetica"><em>SMID</em></font>"] [<code><b>-a</b></code>] <font face="Arial,Helvetica"><em>file
+</em></font></pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</code></font>
+</p>
+
+<ul type=disc><a name="11429"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Use the <code>-m</code> option to specify the SMID (in file <font face="Arial,Helvetica"><em>file</em></font>) for which you want to calculate a SID.</font><a name="10002"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>Use the <code>-a</code> option to calculate a SID for all of the deltas in <font face="Arial,Helvetica"><em>file</em></font>.</font><a name="10003"> </a>
+<font face="Verdana, Arial, Helvetica, sans-serif"><li>For convenience, you can use the <code>-s</code> option to specify a directory from which <font face="Arial,Helvetica"><em>file</em></font> is relative.</font>
+<p><hr noshade size="1">
+  <a name="10004"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><b>Note &#150; </b>Because the SMID contains white space, you must enclose it within quotation marks.</font>
+<hr noshade size="1"></p>
+
+</ul>
+<h5>
+  <a name="10005"> </a><i><font color="#003366" face="Verdana, Arial, Helvetica, sans-serif">Examples</font></i>
+</h5>
+
+
+<p>
+  <a name="10010"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="10008"> </a>
+<pre>example%<code><b> freezept sid -m "64fdd0df de9d7dd de75812 23da96aa" 
+module.c
+</b></code></pre><a name="10009"> </a>
+<pre>SMID "64fdd0df de9d7dd de75812 23da96aa" = SID 1.36
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="10026"> </a><font face="Verdana, Arial, Helvetica, sans-serif"><p>
+<table border="1" bordercolorlight="#FFFFFF" bordercolordark="#000000"
+       cellpadding="5" cellspacing="0">
+  <caption align="left"><b></b></caption>
+  <tr>
+    <td><font face="Courier"><a name="10013"> </a>
+<pre>example% <code><b>freezept sid -a bringover.1
+</b></code></pre><a name="10014"> </a>
+<pre>SMID "b05b0a2f 1db5246e 1a466014 707e38f5" = SID 1.1
+</pre><a name="10015"> </a>
+<pre>SMID "d6a5c61f 5634f0ef 9847a080 d0d7b212" = SID 1.2
+</pre><a name="10016"> </a>
+<pre>SMID "e31acdd5 6c1232e2 9e81c287 1edb2f41" = SID 1.2
+</pre><a name="10017"> </a>
+<pre>SMID "c34c91b4 a818622a 2457356a 489b2728" = SID 1.3
+</pre><a name="10018"> </a>
+<pre>SMID "98c0fd8d 889563fb cf722c2b 6afc9636" = SID 1.4
+</pre><a name="10019"> </a>
+<pre>SMID "b1e24be3 752fec3e df2d2717 a9b3f1fa" = SID 1.5
+</pre><a name="10020"> </a>
+<pre>SMID "2b93d39 1ea2f6ba 9814320c bc609acb" = SID 1.6
+</pre><a name="10021"> </a>
+<pre>SMID "1db7d640 42b0f009 35c60d7b b230bd85" = SID 1.7
+</pre><a name="10022"> </a>
+<pre>SMID "906dfe9a ca7e2d6c a64da5be 4baef254" = SID 1.8
+</pre><a name="10023"> </a>
+<pre>SMID "77481e8a 61542339 cc28f532 e5fc6389" = SID 1.9
+</pre><a name="10024"> </a>
+<pre>SMID "cb97c9a6 d0342cf6 19b7b743 2436ca1c" = SID 1.10
+</pre><a name="10025"> </a>
+<pre>SMID "46de4131 b95b9973 93958a07 b960074c" = SID 1.11
+</pre></font></td>
+  </tr>
+</table>
+
+
+</p>
+</font>
+</p>
+
+
+<p>
+  <a name="9942"> </a><font face="Verdana, Arial, Helvetica, sans-serif"></font>
+</p>
+
+</blockquote>
+
+<hr>
+
+<!-- BEGINNING OF NAVIGATION BAR ------------------------------------------------- -->
+
+<table width="100%" cellpadding="6" cellspacing-"0" border="0">
+<tr>
+<td valign="top" align="left">
+<font size="2">
+<a href="javascript:if(confirm('http://www.sun.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/'" tppabs="http://www.sun.com/">Sun Microsystems, Inc.</a><br>
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/PRN.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/PRN.html'" tppabs="http://docs.sun.com/source/806-3573/PRN.html">Copyright information</a>. All rights reserved.<br>
+<a href="javascript:if(confirm('http://www.sun.com/cgi-bin/comment-form.pl  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.sun.com/cgi-bin/comment-form.pl'" tppabs="http://www.sun.com/cgi-bin/comment-form.pl">Feedback</a><br>
+</font>
+</td>
+
+<td valign="top" align="right">
+<font face="helvetica,arial" size="2">
+<a href="javascript:if(confirm('http://docs.sun.com/index.html  \n\nThis file was not retrieved by Teleport Pro, because the server reports that this file cannot be found.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/index.html'" tppabs="http://docs.sun.com/index.html">Library</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="javascript:if(confirm('http://docs.sun.com/source/806-3573/TeamWareTOC.html  \n\nThis file was not retrieved by Teleport Pro, because it was unavailable, or its retrieval was aborted, or the project was stopped too soon.  \n\nDo you want to open it from the server?'))window.location='http://docs.sun.com/source/806-3573/TeamWareTOC.html'" tppabs="http://docs.sun.com/source/806-3573/TeamWareTOC.html">Contents</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="cli.html" tppabs="http://docs.sun.com/source/806-3573/cli.html">Previous</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="errormsgs.html" tppabs="http://docs.sun.com/source/806-3573/errormsgs.html">Next</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="TeamWareIX.html" tppabs="http://docs.sun.com/source/806-3573/TeamWareIX.html">Index</a>
+</font>
+</td>
+
+</tr>
+</table>
+
+<!-- END OF NAVIGATION BAR ------------------------------------------------------- -->
+
+</body>
+</html>

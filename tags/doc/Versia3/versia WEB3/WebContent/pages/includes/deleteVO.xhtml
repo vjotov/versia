@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<rich:modalPanel xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" id="deleteVO" autosized="false"
+	keepVisualState="false" width="315" height="230">
+	<f:facet name="header">
+		<h:outputText value="Delete Object" />
+	</f:facet>
+	<f:facet name="controls">
+		<span style="cursor: pointer"
+			onclick="javascript:Richfaces.hideModalPanel('DeleteVO')">X</span>
+	</f:facet>
+	<a4j:form>
+		<h:panelGrid columns="2" id="deleteTable">
+			<h:outputText value="Object ID" />
+			<h:outputText value="#{editVObjectBean.VObjectID} " />
+			<h:outputText value="Object Version" />
+			<h:outputText value="#{editVObjectBean.VObjectVersion}" />
+			<h:outputText value="Object Name" />
+			<h:outputText value="#{editVObjectBean.VObjectName}" />
+			<h:outputText value="Object Data" />
+			<h:inputTextarea value="#{editVObjectBean.VObjectDatum}"
+				disabled="true" />
+			<h:outputText value="Is Work Item" />
+			<h:selectBooleanCheckbox value="#{editVObjectBean.isWorkItem}"
+				disabled="true" />
+		</h:panelGrid>
+		<h:commandButton action="#{editVObjectBean.Delete}" value="Delete"
+			onclick="javascript:Richfaces.hideModalPanel('DeleteVO')"
+			disabled="#{editVObjectBean.readonly}"/>
+		<h:commandButton value="Cancel"
+			onclick="javascript:Richfaces.hideModalPanel('DeleteVO')" />
+	</a4j:form>
+</rich:modalPanel>

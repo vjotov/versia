@@ -1,3 +1,0 @@
-REM INSERTING into VERSIONED_OBJECT
-Insert into VERSIONED_OBJECT (VO_ID) values (1);
-Insert into VERSIONED_OBJECT (VO_ID) values (2);

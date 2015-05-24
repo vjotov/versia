@@ -1,0 +1,1 @@
+Goal of the project "Versia" is make a prototype of versioning system, which will elaborate the paradigm of software development process organized using hierarchical composition of workspaces and semi-automatic traceability.
